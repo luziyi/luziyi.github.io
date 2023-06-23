@@ -1,0 +1,554 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>LeagueOfLegends符文详解(LOL新版符文) | TommyGong&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://tommygong.top/favicon.ico?v=1687529377233">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://tommygong.top/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            TommyGong&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1687529377233" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    LeagueOfLegends符文详解(LOL新版符文)
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-01-19 ·
+                    </time>
+                    
+                        <a href="https://tommygong.top/tag/nMs-cIvB2/" class="post-tags">
+                            # LOL
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>lol符文就是微量增强和调整你属性的东西。根据你常用的英雄，来购买你所需要的。说通俗点就是攻击力，法术强度，固定护甲，固定魔抗，成长攻击力，成长护甲，成长魔抗，攻击速度等等的这些属性。游戏中默认可以装备2套不同属性的符文，也称符文页，可以随意的切换2个符文页。</p>
+<!-- more -->
+<h1 id="1-lol新版符文介绍">1. lol新版符文介绍</h1>
+<p>五个符文，分别为<code>精密</code>、<code>主宰</code>、<code>巫术</code>、<code>坚决</code>、<code>启迪</code>。<br>
+玩家可以为英雄选择一个主符文系列和一个副符文系列，前者可以选择1个基石天赋、1个高级符文和2个符文，后者可以选择2个符文或高级符文。<br>
+<code>精密</code>和<code>主宰</code>各有4个基石天赋，<code>巫术</code>、<code>坚决</code>和<code>启迪</code>各有3个基石天赋，共有<code>17</code>个基石天赋。<br>
+需要注意的是，每个符文系列的符文会被分为3行，<strong>每一行中的符文是不能多选的</strong></p>
+<h1 id="2-lol新版符文">2. LOL新版符文</h1>
+<p>种类：符印、雕文、印记、精化。功能：攻速、护甲穿透、攻击力、生命值、魔抗、护甲、法强、法术穿透。其中精华有3个槽。其它的都有9个槽。精化与印记中的状态加攻击比较多最好选择攻击，雕文与符印中的状态加防御比较多最好选择防御。<br>
+具体符文的选择搭配可以按使用英雄的类型来分：<br>
+坦克类英雄——主要以护甲、魔法抗性、生命值等属性符文搭配为主。<br>
+DPS类英雄（物理）——主要以攻击力、攻击速度、暴击率、暴击伤害、护甲穿透等属性符文为主。<br>
+DPS类英雄（法术）——主要以降低技能冷却时间、法力回复、法术强度、法术穿透等属性符文为主。</p>
+<h1 id="3基石符文及普通符文介绍">3.基石符文及普通符文介绍</h1>
+<h2 id="精密系">精密系</h2>
+<p>首先是精密系的符文，精密系的特性是强化攻击和持续伤害。比较适合ADC或者AD刺客这类的英雄。<br>
+<img src="https://100248.com/pic.php?url=https%3A%2F%2Fp26.toutiaoimg.com%2Flarge%2F46d100010b31e5820858%3Ffrom%3Darticle.detail%26_iz%3D31825%26index%3D0&amp;bas=aHR0cHM6Ly9wMjYudG91dGlhb2ltZy5jb20vbGFyZ2UvNDZkMTAwMDEwYjMxZTU4MjA4NTg/ZnJvbT1hcnRpY2xlLmRldGFpbCZfaXo9MzE4MjUmaW5kZXg9MA==" alt="" loading="lazy"></p>
+<h3 id="基石符文">基石符文</h3>
+<p><code>强攻</code>：用3次连续的普攻命中一名敌方英雄时，将使其变为易损状态，造成额外伤害并使所受的来自任意来源的伤害变多，持续<code>6</code>秒。</p>
+<pre><code>类似于战争热诚，无限叠加的的攻击可在持续的战斗中提供非常可观的输出。非常适合ADC的一个基石符文。
+</code></pre>
+<p><code>致命节奏</code>：在伤害一名英雄<code>1.5</code>秒后，你会获得大幅攻击速度加成。甚至你可以暂时溢出你的攻速上限，即突破2.5攻速。</p>
+<pre><code>通过攻击敌人叠加攻速，在短时间内突破攻速上限。对于大嘴剑圣等短时间内爆发极高并且较为以来攻速的英雄有着极大的提升。
+</code></pre>
+<p><code>迅捷步法</code>：攻击和移动会积攒能量层数。在<code>100</code>层时，你的下次攻击会治疗你并提升移动速度。</p>
+<pre><code>对线型技能，适用于对线不强的英雄，换血时利用加速可让多消耗对面，叠满层数后可回血增加英雄的赖线能力。团战时的作用要小于另外两个基石。
+</code></pre>
+<h3 id="普通符文">普通符文</h3>
+<p><code>过量治疗</code>：你身上的溢出治疗效果将变成一个护盾。</p>
+<pre><code>解析：吸蓝刀饮血剑效果融入其中，让AD的续航能力大大加强。溢出的治疗量会成为AD的护盾，当AD的蓝量低于一定程度时不断攻击会回复AD自身的蓝量。蓝药取消之后，部分AD选择做出吸蓝刀来保证蓝量的回复。如今有了符文之后，AD的蓝量回复问题得到了解决，可以更加轻松在线上使用技能压制对方。
+</code></pre>
+<p><code>凯旋</code>：参与击杀会回复你15%的已损失生命值并提供额外25金币。</p>
+<pre><code>死亡游戏天赋改版，参与击杀的英雄可以获得了额外的赏金。作为辅助英雄，比较缺钱。改版之后的类似死亡游戏的天赋，只要辅助参与了击杀获得了助攻，也能获得金钱的奖励。使辅助英雄的经济得补贴。
+</code></pre>
+<p><code>气定神闲</code>：在升级或参与击杀后的5秒里，你的法力花费将得到完全返还。</p>
+<pre><code>类似于鬼书的被动，在回蓝方面有着不错的效果。技能型AD比较依赖蓝量，可以选择这个符文。
+</code></pre>
+<p><code>传说：欢欣</code>：参与击杀敌人将提供永久的攻击速度。</p>
+<pre><code>攻速可以永久叠加，AD的后期能力大大增强。尤其对于女警这种比较依赖攻速的ADC来说更是必备的。
+</code></pre>
+<p><code>传说：韧性</code>：参与击杀敌人将提供永久的韧性。</p>
+<pre><code>永久叠加韧性。非常适合一下AD战士和刺客。
+</code></pre>
+<p><code>传说：血统</code>：参与击杀敌人将提供永久的生命偷取。</p>
+<pre><code>永久叠加的吸血无论是对刺客还是ADC而言都是不错的选择。
+</code></pre>
+<p><code>致命一击</code>：对低生命值的敌方英雄造成更多伤害。</p>
+<pre><code>这个天赋就是刺客用来增加输出的，比较适合高爆发英雄。
+</code></pre>
+<p><code>砍倒</code>：对最大生命值多于你的所有敌方英雄造成更多伤害。</p>
+<pre><code>符文中自带小轻语效果，AD杀坦能力稍微增强。新版基石天赋中不仅增强了AD的反杀能力，同时也让AD的打坦克能力稍微获得了增强。对方的生命值和你的差额可以让AD多打出8的额外伤害，让AD在轻语做出前打前排的能力稍微增强。
+</code></pre>
+<p><code>坚毅不倒</code>：当你的生命值较低时，你的攻击对英雄多造成伤害。</p>
+<pre><code>生命值低于80％最多增加5％的伤害，这个天赋是触发几率最大的天赋，如果是血量越低伤害越高的话，那么这个天赋只适合蛮王剑魔这类走钢丝英雄。
+</code></pre>
+<h2 id="主宰系">主宰系</h2>
+<figure data-type="image" tabindex="1"><img src="https://100248.com/pic.php?url=https%3A%2F%2Fp26.toutiaoimg.com%2Flarge%2F46d20000f3675b9fc924%3Ffrom%3Darticle.detail%26_iz%3D31825%26index%3D3&amp;bas=aHR0cHM6Ly9wMjYudG91dGlhb2ltZy5jb20vbGFyZ2UvNDZkMjAwMDBmMzY3NWI5ZmM5MjQ/ZnJvbT1hcnRpY2xlLmRldGFpbCZfaXo9MzE4MjUmaW5kZXg9Mw==" alt="" loading="lazy"></figure>
+<h3 id="基石符文-2">基石符文</h3>
+<p><code>电刑</code>：在3秒内用3个独立的攻击或技能命中一位英雄时，会造成额外的自适应伤害。</p>
+<pre><code>新改版的雷霆，增加爆发伤害。适合高爆发英雄。
+</code></pre>
+<p><code>掠食者</code>：为你的鞋子添加一个主动效果，此效果可提供一个巨量移动速度加成，并使你的下次攻击或技能造成额外的自适应伤害。</p>
+<pre><code>对于移速有较大需求的英雄的首选，如人马稻草人等英雄。
+</code></pre>
+<p><code>黑暗收割</code>：英雄、大型小兵、大型野怪会在死亡时掉落灵魂精华。触碰一个灵魂可拾取它，并使你的下次攻击造成基于已收集灵魂精华数的额外自适应伤害。</p>
+<pre><code>比较适合喜欢刷的英雄使用，累计灵魂越多额外伤害越高，适合剑圣死歌等英雄。
+</code></pre>
+<h3 id="普通符文-2">普通符文</h3>
+<p><code>恶意中伤</code>：对移动或行动受损的敌人造成额外真实伤害。</p>
+<pre><code>比较合适ADC，有红buff时，配合起来增加不错的真实伤害。
+</code></pre>
+<p><code>血之滋味</code>：在你伤害一名敌方英雄时治疗自身。</p>
+<pre><code>点这个技能虽然牺牲输出，但是让自身有了不错的续航的能力，比较适合高爆发但是缺少续航能力的英雄。
+</code></pre>
+<p><code>猛然冲击</code>：在使用一次突进、跃击、闪烁、传送效果或离开潜行状态后获得穿甲和法术穿透。</p>
+<pre><code>闪现和传送CD很长，所以适合有突进或者跃击的英雄，那么就是适合武器、瑞雯、杰斯、鳄鱼这样的战士天赋了。
+</code></pre>
+<p><code>僵尸守卫</code>：在击杀一个敌方守卫后，该守卫的位置上会升起一个友方的僵尸守卫。当该守卫的持续时间耗尽后，其仍然会复活为一个僵尸守卫。</p>
+<pre><code>在排眼之后会留下友军的视野，视野的压力相对得到了缓解。新版基石僵尸守卫天赋，当你排掉对方的侦查首位时，在原地则会留下一个暂时的僵尸守卫，能持续180秒同时并不算作你自己的侦查首位数量。当你排除掉对方的视野时，等于变相为自己增加了一个视野。这样一来就可以大大缓解了己方的视野压力。
+</code></pre>
+<p><code>幽灵魄罗</code>：当你进入草丛时，一个魄罗会出现。它会呆在后面来为你提供视野。</p>
+<pre><code>这个技能有点类似远见改造，没被敌人发现就一直存在的视野，在比较刁钻的地方，是有可以存在一整局的。
+</code></pre>
+<p><code>眼球收集器</code>：在参与击杀英雄和守卫时收集眼球。每个眼球都会提供永久的攻击力或法术强度，自动适应，并在完成收集后会提供额外加成。</p>
+<pre><code>这是一种加成属性，类似于小法Q叠加法强一样。比较适合螳螂这种打野刺客反野清视野不管是杀人还是清野都能有不错的攻击力加成。
+</code></pre>
+<p><code>贪婪的猎手</code>：独特的参与击杀会永久使来自技能的伤害提供治疗效果。</p>
+<pre><code>增加自身续航能力，杀人提升治疗效果让高伤害法师获得更好的续航能力，不至于被耗一下就要回家。
+</code></pre>
+<p><code>灵性猎手</code>：独特的参与击杀会提供永久的主动道具冷却缩减(包含饰品效果)。</p>
+<pre><code>杀人获得装备减CD，适用于出幽梦这类刺客英雄和妖姬这种出科技枪的法师刺客。
+</code></pre>
+<p><code>无情猎手</code>：独特的参与击杀会提供永久的非战斗状态移动速度加成。</p>
+<pre><code>比较适合短腿的英雄，让自己更好的进行跑图支援。
+</code></pre>
+<h2 id="巫术系">巫术系</h2>
+<figure data-type="image" tabindex="2"><img src="https://100248.com/pic.php?url=https%3A%2F%2Fp9.toutiaoimg.com%2Flarge%2F46d20000f3693c8568e3%3Ffrom%3Darticle.detail%26_iz%3D31825%26index%3D6&amp;bas=aHR0cHM6Ly9wOS50b3V0aWFvaW1nLmNvbS9sYXJnZS80NmQyMDAwMGYzNjkzYzg1NjhlMz9mcm9tPWFydGljbGUuZGV0YWlsJl9pej0zMTgyNSZpbmRleD02" alt="" loading="lazy"></figure>
+<h3 id="基石符文-3">基石符文</h3>
+<p><code>召唤</code>：艾黎：你的攻击和技能会向目标派出艾黎，来对目标敌人造成伤害或为友军套上护盾。</p>
+<pre><code>一个全新的概念符文，非常棒。既能对敌人造成额外伤害，又可以为友军施加保护。所以很明显，这是功能性法师的首选符文。比如拉克丝、卡尔玛、璐璐等。
+</code></pre>
+<p><code>奥术彗星</code>：用一个技能对一个英雄造成伤害时，会在其位置处召唤一颗彗星，若【奥术彗星】尚未冷却时，则改为减少它的剩余冷却时间。</p>
+<pre><code>对于远程消耗型的英雄很好的提高了英雄的输出和爆发能力。如泽拉斯维克托等英雄，因彗星有延迟，配合冰杖效果更佳。
+</code></pre>
+<p><code>相位猛冲</code>：在2秒内用3个独立的攻击或技能命中一位敌方英雄时，会提供爆发性的移动速度。</p>
+<pre><code>风暴骑士的加强版，触发条件简单，不管是追杀还是逃跑都是不错的选择。
+</code></pre>
+<h3 id="普通符文-3">普通符文</h3>
+<p><code>无效化之法球</code>：当你在承受即将使生命值降至危险线的魔法伤害时，提供一个魔法伤害护盾。</p>
+<pre><code>当你在承受即将使生命值降至危险线的魔法伤害时，提供一个魔法伤害护盾。
+</code></pre>
+<p><code>法力流系带</code>：永久性地使你使用的下一个技能返还它的法力或能量消耗并为你回复一些已损失的法力或能量。</p>
+<pre><code>增加续航类符文。完美CD情况下，每60秒大约能为你提供100左右的法力回复。这相当于2层腐败药水回复的法力值。中单刷子的最爱比如说发条泽拉斯维克托。
+</code></pre>
+<p><code>终极技能帽</code>：你的终极技能的冷却时间得到了缩减。并且你每次使用终极技能时，它的冷却时间就会得到进一步缩减。</p>
+<pre><code>大招流AP首选，例如安妮的熊团控，最高可以获得15％-CD。任何吃大招的英雄，都可以点这个。
+</code></pre>
+<p><code>超然</code>: 在你到达10级时提供10%冷却缩减。溢出的冷却缩减属性会转化为攻击力或法术强度，自动适应。</p>
+<pre><code>冷却缩减不怕溢出，能转化为法强。过去冷却缩减最多只有40，多出的冷却缩减未能发挥他们的作用。但是，新版的基石天赋下，冷却缩减溢出之后，可以转化为法强或者是攻击力。这样一来法师的冷却缩减再也不怕溢出了。
+</code></pre>
+<p><code>迅捷</code>：提供4%额外的移动速度。基于你的额外移动速度提供额外的法术强度或攻击力自动适应。</p>
+<pre><code>适合短腿法师，或者说吃移速的英雄例如卡牌瑞兹这类需要移速的英雄，来更好的跑图支援。
+</code></pre>
+<p><code>绝对专注</code>：在高于70%生命值时，获得额外的自适应伤害。</p>
+<pre><code>在生命保持一个安全状态时，提供一个不错的属性，比较百搭。
+</code></pre>
+<p><code>焦灼</code>：每过20秒，你的第一个技能在命中时会使敌方英雄燃烧。</p>
+<pre><code>对线期符文，类似于冥火，但是有20——8秒CD，单体性价比很一般。搭配其他消耗性符文可以使用，适用于有指向性技能的英雄，对线期的压制。
+</code></pre>
+<p><code>水上行走</code>：在河道时提供移动速度和法术强度或攻击力，自动适应。</p>
+<pre><code>这组符文可以让你在适当的情况下获得伤害提升。你的选择有：使自己的首个技能灼烧敌方英雄，在河道中获得额外攻击属性，以及获得随时间呈指数增长的攻击属性。
+</code></pre>
+<p><code>风暴聚集</code>：随着游戏的进程不断提供攻击力或法术强度，自动适应。</p>
+<pre><code>人人自带N条火龙属性?新版的基石风暴聚集能随着时间的不断叠加而不断叠加你的法强或者是攻击力，当游戏进入到50分钟时，你就会自带120点法强，自带一顶帽子。当然前提是游戏能进入到那么后期的话…….
+</code></pre>
+<h2 id="坚决系">坚决系</h2>
+<figure data-type="image" tabindex="3"><img src="https://100248.com/pic.php?url=https%3A%2F%2Fp3.toutiaoimg.com%2Flarge%2F46d100010b3451b9bac2%3Ffrom%3Darticle.detail%26_iz%3D31825%26index%3D9&amp;bas=aHR0cHM6Ly9wMy50b3V0aWFvaW1nLmNvbS9sYXJnZS80NmQxMDAwMTBiMzQ1MWI5YmFjMj9mcm9tPWFydGljbGUuZGV0YWlsJl9pej0zMTgyNSZpbmRleD05" alt="" loading="lazy"></figure>
+<h3 id="基石符文-4">基石符文</h3>
+<p><code>不灭之握</code>：每过4秒，你对一个英雄发起的下一次攻击将造成额外魔法伤害、治疗效果、并永久提升你的生命值。</p>
+<pre><code>这个符文非常适合线上换血掺杂普攻的英雄。如今主流的带不灭之握的坦克英雄依然可以沿用新版不灭之握。另外一些普攻换血平凡的输出型英雄也可以点这个符文来增加后期的生存能力。
+</code></pre>
+<p><code>余震</code>：在你定身一个敌方英雄后提供防御属性，稍后会在你的周围造成爆发性的自适应伤害。</p>
+<pre><code>加强版巨像，不仅能提供护盾还有爆发伤害。在硬控命中对方之后，能增加双抗，同时还能基于自己的生命值打出爆发伤害。坦克的低伤害时代一去不复返。
+</code></pre>
+<p><code>守护者</code>：守护你选作技能目标的友军和那些距离你非常近的友军们。如果你和一个被守护的友军即将承受伤害，那么你们两个都会获得加速效果和一层护盾。</p>
+<pre><code>辅助的首选，增加了对线的容错率，在换血上也可有一些优势。保护型英雄都可以选择此天赋。
+</code></pre>
+<h3 id="普通符文-4">普通符文</h3>
+<p><code>坚定</code>：你每有一个尚未冷却完毕的召唤师技能，你的韧性和减速抵抗就会获得提升。在施放一个召唤师技能后，立刻获得幅度更大的韧性和减速抵抗，持续一段不短的时间。</p>
+<pre><code>非常适合闪现开团的英雄。像皇子的EQ闪这样的开团再也不怕进去被秒杀了。
+</code></pre>
+<p><code>爆破</code>：当位于防御塔附近时，持续充能一次针对防御塔的强力攻击。</p>
+<pre><code>坦克的拆塔能力增强。坦克上单在有段时间内不被待见就是因为拆塔速度太慢，导致单带难以牵制对方。而新版的符文中，基于坦克的生命值，能发动一次对防御塔的冲击，生命值越高，伤害越高，坦克的拆塔能力大大增强。
+</code></pre>
+<p><code>生命源泉</code>：对一名敌方英雄施加移动受损效果会将其标记。你和友方英雄在攻击被标记的英雄时会获得治疗效果。</p>
+<pre><code>这个符文首先是适合打野，特别是拿着红BUFF的打野，其次是适合带有减速的英雄，如果下路带应该是一人带就够了，无需多带。
+</code></pre>
+<p><code>钢铁皮肤</code>：获得+5护甲。治疗（含消耗品）会使你的护甲暂时提升5%。</p>
+<pre><code>3秒时间确实是很短，5的提升也不高，但是在下路如果有奶妈、带圣物之盾的辅助、琴女这些英雄的话，带这个对拼还是有点好处的。
+</code></pre>
+<p><code>镜之壳</code>：获得+5魔法抗性。治疗（含消耗品）会使你的魔法抗性暂时提升5%。</p>
+<pre><code>同样的道理但是我觉得这个符文会上冷板凳，因为下路对拼魔抗需求不大，另外3点魔抗加成不多、5也不多，3秒时间还很短。
+</code></pre>
+<p><code>调节</code>：在10分钟时获得+8护甲和+8魔抗，并使你的护甲和魔抗提升5%。</p>
+<pre><code>抗性成长性符文。相对上2的优点是不需要触发条件，永久生效。缺点是游戏前10分钟零作用。如果对线压力不大的坦克，可以选择。
+</code></pre>
+<p><code>过度生长</code>：你附近每有小兵或野怪死亡时，提供永久最大生命值加成。</p>
+<pre><code>生命值无限叠加。当有大量小兵或者是野怪在附近被击杀时，坦克英雄会不断吸收，不断叠加自己的生命值。这样坦克英雄在带线时的收益会大大增加，人人皆有可能成为大虫子。
+</code></pre>
+<p><code>复苏</code>：治疗效果和护盾效果会增强5%，并且如果目标的生命值较低，则此数值会提升额外的10%。</p>
+<pre><code>护盾治疗型辅助首选。有点类似之前辅助天赋风语者的祝福，只有辅助英雄才会点这个。
+</code></pre>
+<p><code>复苏之风</code>：在受到来自一名敌方英雄的伤害后，会持续治疗你一些已损失生命值。</p>
+<pre><code>比较适用于没有续航能力的肉上单血越多续航能力越强。
+</code></pre>
+<h2 id="启迪系">启迪系</h2>
+<figure data-type="image" tabindex="4"><img src="https://100248.com/pic.php?url=https%3A%2F%2Fp26.toutiaoimg.com%2Flarge%2F46d30000e061c8df8c97%3Ffrom%3Darticle.detail%26_iz%3D31825%26index%3D14&amp;bas=aHR0cHM6Ly9wMjYudG91dGlhb2ltZy5jb20vbGFyZ2UvNDZkMzAwMDBlMDYxYzhkZjhjOTc/ZnJvbT1hcnRpY2xlLmRldGFpbCZfaXo9MzE4MjUmaW5kZXg9MTQ=" alt="" loading="lazy"></figure>
+<h3 id="基石符文-5">基石符文</h3>
+<p><code>启封的秘籍</code>：获得“召唤师碎片”并可在单局游戏期间用它们在商店中更改你的召唤师技能。你的召唤师技能会拥有更短冷却时间。</p>
+<pre><code>召唤师技能可以更改，打龙必备?新版天赋出现了一点非常有趣的，就是召唤师技能可以随意更换。但是不能换成两个一模一样的技能。或者，和朋友5人一起开黑时，在大后期决战可以出现5个惩戒一起打大龙?
+</code></pre>
+<p><code>冰川增幅</code>：你对敌方英雄发起的第一次攻击会使该英雄减速(一段时间内无法重复作用于相同目标)。用主动型装备使敌方英雄减速，还会对着他们发射冻结射线，并创造出一个缓慢消失的减速场。</p>
+<pre><code>技能自带冰杖效果，浪法维克托等技能衔接快的英雄的福音，现在冰杖减速效果减弱，配上这个天赋的话效果会好很多。
+</code></pre>
+<p><code>行窃预兆</code>：使用一个技能后，你的下次普攻将获得5金币，或者获得一个消耗品，概率大概为50%。</p>
+<pre><code>这一符文完全看运气，但选择了绝对不亏。阔别已久的大红药都有可能得到哦。
+</code></pre>
+<h3 id="普通符文-5">普通符文</h3>
+<p><code>海克斯科技闪现罗网</code>：当闪现尚未冷却完毕时，它会被替换为海克斯闪现。海克斯闪现：引导，然后闪烁到一个新位置。</p>
+<pre><code>一些比较依赖闪现进场的英雄是个不错的选择，虽然要引导，但是在埋伏人的时候还是挺
+&lt;!-- more --&gt;
+不错的。
+</code></pre>
+<p><code>饼干配送</code>：每过3分钟获得一个免费的饼干，直到12分钟为止。饼干可回复生命值和法力值。享用一个饼干可永久提升你的最大法力值。</p>
+<pre><code>赖线必备，12分钟之前都会有饼干，回血回蓝还有永久蓝量加成，建议吸血鬼、乌鸦、卡牌这种中后期优秀但前期乏力的英雄带这个。
+</code></pre>
+<p><code>完美时机</code>：获得一个免费的秒表。秒表有一个一次性使用的凝滞主动效果。</p>
+<pre><code>游戏的容错率增加，中亚，复活甲和石像鬼板甲的冷却时间缩短 新版符文中的凝滞，可以在6分钟之后拥有一次机会，让三件装备中的的其中一件的效果冷却时间减少15。这样在大后期决战时，游戏的容错率将大大增强，在关键团战中能打出更充足的效果。
+</code></pre>
+<p><code>神奇之鞋</code>：你在10分钟时获得免费的鞋子，但你在之前不能购买鞋子。每次协助击杀都会让你的鞋子的到来时间提前30秒。</p>
+<pre><code>比较适合刷子类中单，不需要游走支援，刷十分钟就能有一双鞋子还是能省下一把可观的收入，而且有额外的移动速度，辅助也是可以点这个天赋的。
+</code></pre>
+<p><code>未来市场</code>：你可以欠债来购买装备。</p>
+<pre><code>这个天赋最大的亮点就是回家差一点钱出装备是可以直接买了，利息应该也不过，应该是只能贷款买小装备，如果是随着时间的推移买的装备也可可以越贵的话那这个天赋就非常厉害了。
+</code></pre>
+<p><code>小兵去质器</code>：开始游戏时会带着6个能够秒杀线上小兵的小兵去质器。用该物品击杀小兵会永久提升你对该类型小兵的额外伤害。</p>
+<pre><code>开局可以速度抢2，猛推线配合，去反野。
+</code></pre>
+<p><code>星界洞悉</code>：+5%冷却缩减</p>
+<p>+5%最大冷却缩减</p>
+<p>+5%召唤师技能冷却缩减</p>
+<p>+5%装备冷却缩减</p>
+<pre><code>相当不错的符文，因为这个符文让锐雯、安妮等召唤师技能需求大并且技能CD需求大的英雄有很好的环境。我觉得会火。
+</code></pre>
+<p><code>行近速率</code>：朝着移动受损的友方英雄被你施加了移动受损效果的敌方英雄移动时，获得移动速度加成。</p>
+<pre><code>很适用于保护型辅助，或者带控制能更快的保护支援C位。
+</code></pre>
+<p><code>星界躯体</code>：永久+100生命值<br>
+– 10%对英雄和野怪的伤害，直到10分钟为止。</p>
+<pre><code>只有前十分钟有效，前期100生命值的增加了辅助的生存能力跟换血能力，比较适合日女这类前期很凶的辅助。是一个前期技能用好了能帮助自己ADC取得跟好的优势。
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+
+        
+            <span id="/post/leagueoflegends-fu-wen-xiang-jie-lol-xin-ban-fu-wen/" class="leancloud_visitors" data-flag-title="LeagueOfLegends符文详解(LOL新版符文)">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'dG2UTSgaDCvyachOHPZ0Py6S-9Nh9j0Va',
+		appKey: 'eadpLEy8QXXo28YoR7fG8j0T',
+		avatar: 'retro',
+		pageSize: 10,
+		recordIp: true,
+		placeholder: '',
+		visitor: true,
+		meta:['nick','mail'],
+    enableQQ:['true'],
+		emojiCDN:'https://cdn.jsdelivr.net/gh/luziyi/Tieba_emotions@master/',
+		emojiMaps: {
+    "tieba1":"image_emoticon.png",
+    "tieba2":"image_emoticon2.png",
+    "tieba3":"image_emoticon3.png",
+    "tieba4":"image_emoticon4.png",
+    "tieba5":"image_emoticon5.png",
+    "tieba6":"image_emoticon6.png",
+    "tieba7":"image_emoticon7.png",
+    "tieba8":"image_emoticon8.png",
+    "tieba9":"image_emoticon9.png",
+    "tieba10":"image_emoticon10.png",
+    "tieba11":"image_emoticon11.png",
+    "tieba12":"image_emoticon12.png",
+    "tieba13":"image_emoticon13.png",
+    "tieba14":"image_emoticon14.png",
+    "tieba15":"image_emoticon15.png",
+    "tieba16":"image_emoticon16.png",
+    "tieba17":"image_emoticon17.png",
+    "tieba18":"image_emoticon18.png",
+    "tieba19":"image_emoticon19.png",
+    "tieba20":"image_emoticon20.png",
+    "tieba21":"image_emoticon21.png",
+    "tieba22":"image_emoticon22.png",
+    "tieba23":"image_emoticon23.png",
+    "tieba24":"image_emoticon24.png",
+    "tieba25":"image_emoticon25.png",
+    "tieba26":"image_emoticon26.png",
+    "tieba27":"image_emoticon27.png",
+    "tieba28":"image_emoticon28.png",
+    "tieba29":"image_emoticon29.png",
+    "tieba30":"image_emoticon30.png",
+    "tieba31":"image_emoticon31.png",
+    "tieba32":"image_emoticon32.png",
+    "tieba33":"image_emoticon33.png",
+    "tieba34":"image_emoticon34.png",
+    "tieba35":"image_emoticon35.png",
+    "tieba36":"image_emoticon36.png",
+    "tieba37":"image_emoticon37.png",
+    "tieba38":"image_emoticon38.png",
+    "tieba39":"image_emoticon39.png",
+    "tieba40":"image_emoticon40.png",
+    "tieba41":"image_emoticon41.png",
+    "tieba42":"image_emoticon42.png",
+    "tieba43":"image_emoticon43.png",
+    "tieba44":"image_emoticon44.png",
+    "tieba45":"image_emoticon45.png",
+    "tieba46":"image_emoticon46.png",
+    "tieba47":"image_emoticon47.png",
+    "tieba48":"image_emoticon48.png",
+    "tieba49":"image_emoticon49.png",
+    "tieba50":"image_emoticon50.png",
+    "tieba62":"image_emoticon62.png",
+    "tieba63":"image_emoticon63.png",
+    "tieba64":"image_emoticon64.png",
+    "tieba65":"image_emoticon65.png",
+    "tieba66":"image_emoticon66.png",
+    "tieba67":"image_emoticon67.png",
+    "tieba68":"image_emoticon68.png",
+    "tieba69":"image_emoticon69.png",
+    "tieba70":"image_emoticon70.png",
+    "tieba71":"image_emoticon71.png",
+    "tieba72":"image_emoticon72.png",
+    "tieba73":"image_emoticon73.png",
+    "tieba74":"image_emoticon74.png",
+    "tieba75":"image_emoticon75.png",
+    "tieba76":"image_emoticon76.png",
+    "tieba77":"image_emoticon77.png",
+    "tieba78":"image_emoticon78.png",
+    "tieba79":"image_emoticon79.png",
+    "tieba80":"image_emoticon80.png",
+    "tieba81":"image_emoticon81.png",
+    "tieba82":"image_emoticon82.png",
+    "tieba83":"image_emoticon83.png",
+    "tieba84":"image_emoticon84.png",
+    "tieba85":"image_emoticon85.png",
+    "tieba86":"image_emoticon86.png",
+    "tieba87":"image_emoticon87.png",
+    "tieba88":"image_emoticon88.png",
+    "tieba89":"image_emoticon89.png",
+    "tieba90":"image_emoticon90.png",
+    "tieba91":"image_emoticon91.png",
+    "tieba92":"image_emoticon92.png",
+    "tieba93":"image_emoticon93.png",
+    "tieba94":"image_emoticon94.png",
+    "tieba95":"image_emoticon95.png",
+    "tieba96":"image_emoticon96.png",
+    "tieba97":"image_emoticon97.png",
+    "tieba98":"image_emoticon98.png",
+    "tieba99":"image_emoticon99.png",
+    "tieba100":"image_emoticon100.png",
+    "tieba101":"image_emoticon101.png",
+    "tieba102":"image_emoticon102.png",
+    "tieba103":"image_emoticon103.png",
+    "tieba104":"image_emoticon104.png",
+    "tieba105":"image_emoticon105.png",
+    "tieba106":"image_emoticon106.png",
+    "tieba107":"image_emoticon107.png",
+    "tieba108":"image_emoticon108.png",
+    "tieba109":"image_emoticon109.png",
+    "tieba110":"image_emoticon110.png",
+    "tieba111":"image_emoticon111.png",
+    "tieba112":"image_emoticon112.png",
+    "tieba113":"image_emoticon113.png",
+    "tieba114":"image_emoticon114.png",
+    "tieba115":"image_emoticon115.png",
+    "tieba116":"image_emoticon116.png",
+    "tieba117":"image_emoticon117.png",
+    "tieba118":"image_emoticon118.png",
+    "tieba119":"image_emoticon119.png",
+    "tieba120":"image_emoticon120.png",
+    "tieba121":"image_emoticon121.png",
+    "tieba122":"image_emoticon122.png",
+    "tieba123":"image_emoticon123.png",
+    "tieba124":"image_emoticon124.png"},
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">When you feel alone, just look at the space between your fingers, and remember that's where my fingers fit perfect.</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/luziyi" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://twitter.com/abaepU5ZqZ1fCds" target="_blank">
+                    <i class="fab fa-twitter gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/u/7777196215" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.zhihu.com/people/lu-zi-yi-35-13" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://dribbble.com/TommyGong" target="_blank">
+                    <i class="fab fa-dribbble gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.facebook.com/profile.php?id=100049061017588" target="_blank">
+                    <i class="fab fa-facebook gt-c-content-color-first"></i>
+                </a>
+            
+        
+    </div>
+    <div class="footer-info">
+        Hello，Happy
+    </div>
+    <div>
+        CopyRight © 2004-2023 Luziyi. All Rights Reserved. | <a href="https://tommygong.top/atom.xml" target="_blank">RSS</a></a>
+    </div>
+
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

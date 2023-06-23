@@ -1,0 +1,466 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>prim算法（普里姆算法）详解 | TommyGong&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://tommygong.top/favicon.ico?v=1687529377233">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://tommygong.top/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            TommyGong&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1687529377233" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    prim算法（普里姆算法）详解
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-05-11 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>prim算法（普里姆算法）详解<br>
+了解了什么是最小生成树后，本节为您讲解如何用普里姆（prim）算法查找连通网（带权的连通图）中的最小生成树。</p>
+<p>普里姆算法查找最小生成树的过程，采用了贪心算法的思想。对于包含 N 个顶点的连通网，普里姆算法每次从连通网中找出一个权值最小的边，这样的操作重复 N-1 次，由 N-1 条权值最小的边组成的生成树就是最小生成树。</p>
+<p>那么，如何找出 N-1 条权值最小的边呢？普里姆算法的实现思路是：</p>
+<p>将连通网中的所有顶点分为两类（假设为 A 类和 B 类）。初始状态下，所有顶点位于 B 类；</p>
+<p>选择任意一个顶点，将其从 B 类移动到 A 类；</p>
+<p>从 B 类的所有顶点出发，找出一条连接着 A 类中的某个顶点且权值最小的边，将此边连接着的 A 类中的顶点移动到 B 类；</p>
+<p>重复执行第 3 步，直至 B 类中的所有顶点全部移动到 A 类，恰好可以找到 N-1 条边。</p>
+<p>举个例子，下图是一个连通网，使用普里姆算法查找最小生成树，需经历以下几个过程：</p>
+<p><img src="https://tommygong.top/post-images/1683785257966.jpg" alt="" loading="lazy"><br>
+图 1 连通网</p>
+<p>将图中的所有顶点分为 A 类和 B 类，初始状态下，A = {}，B = {A, B, C, D, S, T}。</p>
+<p>从 B 类中任选一个顶点，假设选择 S 顶点，将其从 B 类移到 A 类，A = {S}，B = {A, B, C, D, T}。从 A 类的 S 顶点出发，到达 B 类中顶点的边有 2 个，分别是 S-A 和 S-C，其中 S-A 边的权值最小，所以选择 S-A 边组成最小生成树，将 A 顶点从 B 类移到 A 类，A = {S, A}，B = {B, C, D, T}。</p>
+<p><img src="https://tommygong.top/post-images/1683785303306.jpg" alt="" loading="lazy"><br>
+图 2 S-A 边组成最小生成树</p>
+<p>从 A 类中的 S、A 顶点出发，到达 B 类中顶点的边有 3 个，分别是 S-C、A-C、A-B，其中 A-C 的权值最小，所以选择 A-C 组成最小生成树，将顶点 C 从 B 类移到 A 类，A = {S, A, C}，B = {B, D, T}。</p>
+<p><img src="https://tommygong.top/post-images/1683785307186.jpg" alt="" loading="lazy"><br>
+图 3 A-C 边组成最小生成树</p>
+<p>从 A 类中的 S、A、C 顶点出发，到达 B 类顶点的边有 S-C、A-B、C-B、C-D，其中 C-D 边的权值最小，所以选择 C-D 组成最小生成树，将顶点 D 从 B 类移到 A 类，A = {S, A, C, D}，B = {B, T}。</p>
+<p><img src="https://tommygong.top/post-images/1683785311690.jpg" alt="" loading="lazy"><br>
+图 4 C-D 边组成最小生成树</p>
+<p>从 A 类中的 S、A、C、D 顶点出发，到达 B 类顶点的边有 A-B、C-B、D-B、D-T，其中 D-B 和 D-T 的权值最小，任选其中的一个，例如选择 D-B 组成最小生成树，将顶点 B 从 B 类移到 A 类，A = {S, A, C, D, B}，B = {T}。</p>
+<p><img src="https://tommygong.top/post-images/1683785311690.jpg" alt="" loading="lazy"><br>
+图 5 D-B 边组成最小生成树</p>
+<p>从 A 类中的 S、A、C、D、B 顶点出发，到达 B 类顶点的边有 B-T、D-T，其中 D-T 的权值最小，选择 D-T 组成最小生成树，将顶点 T 从 B 类移到 A 类，A = {S, A, C, D, B, T}，B = {}。</p>
+<p><img src="https://tommygong.top/post-images/1683785315841.jpg" alt="" loading="lazy"><br>
+图 6 D-T 边组成最小生成树</p>
+<p>由于 B 类中的顶点全部移到了 A 类，因此 S-A、A-C、C-D、D-B、D-T 组成的是一个生成树，而且是一个最小生成树，它的总权值为 17。</p>
+<p><img src="https://tommygong.top/post-images/1683785320527.jpg" alt="" loading="lazy"><br>
+图 7 最小生成树</p>
+<p>普里姆算法的具体实现</p>
+<p>接下来，我们将给出实现普里姆算法的 C、Java、Python 程序，程序中有详尽的注释，您可以借助编译器一边运行程序一边观察程序的执行过程，彻底搞清楚普里姆算法是如何找到最小生成树的。</p>
+<p>如下是使用普里姆算法在图 1 所示的连通网中查找最小生成树的 C 语言程序：</p>
+<pre><code class="language-c">#include&lt;stdio.h&gt;
+#define V 6    // 记录图中顶点的个数
+typedef enum { false, true } bool;
+//查找权值最小的、尚未被选择的顶点，key 数组记录了各顶点之间的权值数据，visited数组记录着各个顶点是否已经被选择的信息
+int min_Key(int key[], bool visited[])
+{
+    int min = 2147483647, min_index;  //遍历 key 数组使用，min 记录最小的权值，min_index 记录最小权值关联的顶点
+    //遍历 key 数组
+    for (int v = 0; v &lt; V; v++) {
+        //如果当前顶点为被选择，且对应的权值小于 min 值
+        if (visited[v] == false &amp;&amp; key[v] &lt; min) {
+            //更新  min 的值并记录该顶点的位置
+            min = key[v];
+            min_index = v;
+        }
+    }
+    //返回最小权值的顶点的位置
+    return min_index;
+}
+//输出最小生成树
+void print_MST(int parent[], int cost[V][V])
+{
+    int minCost = 0;
+    printf(&quot;最小生成树为：\n&quot;);
+    //遍历 parent 数组
+    for (int i = 1; i &lt; V; i++) {
+        //parent 数组下标值表示各个顶点，各个下标对应的值为该顶点的父节点
+        printf(&quot;%d - %d wight:%d\n&quot;, parent[i] + 1, i + 1, cost[i][parent[i]]);//由于数组下标从 0 开始，因此输出时各自 +1
+        //统计最小生成树的总权值
+        minCost += cost[i][parent[i]];
+    }
+    printf(&quot;总权值为：%d&quot;, minCost);
+}
+//根据用户提供了图的信息（存储在 cost 数组中），寻找最小生成树
+void find_MST(int cost[V][V])
+{    //key 数组用于记录 B 类顶点到 A 类顶点的权值
+    //parent 数组用于记录最小生成树中各个顶点父节点的位置，便于最终生成最小生成树
+    //visited 数组用于记录各个顶点属于 A 类还是 B 类
+    int parent[V], key[V];
+    bool visited[V];
+    // 初始化 3 个数组
+    for (int i = 0; i &lt; V; i++) {
+        key[i] = 2147483647;    // 将 key 数组各个位置设置为无限大的数
+        visited[i] = false;     // 所有的顶点全部属于 B 类
+        parent[i] = -1;         // 所有顶点都没有父节点
+    }
+    // 选择 key 数组中第一个顶点，开始寻找最小生成树
+    key[0] = 0;  // 该顶点对应的权值设为 0
+    parent[0] = -1; // 该顶点没有父节点
+    // 对于 V 个顶点的图，最需选择 V-1 条路径，即可构成最小生成树
+    for (int x = 0; x &lt; V - 1; x++)
+    {
+        // 从 key 数组中找到权值最小的顶点所在的位置
+        int u = min_Key(key, visited);
+        // 该顶点划分到 A 类
+        visited[u] = true;
+        // 由于新顶点加入 A 类，因此需要更新 key 数组中的数据
+        for (int v = 0; v &lt; V; v++)
+        {
+            // 如果类 B 中存在到下标为 u 的顶点的权值比 key 数组中记录的权值还小，表明新顶点的加入，使得类 B 到类 A 顶点的权值有了更好的选择
+            if (cost[u][v] != 0 &amp;&amp; visited[v] == false &amp;&amp; cost[u][v] &lt; key[v])
+            {
+                // 更新 parent 数组记录的各个顶点父节点的信息
+                parent[v] = u;
+                // 更新 key 数组
+                key[v] = cost[u][v];
+            }
+        }
+    }
+    //根据 parent 记录的各个顶点父节点的信息，输出寻找到的最小生成树
+    print_MST(parent, cost);
+}
+// main function
+int main()
+{
+    int p1, p2;
+    int wight;
+    int cost[V][V] = { 0 };
+    printf(&quot;输入图（顶点到顶点的路径和权值)：\n&quot;);
+    while (1) {
+        scanf(&quot;%d %d&quot;, &amp;p1, &amp;p2);
+        //如果用户输入 -1 -1，表示输入结束
+        if (p1 == -1 &amp;&amp; p2 == -1) {
+            break;
+        }
+        scanf(&quot;%d&quot;, &amp;wight);
+        cost[p1 - 1][p2 - 1] = wight;
+        cost[p2 - 1][p1 - 1] = wight;
+    }
+    // 根据用户输入的图的信息，寻找最小生成树
+    find_MST(cost);
+    return 0;
+}
+</code></pre>
+<p>————————————————<br>
+版权声明：本文为CSDN博主「睿科知识云」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：https://blog.csdn.net/ccc369639963/article/details/122621467</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://tommygong.top/post/ke-lu-si-qia-er-suan-fa-kruskalxiang-jie/" class="post-title gt-a-link">
+                    克鲁斯卡尔算法（Kruskal）详解
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/prim-suan-fa-pu-li-mu-suan-fa-xiang-jie/" class="leancloud_visitors" data-flag-title="prim算法（普里姆算法）详解">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'dG2UTSgaDCvyachOHPZ0Py6S-9Nh9j0Va',
+		appKey: 'eadpLEy8QXXo28YoR7fG8j0T',
+		avatar: 'retro',
+		pageSize: 10,
+		recordIp: true,
+		placeholder: '',
+		visitor: true,
+		meta:['nick','mail'],
+    enableQQ:['true'],
+		emojiCDN:'https://cdn.jsdelivr.net/gh/luziyi/Tieba_emotions@master/',
+		emojiMaps: {
+    "tieba1":"image_emoticon.png",
+    "tieba2":"image_emoticon2.png",
+    "tieba3":"image_emoticon3.png",
+    "tieba4":"image_emoticon4.png",
+    "tieba5":"image_emoticon5.png",
+    "tieba6":"image_emoticon6.png",
+    "tieba7":"image_emoticon7.png",
+    "tieba8":"image_emoticon8.png",
+    "tieba9":"image_emoticon9.png",
+    "tieba10":"image_emoticon10.png",
+    "tieba11":"image_emoticon11.png",
+    "tieba12":"image_emoticon12.png",
+    "tieba13":"image_emoticon13.png",
+    "tieba14":"image_emoticon14.png",
+    "tieba15":"image_emoticon15.png",
+    "tieba16":"image_emoticon16.png",
+    "tieba17":"image_emoticon17.png",
+    "tieba18":"image_emoticon18.png",
+    "tieba19":"image_emoticon19.png",
+    "tieba20":"image_emoticon20.png",
+    "tieba21":"image_emoticon21.png",
+    "tieba22":"image_emoticon22.png",
+    "tieba23":"image_emoticon23.png",
+    "tieba24":"image_emoticon24.png",
+    "tieba25":"image_emoticon25.png",
+    "tieba26":"image_emoticon26.png",
+    "tieba27":"image_emoticon27.png",
+    "tieba28":"image_emoticon28.png",
+    "tieba29":"image_emoticon29.png",
+    "tieba30":"image_emoticon30.png",
+    "tieba31":"image_emoticon31.png",
+    "tieba32":"image_emoticon32.png",
+    "tieba33":"image_emoticon33.png",
+    "tieba34":"image_emoticon34.png",
+    "tieba35":"image_emoticon35.png",
+    "tieba36":"image_emoticon36.png",
+    "tieba37":"image_emoticon37.png",
+    "tieba38":"image_emoticon38.png",
+    "tieba39":"image_emoticon39.png",
+    "tieba40":"image_emoticon40.png",
+    "tieba41":"image_emoticon41.png",
+    "tieba42":"image_emoticon42.png",
+    "tieba43":"image_emoticon43.png",
+    "tieba44":"image_emoticon44.png",
+    "tieba45":"image_emoticon45.png",
+    "tieba46":"image_emoticon46.png",
+    "tieba47":"image_emoticon47.png",
+    "tieba48":"image_emoticon48.png",
+    "tieba49":"image_emoticon49.png",
+    "tieba50":"image_emoticon50.png",
+    "tieba62":"image_emoticon62.png",
+    "tieba63":"image_emoticon63.png",
+    "tieba64":"image_emoticon64.png",
+    "tieba65":"image_emoticon65.png",
+    "tieba66":"image_emoticon66.png",
+    "tieba67":"image_emoticon67.png",
+    "tieba68":"image_emoticon68.png",
+    "tieba69":"image_emoticon69.png",
+    "tieba70":"image_emoticon70.png",
+    "tieba71":"image_emoticon71.png",
+    "tieba72":"image_emoticon72.png",
+    "tieba73":"image_emoticon73.png",
+    "tieba74":"image_emoticon74.png",
+    "tieba75":"image_emoticon75.png",
+    "tieba76":"image_emoticon76.png",
+    "tieba77":"image_emoticon77.png",
+    "tieba78":"image_emoticon78.png",
+    "tieba79":"image_emoticon79.png",
+    "tieba80":"image_emoticon80.png",
+    "tieba81":"image_emoticon81.png",
+    "tieba82":"image_emoticon82.png",
+    "tieba83":"image_emoticon83.png",
+    "tieba84":"image_emoticon84.png",
+    "tieba85":"image_emoticon85.png",
+    "tieba86":"image_emoticon86.png",
+    "tieba87":"image_emoticon87.png",
+    "tieba88":"image_emoticon88.png",
+    "tieba89":"image_emoticon89.png",
+    "tieba90":"image_emoticon90.png",
+    "tieba91":"image_emoticon91.png",
+    "tieba92":"image_emoticon92.png",
+    "tieba93":"image_emoticon93.png",
+    "tieba94":"image_emoticon94.png",
+    "tieba95":"image_emoticon95.png",
+    "tieba96":"image_emoticon96.png",
+    "tieba97":"image_emoticon97.png",
+    "tieba98":"image_emoticon98.png",
+    "tieba99":"image_emoticon99.png",
+    "tieba100":"image_emoticon100.png",
+    "tieba101":"image_emoticon101.png",
+    "tieba102":"image_emoticon102.png",
+    "tieba103":"image_emoticon103.png",
+    "tieba104":"image_emoticon104.png",
+    "tieba105":"image_emoticon105.png",
+    "tieba106":"image_emoticon106.png",
+    "tieba107":"image_emoticon107.png",
+    "tieba108":"image_emoticon108.png",
+    "tieba109":"image_emoticon109.png",
+    "tieba110":"image_emoticon110.png",
+    "tieba111":"image_emoticon111.png",
+    "tieba112":"image_emoticon112.png",
+    "tieba113":"image_emoticon113.png",
+    "tieba114":"image_emoticon114.png",
+    "tieba115":"image_emoticon115.png",
+    "tieba116":"image_emoticon116.png",
+    "tieba117":"image_emoticon117.png",
+    "tieba118":"image_emoticon118.png",
+    "tieba119":"image_emoticon119.png",
+    "tieba120":"image_emoticon120.png",
+    "tieba121":"image_emoticon121.png",
+    "tieba122":"image_emoticon122.png",
+    "tieba123":"image_emoticon123.png",
+    "tieba124":"image_emoticon124.png"},
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">When you feel alone, just look at the space between your fingers, and remember that's where my fingers fit perfect.</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/luziyi" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://twitter.com/abaepU5ZqZ1fCds" target="_blank">
+                    <i class="fab fa-twitter gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/u/7777196215" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.zhihu.com/people/lu-zi-yi-35-13" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://dribbble.com/TommyGong" target="_blank">
+                    <i class="fab fa-dribbble gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.facebook.com/profile.php?id=100049061017588" target="_blank">
+                    <i class="fab fa-facebook gt-c-content-color-first"></i>
+                </a>
+            
+        
+    </div>
+    <div class="footer-info">
+        Hello，Happy
+    </div>
+    <div>
+        CopyRight © 2004-2023 Luziyi. All Rights Reserved. | <a href="https://tommygong.top/atom.xml" target="_blank">RSS</a></a>
+    </div>
+
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

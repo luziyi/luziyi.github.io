@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://tommygong.top</id>
+    <title>TommyGong&apos;s blog</title>
+    <updated>2023-06-23T14:10:10.709Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://tommygong.top"/>
+    <link rel="self" href="https://tommygong.top/atom.xml"/>
+    <subtitle>When you feel alone, just look at the space between your fingers, and remember that&apos;s where my fingers fit perfect.</subtitle>
+    <logo>https://tommygong.top/images/avatar.png</logo>
+    <icon>https://tommygong.top/favicon.ico</icon>
+    <rights>All rights reserved 2023, TommyGong&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[台湾国立大学郭彦甫Matlab教程笔记（3）]]></title>
+        <id>https://tommygong.top/post/tai-wan-guo-li-da-xue-guo-yan-fu-matlab-jiao-cheng-bi-ji-3/</id>
+        <link href="https://tommygong.top/post/tai-wan-guo-li-da-xue-guo-yan-fu-matlab-jiao-cheng-bi-ji-3/">
+        </link>
+        <updated>2023-06-19T03:26:09.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[台湾国立大学郭彦甫Matlab教程笔记（1）]]></title>
+        <id>https://tommygong.top/post/tai-wan-guo-li-da-xue-guo-yan-fu-matlab-jiao-cheng-bi-ji-1/</id>
+        <link href="https://tommygong.top/post/tai-wan-guo-li-da-xue-guo-yan-fu-matlab-jiao-cheng-bi-ji-1/">
+        </link>
+        <updated>2023-06-18T14:36:00.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[台湾国立大学郭彦甫Matlab教程笔记（2）]]></title>
+        <id>https://tommygong.top/post/tai-wan-guo-li-da-xue-guo-yan-fu-matlab-jiao-cheng-bi-ji-2/</id>
+        <link href="https://tommygong.top/post/tai-wan-guo-li-da-xue-guo-yan-fu-matlab-jiao-cheng-bi-ji-2/">
+        </link>
+        <updated>2023-06-18T14:27:05.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[algorithm头文件函数全集——史上最全，最贴心]]></title>
+        <id>https://tommygong.top/post/algorithm-tou-wen-jian-han-shu-quan-ji-shi-shang-zui-quan-zui-tie-xin/</id>
+        <link href="https://tommygong.top/post/algorithm-tou-wen-jian-han-shu-quan-ji-shi-shang-zui-quan-zui-tie-xin/">
+        </link>
+        <updated>2023-05-17T01:49:19.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="简介">简介：</h1>
+<p>algorithm头文件是C++的标准算法库，它主要应用在容器上。 因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的 ，也就是说，具有低耦合性。 因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。</p>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="简介">简介：</h1>
+<p>algorithm头文件是C++的标准算法库，它主要应用在容器上。 因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的 ，也就是说，具有低耦合性。 因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[prim算法（普里姆算法）详解]]></title>
+        <id>https://tommygong.top/post/prim-suan-fa-pu-li-mu-suan-fa-xiang-jie/</id>
+        <link href="https://tommygong.top/post/prim-suan-fa-pu-li-mu-suan-fa-xiang-jie/">
+        </link>
+        <updated>2023-05-11T06:06:29.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[克鲁斯卡尔算法（Kruskal）详解]]></title>
+        <id>https://tommygong.top/post/ke-lu-si-qia-er-suan-fa-kruskalxiang-jie/</id>
+        <link href="https://tommygong.top/post/ke-lu-si-qia-er-suan-fa-kruskalxiang-jie/">
+        </link>
+        <updated>2023-05-11T06:01:55.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[int p[4];int (*p)[4];和int *p[4];三种数组定义详解]]></title>
+        <id>https://tommygong.top/post/int-p4int-p4he-int-p4san-chong-shu-zu-ding-yi-xiang-jie/</id>
+        <link href="https://tommygong.top/post/int-p4int-p4he-int-p4san-chong-shu-zu-ding-yi-xiang-jie/">
+        </link>
+        <updated>2023-05-08T01:41:56.000Z</updated>
+        <summary type="html"><![CDATA[<p>初学C语言时，很难分清楚到底三者有何区别，尤其还涉及c语言的灵魂——C指针,下面，我将详细介绍一下三种定义方式，希望对正困惑的你有所帮助。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>初学C语言时，很难分清楚到底三者有何区别，尤其还涉及c语言的灵魂——C指针,下面，我将详细介绍一下三种定义方式，希望对正困惑的你有所帮助。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[KMP算法详解]]></title>
+        <id>https://tommygong.top/post/kmp-suan-fa-xiang-jie/</id>
+        <link href="https://tommygong.top/post/kmp-suan-fa-xiang-jie/">
+        </link>
+        <updated>2023-04-30T02:02:17.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>KMP 解法</strong><br>
+KMP 算法是一个快速查找匹配串的算法，它的作用其实就是本题问题：如何快速在「<strong>原字符串</strong>」中找到「<strong>匹配字符串</strong>」。<br>
+在朴素解法中，不考虑剪枝的话复杂度是 O(m∗n) 的，而 KMP 算法的复杂度为 O(m+n)。<br>
+KMP 之所以能够在O(m+n) 复杂度内完成查找，是因为其能在「<strong>非完全匹配</strong>」的过程中提取到有效信息进行复用，以减少「<strong>重复匹配</strong>」的消耗。<br>
+你可能不太理解，没关系，我们可以通过举个例子来理解 KMP。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>KMP 解法</strong><br>
+KMP 算法是一个快速查找匹配串的算法，它的作用其实就是本题问题：如何快速在「<strong>原字符串</strong>」中找到「<strong>匹配字符串</strong>」。<br>
+在朴素解法中，不考虑剪枝的话复杂度是 O(m∗n) 的，而 KMP 算法的复杂度为 O(m+n)。<br>
+KMP 之所以能够在O(m+n) 复杂度内完成查找，是因为其能在「<strong>非完全匹配</strong>」的过程中提取到有效信息进行复用，以减少「<strong>重复匹配</strong>」的消耗。<br>
+你可能不太理解，没关系，我们可以通过举个例子来理解 KMP。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[c++运算符优先级归纳]]></title>
+        <id>https://tommygong.top/post/cyun-suan-fu-you-xian-ji-gui-na/</id>
+        <link href="https://tommygong.top/post/cyun-suan-fu-you-xian-ji-gui-na/">
+        </link>
+        <updated>2023-04-23T11:38:09.000Z</updated>
+        <summary type="html"><![CDATA[<p>C++一共有 18个优先级，运算中按优先级进行性计算，当优先级相同时，根据结合性规则来决定。<br>
+结合性：<br>
+1.从左到右（L-R）：操作数和操作符结合的顺序大部分是从左到右结合性的，例如（）、单独的算术运算符<br>
+2.从右到左（R-L）：最典型的是赋值运算符，当赋值符号与算术运算符结合后 ，整体也是R-L。另一个最常用的就是逻辑非运算符 “！”。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>C++一共有 18个优先级，运算中按优先级进行性计算，当优先级相同时，根据结合性规则来决定。<br>
+结合性：<br>
+1.从左到右（L-R）：操作数和操作符结合的顺序大部分是从左到右结合性的，例如（）、单独的算术运算符<br>
+2.从右到左（R-L）：最典型的是赋值运算符，当赋值符号与算术运算符结合后 ，整体也是R-L。另一个最常用的就是逻辑非运算符 “！”。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[指向常量的指针和常量指针]]></title>
+        <id>https://tommygong.top/post/zhi-xiang-chang-liang-de-zhi-zhen-he-chang-liang-zhi-zhen/</id>
+        <link href="https://tommygong.top/post/zhi-xiang-chang-liang-de-zhi-zhen-he-chang-liang-zhi-zhen/">
+        </link>
+        <updated>2023-04-23T11:11:00.000Z</updated>
+    </entry>
+</feed>

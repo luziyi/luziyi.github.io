@@ -1,0 +1,468 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>LeagueOfLegends控制效果详解 | TommyGong&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://tommygong.top/favicon.ico?v=1687529377233">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://tommygong.top/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            TommyGong&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1687529377233" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    LeagueOfLegends控制效果详解
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-01-19 ·
+                    </time>
+                    
+                        <a href="https://tommygong.top/tag/nMs-cIvB2/" class="post-tags">
+                            # LOL
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>英雄联盟目前的控制效果一共有14个，分别是：<code>减速</code>、<code>减攻速</code>、<code>沉默</code>、<code>变形</code>、<code>致盲</code>、<code>近视</code>、<code>禁锢</code>、<code>魅惑</code>、<code>嘲讽</code>、<code>恐惧</code>、<code>晕眩</code>、<code>击飞</code>、<code>压制</code>。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://shp.qpic.cn/cfwebcap/0/a46acbc47173bc5a8f64012b5d49e8b6/0/?width=1264&amp;height=896" alt="" loading="lazy"></figure>
+<h1 id="减速降低目标移动速度">减速：降低目标移动速度</h1>
+<p><img src="https://shp.qpic.cn/cfwebcap/0/69d8fc9a81255753c2f7e17ab3e00977/0/?width=881&amp;height=204" alt="" loading="lazy"><br>
+很多英雄都具备让敌方减速的技能，这是因为相对于其他硬控，减速效果属于<strong>软控制</strong>，对方除了移动速度减缓，其他行为都不会受到太多的影响！但是即便是看上去比较低端的减速效果，一旦吃到，同样会感觉非常难受，尤其是以下四位英雄更是将减速发挥的淋漓尽致！</p>
+<ul>
+<li>1、寒冰射手-艾希<br>
+寒冰的被动无论是普攻还是技能都能造成20%-30%的减速效果，这个效果本身其实强度不算特别高，但是有了攻速装的寒冰却能通过不断高攻速的平A不断延长减速控制的时间，让你插翅也难飞！</li>
+<li>2、魂锁典狱长-锤石<br>
+锤石的大招幽冥监牢会让通过监牢四个墙壁的敌方英雄减速99%，这几乎就相当于定身了，所以如果锤石的监牢放的好，对方除了在里面等待我们的集火外很难有逃生的机会！</li>
+<li>3、沙漠死神-内瑟斯<br>
+狗头的W可以减速敌方，而且是持续5秒从35%到95%递增的效果，另外还能减少对方攻速，所以狗头开大后再将你W减速，你很难逃离他连续Q的残暴打击！</li>
+<li>4、时光守护者-基兰<br>
+时光的E技能可以给自己或者队友加速，也可以对敌方释放造成减速效果！虽然表面看这个减速效果一般且持续时间很短，但时光的W可以重置这个技能冷却，因此EWE连招可以自己加速敌方减速，这样就能起到非常好的追击功能了！<br>
+<img src="https://shp.qpic.cn/cfwebcap/0/4c4a0aa27af3503e9254d166e0f3189e/0/?width=626&amp;height=63" alt="" loading="lazy"><br>
+<strong>应对方法：</strong></li>
+<li>韧性：水银鞋、触发后的血手、触发净化后的3秒内等。韧性只会减少减速的持续时间，不会减少减速效果。</li>
+<li>减速抗性：轻灵之靴、坚定、蓝凯的E技能等。减速抗性会减少减速影响的效果，但不会减少减速的持续时间。（同时，减速抗性的叠加在之前某个版本中已经改为和韧性相同的计算方法：乘法计算。例如轻灵之靴（25%）和坚定（20%）同时触发时的减速抗性为100%-(1-25%)×(1-20%)=40%）。</li>
+<li>减速免疫：剑圣R，奥拉夫R、瑟庄妮被动等。减速免疫可以直接免疫状态内收到的所有减速效果，直接全额抵消。</li>
+<li><img src="https://shp.qpic.cn/cfwebcap/0/d0762d16f333879156807d2019fb4392/0/?width=715&amp;height=76" alt="" loading="lazy"></li>
+</ul>
+<h1 id="减攻速降低目标的攻击速度">减攻速：降低目标的攻击速度</h1>
+<p>在LOL中，攻速阈值指的是攻击速度的上限，这个攻速阈值是2.5，而致命节奏符文则可以突破2.5的攻速阈值。<br>
+在游戏中，一个英雄的攻击速度非常重要，尤其是以平A输出的物理英雄。没有了攻速，他们的输出能力就会降低一大半，在英雄联盟中，能够降低攻速的技能非常少。但也有四个技能能够大幅降低敌方攻速，可以说是AD英雄的克星。</p>
+<ul>
+<li>1.雪人骑士-努努：<code>E技能冰雹</code>，它这个冰球可以减速敌移速和攻速。</li>
+<li>2.熔岩巨兽-墨菲特：<code>E技能大地震颤</code>，它的E技能的效果，墨菲特撞击地面，对周围敌人造成<code>60/95/130/165/200(+0.3)(+0.2)</code>魔法伤害，同时减少目标<code>30/35/40/45/50%</code>的攻击速度，持续<code>3</code>秒。<br>
+<strong>这里注意</strong>：在《英雄联盟》中，描述文本有很多差异。剑圣R和猪妹被动技能描述都为“免疫减速效果”。这里的“减速”指的是攻速和移速双速。</li>
+</ul>
+<h1 id="沉默几乎所有主动技能-装备技能-召唤师技能都不能使用">沉默：几乎所有主动技能、装备技能、召唤师技能都不能使用</h1>
+<p>沉默: 几乎所有主动技能、装备技能、召唤师技能都不能使用，只有个别技能可以使用，例如惩戒等，关于什么技能在沉默状态能够使用后面会另写文章介绍。</p>
+<ul>
+<li>1、虚空恐惧科加斯。大虫子的W技能<code>(1.5/1.75/2/2.25/2.5秒)</code>作为一个AOE的沉默带伤害的技能，对于瑞文、火男，小鱼人等需要技能连招打爆发的英雄来说非常的克制，而且自身有比较的肉。</li>
+<li>2、德玛西亚之力盖伦。盖伦的Q技能(全级<code>1.5</code>秒，<strong>单体沉默效果</strong>)，老版本Q技能沉默时间随等级上升沉默时间越长。因为盖伦有个这个沉默打瑞文才比较好打，而且现在盖伦伤害高，1.5秒足够他用的了，后期Q一套下去哪个脆皮吃得消？</li>
+<li>3、虚空先知玛尔扎哈。蚂蚱的Q技能(<code>1.4/1.8/2.2/2.6/3秒</code>，AOE沉默效果)，效果虽然后期很强大，但是一个有施法动作延迟且非指向性技能。容易MISS。</li>
+<li>4、稻草人。稻草人也是一个很古老的使用沉默技能的英雄，他的E曾经在一级团非常的给力，一级团用E拿五杀也有过发生。现在E技能沉默时间只有<code>1.25</code>秒，AOE沉默效果。</li>
+<li>5、蒸汽机器人布里茨。机器人的R技能(<code>0.5</code>秒，AOE沉默效果)机器人的沉默范围因为是比较大的了，而且是一个瞬发沉默，只是时间过于短暂。</li>
+<li>6、机械先驱维克托。三只手的R技能(和机器人一样，<code>0.5</code>秒，AOE沉默效果)但是他的沉默效果范围区域是会转移的，很吃操作。</li>
+</ul>
+<h1 id="变形高级沉默技能">变形：高级沉默技能</h1>
+<p>英雄联盟中，变形是一种非常特殊的控制技能效果，非常稀有，只有露露具备释放变形的能力。<br>
+露露技能的具体效果是把英雄变成小动物，能够自由移动但是不能够释放技能和攻击。<br>
+变形效果相当于把普通也禁止掉的<strong>高级沉默技能</strong>，变形能够<strong>减少目标的碰撞体积</strong>，<strong>可以被韧性属性减免</strong>。<br>
+变形能够被船长的W技能坏血病疗法、召唤师技能净化以及水银饰带装备技能等净化手段解除。<br>
+目前英雄联盟中仅有仙灵女巫露露的W技能具备将敌人变形的能力。<br>
+<strong>应对方法：</strong><br>
+所有的解控类技能或装备都可以应对（类似于船长W，水银系带，净化等），一般ADC英雄相对没那么害怕沉默，但是放不出技能还是比较恶心的。</p>
+<h1 id="致盲-普通攻击无效">致盲: 普通攻击无效</h1>
+<p><img src="https://shp.qpic.cn/cfwebcap/0/2e3a08dbc569c19505149811bbe4e965/0/?width=1410&amp;height=258" alt="" loading="lazy"><br>
+在致盲期间，被致盲的敌方英雄所有物理攻击都不会命中，伤害显示为miss（闪避）。</p>
+<ul>
+<li>提莫：提莫在英雄联盟中是一个斥候英雄，也是一个人人喊打的英雄，主要是因为这个英雄比较烦人，影响游戏体验。提莫是<strong>上单蛮王的克星</strong>，主要依赖的就是他的<code>Q技能</code>，<code>Q技能</code>致盲效果是一个让依靠普通攻击的英雄头疼的技能。</li>
+<li>奎因：奎因在英雄联盟中是一个射手，但是很少出现在下路的对线中，因为这个英雄在下路弱势，很容易被打爆炸。她的<code>Q技能</code>也是一个致盲效果，算是一个小型的控制技能。</li>
+<li>梦魇：梦魇在英雄联盟中是一个打野英雄，这个英雄最大的特点就是他的大招，具有支援能力，常常作为全球流的打野位置，不仅如此，他的<strong>大招还附带一定的致盲效果</strong>，并且<strong>针对敌方的所有敌人</strong>，是一个很强势的开团技能。</li>
+<li>男枪：男枪在英雄联盟中是一个打野英雄，这个英雄的刷野速率很快，而且无伤打野，不过抓人能力有点欠缺，依赖线上英雄的控制技能和自身的W技能，<code>W技能</code><strong>不仅可以减速，而且附带致盲效果</strong>，是唯一一个依靠致盲可以打断卡牌大招的男人。<br>
+<strong>应对方法：</strong></li>
+<li>类似伊泽瑞尔Q技能的技能携带普攻效果的不受致盲影响，在对面选出致盲或闪避英雄时可以选择这类英雄进行反制。</li>
+<li>水银等解控类装备可以直接解除致盲状态。</li>
+<li>韧性类装备可以缩短致盲持续时间。<br>
+<strong>Tips：</strong></li>
+<li>男枪在受到致盲时，普攻动画会打空气，但实际并没有伤害。</li>
+<li>被致盲的英雄在普攻装备了反甲的英雄时，即使没有打出伤害，也会受到反甲的重伤效果。</li>
+<li>如果普通攻击在受到致盲前已经出手，被致盲后仍然可以命中目标。</li>
+</ul>
+<h1 id="近视-缩小目标视野">近视: 缩小目标视野</h1>
+<p><img src="https://shp.qpic.cn/cfwebcap/0/9f28313570702b8bc0510bfa7cc71035/0/?width=868&amp;height=154" alt="" loading="lazy"><br>
+近视是从致盲中衍生出来的一个控制效果。<br>
+近视可以说是相对比较搞人心态的一个控制了。主要效果为缩短视野半径并失去友方单位的视野。<br>
+近视可以使得你无法在可视距离外通过普攻或指向性技能攻击到目标，甚至没办法知道敌方的准确位置在哪。<br>
+目前拥有近视效果的英雄为：梦魇、奎因、男枪。<br>
+<strong>应对方法：</strong></p>
+<ul>
+<li>女妖和夜之锋刃可以规避梦魇和奎因的技能近视。</li>
+<li>解控类装备可以解除梦魇和奎因的技能近视。</li>
+<li>男枪的烟雾弹除了走出去没有任何应对方法。</li>
+</ul>
+<h1 id="禁锢缚地-无法使用任何位移或传送类技能">禁锢/缚地: 无法使用任何位移或传送类技能</h1>
+<p><img src="https://shp.qpic.cn/cfwebcap/0/faba13fcdedadc1406ccf7b555c23c50/0/?width=874&amp;height=167" alt="" loading="lazy"><br>
+禁锢是一个限制位移的控制效果，在禁锢的持续时间内无法使用任何位移或传送类技能。禁锢过程中可以普通攻击和释放非位移技能。<br>
+禁锢可以打断TP以及海克斯闪现的引导。<br>
+<strong>应对方法：</strong></p>
+<ul>
+<li>解控类装备可以直接解除。</li>
+<li>韧性装可以减短禁锢持续时间。</li>
+</ul>
+<h1 id="强制行动">强制行动</h1>
+<p><img src="https://shp.qpic.cn/cfwebcap/0/6f7871ffc78530de17e4c71a8795ecca/0/?width=718&amp;height=200" alt="" loading="lazy"><br>
+<img src="https://shp.qpic.cn/cfwebcap/0/0bf5861d2c39293d393e4e21751f526a/0/?width=720&amp;height=110" alt="" loading="lazy"><br>
+<img src="https://shp.qpic.cn/cfwebcap/0/5b69542ab055a3ab30ecbfa3da3b02ee/0/?width=715&amp;height=84" alt="" loading="lazy"><br>
+强制行动分为魅惑、恐惧、嘲讽，我将这三类归纳一起讲解。</p>
+<ul>
+<li>魅惑的效果为强迫使被魅惑单位走向自己，同时会被减速。</li>
+<li>恐惧的效果为强迫使被恐惧单位远离自己，同时被减速。</li>
+<li>嘲讽则是强迫目标单位普通攻击自己。<br>
+三种控制效果都是属于<strong>强制行动</strong>的，可以<strong>强制改变敌方</strong>的<strong>移动路线</strong>和<strong>攻击目标</strong>。<br>
+<strong>应对方法：</strong></li>
+<li>解控类装备以及技能可以直接解除。</li>
+<li>韧性装备可以缩短控制持续时间。</li>
+<li>面对恐惧和魅惑时，具有减速免疫的英雄会有奇效。</li>
+<li>以上三种效果会持续到目标死亡，可以通过击杀敌方帮助队友解除控制。</li>
+</ul>
+<h1 id="晕眩-不能使用普攻-移动-大部分技能">晕眩: 不能使用普攻、移动、大部分技能。</h1>
+<p><img src="https://shp.qpic.cn/cfwebcap/0/50904478598d0985da862f6117ffea36/0/?width=728&amp;height=215" alt="" loading="lazy"><br>
+目标无法攻击或使用技能该效果可以被韧性减免，可以被移除<br>
+官方解释中，晕眩是结合了缴械、禁锢和沉默三合一的控制技能。也就是在被晕眩的过程中，没办法释放大部分的技能以及施加攻击指令。<br>
+<strong>应对方法：</strong></p>
+<ul>
+<li>解控类装备技能可以直接解除。</li>
+<li>韧性可以缩短持续时间。</li>
+</ul>
+<h1 id="击飞-控制效果和晕眩相同都不能使用普攻-移动-大部分技能">击飞: 控制效果和晕眩相同，都不能使用普攻、移动、大部分技能。</h1>
+<p>击飞是一个控制强度比较高的控制技能，具体控制效果和晕眩相同，但解除手段就会有部分限制。并且击飞可以配合队友（如亚索）的技能，达到更加强势的作用。<br>
+<strong>应对方法：</strong></p>
+<ul>
+<li>击飞没办法直接移除，但使用除了净化、坩埚以外的解控类装备可以解除因为击飞受到的晕眩。解除晕眩后可以使用闪现和第二段雪球（其他的位移相关的技能都不能用）。</li>
+</ul>
+<h1 id="压制-最强的控制效果不能使用普攻-移动-大部分技能所有召唤师技能只有船长的w和水银能解除">压制: 最强的控制效果，不能使用普攻、移动、大部分技能，所有召唤师技能，只有船长的W和水银能解除</h1>
+<p><img src="https://shp.qpic.cn/cfwebcap/0/804e336aef020812b35f16dcba1ac9d4/0/?width=718&amp;height=100" alt="" loading="lazy"><br>
+控制效果中的霸主来了，压制是整个英雄联盟中效果最狠的控制效果。压制可以使所有召唤师技能无法使用，且净化和坩埚无法解除。<br>
+此分类笔者认为应该属压制类，因为其中有几项控制效果和应对方法和压制完全相同，但在游戏中并没有命名压制。所以笔者将其统称为压制类控制。<br>
+（例如：瑟提的R和蛤蟆的W）<br>
+<strong>应对方法：</strong></p>
+<ul>
+<li>能解压制的装备仅有水银系带和水银弯刀。</li>
+<li>解控类技能（如普朗克W、奥拉夫R等）都可以解压制。</li>
+<li>马尔扎哈R的压制可以通过强制位移和晕眩打断。</li>
+</ul>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://tommygong.top/post/latex-pai-ban-xi-tong-jie-shao/" class="post-title gt-a-link">
+                    LaTeX排版系统介绍
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/leagueoflegends-kong-zhi-xiao-guo-xiang-jie/" class="leancloud_visitors" data-flag-title="LeagueOfLegends控制效果详解">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'dG2UTSgaDCvyachOHPZ0Py6S-9Nh9j0Va',
+		appKey: 'eadpLEy8QXXo28YoR7fG8j0T',
+		avatar: 'retro',
+		pageSize: 10,
+		recordIp: true,
+		placeholder: '',
+		visitor: true,
+		meta:['nick','mail'],
+    enableQQ:['true'],
+		emojiCDN:'https://cdn.jsdelivr.net/gh/luziyi/Tieba_emotions@master/',
+		emojiMaps: {
+    "tieba1":"image_emoticon.png",
+    "tieba2":"image_emoticon2.png",
+    "tieba3":"image_emoticon3.png",
+    "tieba4":"image_emoticon4.png",
+    "tieba5":"image_emoticon5.png",
+    "tieba6":"image_emoticon6.png",
+    "tieba7":"image_emoticon7.png",
+    "tieba8":"image_emoticon8.png",
+    "tieba9":"image_emoticon9.png",
+    "tieba10":"image_emoticon10.png",
+    "tieba11":"image_emoticon11.png",
+    "tieba12":"image_emoticon12.png",
+    "tieba13":"image_emoticon13.png",
+    "tieba14":"image_emoticon14.png",
+    "tieba15":"image_emoticon15.png",
+    "tieba16":"image_emoticon16.png",
+    "tieba17":"image_emoticon17.png",
+    "tieba18":"image_emoticon18.png",
+    "tieba19":"image_emoticon19.png",
+    "tieba20":"image_emoticon20.png",
+    "tieba21":"image_emoticon21.png",
+    "tieba22":"image_emoticon22.png",
+    "tieba23":"image_emoticon23.png",
+    "tieba24":"image_emoticon24.png",
+    "tieba25":"image_emoticon25.png",
+    "tieba26":"image_emoticon26.png",
+    "tieba27":"image_emoticon27.png",
+    "tieba28":"image_emoticon28.png",
+    "tieba29":"image_emoticon29.png",
+    "tieba30":"image_emoticon30.png",
+    "tieba31":"image_emoticon31.png",
+    "tieba32":"image_emoticon32.png",
+    "tieba33":"image_emoticon33.png",
+    "tieba34":"image_emoticon34.png",
+    "tieba35":"image_emoticon35.png",
+    "tieba36":"image_emoticon36.png",
+    "tieba37":"image_emoticon37.png",
+    "tieba38":"image_emoticon38.png",
+    "tieba39":"image_emoticon39.png",
+    "tieba40":"image_emoticon40.png",
+    "tieba41":"image_emoticon41.png",
+    "tieba42":"image_emoticon42.png",
+    "tieba43":"image_emoticon43.png",
+    "tieba44":"image_emoticon44.png",
+    "tieba45":"image_emoticon45.png",
+    "tieba46":"image_emoticon46.png",
+    "tieba47":"image_emoticon47.png",
+    "tieba48":"image_emoticon48.png",
+    "tieba49":"image_emoticon49.png",
+    "tieba50":"image_emoticon50.png",
+    "tieba62":"image_emoticon62.png",
+    "tieba63":"image_emoticon63.png",
+    "tieba64":"image_emoticon64.png",
+    "tieba65":"image_emoticon65.png",
+    "tieba66":"image_emoticon66.png",
+    "tieba67":"image_emoticon67.png",
+    "tieba68":"image_emoticon68.png",
+    "tieba69":"image_emoticon69.png",
+    "tieba70":"image_emoticon70.png",
+    "tieba71":"image_emoticon71.png",
+    "tieba72":"image_emoticon72.png",
+    "tieba73":"image_emoticon73.png",
+    "tieba74":"image_emoticon74.png",
+    "tieba75":"image_emoticon75.png",
+    "tieba76":"image_emoticon76.png",
+    "tieba77":"image_emoticon77.png",
+    "tieba78":"image_emoticon78.png",
+    "tieba79":"image_emoticon79.png",
+    "tieba80":"image_emoticon80.png",
+    "tieba81":"image_emoticon81.png",
+    "tieba82":"image_emoticon82.png",
+    "tieba83":"image_emoticon83.png",
+    "tieba84":"image_emoticon84.png",
+    "tieba85":"image_emoticon85.png",
+    "tieba86":"image_emoticon86.png",
+    "tieba87":"image_emoticon87.png",
+    "tieba88":"image_emoticon88.png",
+    "tieba89":"image_emoticon89.png",
+    "tieba90":"image_emoticon90.png",
+    "tieba91":"image_emoticon91.png",
+    "tieba92":"image_emoticon92.png",
+    "tieba93":"image_emoticon93.png",
+    "tieba94":"image_emoticon94.png",
+    "tieba95":"image_emoticon95.png",
+    "tieba96":"image_emoticon96.png",
+    "tieba97":"image_emoticon97.png",
+    "tieba98":"image_emoticon98.png",
+    "tieba99":"image_emoticon99.png",
+    "tieba100":"image_emoticon100.png",
+    "tieba101":"image_emoticon101.png",
+    "tieba102":"image_emoticon102.png",
+    "tieba103":"image_emoticon103.png",
+    "tieba104":"image_emoticon104.png",
+    "tieba105":"image_emoticon105.png",
+    "tieba106":"image_emoticon106.png",
+    "tieba107":"image_emoticon107.png",
+    "tieba108":"image_emoticon108.png",
+    "tieba109":"image_emoticon109.png",
+    "tieba110":"image_emoticon110.png",
+    "tieba111":"image_emoticon111.png",
+    "tieba112":"image_emoticon112.png",
+    "tieba113":"image_emoticon113.png",
+    "tieba114":"image_emoticon114.png",
+    "tieba115":"image_emoticon115.png",
+    "tieba116":"image_emoticon116.png",
+    "tieba117":"image_emoticon117.png",
+    "tieba118":"image_emoticon118.png",
+    "tieba119":"image_emoticon119.png",
+    "tieba120":"image_emoticon120.png",
+    "tieba121":"image_emoticon121.png",
+    "tieba122":"image_emoticon122.png",
+    "tieba123":"image_emoticon123.png",
+    "tieba124":"image_emoticon124.png"},
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">When you feel alone, just look at the space between your fingers, and remember that's where my fingers fit perfect.</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/luziyi" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://twitter.com/abaepU5ZqZ1fCds" target="_blank">
+                    <i class="fab fa-twitter gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/u/7777196215" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.zhihu.com/people/lu-zi-yi-35-13" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://dribbble.com/TommyGong" target="_blank">
+                    <i class="fab fa-dribbble gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.facebook.com/profile.php?id=100049061017588" target="_blank">
+                    <i class="fab fa-facebook gt-c-content-color-first"></i>
+                </a>
+            
+        
+    </div>
+    <div class="footer-info">
+        Hello，Happy
+    </div>
+    <div>
+        CopyRight © 2004-2023 Luziyi. All Rights Reserved. | <a href="https://tommygong.top/atom.xml" target="_blank">RSS</a></a>
+    </div>
+
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

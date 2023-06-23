@@ -1,0 +1,415 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>台湾国立大学郭彦甫Matlab教程笔记（2） | TommyGong&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://tommygong.top/favicon.ico?v=1687529377233">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://tommygong.top/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            TommyGong&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1687529377233" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    台湾国立大学郭彦甫Matlab教程笔记（2）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-06-18 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>log函数，就是 natural log<br>
+log10（x） common logarithm 以10为底的<br>
+log2（X） 是以2为底的。</p>
+<p><strong>elementary math functions基本数学函数</strong><br>
+1.arithmetic 加减乘除<br>
+2.trigonometry 三角函数<br>
+3.exponents and logarithms 指数和对数函数<br>
+4.complex numbers 复数<br>
+5.cartesian coordinate system conversion</p>
+<p><strong>embedding functions 嵌套函数</strong><br>
+1.functions may be embedded into other functions<br>
+sin(cos(pi))等价于ans=cos(pi),sin(ans)这种两阶段的形式<br>
+2.many lines of code can be condensed into one single command</p>
+<p><strong>variables变数</strong><br>
+1.variables do not need to be declared before assignment<br>
+2.a single “equal” is the assignment operator:指定<br>
+10=A是错的，不能指定，A=10可以 ，是把10指定给A<br>
+question：<br>
+1.upper case/lower case make difference? diffirent<br>
+1.<br>
+can variable names can begin with a number ? no for example 2A is illegal</p>
+<p><strong>numeric variable type变数类型</strong><br>
+默认是double<br>
+怎么查看变量类型，可以在command window 输入 who<br>
+会显示存在的变量名称<br>
+<img src="https://tommygong.top/post-images/1687098670003.png" alt="" loading="lazy"><br>
+输入 whos 会出现更多信息：变量名，大小，数据类型，<br>
+<img src="https://tommygong.top/post-images/1687098687877.png" alt="" loading="lazy"></p>
+<p>special variables and constants特殊的变数和常量<br>
+some keyword 关键字 不能用<br>
+比如 inf 表示无限大，eps这个数很小，NaN :not a number 不是一个数,pi表示Π<br>
+例如输出x=1/0,结果会显示是inf，无限大<br>
+<img src="https://tommygong.top/post-images/1687098699962.png" alt="" loading="lazy"><br>
+例如，输入y=inf/inf 结果显示 y不是一个数nan<br>
+<img src="https://tommygong.top/post-images/1687098703267.png" alt="" loading="lazy"></p>
+<p><strong>【如何判断是否是keyword?]</strong><br>
+输入命令 iskeyword,会出现很多keyword关键字<br>
+<img src="https://tommygong.top/post-images/1687098716956.png" alt="" loading="lazy"><br>
+<strong>matlab calling priority matlab调用优先级</strong><br>
+<img src="https://tommygong.top/post-images/1687098726219.png" alt="" loading="lazy"></p>
+<p>优先顺序举例子<br>
+<img src="https://tommygong.top/post-images/1687098735863.png" alt="" loading="lazy"><br>
+如下图现在的cos就不是cos函数，而是一个变数，字符串类型。cos（8）得到的是这个字符串的第八个位置的东西，就是r<br>
+<img src="https://tommygong.top/post-images/1687098746247.png" alt="" loading="lazy"></p>
+<p>本来cos是一个function，这里被当作了 varible,而且发现 varible的优先级比build-in function高<br>
+同时告诉我们，不要用function name 或者是 Keyword当作 varible name</p>
+<p>下面有一个问题：<br>
+【如何把一个变数从 workspace消除？】<br>
+解决clear 变数名比如， clear cos,就是把上面定义的cos这个变数消除<br>
+clear 不加东西， 整个 workspace 全部清掉</p>
+<p><strong>numeric display format 数据显示格式指令</strong><br>
+<img src="https://tommygong.top/post-images/1687098765952.png" alt="" loading="lazy"><br>
+format<br>
+例如 format long 显示的更长<br>
+bank 有两个小数位<br>
+rat 转成有理数，分数<br>
+在加 format rat之前，分数是这样的显示：4位小数<br>
+<img src="https://tommygong.top/post-images/1687098775010.png" alt="" loading="lazy"><br>
+加 format rat之后：可以显示分数的形式<br>
+<img src="https://tommygong.top/post-images/1687098778623.png" alt="" loading="lazy"></p>
+<p>练习：calculate ,using different format to choose the right answer, format ratio and format long<br>
+<img src="https://tommygong.top/post-images/1687098788430.png" alt="" loading="lazy"></p>
+<p>下面的自己的练习<br>
+<img src="https://tommygong.top/post-images/1687098942604.png" alt="" loading="lazy"><br>
+可以看到是选择d</p>
+<p>选择分数显示的话<br>
+<img src="https://tommygong.top/post-images/1687098924476.png" alt="" loading="lazy"><br>
+结果选1</p>
+<p>【总结一下】<br>
+1.elementary math functions基本数学函数<br>
+2.embedding functions 嵌套函数<br>
+3.variables变数<br>
+4.numeric variable type变数类型<br>
+5.special variables and constants特殊的变数和常量<br>
+6.matlab calling priority matlab调用优先级<br>
+7.numeric display format 数据显示格式<br>
+————————————————<br>
+版权声明：本文为CSDN博主「阿正的梦工坊」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：https://blog.csdn.net/shizheng_Li/article/details/99638059</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://tommygong.top/post/algorithm-tou-wen-jian-han-shu-quan-ji-shi-shang-zui-quan-zui-tie-xin/" class="post-title gt-a-link">
+                    algorithm头文件函数全集——史上最全，最贴心
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/tai-wan-guo-li-da-xue-guo-yan-fu-matlab-jiao-cheng-bi-ji-2/" class="leancloud_visitors" data-flag-title="台湾国立大学郭彦甫Matlab教程笔记（2）">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'dG2UTSgaDCvyachOHPZ0Py6S-9Nh9j0Va',
+		appKey: 'eadpLEy8QXXo28YoR7fG8j0T',
+		avatar: 'retro',
+		pageSize: 10,
+		recordIp: true,
+		placeholder: '',
+		visitor: true,
+		meta:['nick','mail'],
+    enableQQ:['true'],
+		emojiCDN:'https://cdn.jsdelivr.net/gh/luziyi/Tieba_emotions@master/',
+		emojiMaps: {
+    "tieba1":"image_emoticon.png",
+    "tieba2":"image_emoticon2.png",
+    "tieba3":"image_emoticon3.png",
+    "tieba4":"image_emoticon4.png",
+    "tieba5":"image_emoticon5.png",
+    "tieba6":"image_emoticon6.png",
+    "tieba7":"image_emoticon7.png",
+    "tieba8":"image_emoticon8.png",
+    "tieba9":"image_emoticon9.png",
+    "tieba10":"image_emoticon10.png",
+    "tieba11":"image_emoticon11.png",
+    "tieba12":"image_emoticon12.png",
+    "tieba13":"image_emoticon13.png",
+    "tieba14":"image_emoticon14.png",
+    "tieba15":"image_emoticon15.png",
+    "tieba16":"image_emoticon16.png",
+    "tieba17":"image_emoticon17.png",
+    "tieba18":"image_emoticon18.png",
+    "tieba19":"image_emoticon19.png",
+    "tieba20":"image_emoticon20.png",
+    "tieba21":"image_emoticon21.png",
+    "tieba22":"image_emoticon22.png",
+    "tieba23":"image_emoticon23.png",
+    "tieba24":"image_emoticon24.png",
+    "tieba25":"image_emoticon25.png",
+    "tieba26":"image_emoticon26.png",
+    "tieba27":"image_emoticon27.png",
+    "tieba28":"image_emoticon28.png",
+    "tieba29":"image_emoticon29.png",
+    "tieba30":"image_emoticon30.png",
+    "tieba31":"image_emoticon31.png",
+    "tieba32":"image_emoticon32.png",
+    "tieba33":"image_emoticon33.png",
+    "tieba34":"image_emoticon34.png",
+    "tieba35":"image_emoticon35.png",
+    "tieba36":"image_emoticon36.png",
+    "tieba37":"image_emoticon37.png",
+    "tieba38":"image_emoticon38.png",
+    "tieba39":"image_emoticon39.png",
+    "tieba40":"image_emoticon40.png",
+    "tieba41":"image_emoticon41.png",
+    "tieba42":"image_emoticon42.png",
+    "tieba43":"image_emoticon43.png",
+    "tieba44":"image_emoticon44.png",
+    "tieba45":"image_emoticon45.png",
+    "tieba46":"image_emoticon46.png",
+    "tieba47":"image_emoticon47.png",
+    "tieba48":"image_emoticon48.png",
+    "tieba49":"image_emoticon49.png",
+    "tieba50":"image_emoticon50.png",
+    "tieba62":"image_emoticon62.png",
+    "tieba63":"image_emoticon63.png",
+    "tieba64":"image_emoticon64.png",
+    "tieba65":"image_emoticon65.png",
+    "tieba66":"image_emoticon66.png",
+    "tieba67":"image_emoticon67.png",
+    "tieba68":"image_emoticon68.png",
+    "tieba69":"image_emoticon69.png",
+    "tieba70":"image_emoticon70.png",
+    "tieba71":"image_emoticon71.png",
+    "tieba72":"image_emoticon72.png",
+    "tieba73":"image_emoticon73.png",
+    "tieba74":"image_emoticon74.png",
+    "tieba75":"image_emoticon75.png",
+    "tieba76":"image_emoticon76.png",
+    "tieba77":"image_emoticon77.png",
+    "tieba78":"image_emoticon78.png",
+    "tieba79":"image_emoticon79.png",
+    "tieba80":"image_emoticon80.png",
+    "tieba81":"image_emoticon81.png",
+    "tieba82":"image_emoticon82.png",
+    "tieba83":"image_emoticon83.png",
+    "tieba84":"image_emoticon84.png",
+    "tieba85":"image_emoticon85.png",
+    "tieba86":"image_emoticon86.png",
+    "tieba87":"image_emoticon87.png",
+    "tieba88":"image_emoticon88.png",
+    "tieba89":"image_emoticon89.png",
+    "tieba90":"image_emoticon90.png",
+    "tieba91":"image_emoticon91.png",
+    "tieba92":"image_emoticon92.png",
+    "tieba93":"image_emoticon93.png",
+    "tieba94":"image_emoticon94.png",
+    "tieba95":"image_emoticon95.png",
+    "tieba96":"image_emoticon96.png",
+    "tieba97":"image_emoticon97.png",
+    "tieba98":"image_emoticon98.png",
+    "tieba99":"image_emoticon99.png",
+    "tieba100":"image_emoticon100.png",
+    "tieba101":"image_emoticon101.png",
+    "tieba102":"image_emoticon102.png",
+    "tieba103":"image_emoticon103.png",
+    "tieba104":"image_emoticon104.png",
+    "tieba105":"image_emoticon105.png",
+    "tieba106":"image_emoticon106.png",
+    "tieba107":"image_emoticon107.png",
+    "tieba108":"image_emoticon108.png",
+    "tieba109":"image_emoticon109.png",
+    "tieba110":"image_emoticon110.png",
+    "tieba111":"image_emoticon111.png",
+    "tieba112":"image_emoticon112.png",
+    "tieba113":"image_emoticon113.png",
+    "tieba114":"image_emoticon114.png",
+    "tieba115":"image_emoticon115.png",
+    "tieba116":"image_emoticon116.png",
+    "tieba117":"image_emoticon117.png",
+    "tieba118":"image_emoticon118.png",
+    "tieba119":"image_emoticon119.png",
+    "tieba120":"image_emoticon120.png",
+    "tieba121":"image_emoticon121.png",
+    "tieba122":"image_emoticon122.png",
+    "tieba123":"image_emoticon123.png",
+    "tieba124":"image_emoticon124.png"},
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">When you feel alone, just look at the space between your fingers, and remember that's where my fingers fit perfect.</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/luziyi" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://twitter.com/abaepU5ZqZ1fCds" target="_blank">
+                    <i class="fab fa-twitter gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/u/7777196215" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.zhihu.com/people/lu-zi-yi-35-13" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://dribbble.com/TommyGong" target="_blank">
+                    <i class="fab fa-dribbble gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.facebook.com/profile.php?id=100049061017588" target="_blank">
+                    <i class="fab fa-facebook gt-c-content-color-first"></i>
+                </a>
+            
+        
+    </div>
+    <div class="footer-info">
+        Hello，Happy
+    </div>
+    <div>
+        CopyRight © 2004-2023 Luziyi. All Rights Reserved. | <a href="https://tommygong.top/atom.xml" target="_blank">RSS</a></a>
+    </div>
+
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

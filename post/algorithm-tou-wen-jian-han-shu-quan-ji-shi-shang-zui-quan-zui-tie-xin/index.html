@@ -1,0 +1,780 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>algorithm头文件函数全集——史上最全，最贴心 | TommyGong&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://tommygong.top/favicon.ico?v=1687529377233">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://tommygong.top/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            TommyGong&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1687529377233" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    algorithm头文件函数全集——史上最全，最贴心
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-05-17 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="简介">简介：</h1>
+<p>algorithm头文件是C++的标准算法库，它主要应用在容器上。 因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的 ，也就是说，具有低耦合性。 因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。</p>
+<!-- more -->
+<h1 id="常用函数">常用函数：</h1>
+<h2 id="一-max-min-abs函数">一、max()、min()、abs()函数</h2>
+<p>max()：求两个数最大值<br>
+min()：求两个数最小值<br>
+abs()：求一个数的绝对值<br>
+代码:</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {
+	int a = 3, b = 4;
+	//求最大值
+	int Max = max(a,b);
+	//求最小值
+	int Min = min(a,b);
+	//求绝对值
+	int Abs = abs(-3);
+	cout &lt;&lt; Max &lt;&lt; Min &lt;&lt; Abs;
+	
+	return 0;
+ } 
+</code></pre>
+<p>输出：433<br>
+注意：<br>
+1、max()和min()函数中的参数只能是两个，如果想求3个数的最大值，需要嵌套一下<br>
+同理：如果想求数组中的最大值，需要在循环中写。<br>
+2、写了algorithm头文件后， max就变成了函数名，在自己定义变量时，要避免使用max，min等。<br>
+3、abs()函数只能用于求整型变量的绝对值，而#include<cmath>中的fabs()函数还可用于求浮点型变量的绝对值，不要搞混~</p>
+<h2 id="2-交换函数swap">2、交换函数：swap()</h2>
+<p>用来交换x和y的值</p>
+<p>代码：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {
+	int a = 3, b = 4;
+	swap(a,b);
+	cout &lt;&lt; a &lt;&lt; b;
+	return 0;
+ } 
+</code></pre>
+<p>输出：43</p>
+<h2 id="3-翻转函数reverse">3、翻转函数：reverse()</h2>
+<p><strong>翻转x-y区间的数组、容器的值。</strong></p>
+<h3 id="1-翻转整个数组">1、翻转整个数组</h3>
+<p>翻转整个数组：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {
+	int a[5] = {11,22,33,44,55};
+	reverse(a,a+5);
+	for(int i = 0; i &lt; 5; i++) 
+		cout &lt;&lt; a[i] &lt;&lt; ' ';
+	return 0;
+ } 
+</code></pre>
+<p>输出：55 44 33 22 11</p>
+<h3 id="2-也可以实现对部分值的翻转像这样">2、也可以实现对部分值的翻转，像这样：</h3>
+<p>翻转部分数组：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {
+	int a[5] = {11,22,33,44,55};
+	reverse(a+3,a+5);
+	for(int i = 0; i &lt; 5; i++) 
+		cout &lt;&lt; a[i] &lt;&lt; ' ';
+	return 0;
+ } 
+</code></pre>
+<p>输出：11 22 33 55 44</p>
+<h3 id="3-翻转容器若想对容器中所有的数进行翻转则需要用到begin-end函数像这样">3、翻转容器：若想对容器中所有的数进行翻转，则需要用到begin()、end()函数，像这样：</h3>
+<p>翻转整个容器：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main() {
+	vector&lt;int&gt;v;
+	//输入： 
+	for(int i = 0; i &lt; 5; i++) 
+		v.push_back(i);
+	//输出： 
+	reverse(v.begin(), v.end());
+	for(int i = 0; i &lt; v.size(); i++) {
+		cout &lt;&lt; v[i] &lt;&lt; ' ';
+	}
+	return 0;
+ } 
+</code></pre>
+<p>输出：4 3 2 1 0</p>
+<h3 id="4-翻转容器容器的翻转也可以用迭代器来实现指定位数的翻转像这样">4、翻转容器：容器的翻转也可以用迭代器，来实现指定位数的翻转，像这样：</h3>
+<p>翻转部分容器：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main() {
+	vector&lt;int&gt;v;
+	vector&lt;int&gt;::iterator it;
+	//输入： 
+	for(int i = 0; i &lt; 5; i++) 
+		v.push_back(i);
+	//输出： 
+	it = v.begin(); 
+	reverse(it, it+3);
+	for(int i = 0; i &lt; v.size(); i++) {
+		cout &lt;&lt; v[i] &lt;&lt; ' ';
+	}
+	return 0;
+ } 
+</code></pre>
+<p>输出：2 1 0 3 4</p>
+<p>注意：<br>
+如果想在翻转时指定位数，则其为半开半闭区间。 如reserve(a+2, a+4);翻转数组中第2-4之间的数，不包括第二个，但包括第四个。</p>
+<h2 id="四-排序函数sort">四、排序函数：sort()</h2>
+<h3 id="1-对x-y区间的数组-容器进行排序-默认升序排列">1、对x-y区间的数组、容器进行排序。默认升序排列。</h3>
+<p>数组升序排序：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {
+	int a[5] = {55,44,33,22,11};
+	
+	sort(a,a+5);
+	
+	for(int i = 0; i &lt; 5; i++) 
+		cout &lt;&lt; a[i] &lt;&lt; ' ';
+		
+	return 0;
+ }
+</code></pre>
+<p>输出：11 22 33 44 55</p>
+<h3 id="2-如果想将数组降序排序就需要写一个简单的函数改变默认的排序功能像这样">2、如果想将数组降序排序，就需要写一个简单的函数，改变默认的排序功能，像这样：</h3>
+<p>数组降序排序：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+//意思是：若a&gt;b，则a的优先级更大！ 也就是说大的在前面。
+bool cmp(int a, int b) {
+	return a &gt; b; 
+}
+using namespace std;
+int main() {
+	int a[5] = {55,44,33,22,11};
+	
+	sort(a,a+5,cmp);			//这里需要加上自己自定义的函数
+	
+	for(int i = 0; i &lt; 5; i++) 
+		cout &lt;&lt; a[i] &lt;&lt; ' ';
+	return 0;
+ } 
+</code></pre>
+<p>输出：55 44 33 22 11</p>
+<h3 id="3-同理如果想对结构体排序也需要自定义优先级-像这样">3、同理，如果想对结构体排序，也需要自定义优先级。像这样：</h3>
+<p>结构体排序：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+//用sort函数对结构体排序 
+struct Student {
+	int high;
+	int weigh;
+}student[10];
+//a.high如果小于b.high，则a结构体的优先级更大， 也就是说：high小的结构体排在前面。 
+bool cmp(Student a, Student b) {
+	return a.high &lt; b.high;
+} 
+int main() {
+	for(int i = 0; i &lt; 10; i++) {
+		student[i].high = i ;
+	}
+	sort(student, student+10, cmp);		//将自定义的函数添加上。
+	
+	for(int i = 0; i &lt; 10; i++) {
+		cout &lt;&lt; student[i].high &lt;&lt; ' ';
+	}
+	return 0;
+}
+</code></pre>
+<p>输出：0 1 2 3 4 5 6 7 8 9</p>
+<h3 id="4-如果想对容器排序就需要使用迭代器或beginend函数-像这样">4、如果想对容器排序，就需要使用迭代器，或begin(),end()函数。像这样：</h3>
+<p>容器升序排序：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main() {
+	vector&lt;int&gt;v;
+	vector&lt;int&gt;::iterator it;
+	//输入： 
+	for(int i = 5; i &gt; 0; i--) 
+		v.push_back(i); 
+	//输出： 
+	it = v.begin(); 
+	sort(it, it+3);
+//	sort(v.begin(), v.end())
+	for(int i = 0; i &lt; v.size(); i++) {
+		cout &lt;&lt; v[i] &lt;&lt; ' ';
+	}
+	return 0;
+ } 
+</code></pre>
+<p>输出：3 4 5 2 1</p>
+<h3 id="5-同理如果想对容器降序排序或对容器结构体排序向数组那样操作就可以了">5、同理，如果想对容器降序排序，或对容器结构体排序，向数组那样操作就可以了。</h3>
+<p>注意：<br>
+1、sort()排序函数的时间复杂度大概在o(nlogn)，比冒泡、简单排序等效率高 。<br>
+2、和reverse()函数一样，可以自由指定排序范围，也是半开半闭区间（左闭右开）。</p>
+<h2 id="五-查找函数find">五、查找函数：find()</h2>
+<p>查找某数组指定区间x-y内是否有x，若有，则返回该位置的地址，若没有，则返回该数组第n+1个值的地址。(好烦有木有，为啥要返回地址。还要转化o(╥﹏╥)o)<br>
+1、数组中查找是否有某值：一定一定一定要满足代码中这两个条件。<br>
+第一个条件是：p-a != 数组的长度。p是查找数值的地址，a是a[0]的地址。<br>
+第二个条件是：*p == x; 也就是该地址指向的值等于我们要查找的值。<br>
+最后输出p-a+1； p-a相当于x所在位置的地址-a[0]所在位置的地址， 但因为是从0开始算， 所以最后需要+1。</p>
+<h3 id="1-对数组查找">1、对数组查找：</h3>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {  
+	int a[5] = {11,22,33,44,55}	
+	
+	int *p = find(a,a+5,33);				//定义指针，指向查找完成后返回的地址，5为a2数组长度 
+  	if(((p-a) != 5) &amp;&amp; (*p == x))		//若同时满足这两个条件，则查找成功，输出 
+  		cout &lt;&lt; (p-a+1);					//输出所在位置 
+	return 0;
+ } 
+</code></pre>
+<p>输出：3</p>
+<h3 id="2-对容器进行查找同理也要满足这两个条件">2、对容器进行查找同理：也要满足这两个条件：</h3>
+<p>对容器查找：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main() {
+	vector&lt;int&gt;v;
+	vector&lt;int&gt;::iterator it, it1;
+	//输入： 
+	for(int i = 0; i &lt; 5; i++) 
+		v.push_back(i); 
+	//查找 
+	int size = v.size();					//第一步：求长度
+	it = find(v.begin(), v.end(), 3);		//第二步：查找x在容器的位置，返回迭代器1
+	it1 = v.begin();						//第三步：令迭代器2指向容器头 
+	if(((it-it1)!=size)&amp;&amp;(*it==3))			//第四步：若同时满足这两个条件，则查找成功，输出 
+		cout &lt;&lt; (it-it1+1) &lt;&lt; endl;			//输出所在位置 
+	return 0;
+ }
+</code></pre>
+<p>输出：4</p>
+<h2 id="六-查找函数upper_bound-lower_bound">六、查找函数：upper_bound()、lower_bound()</h2>
+<p>1、upper_bound()：查找第一个大于x的值的位置<br>
+2、lower_bound()：查找第一个大于等于x的值的位置<br>
+同样是返回地址，用法和find()函数一毛一样，限制条件也一毛一样，照着扒就行了。</p>
+<h2 id="七-填充函数fill">七、填充函数：fill()</h2>
+<p>在区间内填充某一个值。同样适用所有类型数组，容器。<br>
+1、举例：在数组中未赋值的地方填充9999</p>
+<p>代码：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {  
+	int a[5] = {11,33,22};
+	
+	fill(a+3,a+5,9999);								
+	
+	for(int i = 0; i &lt; 5; i++) 
+		cout &lt;&lt; a[i] &lt;&lt; ' ';
+	return 0;
+ } 
+</code></pre>
+<p>输出：11 33 22 9999 9999</p>
+<p>应用：<br>
+常用在大数加法中，因为数太大，需要用字符串保存，如果在运算时需要填充0，就要用这个函数。</p>
+<h2 id="八-查找某值出现的次数count">八、查找某值出现的次数：count()</h2>
+<p>1、在数组中查找x 在某区间出现的次数：</p>
+<p>代码：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {  
+	int a[5] = {11,22,33,44,44};
+	
+	cout &lt;&lt; count(a, a+5, 44);	
+	
+	return 0;
+ } 
+</code></pre>
+<p>输出：2</p>
+<p>2、在容器中查找同理，只是需要用iterator迭代器或begin()、end()函数。</p>
+<p>注意：<br>
+和前几个函数一样，如果需要指定区间查询，注意是半开半闭区间(左闭右开区间)。</p>
+<h2 id="八-求最大公因数__gcd">八、求最大公因数：__gcd()</h2>
+<p>震惊把！在我最开始知道竟然有这个函数时，我也是震惊的！<br>
+另外，用二者乘积除以最大公因数即可得到最小公倍数。 因此没有求最小公倍数的函数。</p>
+<p>代码：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {  
+	int a = 12, b = 4;
+	int Gcd = __gcd(a,b);
+	cout &lt;&lt; Gcd;
+	return 0;
+ } 
+</code></pre>
+<p>注意：<br>
+__gcd() 需要写两个下划线！</p>
+<h2 id="九-求交集-并集-差集set_intersection-set_union-set_difference">九、求交集、并集、差集：set_intersection()、set_union()、set_difference()</h2>
+<h3 id="1-求交集">1、求交集：</h3>
+<p>（1）：将两个数组的交集赋给一个容器(为什么不能赋给数组呢？因为数组不能动态开辟，且inserter()函数中的参数必须是指向容器的迭代器。)：<br>
+代码：</p>
+<pre><code class="language-c++">#include&lt;algorithm&gt;
+#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main() {
+	int a[5] = {1,2,3,4,5}, b[5] = {1,2,33,44,55};
+	vector&lt;int&gt;::iterator it;
+	vector&lt;int&gt;v4;	
+	set_intersection(a, a+5, b, b+5, inserter(v4,v4.begin()));
+	for(int i = 0; i &lt; v4.size(); i++) {
+		cout &lt;&lt; v4[i] &lt;&lt; ' ';
+	}
+</code></pre>
+<p>输出：1 2</p>
+<p>（2）：将两个容器的交集赋给另一个容器：<br>
+代码：</p>
+<pre><code class="language-c++">#include&lt;algorithm&gt;
+#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main() {
+	vector&lt;int&gt; v1, v2, v3;
+	for(int i = 0; i &lt; 5; i++) 
+		v1.push_back(i);
+	for(int i = 3; i &lt; 8; i++) 
+		v2.push_back(i);
+	  
+	set_intersection(v1.begin(), v1.end(), v2.begin(), v2.end(), inserter(v3,v3.begin()));  
+	for(int i = 0; i &lt; v3.size(); i++) {
+		cout &lt;&lt; v3[i] &lt;&lt; ' ';
+	}
+	return 0;
+} 
+</code></pre>
+<p>输出：3 4</p>
+<h3 id="2-求并集">2、求并集：</h3>
+<p>（1）：将两个数组的并集赋给一个容器(为什么不能赋给数组呢？因为数组不能动态开辟，且inserter()函数中的参数必须是指向容器的迭代器。)：</p>
+<p>代码：</p>
+<pre><code class="language-c++">#include&lt;algorithm&gt;
+#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main() {
+	int a[5] = {1,2,3,4,5}, b[5] = {1,2,33,44,55};
+	vector&lt;int&gt;::iterator it;
+	vector&lt;int&gt;v4;	
+	set_union(a, a+5, b, b+5, inserter(v4,v4.begin()));
+	for(int i = 0; i &lt; v4.size(); i++) {
+		cout &lt;&lt; v4[i] &lt;&lt; ' ';
+	}
+</code></pre>
+<p>输出：1 2 3 4 5 33 44 55<br>
+（2）：将两个容器的并集赋给另一个容器：</p>
+<p>代码：<br>
+#include<algorithm><br>
+#include<iostream></p>
+<pre><code class="language-c++">#include&lt;vector&gt;
+using namespace std;
+int main() {
+	vector&lt;int&gt; v1, v2, v3;
+	for(int i = 0; i &lt; 5; i++) 
+		v1.push_back(i);
+	for(int i = 3; i &lt; 8; i++) 
+		v2.push_back(i);
+	  
+	set_union(v1.begin(), v1.end(), v2.begin(), v2.end(), inserter(v3,v3.begin()));  
+	for(int i = 0; i &lt; v3.size(); i++) {
+		cout &lt;&lt; v3[i] &lt;&lt; ' ';
+	}
+	return 0;
+}
+</code></pre>
+<p>输出：0 1 2 3 4 5 6 7</p>
+<h3 id="3-差集完全同理">3、差集完全同理。</h3>
+<p>注意：<br>
+inserter(c,c.begin()）为插入迭代器<br>
+此函数接受第二个参数，这个参数必须是一个指向给定容器的迭代器。元素将被插入到给定迭代器所表示的元素之前。</p>
+<h2 id="十-全排列next_permutation">十、全排列：next_permutation()</h2>
+<p>将给定区间的数组、容器全排列</p>
+<h3 id="1-将给定区间的数组全排列">1、将给定区间的数组全排列：</h3>
+<p>代码：</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main() {  
+	int a[3] = {1,2,3};
+	do{
+		cout&lt;&lt;a[0]&lt;&lt;a[1]&lt;&lt;a[2]&lt;&lt;endl; 
+	}while(next_permutation(a,a+3));	//输出1、2、3的全排列 
+	
+	return 0;
+ } 
+</code></pre>
+<p>输出：<br>
+123<br>
+132<br>
+213<br>
+231<br>
+312<br>
+321</p>
+<h3 id="2-容器全排列同理只不过将参数换成iterator迭代器或begin-end函数">2、容器全排列同理：只不过将参数换成iterator迭代器或begin()、end()函数。</h3>
+<p>注意：<br>
+和之前的一样，如果指定全排列区间，则该区间是半开半闭区间（左闭右开）</p>
+<pre><code class="language-c++">/*
+                   _ooOoo_
+                  o8888888o
+                  88&quot; . &quot;88
+                  (| -_- |)
+                  O\  =  /O
+               ____/`---'\____
+             .'  \\|     |//  `.
+            /  \\|||  :  |||//  \
+           /  _||||| -:- |||||-  \
+           |   | \\\  -  /// |   |
+           | \_|  ''\---/''  |   |
+           \  .-\__  `-`  ___/-. /
+         ___`. .'  /--.--\  `. . __
+      .&quot;&quot; '&lt;  `.___\_&lt;|&gt;_/___.'  &gt;'&quot;&quot;.
+     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+     \  \ `-.   \_ __\ /__ _/   .-` /  /
+======`-.____`-.___\_____/___.-`____.-'======
+                   `=---='
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         I have a dream! An AC dream!!
+ */
+</code></pre>
+<p>————————————————<br>
+版权声明：本文为CSDN博主「来老铁干了这碗代码」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：https://blog.csdn.net/weixin_43899069/article/details/104450000</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://tommygong.top/post/prim-suan-fa-pu-li-mu-suan-fa-xiang-jie/" class="post-title gt-a-link">
+                    prim算法（普里姆算法）详解
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/algorithm-tou-wen-jian-han-shu-quan-ji-shi-shang-zui-quan-zui-tie-xin/" class="leancloud_visitors" data-flag-title="algorithm头文件函数全集——史上最全，最贴心">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'dG2UTSgaDCvyachOHPZ0Py6S-9Nh9j0Va',
+		appKey: 'eadpLEy8QXXo28YoR7fG8j0T',
+		avatar: 'retro',
+		pageSize: 10,
+		recordIp: true,
+		placeholder: '',
+		visitor: true,
+		meta:['nick','mail'],
+    enableQQ:['true'],
+		emojiCDN:'https://cdn.jsdelivr.net/gh/luziyi/Tieba_emotions@master/',
+		emojiMaps: {
+    "tieba1":"image_emoticon.png",
+    "tieba2":"image_emoticon2.png",
+    "tieba3":"image_emoticon3.png",
+    "tieba4":"image_emoticon4.png",
+    "tieba5":"image_emoticon5.png",
+    "tieba6":"image_emoticon6.png",
+    "tieba7":"image_emoticon7.png",
+    "tieba8":"image_emoticon8.png",
+    "tieba9":"image_emoticon9.png",
+    "tieba10":"image_emoticon10.png",
+    "tieba11":"image_emoticon11.png",
+    "tieba12":"image_emoticon12.png",
+    "tieba13":"image_emoticon13.png",
+    "tieba14":"image_emoticon14.png",
+    "tieba15":"image_emoticon15.png",
+    "tieba16":"image_emoticon16.png",
+    "tieba17":"image_emoticon17.png",
+    "tieba18":"image_emoticon18.png",
+    "tieba19":"image_emoticon19.png",
+    "tieba20":"image_emoticon20.png",
+    "tieba21":"image_emoticon21.png",
+    "tieba22":"image_emoticon22.png",
+    "tieba23":"image_emoticon23.png",
+    "tieba24":"image_emoticon24.png",
+    "tieba25":"image_emoticon25.png",
+    "tieba26":"image_emoticon26.png",
+    "tieba27":"image_emoticon27.png",
+    "tieba28":"image_emoticon28.png",
+    "tieba29":"image_emoticon29.png",
+    "tieba30":"image_emoticon30.png",
+    "tieba31":"image_emoticon31.png",
+    "tieba32":"image_emoticon32.png",
+    "tieba33":"image_emoticon33.png",
+    "tieba34":"image_emoticon34.png",
+    "tieba35":"image_emoticon35.png",
+    "tieba36":"image_emoticon36.png",
+    "tieba37":"image_emoticon37.png",
+    "tieba38":"image_emoticon38.png",
+    "tieba39":"image_emoticon39.png",
+    "tieba40":"image_emoticon40.png",
+    "tieba41":"image_emoticon41.png",
+    "tieba42":"image_emoticon42.png",
+    "tieba43":"image_emoticon43.png",
+    "tieba44":"image_emoticon44.png",
+    "tieba45":"image_emoticon45.png",
+    "tieba46":"image_emoticon46.png",
+    "tieba47":"image_emoticon47.png",
+    "tieba48":"image_emoticon48.png",
+    "tieba49":"image_emoticon49.png",
+    "tieba50":"image_emoticon50.png",
+    "tieba62":"image_emoticon62.png",
+    "tieba63":"image_emoticon63.png",
+    "tieba64":"image_emoticon64.png",
+    "tieba65":"image_emoticon65.png",
+    "tieba66":"image_emoticon66.png",
+    "tieba67":"image_emoticon67.png",
+    "tieba68":"image_emoticon68.png",
+    "tieba69":"image_emoticon69.png",
+    "tieba70":"image_emoticon70.png",
+    "tieba71":"image_emoticon71.png",
+    "tieba72":"image_emoticon72.png",
+    "tieba73":"image_emoticon73.png",
+    "tieba74":"image_emoticon74.png",
+    "tieba75":"image_emoticon75.png",
+    "tieba76":"image_emoticon76.png",
+    "tieba77":"image_emoticon77.png",
+    "tieba78":"image_emoticon78.png",
+    "tieba79":"image_emoticon79.png",
+    "tieba80":"image_emoticon80.png",
+    "tieba81":"image_emoticon81.png",
+    "tieba82":"image_emoticon82.png",
+    "tieba83":"image_emoticon83.png",
+    "tieba84":"image_emoticon84.png",
+    "tieba85":"image_emoticon85.png",
+    "tieba86":"image_emoticon86.png",
+    "tieba87":"image_emoticon87.png",
+    "tieba88":"image_emoticon88.png",
+    "tieba89":"image_emoticon89.png",
+    "tieba90":"image_emoticon90.png",
+    "tieba91":"image_emoticon91.png",
+    "tieba92":"image_emoticon92.png",
+    "tieba93":"image_emoticon93.png",
+    "tieba94":"image_emoticon94.png",
+    "tieba95":"image_emoticon95.png",
+    "tieba96":"image_emoticon96.png",
+    "tieba97":"image_emoticon97.png",
+    "tieba98":"image_emoticon98.png",
+    "tieba99":"image_emoticon99.png",
+    "tieba100":"image_emoticon100.png",
+    "tieba101":"image_emoticon101.png",
+    "tieba102":"image_emoticon102.png",
+    "tieba103":"image_emoticon103.png",
+    "tieba104":"image_emoticon104.png",
+    "tieba105":"image_emoticon105.png",
+    "tieba106":"image_emoticon106.png",
+    "tieba107":"image_emoticon107.png",
+    "tieba108":"image_emoticon108.png",
+    "tieba109":"image_emoticon109.png",
+    "tieba110":"image_emoticon110.png",
+    "tieba111":"image_emoticon111.png",
+    "tieba112":"image_emoticon112.png",
+    "tieba113":"image_emoticon113.png",
+    "tieba114":"image_emoticon114.png",
+    "tieba115":"image_emoticon115.png",
+    "tieba116":"image_emoticon116.png",
+    "tieba117":"image_emoticon117.png",
+    "tieba118":"image_emoticon118.png",
+    "tieba119":"image_emoticon119.png",
+    "tieba120":"image_emoticon120.png",
+    "tieba121":"image_emoticon121.png",
+    "tieba122":"image_emoticon122.png",
+    "tieba123":"image_emoticon123.png",
+    "tieba124":"image_emoticon124.png"},
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">When you feel alone, just look at the space between your fingers, and remember that's where my fingers fit perfect.</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/luziyi" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://twitter.com/abaepU5ZqZ1fCds" target="_blank">
+                    <i class="fab fa-twitter gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/u/7777196215" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.zhihu.com/people/lu-zi-yi-35-13" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://dribbble.com/TommyGong" target="_blank">
+                    <i class="fab fa-dribbble gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.facebook.com/profile.php?id=100049061017588" target="_blank">
+                    <i class="fab fa-facebook gt-c-content-color-first"></i>
+                </a>
+            
+        
+    </div>
+    <div class="footer-info">
+        Hello，Happy
+    </div>
+    <div>
+        CopyRight © 2004-2023 Luziyi. All Rights Reserved. | <a href="https://tommygong.top/atom.xml" target="_blank">RSS</a></a>
+    </div>
+
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

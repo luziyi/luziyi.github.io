@@ -1,0 +1,404 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>int p[4];int (*p)[4];和int *p[4];三种数组定义详解 | TommyGong&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://tommygong.top/favicon.ico?v=1687529377233">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://tommygong.top/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            TommyGong&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://tommygong.top/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1687529377233" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    int p[4];int (*p)[4];和int *p[4];三种数组定义详解
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-05-08 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>初学C语言时，很难分清楚到底三者有何区别，尤其还涉及c语言的灵魂——C指针,下面，我将详细介绍一下三种定义方式，希望对正困惑的你有所帮助。</p>
+<!-- more -->
+<h2 id="1分析第一种方式int-p4">1.分析第一种方式——int p[4];</h2>
+<p>我相信接触过数组的，不管是任何所学的编程语言，这种定义应该最常见也最方便理解的吧。</p>
+<h3 id="11定义解释">1.1定义解释</h3>
+<p>int p[4]；表示定义了一个整型数组，数组名为p（数组名表示该数组在内存存放的首地址，故p为数组的首地址），此数组有4个元素，并且每个元素也都是int类型，定义该数组会开辟sizeof(int) * 4个字节的连续存储空间。</p>
+<h3 id="12数组在内存中的存放形式">1.2数组在内存中的存放形式：</h3>
+<figure data-type="image" tabindex="1"><img src="https://tommygong.top/post-images/1683510212140.jpg" alt="" loading="lazy"></figure>
+<h2 id="2分析第二种方式int-p4">2.分析第二种方式——int (*p)[4]；</h2>
+<p>这种定义方式经常<strong>与二维数组联用</strong></p>
+<h3 id="21解释定义">2.1解释定义</h3>
+<p>int (*p)[4];表示p是一个指针变量，指向一个存放4个整型元素的一维数组，且<strong>p+1（或p-1）是向前（或向后）移动数组长度个字节的大小</strong>。其中，指针变量指向一维数组的指针变量，指向二维数组中的某一行。<br>
+而第一种方式的p+1（或p-1）是向前（或向后）移动int个字节的大小。</p>
+<h3 id="22该方式在与二维数组的联用">2.2该方式在与二维数组的联用</h3>
+<p>设有如下二维数组：</p>
+<pre><code class="language-c++">int (*p)[4];
+int a[3][4] = {
+	{1,2,3,4},
+	{5,6,7,8},
+	{9,10,11,12}
+};
+</code></pre>
+<p>利用指向由4（二维数组列数）个元素组成的一维数组的指针变量引用二维数组<br>
+<img src="https://tommygong.top/post-images/1683510285118.jpg" alt="" loading="lazy"><br>
+当执行 p = a时,内存存储情况变为:<br>
+<img src="https://tommygong.top/post-images/1683510297549.jpg" alt="" loading="lazy"><br>
+当 p ++ 时：<br>
+<img src="https://tommygong.top/post-images/1683510310037.jpg" alt="" loading="lazy"><br>
+即 此时p[0][0] 的值等于a[1][0]的值为5.</p>
+<pre><code>注：(*(a + i) + j)等价于 *(a[i] + j) 等价于a[i][j]*。
+例如：(*(a + 1) + 2) =  *(a[1] + 2) = a[1][2]
+	若：int (*p)[4];
+		p = a;
+	则：(*(p + 1) + 2) =  *(p[1] + 2) = p[1][2]
+</code></pre>
+<h2 id="3分析第三种方式int-p4">3.分析第三种方式——int *p[4]；</h2>
+<p>这种定义方式等价于 int *(p[4]); 代表定义了一个指针数组，p是指针数组名，数组中的每个元素存放的是指向整型变量的指针（int * 类型）</p>
+<h3 id="31内存中的存放形式">3.1内存中的存放形式</h3>
+<p><img src="https://tommygong.top/post-images/1683510341473.jpg" alt="" loading="lazy"><br>
+<strong>和普通数组一样，指针数组在内存中分配连续的存储空间</strong>，指针数组也可以初始化。指针数组元素在使用时与同类型的指针变量相同。</p>
+<h2 id="32定义一字符型指针数组">3.2定义一字符型指针数组</h2>
+<pre><code class="language-c++">char *name[] = {&quot;Beijing&quot;,&quot;Hebei&quot;,&quot;Shanxi&quot;};
+</code></pre>
+<p>则在内存中的存储形式：<br>
+<img src="https://tommygong.top/post-images/1683510386183.jpg" alt="" loading="lazy"></p>
+<pre><code class="language-c++">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+int main()
+{
+	char *name[] = {&quot;Beijing&quot;,&quot;Hebei&quot;,&quot;Shanxi&quot;};
+	puts(name[0]); //输出Beijing
+	puts(*name);   //输出Beijing
+
+	puts(name[2]); //输出Shanxi
+
+	puts(*(name + 1));  //输出Hebei
+	return 0;
+}
+</code></pre>
+<p>如果是 char * s = name[1]; puts(s + 3) 则输出什么？<br>
+我们继续分析存储情况：<br>
+<img src="https://tommygong.top/post-images/1683510420575.jpg" alt="" loading="lazy"><br>
+故输出：<code>ei</code></p>
+<p>讲到现在，我相信你对这三种定义方式大概有所熟悉，其实难理解的主要就是指针操作。C语言的指针，可以使得程序更加简洁、紧凑、高效。我们学习C语言的人，都应当熟练掌握指针操作，即使现在只是涉及入门内容。<br>
+————————————————<br>
+版权声明：本文为CSDN博主「_running4J」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：https://blog.csdn.net/qq_41519304/article/details/105907427</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://tommygong.top/post/kmp-suan-fa-xiang-jie/" class="post-title gt-a-link">
+                    KMP算法详解
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/int-p4int-p4he-int-p4san-chong-shu-zu-ding-yi-xiang-jie/" class="leancloud_visitors" data-flag-title="int p[4];int (*p)[4];和int *p[4];三种数组定义详解">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'dG2UTSgaDCvyachOHPZ0Py6S-9Nh9j0Va',
+		appKey: 'eadpLEy8QXXo28YoR7fG8j0T',
+		avatar: 'retro',
+		pageSize: 10,
+		recordIp: true,
+		placeholder: '',
+		visitor: true,
+		meta:['nick','mail'],
+    enableQQ:['true'],
+		emojiCDN:'https://cdn.jsdelivr.net/gh/luziyi/Tieba_emotions@master/',
+		emojiMaps: {
+    "tieba1":"image_emoticon.png",
+    "tieba2":"image_emoticon2.png",
+    "tieba3":"image_emoticon3.png",
+    "tieba4":"image_emoticon4.png",
+    "tieba5":"image_emoticon5.png",
+    "tieba6":"image_emoticon6.png",
+    "tieba7":"image_emoticon7.png",
+    "tieba8":"image_emoticon8.png",
+    "tieba9":"image_emoticon9.png",
+    "tieba10":"image_emoticon10.png",
+    "tieba11":"image_emoticon11.png",
+    "tieba12":"image_emoticon12.png",
+    "tieba13":"image_emoticon13.png",
+    "tieba14":"image_emoticon14.png",
+    "tieba15":"image_emoticon15.png",
+    "tieba16":"image_emoticon16.png",
+    "tieba17":"image_emoticon17.png",
+    "tieba18":"image_emoticon18.png",
+    "tieba19":"image_emoticon19.png",
+    "tieba20":"image_emoticon20.png",
+    "tieba21":"image_emoticon21.png",
+    "tieba22":"image_emoticon22.png",
+    "tieba23":"image_emoticon23.png",
+    "tieba24":"image_emoticon24.png",
+    "tieba25":"image_emoticon25.png",
+    "tieba26":"image_emoticon26.png",
+    "tieba27":"image_emoticon27.png",
+    "tieba28":"image_emoticon28.png",
+    "tieba29":"image_emoticon29.png",
+    "tieba30":"image_emoticon30.png",
+    "tieba31":"image_emoticon31.png",
+    "tieba32":"image_emoticon32.png",
+    "tieba33":"image_emoticon33.png",
+    "tieba34":"image_emoticon34.png",
+    "tieba35":"image_emoticon35.png",
+    "tieba36":"image_emoticon36.png",
+    "tieba37":"image_emoticon37.png",
+    "tieba38":"image_emoticon38.png",
+    "tieba39":"image_emoticon39.png",
+    "tieba40":"image_emoticon40.png",
+    "tieba41":"image_emoticon41.png",
+    "tieba42":"image_emoticon42.png",
+    "tieba43":"image_emoticon43.png",
+    "tieba44":"image_emoticon44.png",
+    "tieba45":"image_emoticon45.png",
+    "tieba46":"image_emoticon46.png",
+    "tieba47":"image_emoticon47.png",
+    "tieba48":"image_emoticon48.png",
+    "tieba49":"image_emoticon49.png",
+    "tieba50":"image_emoticon50.png",
+    "tieba62":"image_emoticon62.png",
+    "tieba63":"image_emoticon63.png",
+    "tieba64":"image_emoticon64.png",
+    "tieba65":"image_emoticon65.png",
+    "tieba66":"image_emoticon66.png",
+    "tieba67":"image_emoticon67.png",
+    "tieba68":"image_emoticon68.png",
+    "tieba69":"image_emoticon69.png",
+    "tieba70":"image_emoticon70.png",
+    "tieba71":"image_emoticon71.png",
+    "tieba72":"image_emoticon72.png",
+    "tieba73":"image_emoticon73.png",
+    "tieba74":"image_emoticon74.png",
+    "tieba75":"image_emoticon75.png",
+    "tieba76":"image_emoticon76.png",
+    "tieba77":"image_emoticon77.png",
+    "tieba78":"image_emoticon78.png",
+    "tieba79":"image_emoticon79.png",
+    "tieba80":"image_emoticon80.png",
+    "tieba81":"image_emoticon81.png",
+    "tieba82":"image_emoticon82.png",
+    "tieba83":"image_emoticon83.png",
+    "tieba84":"image_emoticon84.png",
+    "tieba85":"image_emoticon85.png",
+    "tieba86":"image_emoticon86.png",
+    "tieba87":"image_emoticon87.png",
+    "tieba88":"image_emoticon88.png",
+    "tieba89":"image_emoticon89.png",
+    "tieba90":"image_emoticon90.png",
+    "tieba91":"image_emoticon91.png",
+    "tieba92":"image_emoticon92.png",
+    "tieba93":"image_emoticon93.png",
+    "tieba94":"image_emoticon94.png",
+    "tieba95":"image_emoticon95.png",
+    "tieba96":"image_emoticon96.png",
+    "tieba97":"image_emoticon97.png",
+    "tieba98":"image_emoticon98.png",
+    "tieba99":"image_emoticon99.png",
+    "tieba100":"image_emoticon100.png",
+    "tieba101":"image_emoticon101.png",
+    "tieba102":"image_emoticon102.png",
+    "tieba103":"image_emoticon103.png",
+    "tieba104":"image_emoticon104.png",
+    "tieba105":"image_emoticon105.png",
+    "tieba106":"image_emoticon106.png",
+    "tieba107":"image_emoticon107.png",
+    "tieba108":"image_emoticon108.png",
+    "tieba109":"image_emoticon109.png",
+    "tieba110":"image_emoticon110.png",
+    "tieba111":"image_emoticon111.png",
+    "tieba112":"image_emoticon112.png",
+    "tieba113":"image_emoticon113.png",
+    "tieba114":"image_emoticon114.png",
+    "tieba115":"image_emoticon115.png",
+    "tieba116":"image_emoticon116.png",
+    "tieba117":"image_emoticon117.png",
+    "tieba118":"image_emoticon118.png",
+    "tieba119":"image_emoticon119.png",
+    "tieba120":"image_emoticon120.png",
+    "tieba121":"image_emoticon121.png",
+    "tieba122":"image_emoticon122.png",
+    "tieba123":"image_emoticon123.png",
+    "tieba124":"image_emoticon124.png"},
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">When you feel alone, just look at the space between your fingers, and remember that's where my fingers fit perfect.</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/luziyi" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://twitter.com/abaepU5ZqZ1fCds" target="_blank">
+                    <i class="fab fa-twitter gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://weibo.com/u/7777196215" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.zhihu.com/people/lu-zi-yi-35-13" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://dribbble.com/TommyGong" target="_blank">
+                    <i class="fab fa-dribbble gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+                <a href="https://www.facebook.com/profile.php?id=100049061017588" target="_blank">
+                    <i class="fab fa-facebook gt-c-content-color-first"></i>
+                </a>
+            
+        
+    </div>
+    <div class="footer-info">
+        Hello，Happy
+    </div>
+    <div>
+        CopyRight © 2004-2023 Luziyi. All Rights Reserved. | <a href="https://tommygong.top/atom.xml" target="_blank">RSS</a></a>
+    </div>
+
+
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
