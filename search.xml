@@ -21,7 +21,7 @@
       <link href="/2023/10/22/%E9%80%9A%E8%BF%87UMAF%E7%A6%81-%E5%90%AF%E7%94%A8XHCI/"/>
       <url>/2023/10/22/%E9%80%9A%E8%BF%87UMAF%E7%A6%81-%E5%90%AF%E7%94%A8XHCI/</url>
       
-        <content type="html"><![CDATA[<h1 id="利用UMAF进入高级bios设置">利用UMAF进入高级bios设置</h1><p><strong>注意</strong> :  擅自修改可能会对电脑硬件造成不可逆转的损坏，请确保你明白你在干什么。</p><p><a href="https://github.com/DavidS95/Smokeless_UMAF" title="需要科学上网">github链接</a></p><p>将文件考入移动介质，禁用电脑安全启动。</p><p>从BootManager中选择移动介质，进入以后将语言改为英文，不然会一堆菱形符号</p><p>下面是对XHCI的操作截图</p><p><img src="https://tommygong.top/post-images/IMG_4505.IMG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4506.IMG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4507.IMG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4510.IMG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4511.IMG" alt="img"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="利用umaf进入高级bios设置">利用UMAF进入高级bios设置</h1><p><strong>注意</strong> :  擅自修改可能会对电脑硬件造成不可逆转的损坏，请确保你明白你在干什么。</p><p><a href="https://github.com/DavidS95/Smokeless_UMAF" title="需要科学上网">github链接</a></p><p>将文件考入移动介质，禁用电脑安全启动。</p><p>从BootManager中选择移动介质，进入以后将语言改为英文，不然会一堆菱形符号</p><p>下面是对XHCI的操作截图</p><p><img src="https://tommygong.top/post-images/IMG_4505.JPG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4506.JPG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4507.JPG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4510.JPG" alt="img"></p><p><img src="https://tommygong.top/post-images/IMG_4511.JPG" alt="img"></p>]]></content>
       
       
       
