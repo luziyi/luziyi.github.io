@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>台湾国立大学郭彦甫Matlab教程笔记（2） | うずまきナルト</title><meta name="author" content="うずまきナルト"><meta name="copyright" content="うずまきナルト"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="log函数，就是 natural log log10（x） common logarithm 以10为底的 log2（X） 是以2为底的。 elementary math functions基本数学函数 1.arithmetic 加减乘除 2.trigonometry 三角函数 3.exponents and logarithms 指数和对数函数 4.complex numbers 复数 5.ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="台湾国立大学郭彦甫Matlab教程笔记（2）">
+<meta property="og:url" content="https://tommygong.top/3645891351.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="log函数，就是 natural log log10（x） common logarithm 以10为底的 log2（X） 是以2为底的。 elementary math functions基本数学函数 1.arithmetic 加减乘除 2.trigonometry 三角函数 3.exponents and logarithms 指数和对数函数 4.complex numbers 复数 5.ca">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tommygong.top/images/avatar.png">
+<meta property="article:published_time" content="2023-06-18T14:27:05.000Z">
+<meta property="article:modified_time" content="2023-10-26T00:20:50.954Z">
+<meta property="article:author" content="うずまきナルト">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tommygong.top/images/avatar.png"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="canonical" href="https://tommygong.top/3645891351.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-yFe4SsNpzF"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"简","msgToSimplifiedChinese":"繁"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '台湾国立大学郭彦甫Matlab教程笔记（2）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: false,
+  postUpdate: '2023-10-26 08:20:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/luziyi/CSS-CDN@main/barber-shop.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="うずまきナルト"><span class="site-name">うずまきナルト</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">台湾国立大学郭彦甫Matlab教程笔记（2）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-18T14:27:05.000Z" title="发表于 2023-06-18 22:27:05">2023-06-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-26T00:20:50.954Z" title="更新于 2023-10-26 08:20:50">2023-10-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">734</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="台湾国立大学郭彦甫Matlab教程笔记（2）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>log函数，就是 natural log<br>
+log10（x） common logarithm 以10为底的<br>
+log2（X） 是以2为底的。</p>
+<p><strong>elementary math functions基本数学函数</strong><br>
+1.arithmetic 加减乘除<br>
+2.trigonometry 三角函数<br>
+3.exponents and logarithms 指数和对数函数<br>
+4.complex numbers 复数<br>
+5.cartesian coordinate system conversion</p>
+<p><strong>embedding functions 嵌套函数</strong><br>
+1.functions may be embedded into other functions<br>
+sin(cos(pi))等价于ans=cos(pi),sin(ans)这种两阶段的形式<br>
+2.many lines of code can be condensed into one single command</p>
+<p><strong>variables变数</strong><br>
+1.variables do not need to be declared before assignment<br>
+2.a single “equal” is the assignment operator:指定<br>
+10=A是错的，不能指定，A=10可以 ，是把10指定给A<br>
+question：<br>
+1.upper case/lower case make difference? diffirent<br>
+1.<br>
+can variable names can begin with a number ? no for example 2A is illegal</p>
+<p><strong>numeric variable type变数类型</strong><br>
+默认是double<br>
+怎么查看变量类型，可以在command window 输入 who<br>
+会显示存在的变量名称<br>
+<img src="https://luziyi.github.io/post-images/1687098670003.png" alt=""><br>
+输入 whos 会出现更多信息：变量名，大小，数据类型，<br>
+<img src="https://luziyi.github.io/post-images/1687098687877.png" alt=""></p>
+<p>special variables and constants特殊的变数和常量<br>
+some keyword 关键字 不能用<br>
+比如 inf 表示无限大，eps这个数很小，NaN :not a number 不是一个数,pi表示Π<br>
+例如输出x=1/0,结果会显示是inf，无限大<br>
+<img src="https://luziyi.github.io/post-images/1687098699962.png" alt=""><br>
+例如，输入y=inf/inf 结果显示 y不是一个数nan<br>
+<img src="https://luziyi.github.io/post-images/1687098703267.png" alt=""></p>
+<p><strong>【如何判断是否是keyword?]</strong><br>
+输入命令 iskeyword,会出现很多keyword关键字<br>
+<img src="https://luziyi.github.io/post-images/1687098716956.png" alt=""><br>
+<strong>matlab calling priority matlab调用优先级</strong><br>
+<img src="https://luziyi.github.io/post-images/1687098726219.png" alt=""></p>
+<p>优先顺序举例子<br>
+<img src="https://luziyi.github.io/post-images/1687098735863.png" alt=""><br>
+如下图现在的cos就不是cos函数，而是一个变数，字符串类型。cos（8）得到的是这个字符串的第八个位置的东西，就是r<br>
+<img src="https://luziyi.github.io/post-images/1687098746247.png" alt=""></p>
+<p>本来cos是一个function，这里被当作了 varible,而且发现 varible的优先级比build-in function高<br>
+同时告诉我们，不要用function name 或者是 Keyword当作 varible name</p>
+<p>下面有一个问题：<br>
+【如何把一个变数从 workspace消除？】<br>
+解决clear 变数名比如， clear cos,就是把上面定义的cos这个变数消除<br>
+clear 不加东西， 整个 workspace 全部清掉</p>
+<p><strong>numeric display format 数据显示格式指令</strong><br>
+<img src="https://luziyi.github.io/post-images/1687098765952.png" alt=""><br>
+format<br>
+例如 format long 显示的更长<br>
+bank 有两个小数位<br>
+rat 转成有理数，分数<br>
+在加 format rat之前，分数是这样的显示：4位小数<br>
+<img src="https://luziyi.github.io/post-images/1687098775010.png" alt=""><br>
+加 format rat之后：可以显示分数的形式<br>
+<img src="https://luziyi.github.io/post-images/1687098778623.png" alt=""></p>
+<p>练习：calculate ,using different format to choose the right answer, format ratio and format long<br>
+<img src="https://luziyi.github.io/post-images/1687098788430.png" alt=""></p>
+<p>下面的自己的练习<br>
+<img src="https://luziyi.github.io/post-images/1687098942604.png" alt=""><br>
+可以看到是选择d</p>
+<p>选择分数显示的话<br>
+<img src="https://luziyi.github.io/post-images/1687098924476.png" alt=""><br>
+结果选1</p>
+<p>【总结一下】<br>
+1.elementary math functions基本数学函数<br>
+2.embedding functions 嵌套函数<br>
+3.variables变数<br>
+4.numeric variable type变数类型<br>
+5.special variables and constants特殊的变数和常量<br>
+6.matlab calling priority matlab调用优先级<br>
+7.numeric display format 数据显示格式<br>
+————————————————<br>
+版权声明：本文为CSDN博主「阿正的梦工坊」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>
+原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/shizheng_Li/article/details/99638059">https://blog.csdn.net/shizheng_Li/article/details/99638059</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tommygong.top">うずまきナルト</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tommygong.top/3645891351.html">https://tommygong.top/3645891351.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tommygong.top" target="_blank">うずまきナルト</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/3422178553.html" title="台湾国立大学郭彦甫Matlab教程笔记（1）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">台湾国立大学郭彦甫Matlab教程笔记（1）</div></div></a></div><div class="next-post pull-right"><a href="/540896091.html" title="algorithm头文件函数全集——史上最全，最贴心"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">algorithm头文件函数全集——史上最全，最贴心</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">うずまきナルト</div><div class="author-info__description">相信过程</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/luziyi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luziyi" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站已开启暗黑模式，点击右下角按钮切换</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2618594765.html" title="C可变参数函数">C可变参数函数</a><time datetime="2023-10-22T12:33:12.000Z" title="发表于 2023-10-22 20:33:12">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/4203464694.html" title="通过UMAF禁/启用XHCI">通过UMAF禁/启用XHCI</a><time datetime="2023-10-22T12:20:42.000Z" title="发表于 2023-10-22 20:20:42">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/1802903754.html" title="IEEE754浮点数存储机制">IEEE754浮点数存储机制</a><time datetime="2023-09-11T12:03:09.000Z" title="发表于 2023-09-11 20:03:09">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/737419435.html" title="运算符重载">运算符重载</a><time datetime="2023-09-11T11:46:43.000Z" title="发表于 2023-09-11 19:46:43">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/1679445169.html" title="指针及动态内存管理">指针及动态内存管理</a><time datetime="2023-09-11T11:20:39.000Z" title="发表于 2023-09-11 19:20:39">2023-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By うずまきナルト</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function getGiscusTheme (theme) {
+  return theme === 'dark' ? 'dark' : 'light'
+}
+
+function loadGiscus () {
+  const config = Object.assign({
+    src: 'https://giscus.app/client.js',
+    'data-repo': 'luziyi/luziyi.github.io',
+    'data-repo-id': 'R_kgDOJdDDlQ',
+    'data-category-id': 'DIC_kwDOJdDDlc4CaS8o',
+    'data-mapping': 'pathname',
+    'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+    'data-reactions-enabled': '1',
+    crossorigin: 'anonymous',
+    async: true
+  },{"mapping":"url","strict":0,"reactions-enabled":1,"emit-metadata":0,"input-position":"top","theme":"preferred_color_scheme\"","lang":"zh-CN","loading":"lazy","crossorigin":"anonymous"})
+
+  let ele = document.createElement('script')
+  for (let key in config) {
+    ele.setAttribute(key, config[key])
+  }
+  document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function changeGiscusTheme (theme) {
+  function sendMessage(message) {
+    const iframe = document.querySelector('iframe.giscus-frame')
+    if (!iframe) return
+    iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+  }
+
+  sendMessage({
+    setConfig: {
+      theme: getGiscusTheme(theme)
+    }
+  });
+}
+
+btf.addModeChange('giscus', changeGiscusTheme)
+
+if ('Giscus' === 'Giscus' || !false) {
+  if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+  else loadGiscus()
+} else {
+  function loadOtherComment () {
+    loadGiscus()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="210,210,210" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
