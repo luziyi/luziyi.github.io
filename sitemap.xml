@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://tommygong.top/1170831533.html</loc>
+    
+    <lastmod>2023-10-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tommygong.top/292630706.html</loc>
+    
+    <lastmod>2023-10-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tommygong.top/2434167907.html</loc>
+    
+    <lastmod>2023-10-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://tommygong.top/4203464694.html</loc>
     
     <lastmod>2023-10-26</lastmod>
@@ -21,15 +48,6 @@
   
   <url>
     <loc>https://tommygong.top/737419435.html</loc>
-    
-    <lastmod>2023-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://tommygong.top/292630706.html</loc>
     
     <lastmod>2023-10-26</lastmod>
     
@@ -129,15 +147,6 @@
   
   <url>
     <loc>https://tommygong.top/3422178553.html</loc>
-    
-    <lastmod>2023-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://tommygong.top/2434167907.html</loc>
     
     <lastmod>2023-10-26</lastmod>
     
@@ -246,15 +255,6 @@
   
   <url>
     <loc>https://tommygong.top/3160813831.html</loc>
-    
-    <lastmod>2023-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://tommygong.top/1170831533.html</loc>
     
     <lastmod>2023-10-26</lastmod>
     
@@ -397,13 +397,6 @@
   </url>
   
   <url>
-    <loc>https://tommygong.top/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2023-10-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://tommygong.top/categories/Python/</loc>
     <lastmod>2023-10-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -418,7 +411,14 @@
   </url>
   
   <url>
-    <loc>https://tommygong.top/categories/%E8%B5%84%E6%BA%90/</loc>
+    <loc>https://tommygong.top/categories/Algorithm/</loc>
+    <lastmod>2023-10-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tommygong.top/categories/Resources/</loc>
     <lastmod>2023-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
