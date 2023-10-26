@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>prim算法（普里姆算法）详解 | うずまきナルト</title><meta name="author" content="うずまきナルト"><meta name="copyright" content="うずまきナルト"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="prim算法（普里姆算法）详解 了解了什么是最小生成树后，本节为您讲解如何用普里姆（prim）算法查找连通网（带权的连通图）中的最小生成树。 普里姆算法查找最小生成树的过程，采用了贪心算法的思想。对于包含 N 个顶点的连通网，普里姆算法每次从连通网中找出一个权值最小的边，这样的操作重复 N-1 次，由 N-1 条权值最小的边组成的生成树就是最小生成树。 那么，如何找出 N-1 条权值最小的边呢？普">
+<meta property="og:type" content="article">
+<meta property="og:title" content="prim算法（普里姆算法）详解">
+<meta property="og:url" content="https://tommygong.top/posts/4233806412.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="prim算法（普里姆算法）详解 了解了什么是最小生成树后，本节为您讲解如何用普里姆（prim）算法查找连通网（带权的连通图）中的最小生成树。 普里姆算法查找最小生成树的过程，采用了贪心算法的思想。对于包含 N 个顶点的连通网，普里姆算法每次从连通网中找出一个权值最小的边，这样的操作重复 N-1 次，由 N-1 条权值最小的边组成的生成树就是最小生成树。 那么，如何找出 N-1 条权值最小的边呢？普">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tommygong.top/images/avatar.png">
+<meta property="article:published_time" content="2023-05-11T06:06:29.000Z">
+<meta property="article:modified_time" content="2023-10-26T00:20:50.934Z">
+<meta property="article:author" content="うずまきナルト">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tommygong.top/images/avatar.png"><link rel="shortcut icon" href="/%5Bobject%20Object%5D"><link rel="canonical" href="https://tommygong.top/posts/4233806412.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-yFe4SsNpzF"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"简","msgToSimplifiedChinese":"繁"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'prim算法（普里姆算法）详解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: false,
+  postUpdate: '2023-10-26 08:20:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/font.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/luziyi/CSS-CDN@main/barber-shop.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="うずまきナルト"><span class="site-name">うずまきナルト</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">prim算法（普里姆算法）详解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-11T06:06:29.000Z" title="发表于 2023-05-11 14:06:29">2023-05-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-26T00:20:50.934Z" title="更新于 2023-10-26 08:20:50">2023-10-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="prim算法（普里姆算法）详解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>prim算法（普里姆算法）详解<br />
+了解了什么是最小生成树后，本节为您讲解如何用普里姆（prim）算法查找连通网（带权的连通图）中的最小生成树。</p>
+<p>普里姆算法查找最小生成树的过程，采用了贪心算法的思想。对于包含 N 个顶点的连通网，普里姆算法每次从连通网中找出一个权值最小的边，这样的操作重复 N-1 次，由 N-1 条权值最小的边组成的生成树就是最小生成树。</p>
+<p>那么，如何找出 N-1 条权值最小的边呢？普里姆算法的实现思路是：</p>
+<p>将连通网中的所有顶点分为两类（假设为 A 类和 B 类）。初始状态下，所有顶点位于 B 类；</p>
+<p>选择任意一个顶点，将其从 B 类移动到 A 类；</p>
+<p>从 B 类的所有顶点出发，找出一条连接着 A 类中的某个顶点且权值最小的边，将此边连接着的 A 类中的顶点移动到 B 类；</p>
+<p>重复执行第 3 步，直至 B 类中的所有顶点全部移动到 A 类，恰好可以找到 N-1 条边。</p>
+<p>举个例子，下图是一个连通网，使用普里姆算法查找最小生成树，需经历以下几个过程：</p>
+<p><img src="https://luziyi.github.io/post-images/1683785257966.jpg" alt="" /><br />
+图 1 连通网</p>
+<p>将图中的所有顶点分为 A 类和 B 类，初始状态下，A = {}，B = {A, B, C, D, S, T}。</p>
+<p>从 B 类中任选一个顶点，假设选择 S 顶点，将其从 B 类移到 A 类，A = {S}，B = {A, B, C, D, T}。从 A 类的 S 顶点出发，到达 B 类中顶点的边有 2 个，分别是 S-A 和 S-C，其中 S-A 边的权值最小，所以选择 S-A 边组成最小生成树，将 A 顶点从 B 类移到 A 类，A = {S, A}，B = {B, C, D, T}。</p>
+<p><img src="https://luziyi.github.io/post-images/1683785303306.jpg" alt="" /><br />
+图 2 S-A 边组成最小生成树</p>
+<p>从 A 类中的 S、A 顶点出发，到达 B 类中顶点的边有 3 个，分别是 S-C、A-C、A-B，其中 A-C 的权值最小，所以选择 A-C 组成最小生成树，将顶点 C 从 B 类移到 A 类，A = {S, A, C}，B = {B, D, T}。</p>
+<p><img src="https://luziyi.github.io/post-images/1683785307186.jpg" alt="" /><br />
+图 3 A-C 边组成最小生成树</p>
+<p>从 A 类中的 S、A、C 顶点出发，到达 B 类顶点的边有 S-C、A-B、C-B、C-D，其中 C-D 边的权值最小，所以选择 C-D 组成最小生成树，将顶点 D 从 B 类移到 A 类，A = {S, A, C, D}，B = {B, T}。</p>
+<p><img src="https://luziyi.github.io/post-images/1683785311690.jpg" alt="" /><br />
+图 4 C-D 边组成最小生成树</p>
+<p>从 A 类中的 S、A、C、D 顶点出发，到达 B 类顶点的边有 A-B、C-B、D-B、D-T，其中 D-B 和 D-T 的权值最小，任选其中的一个，例如选择 D-B 组成最小生成树，将顶点 B 从 B 类移到 A 类，A = {S, A, C, D, B}，B = {T}。</p>
+<p><img src="https://luziyi.github.io/post-images/1683785311690.jpg" alt="" /><br />
+图 5 D-B 边组成最小生成树</p>
+<p>从 A 类中的 S、A、C、D、B 顶点出发，到达 B 类顶点的边有 B-T、D-T，其中 D-T 的权值最小，选择 D-T 组成最小生成树，将顶点 T 从 B 类移到 A 类，A = {S, A, C, D, B, T}，B = {}。</p>
+<p><img src="https://luziyi.github.io/post-images/1683785315841.jpg" alt="" /><br />
+图 6 D-T 边组成最小生成树</p>
+<p>由于 B 类中的顶点全部移到了 A 类，因此 S-A、A-C、C-D、D-B、D-T 组成的是一个生成树，而且是一个最小生成树，它的总权值为 17。</p>
+<p><img src="https://luziyi.github.io/post-images/1683785320527.jpg" alt="" /><br />
+图 7 最小生成树</p>
+<p>普里姆算法的具体实现</p>
+<p>接下来，我们将给出实现普里姆算法的 C、Java、Python 程序，程序中有详尽的注释，您可以借助编译器一边运行程序一边观察程序的执行过程，彻底搞清楚普里姆算法是如何找到最小生成树的。</p>
+<p>如下是使用普里姆算法在图 1 所示的连通网中查找最小生成树的 C 语言程序：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> V 6    <span class="comment">// 记录图中顶点的个数</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span> <span class="literal">false</span>, <span class="literal">true</span> &#125; <span class="type">bool</span>;</span><br><span class="line"><span class="comment">//查找权值最小的、尚未被选择的顶点，key 数组记录了各顶点之间的权值数据，visited数组记录着各个顶点是否已经被选择的信息</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">min_Key</span><span class="params">(<span class="type">int</span> key[], <span class="type">bool</span> visited[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> min = <span class="number">2147483647</span>, min_index;  <span class="comment">//遍历 key 数组使用，min 记录最小的权值，min_index 记录最小权值关联的顶点</span></span><br><span class="line">    <span class="comment">//遍历 key 数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; V; v++) &#123;</span><br><span class="line">        <span class="comment">//如果当前顶点为被选择，且对应的权值小于 min 值</span></span><br><span class="line">        <span class="keyword">if</span> (visited[v] == <span class="literal">false</span> &amp;&amp; key[v] &lt; min) &#123;</span><br><span class="line">            <span class="comment">//更新  min 的值并记录该顶点的位置</span></span><br><span class="line">            min = key[v];</span><br><span class="line">            min_index = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回最小权值的顶点的位置</span></span><br><span class="line">    <span class="keyword">return</span> min_index;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出最小生成树</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">print_MST</span><span class="params">(<span class="type">int</span> parent[], <span class="type">int</span> cost[V][V])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> minCost = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最小生成树为：\n&quot;</span>);</span><br><span class="line">    <span class="comment">//遍历 parent 数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; V; i++) &#123;</span><br><span class="line">        <span class="comment">//parent 数组下标值表示各个顶点，各个下标对应的值为该顶点的父节点</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d - %d wight:%d\n&quot;</span>, parent[i] + <span class="number">1</span>, i + <span class="number">1</span>, cost[i][parent[i]]);<span class="comment">//由于数组下标从 0 开始，因此输出时各自 +1</span></span><br><span class="line">        <span class="comment">//统计最小生成树的总权值</span></span><br><span class="line">        minCost += cost[i][parent[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;总权值为：%d&quot;</span>, minCost);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//根据用户提供了图的信息（存储在 cost 数组中），寻找最小生成树</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">find_MST</span><span class="params">(<span class="type">int</span> cost[V][V])</span></span><br><span class="line">&#123;    <span class="comment">//key 数组用于记录 B 类顶点到 A 类顶点的权值</span></span><br><span class="line">    <span class="comment">//parent 数组用于记录最小生成树中各个顶点父节点的位置，便于最终生成最小生成树</span></span><br><span class="line">    <span class="comment">//visited 数组用于记录各个顶点属于 A 类还是 B 类</span></span><br><span class="line">    <span class="type">int</span> parent[V], key[V];</span><br><span class="line">    <span class="type">bool</span> visited[V];</span><br><span class="line">    <span class="comment">// 初始化 3 个数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; V; i++) &#123;</span><br><span class="line">        key[i] = <span class="number">2147483647</span>;    <span class="comment">// 将 key 数组各个位置设置为无限大的数</span></span><br><span class="line">        visited[i] = <span class="literal">false</span>;     <span class="comment">// 所有的顶点全部属于 B 类</span></span><br><span class="line">        parent[i] = <span class="number">-1</span>;         <span class="comment">// 所有顶点都没有父节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 选择 key 数组中第一个顶点，开始寻找最小生成树</span></span><br><span class="line">    key[<span class="number">0</span>] = <span class="number">0</span>;  <span class="comment">// 该顶点对应的权值设为 0</span></span><br><span class="line">    parent[<span class="number">0</span>] = <span class="number">-1</span>; <span class="comment">// 该顶点没有父节点</span></span><br><span class="line">    <span class="comment">// 对于 V 个顶点的图，最需选择 V-1 条路径，即可构成最小生成树</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> x = <span class="number">0</span>; x &lt; V - <span class="number">1</span>; x++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 从 key 数组中找到权值最小的顶点所在的位置</span></span><br><span class="line">        <span class="type">int</span> u = min_Key(key, visited);</span><br><span class="line">        <span class="comment">// 该顶点划分到 A 类</span></span><br><span class="line">        visited[u] = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 由于新顶点加入 A 类，因此需要更新 key 数组中的数据</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; V; v++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果类 B 中存在到下标为 u 的顶点的权值比 key 数组中记录的权值还小，表明新顶点的加入，使得类 B 到类 A 顶点的权值有了更好的选择</span></span><br><span class="line">            <span class="keyword">if</span> (cost[u][v] != <span class="number">0</span> &amp;&amp; visited[v] == <span class="literal">false</span> &amp;&amp; cost[u][v] &lt; key[v])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 更新 parent 数组记录的各个顶点父节点的信息</span></span><br><span class="line">                parent[v] = u;</span><br><span class="line">                <span class="comment">// 更新 key 数组</span></span><br><span class="line">                key[v] = cost[u][v];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//根据 parent 记录的各个顶点父节点的信息，输出寻找到的最小生成树</span></span><br><span class="line">    print_MST(parent, cost);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// main function</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p1, p2;</span><br><span class="line">    <span class="type">int</span> wight;</span><br><span class="line">    <span class="type">int</span> cost[V][V] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;输入图（顶点到顶点的路径和权值)：\n&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;p1, &amp;p2);</span><br><span class="line">        <span class="comment">//如果用户输入 -1 -1，表示输入结束</span></span><br><span class="line">        <span class="keyword">if</span> (p1 == <span class="number">-1</span> &amp;&amp; p2 == <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;wight);</span><br><span class="line">        cost[p1 - <span class="number">1</span>][p2 - <span class="number">1</span>] = wight;</span><br><span class="line">        cost[p2 - <span class="number">1</span>][p1 - <span class="number">1</span>] = wight;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 根据用户输入的图的信息，寻找最小生成树</span></span><br><span class="line">    find_MST(cost);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>————————————————<br />
+版权声明：本文为CSDN博主「睿科知识云」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br />
+原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/ccc369639963/article/details/122621467">https://blog.csdn.net/ccc369639963/article/details/122621467</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://tommygong.top">うずまきナルト</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://tommygong.top/posts/4233806412.html">https://tommygong.top/posts/4233806412.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tommygong.top" target="_blank">うずまきナルト</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/images/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/540896091.html" title="algorithm头文件函数全集——史上最全，最贴心"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">algorithm头文件函数全集——史上最全，最贴心</div></div></a></div><div class="next-post pull-right"><a href="/posts/2434167907.html" title="克鲁斯卡尔算法（Kruskal）详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">克鲁斯卡尔算法（Kruskal）详解</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">うずまきナルト</div><div class="author-info__description">相信过程</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/luziyi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luziyi" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站已开启暗黑模式，点击右下角按钮切换</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2618594765.html" title="C可变参数函数">C可变参数函数</a><time datetime="2023-10-22T12:33:12.000Z" title="发表于 2023-10-22 20:33:12">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4203464694.html" title="通过UMAF禁/启用XHCI">通过UMAF禁/启用XHCI</a><time datetime="2023-10-22T12:20:42.000Z" title="发表于 2023-10-22 20:20:42">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1802903754.html" title="IEEE754浮点数存储机制">IEEE754浮点数存储机制</a><time datetime="2023-09-11T12:03:09.000Z" title="发表于 2023-09-11 20:03:09">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/737419435.html" title="运算符重载">运算符重载</a><time datetime="2023-09-11T11:46:43.000Z" title="发表于 2023-09-11 19:46:43">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1679445169.html" title="指针及动态内存管理">指针及动态内存管理</a><time datetime="2023-09-11T11:20:39.000Z" title="发表于 2023-09-11 19:20:39">2023-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By うずまきナルト</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function getGiscusTheme (theme) {
+  return theme === 'dark' ? 'dark' : 'light'
+}
+
+function loadGiscus () {
+  const config = Object.assign({
+    src: 'https://giscus.app/client.js',
+    'data-repo': 'luziyi/luziyi.github.io',
+    'data-repo-id': 'R_kgDOJdDDlQ',
+    'data-category-id': 'DIC_kwDOJdDDlc4CaS8o',
+    'data-mapping': 'pathname',
+    'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+    'data-reactions-enabled': '1',
+    crossorigin: 'anonymous',
+    async: true
+  },{"mapping":"url","strict":0,"reactions-enabled":1,"emit-metadata":0,"input-position":"top","theme":"preferred_color_scheme\"","lang":"zh-CN","loading":"lazy","crossorigin":"anonymous"})
+
+  let ele = document.createElement('script')
+  for (let key in config) {
+    ele.setAttribute(key, config[key])
+  }
+  document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function changeGiscusTheme (theme) {
+  function sendMessage(message) {
+    const iframe = document.querySelector('iframe.giscus-frame')
+    if (!iframe) return
+    iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+  }
+
+  sendMessage({
+    setConfig: {
+      theme: getGiscusTheme(theme)
+    }
+  });
+}
+
+btf.addModeChange('giscus', changeGiscusTheme)
+
+if ('Giscus' === 'Giscus' || !false) {
+  if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+  else loadGiscus()
+} else {
+  function loadOtherComment () {
+    loadGiscus()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="210,210,210" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
