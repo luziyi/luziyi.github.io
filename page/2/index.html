@@ -55,7 +55,7 @@
   isHome: true,
   isHighlightShrink: undefined,
   isToc: false,
-  postUpdate: '2023-10-26 17:16:22'
+  postUpdate: '2023-10-27 15:41:08'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -173,149 +173,216 @@
 document.addEventListener('pjax:send', () => {
   Pace.restart()
 })
-</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/luziyi/CSS-CDN@main/barber-shop.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="うずまきナルト"><span class="site-name">うずまきナルト</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/540896091.html" title="algorithm头文件函数全集——史上最全，最贴心">algorithm头文件函数全集——史上最全，最贴心</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-17T01:49:19.000Z" title="发表于 2023-05-17 09:49:19">2023-05-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CPP/">CPP</a></span></div><div class="content"> 简介：
-algorithm头文件是C++的标准算法库，它主要应用在容器上。 因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的 ，也就是说，具有低耦合性。 因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/luziyi/CSS-CDN@main/barber-shop.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="うずまきナルト"><span class="site-name">うずまきナルト</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/132067786.html" title="对于中国古典园林，在阅读中国古典园林分析的基础上的一些个人见解与看法">对于中国古典园林，在阅读中国古典园林分析的基础上的一些个人见解与看法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-17T07:21:37.000Z" title="发表于 2023-03-17 15:21:37">2023-03-17</time></span></div><div class="content">中国古典园林的发展经历了漫长的时光。周、汉时期，古典园林主要是皇家苑囿，规模很大，但是属于圈地性质。秦汉时期出现过人工开池、堆山活动，但是造园的主旨、意趣依然很淡薄。到了魏晋南北朝时期，初步确立了再现自然山水的基本原则，把园林主要作为观赏艺术来对待。隋唐五代，由于文人直接参与造园活动，从而将造园艺术与诗画相联系，有助于在园林中创造出诗情画意的境界。宋代，对自然美的认识更加深刻，出现了山水画的理论著作，进一步推动园林的发展。
+从园林的分布来看，造园活动的选址大多都在经济比较繁荣的地区或者是郊外安静的地区，这些地区都有山或者水或者二者兼有。文人工匠利用自然界的山水，在市井中营造一个小自然。
+西方的古典园林设计受到一定程度上当时对于比例尺度的推崇，这种理性主义反映在园林中则是利用几何图形进行园林的规划设计。而中国的古典园林，从发展历程不难看出，很大程度上受到了当时文人墨客的影响，他们将书画诗等高雅艺术形式融入造园活动中，反映的是人的趣味，气质。
+与其他中国古典建筑不同的是，古典园林在构图上取消了中轴线，在中国古典园林中很难看到左右对称的布局形式。其次，古典园林对待周围环境的态度不同，我认为这 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/3160813831.html" title="LOL英雄定位">LOL英雄定位</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-22T11:23:19.000Z" title="发表于 2023-02-22 19:23:19">2023-02-22</time></span></div><div class="content"> 上单
 
- 常用函数：
- 一、max()、min()、abs()函数
-max()：求两个数最大值
-min()：求两个数最小值
-abs()：求一个数的绝对值
-代码:
-#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int main() &#123;	int a = 3, b = 4;	//求最大值	int Max = max(a,b);	//求最小值	int Min = min(a,b);	//求绝对值	int Abs = abs(-3);	cout &lt;&lt; Max &lt;&lt; Min &lt;&lt; Abs;	return 0; &#125; 
-输出：433
-注意：
-1、max()和min()函数中的参数只能是两个，如果想求3个数 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/4233806412.html" title="prim算法（普里姆算法）详解">prim算法（普里姆算法）详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-11T06:06:29.000Z" title="发表于 2023-05-11 14:06:29">2023-05-11</time></span></div><div class="content">prim算法（普里姆算法）详解
-了解了什么是最小生成树后，本节为您讲解如何用普里姆（prim）算法查找连通网（带权的连通图）中的最小生成树。
-普里姆算法查找最小生成树的过程，采用了贪心算法的思想。对于包含 N 个顶点的连通网，普里姆算法每次从连通网中找出一个权值最小的边，这样的操作重复 N-1 次，由 N-1 条权值最小的边组成的生成树就是最小生成树。
-那么，如何找出 N-1 条权值最小的边呢？普里姆算法的实现思路是：
-将连通网中的所有顶点分为两类（假设为 A 类和 B 类）。初始状态下，所有顶点位于 B 类；
-选择任意一个顶点，将其从 B 类移动到 A 类；
-从 B 类的所有顶点出发，找出一条连接着 A 类中的某个顶点且权值最小的边，将此边连接着的 A 类中的顶点移动到 B 类；
-重复执行第 3 步，直至 B 类中的所有顶点全部移动到 A 类，恰好可以找到 N-1 条边。
-举个例子，下图是一个连通网，使用普里姆算法查找最小生成树，需经历以下几个过程：
+ 中单
 
-图 1 连通网
-将图中的所有顶点分为 A 类和 B 类，初始状态下，A = {}，B = {A, B, C, D, S, T}。
-从 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/2434167907.html" title="克鲁斯卡尔算法（Kruskal）详解">克鲁斯卡尔算法（Kruskal）详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-11T06:01:55.000Z" title="发表于 2023-05-11 14:01:55">2023-05-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Algorithm/">Algorithm</a></span></div><div class="content"> 应用场景-公交站问题
-看一个应用场景和问题：
+ 下路
+
+ 辅助
+
+ 打野
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/813718699.html" title="天津五大道历史背景">天津五大道历史背景</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-21T13:46:38.000Z" title="发表于 2023-02-21 21:46:38">2023-02-21</time></span></div><div class="content">五大道是人们对天津英租界在墙子河外的推广界的俗称，是位于天津市市中心偏南，今属和平区的一片民国年间形成的高级住宅区。
+
+ 五大道
+1903年被划为天津英租界的推广界后，开始结合海河疏浚工程，填筑原有的沼泽洼地，到1920年代陆续建造大片洋房，成为天津最高档的住宅区之一，曾吸引不少民国初年的军政工商各界要人入住。现在，五大道已成为天津最知名的观光景点之一，那些风格各异的欧陆风情小洋楼，使这里成为天津的“万国建筑博览会”。
+ 历史
+这片地区东西方向有六条马路：马场道（原马厂道）、睦南道（原香港道）、大理道（原新加坡道）、常德道（原科伦坡道）、重庆道（河北路以东为原剑桥道；河北路以西为原爱丁堡道）、成都道（原伦敦道）。2011年，五大道根据历史街区保护规划，被天津市规划局确定为五大道历史文化街区。2013年，天津五大道近代建筑群中的39处代表性建筑被中华人民共和国国务院批准为全国重点文物保护单位。2015年4月，天津市五大道历史文化街区入选住房城乡建设部、国家文物局公布的第一批中国历史文化街区。
+19世纪末20世纪初，五大道地区为天津城南部的一片坑洼塘淀。其间散落着一些简陋民居，当时有“二十 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/292630706.html" title="论文参考数据来源">论文参考数据来源</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-06T05:59:13.000Z" title="发表于 2023-02-06 13:59:13">2023-02-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Resources/">Resources</a></span></div><div class="content">国家哲学社会科学文献中心：https://www.ncpssd.org
+国家哲学社会科学学术期刊数据库：https://www.nssd.org
+中国知网：国内最大学术数据库，包括期刊、学位论文、统计年鉴等：https://epub.cnki.net/kns
+万方数据，仅次于中国知网，包括期刊，学位论文等：https://www.wanfangdata.com.cn
+人大复印资料：期刊、论文等：http://pub.exuezhe.com/index.html
+维普：期刊、论文等：http://cqvip.com
+国家统计局：https://www.stats.gov.cn
+中国人民银行：https://www.pbc.gov.cn
+财政部：https://www.mof.gov.cn
+国研网（国务院发展研究中心)：https://www.drcnet.com.cn
+中经网（国家信息中心）：https://www.cei.gov.cn
+中经网统计数据库：https://db.cei.gov.cn
+中经网产业数据库：https://cyk.cei.gov.cn
+世界经济数据库：https ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/2820332801.html" title="Anaconda安装后spyder无法打开解决方法及出现的原因">Anaconda安装后spyder无法打开解决方法及出现的原因</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-04T01:58:07.000Z" title="发表于 2023-02-04 09:58:07">2023-02-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content">无法打开spyder的可能原因：1.更新包之后，使得pyzmq的版本过高    2.就是安装时pyzmp的版本就过高了，导致无法打开spyder
+
+ 解决方法：
+打开Anaconda Powershell Prompt，输入命令 spyder --new-instance查看报错
+
+ 出现报错的情况：
+ 第一种错误
+Warning:QT_DEVICE_PIXEL_RATIO is deprecated. Instead use:QT_AUTO_SCREEN_SCALE_FACTOR to enable platform plugin controlled per-screen factors.QT_SCREEN_SCALE_FACTORS to set per-screen factors.QT_SCALE_FACTOR to set the application global scale factor.”
+出现这种情况，说明你可能有一个QT的环境变量可以移除
+所以解决的方法是用值 auto来覆盖原有值
+
+ 第二种错误：
+AttributeError: module ‘xxx’ ha ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/68335884.html" title="建筑立面设计的参考">建筑立面设计的参考</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-03T02:31:19.000Z" title="发表于 2023-02-03 10:31:19">2023-02-03</time></span></div><div class="content">转载：建筑里面中的构成之美，体会一下
+无非建筑
 
 
-某城市新增 7 个站点 (A, B, C, D, E, F, G) ，现在需要修路把 7 个站点连通
-各个站点的距离用边线表示 ( 权 ) ，比如 A – B 距离 12 公里
-问：如何修路保证各个站点都能连通，并且总的修建公路总里程最短 ?
 
- 克鲁斯卡尔算法介绍
 
-克鲁斯卡尔 (Kruskal) 算法，是用来求加权连通图的最小生成树的算法 。
-基本思想 ：按照权值从小到大的顺序选择 n-1 条边，并保证这 n-1 条边不构成回路
-具体做法 ：首先构造一个只含 n 个顶点的森林，然后依权值从小到大从连通网中选择边加入到森林中，并使森林中不产生回路，直至森林变成一棵树为止
 
- 克鲁斯卡尔算法图解说明
-以城市公交站问题来图解说明 克鲁斯卡尔算法的原理和步骤：
-在含有n个顶点的连通图中选择n-1条边，构成一棵极小连通子图，并使该连通子图中n-1条边上权值之和达到最小，则称其为连通网的最小生成树。
 
-例如，对于如上图G4所示的连通网可以有多棵权值总和不相同的生成树。
 
- 克鲁斯卡尔算法图解
-以上图G4为例，来对克鲁斯卡尔进行演示(假设，用数 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1677963899.html" title="int p[4];int (*p)[4];和int *p[4];三种数组定义详解">int p[4];int (*p)[4];和int *p[4];三种数组定义详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-08T01:41:56.000Z" title="发表于 2023-05-08 09:41:56">2023-05-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CPP/">CPP</a></span></div><div class="content">初学C语言时，很难分清楚到底三者有何区别，尤其还涉及c语言的灵魂——C指针,下面，我将详细介绍一下三种定义方式，希望对正困惑的你有所帮助。
 
- 1.分析第一种方式——int p[4];
-我相信接触过数组的，不管是任何所学的编程语言，这种定义应该最常见也最方便理解的吧。
- 1.1定义解释
-int p[4]；表示定义了一个整型数组，数组名为p（数组名表示该数组在内存存放的首地址，故p为数组的首地址），此数组有4个元素，并且每个元素也都是int类型，定义该数组会开辟sizeof(int) * 4个字节的连续存储空间。
- 1.2数组在内存中的存放形式：
 
- 2.分析第二种方式——int (*p)[4]；
-这种定义方式经常与二维数组联用
- 2.1解释定义
-int (*p)[4];表示p是一个指针变量，指向一个存放4个整型元素的一维数组，且p+1（或p-1）是向前（或向后）移动数组长度个字节的大小。其中，指针变量指向一维数组的指针变量，指向二维数组中的某一行。
-而第一种方式的p+1（或p-1）是向前（或向后）移动int个字节的大小。
- 2.2该方式在与二维数组的联用
-设有如下二维数组：
-int ( ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1170831533.html" title="KMP算法详解">KMP算法详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-30T02:02:17.000Z" title="发表于 2023-04-30 10:02:17">2023-04-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Algorithm/">Algorithm</a></span></div><div class="content">KMP 解法
-KMP 算法是一个快速查找匹配串的算法，它的作用其实就是本题问题：如何快速在「原字符串」中找到「匹配字符串」。
-在朴素解法中，不考虑剪枝的话复杂度是 O(m∗n) 的，而 KMP 算法的复杂度为 O(m+n)。
-KMP 之所以能够在O(m+n) 复杂度内完成查找，是因为其能在「非完全匹配」的过程中提取到有效信息进行复用，以减少「重复匹配」的消耗。
-你可能不太理解，没关系，我们可以通过举个例子来理解 KMP。
 
- 1. 匹配过程
-在模拟 KMP 匹配过程之前，我们先建立两个概念：
-前缀：对于字符串 abcxxxxefg，我们称 abc 属于 abcxxxxefg 的某个前缀。
-后缀：对于字符串 abcxxxxefg，我们称 efg 属于 abcxxxxefg 的某个后缀。
-然后我们假设原串为 abeababeabf，匹配串为 abeabf：
 
-我们可以先看看如果不使用 KMP，会如何进行匹配（不使用 substring 函数的情况下）。
-首先在「原串」和「匹配串」分别各自有一个指针指向当前匹配的位置。
-首次匹配的「发起点」是第一个字符 a。显然，后面的 abeab 都是匹配 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/3771985588.html" title="c++运算符优先级归纳">c++运算符优先级归纳</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-23T11:38:09.000Z" title="发表于 2023-04-23 19:38:09">2023-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CPP/">CPP</a></span></div><div class="content">C++一共有 18个优先级，运算中按优先级进行性计算，当优先级相同时，根据结合性规则来决定。
-结合性：
-1.从左到右（L-R）：操作数和操作符结合的顺序大部分是从左到右结合性的，例如（）、单独的算术运算符
-2.从右到左（R-L）：最典型的是赋值运算符，当赋值符号与算术运算符结合后 ，整体也是R-L。另一个最常用的就是逻辑非运算符 “！”。
 
-在使用的时候，如果不确定，或者运算符太多，就按照自己的思路用括号隔开。
-因为在程序中，正确性&gt;可读性&gt;简洁性，万万不可本末倒置
- 优先级1
 
- 优先级2
-平时常用的最高优先级操作符是从左向右结合的一批操作符，操作数和操作符结合的顺序是从左到右。包括：函数调用、数组下标、取成员、类型转换、后置运算符等。
 
- 优先级3
-此优先级都是一元运算符（单目运算符），从右向做结合。
 
- 优先级4
-类成员指针运算符
 
- 优先级5
-算术运算符中的乘(*)、除(/)、取余(%)
 
- 优先级6
-算术运算符中的加、减
 
- 优先级7
-移位运算符
 
- 优先级8
-比较运算符
 
- 优先级9
-比较运算符
 
- 优先级10、11、12
-按位运算符
 
- 优先级13、14
-逻辑 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/900007784.html" title="指向常量的指针和常量指针">指向常量的指针和常量指针</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-23T11:11:00.000Z" title="发表于 2023-04-23 19:11:00">2023-04-23</time></span></div><div class="content"> 指向常量的指针
-指向常量的指针，即 pointer to const，即指针指向的是一个常量，你应该把这个词（指向常量的指针）当做一个整体来理解，而不是分开。（当然也有翻译成指针常量的，但我并不喜欢这种翻译方式）
-通常也将指针本身是一个常量称为顶层 const，将指针所指的对象是个常量称为底层 const
-它的语法格式是 const 在 * 左边，这一点很重要，因为后面要讲的常量指针是 const 在 * 的右边。下面是它的基本语法格式
-const double pi = 3.14;   // pi 是一个常量const double *cptr = &amp;pi; // cptr 是一个指向常量的指针// 或者，它的另一种写法是交换一下 const 和 double 的位置顺序double const *cptr = &amp;pi; // cptr 是一个指向常量的指针
-下面我们举一个例子来进行具体的讲解
-#include &lt;iostream&gt;using namespace std;int main()&#123;   const double pi = 3.14; ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/2329703282.html" title="c++ switch case详解">c++ switch case详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-23T10:45:36.000Z" title="发表于 2023-04-23 18:45:36">2023-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/CPP/">CPP</a></span></div><div class="content">当程序的一部分导致另一部分执行时，会发生分支。if-else if 语句允许程序分支到几个可能的路径之一，当这些测试之一成立时，它执行一系列测试（通常是关系）和分支。
 
-switch 语句是一个类似的机制，但是它测试的是整数表达式的值，然后使用该值来确定要分支到哪一组语句，以下是 switch 语句的格式：
-switch (IntegerExpression)&#123;    case ConstantExpression:        //在这里放置一个或多个语句    case ConstantExpression:        //在这里放置一个或多个语句    //case可被重复多次    default:        //在这里放置一个或多个语句&#125;
-此类语句的第一行以单词 switch 开始，后面是括号内的整数表达式 Integer Expression。 这可以是以下两种之一：
-任何一个整型数据类型的变量（包括 char）。
-其值为任何整型数据类型的表达式。
-在下一行是包含几个 case 语句的块的开头，每个 case 语句格式如下：
-case Cons ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/3970726980.html" title="一些学计算机可能会用到的网站">一些学计算机可能会用到的网站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-13T14:35:36.000Z" title="发表于 2023-04-13 22:35:36">2023-04-13</time></span></div><div class="content">最近对原学院的学习氛围感到厌倦，想要称大一加权还不错的情况下转专业。在以前同学的帮助下，收集到了一些用于自学的比较好的网站
 
-1.cpp参考手册：https://zh.cppreference.com
-2.OI Wiki（偏向与信息学竞赛的一个网站，不过对于系统自学cpp也有很大的帮助）：https://oiwiki.org/
-3.CS自学指南（这个可以说比较硬核了）：https://csdiy.wiki/
-4.Leetcode（经典的刷题面试网站，曾经因为没有接触过容器和类对这个网站很反感，建议在学完容器和类之后去刷题）：https://leetcode.cn/
-5.Luogu（可以说是很经典的刷题网站了，主要面向NOIP和NOI，但是刷题还是不错的）：https://www.luogu.com.cn/
-</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/3381953697.html" title="留园现场课笔记">留园现场课笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-07T02:32:48.000Z" title="发表于 2023-04-07 10:32:48">2023-04-07</time></span></div><div class="content">因为本来就是苏州人，暑假有时间可再次造访留园，所以这次没有去留园，听直播课讲解以后的一些心得体会。
 
-园林的空间体验，不会一下看清空间是什么，在第一次空间体验中无法感受到空间的全貌。需要通过两次甚至三次的重复体验才能够感受到完整的空间。
-在感受空间的过程中，设计者往往会给出一些线索，比如露出影子的树，去引导你的游览路线。墙上的窗形成的孔隙也是一种线索，通过孔隙将园林中的景观和空间相互联系，同时孔隙之间还会产生联系，在极小的空间内营造出极为丰富的空间体验。
-z字型转折，廊道，在功能上毫无用处。但是，这种“无用”的转折可以营丰富且拥有深度的空间。有的转折会漏出两个孔洞，空洞之间会有一个对话的关系。园林有很多曲折的廊道，求曲而不求直，曲折的意义，通过一个转折漏出了空间空隙，并且在孔隙中形成了空间景观。
-廊道与柱子构成了虚的空间划分，将廊道和转折所构成的景观分割成了对立空间，从而产生了一种距离感，景不是让你游的，而是让人远离景观去远观画的。同时，空间光线的巧妙安排使得景物一边有自然光线渗入，而人所在的廊道较暗，形成了景物在舞台上，人在观众席上的感觉，进而形成人与景的对话关系。
-古木交柯，在空间 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">うずまきナルト</div><div class="author-info__description">相信过程</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/luziyi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luziyi" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站已开启暗黑模式，点击右下角按钮切换</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2618594765.html" title="C可变参数函数"><img src="/%5Cpost-images%5C1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C可变参数函数"/></a><div class="content"><a class="title" href="/posts/2618594765.html" title="C可变参数函数">C可变参数函数</a><time datetime="2023-10-22T12:33:12.000Z" title="发表于 2023-10-22 20:33:12">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4203464694.html" title="通过UMAF禁/启用XHCI">通过UMAF禁/启用XHCI</a><time datetime="2023-10-22T12:20:42.000Z" title="发表于 2023-10-22 20:20:42">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1802903754.html" title="IEEE754浮点数存储机制">IEEE754浮点数存储机制</a><time datetime="2023-09-11T12:03:09.000Z" title="发表于 2023-09-11 20:03:09">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/737419435.html" title="运算符重载">运算符重载</a><time datetime="2023-09-11T11:46:43.000Z" title="发表于 2023-09-11 19:46:43">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1679445169.html" title="指针及动态内存管理">指针及动态内存管理</a><time datetime="2023-09-11T11:20:39.000Z" title="发表于 2023-09-11 19:20:39">2023-09-11</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1033880735.html" title="Z-library 域名被扣押，应急访问办法">Z-library 域名被扣押，应急访问办法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-22T06:57:58.000Z" title="发表于 2023-01-22 14:57:58">2023-01-22</time></span></div><div class="content">在Z-library事件过后，出现了一些新的电子资源平台。
+
+ 电子书
+
+Anna’s Archive：https://annas-archive.org 支持 libgen 和 Z-library
+
+ 外刊
+最好的在线杂志免费全部集中在一个地方。pdf可供下载，无需订阅即可随意选择大量类型。
+freemagazines.top：https://freemagazines.top/
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/4049293849.html" title="LeagueOfLegends符文详解(LOL新版符文)">LeagueOfLegends符文详解(LOL新版符文)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-19T06:42:05.000Z" title="发表于 2023-01-19 14:42:05">2023-01-19</time></span></div><div class="content">lol符文就是微量增强和调整你属性的东西。根据你常用的英雄，来购买你所需要的。说通俗点就是攻击力，法术强度，固定护甲，固定魔抗，成长攻击力，成长护甲，成长魔抗，攻击速度等等的这些属性。游戏中默认可以装备2套不同属性的符文，也称符文页，可以随意的切换2个符文页。
+
+ 1. lol新版符文介绍
+五个符文，分别为精密、主宰、巫术、坚决、启迪。
+玩家可以为英雄选择一个主符文系列和一个副符文系列，前者可以选择1个基石天赋、1个高级符文和2个符文，后者可以选择2个符文或高级符文。
+精密和主宰各有4个基石天赋，巫术、坚决和启迪各有3个基石天赋，共有17个基石天赋。
+需要注意的是，每个符文系列的符文会被分为3行，每一行中的符文是不能多选的
+ 2. LOL新版符文
+种类：符印、雕文、印记、精化。功能：攻速、护甲穿透、攻击力、生命值、魔抗、护甲、法强、法术穿透。其中精华有3个槽。其它的都有9个槽。精化与印记中的状态加攻击比较多最好选择攻击，雕文与符印中的状态加防御比较多最好选择防御。
+具体符文的选择搭配可以按使用英雄的类型来分：
+坦克类英雄——主要以护甲、魔法抗性、生命值等属性符文搭配为主。
+DPS类英雄 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1965019742.html" title="LeagueOfLegends控制效果详解">LeagueOfLegends控制效果详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-19T05:57:26.000Z" title="发表于 2023-01-19 13:57:26">2023-01-19</time></span></div><div class="content">英雄联盟目前的控制效果一共有14个，分别是：减速、减攻速、沉默、变形、致盲、近视、禁锢、魅惑、嘲讽、恐惧、晕眩、击飞、压制。
+
+
+ 减速：降低目标移动速度
+
+很多英雄都具备让敌方减速的技能，这是因为相对于其他硬控，减速效果属于软控制，对方除了移动速度减缓，其他行为都不会受到太多的影响！但是即便是看上去比较低端的减速效果，一旦吃到，同样会感觉非常难受，尤其是以下四位英雄更是将减速发挥的淋漓尽致！
+
+1、寒冰射手-艾希
+寒冰的被动无论是普攻还是技能都能造成20%-30%的减速效果，这个效果本身其实强度不算特别高，但是有了攻速装的寒冰却能通过不断高攻速的平A不断延长减速控制的时间，让你插翅也难飞！
+2、魂锁典狱长-锤石
+锤石的大招幽冥监牢会让通过监牢四个墙壁的敌方英雄减速99%，这几乎就相当于定身了，所以如果锤石的监牢放的好，对方除了在里面等待我们的集火外很难有逃生的机会！
+3、沙漠死神-内瑟斯
+狗头的W可以减速敌方，而且是持续5秒从35%到95%递增的效果，另外还能减少对方攻速，所以狗头开大后再将你W减速，你很难逃离他连续Q的残暴打击！
+4、时光守护者-基兰
+时光的E技能可以给自己或者队友 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/3038973426.html" title="LaTeX排版系统介绍">LaTeX排版系统介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-19T03:55:10.000Z" title="发表于 2023-01-19 11:55:10">2023-01-19</time></span></div><div class="content"> 前言：排版工具与书写工具的讨论
+LaTeX是一种“非所见即所得”的排版系统，用户需要输入特定的代码，保存在后缀为.tex的文件中，通过编译得到所需的pdf文件.
+
+例如以下代码：
+\documentclass&#123;article&#125;\begin&#123;document&#125;Hello, world!\end&#123;document&#125;
+最后输出的结果是一个pdf文件，内容是”Hello, world!“。
+如何理解“非所见即所得”呢？在这里举个“所见即所得”的例子：Word。Word的界面就是一张A4纸，输入的时候是什么样子，最后呈现出来就是什么样子。这给了我们极高的自由度，也非常容易上手，但是有如下问题： - 对于对细节不敏感的用户，Word的排版常常会在细节存在问题，比如两段话之间行间距不同、字体不同、标题样式不同等； - 对于撰写论文的用户，Word的标题、章节、图表、参考文献等无法自动标号，也很难在正文中引用； - 对于有公式输入需求的用户，Word自带的公式不稳定，而公式插件效果常常不好。
+相比之下，使用LaTeX进行排版，就像是在铺好的 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1573833940.html" title="LaTeX数学公式的输入">LaTeX数学公式的输入</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-19T03:33:08.000Z" title="发表于 2023-01-19 11:33:08">2023-01-19</time></span></div><div class="content">这里列出了部分需要注意的LaTeX数学公式输入方法
+
+ 行内公式
+行内公式通常使用$..$来输入，这通常被称为公式环境，例如：若a&gt;0a&gt;0a&gt;0,b&gt;0b&gt;0b&gt;0，则a+b&gt;0a+b&gt;0a+b&gt;0.
+若$a&gt;0$,$b&gt;0$，则$a+b&gt;0$.
+公式环境通常使用特殊字体，并且默认为斜体。需要注意的是，只要是公式，就需要放入公式环境中。如果需要在行内公式中展现出行间公式的效果，可以在前面加入\displaystyle，例如：设lim⁡n→∞xn=x\displaystyle\lim_{n\to\infty}x_n=xn→∞lim​xn​=x.
+设$\displaystyle\lim_&#123;n\to\infty&#125;x_n=x$.
+ 行间公式
+行间公式需要用$$…$$来输入，笔者习惯的输入方式如下：若a&gt;0a&gt;0a&gt;0, b&gt;0b&gt;0b&gt;0, 则
+a+b&gt;0.a+b&gt;0.
+a+b&gt;0.
+若$a&gt;0$, $b&gt;0$, 则$$a+b&gt;0 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/518728111.html" title="著名建筑师及其作品分析（世界十大著名建筑师）【下】">著名建筑师及其作品分析（世界十大著名建筑师）【下】</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-18T13:14:02.000Z" title="发表于 2023-01-18 21:14:02">2023-01-18</time></span></div><div class="content">本文介绍后五个建筑师：勒·柯布西耶（法国）、约翰•伍重（丹麦）、阿尔瓦·阿尔托（芬兰）、伦佐·皮亚诺（意大利）、诺曼·福斯特（英国）
+
+ 6.勒·柯布西耶（法国）
+
+全球地位： 20世纪最著名的建筑大师、城市规划家和作家，是现代建筑运动的激进分子和主将，是现代主义建筑的主要倡导者，机器美学的重要奠基人，被称为&quot;现代建筑的旗手&quot;，是功能主义建筑的泰斗，被称为&quot;功能主义之父&quot;。他和瓦尔特·格罗皮乌斯(Walter Gropius)、路德维希·密斯·凡·德·罗、赖特并称为&quot;现代建筑派或国际形式建筑派的主要代表&quot;。1927年柯布西耶在瑞士拉萨拉兹发起&quot; 现代建筑国际会议&quot; ，成为国际风格现代建筑的中心组织。
+突出成就： 柯布西耶1926年提出了他的五个建筑学新观点(一些人将其比作五个古典的柱型)，这些观点包括:底层架空柱、屋顶花园、自由平面、自由立面以及横向长窗。人们将这个建筑时代比作为机器时代，勒·柯布西耶是我们这个时代最具影响力的建筑师，同时，也是一位著名的社会改良主义者。在考察整个城市中的伟大建筑、宽敞的空间 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/2790739658.html" title="著名建筑师及其作品分析（世界十大著名建筑师）【上】">著名建筑师及其作品分析（世界十大著名建筑师）【上】</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-18T12:59:17.000Z" title="发表于 2023-01-18 20:59:17">2023-01-18</time></span></div><div class="content">前言：对世界著名建筑师的介绍，包括了全球地位，突出成就，主要作品等方面，全方位了解这些著名建筑师们，本文先介绍前5位建筑师：贝聿铭（中国苏州）、卡拉特拉瓦（西班牙）、安东尼奥·高迪（西班牙）、扎哈·哈迪德（伊拉克）、安藤忠雄（日本）
+
+ 1.贝聿铭（中国苏州）
+
+全球地位： 世界首屈一指的建筑设计大师，美国艺术与科学院院士，中国工程院外籍院士，土木专家。贝聿铭先后在麻省理工学院和哈佛大学学习建筑学。美国建筑界宣布1979年为&quot;贝聿铭年&quot;，曾获得1979年美国建筑学会金奖、1981年法国建筑学金奖、1989年日本帝赏奖、1983年第五届普利兹克奖及1986年里根总统颁予的自由奖章等，被誉为&quot;现代建筑的最后大师&quot;。贝聿铭作品以公共建筑、文教建筑为主，被归类为现代主义建筑，善用钢材、混凝土、玻璃与石材。
+突出成就： 贝聿铭为我国设计了北京香山饭店、中国银行总部大厦等。与中国建筑科学研究院合作，为中国培养、培训建筑设计师，为推进中国建筑现代化作出重要贡献。他设计的许多大型建筑遍布世界各地，其中位于华盛顿市的美国国家美术馆东馆、法国巴黎卢浮宫扩建工程等作品 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1406297574.html" title="MarkDown语法大全">MarkDown语法大全</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-18T12:25:02.000Z" title="发表于 2023-01-18 20:25:02">2023-01-18</time></span></div><div class="content"> 1.Markdown标题
+提升标题等级ctrl+
+# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题
+ 2.Markdown字体
+用1个星号*或底线_表示斜体  斜体：Ctrl+I
+用2个星号*或底线_表示粗体 加粗：Ctrl+B
+用3个星号*或底线_表示粗斜体
+*斜体文字*_斜体文字_**粗体文字**__粗体文字__***粗斜体文字***___粗斜体文字___
+ 3.Markdown分割线
+*********------
+ 4.Markdown删除线
+快捷键Alt+Shift+5
+~~tencent.com~~
+ 5.代码块
+快捷键Ctrl+Shift+`
+`world`
+ 6.Markdown下划线
+快捷键Ctrl+U
+&lt;u&gt;带下划线文本&lt;/u&gt;   
+ 7.Markdown列表
+无序列表(三个都行）
+* 第一项* 第二项* 第三项+ 第一项+ 第二项+ 第三项- 第一项- 第二项- 第三项
+有序列表直接在文字有加上1. 2. 3. 来表示，符号和文字之间加上一个空格字符。
+1. 第一项2. 第二项3.  ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">うずまきナルト</div><div class="author-info__description">相信过程</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/luziyi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luziyi" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站已开启暗黑模式，点击右下角按钮切换</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2618594765.html" title="C可变参数函数"><img src="/post-images%5C2618594765.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C可变参数函数"/></a><div class="content"><a class="title" href="/posts/2618594765.html" title="C可变参数函数">C可变参数函数</a><time datetime="2023-10-22T12:33:12.000Z" title="发表于 2023-10-22 20:33:12">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4203464694.html" title="通过UMAF禁/启用XHCI">通过UMAF禁/启用XHCI</a><time datetime="2023-10-22T12:20:42.000Z" title="发表于 2023-10-22 20:20:42">2023-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1802903754.html" title="IEEE754浮点数存储机制">IEEE754浮点数存储机制</a><time datetime="2023-09-11T12:03:09.000Z" title="发表于 2023-09-11 20:03:09">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/737419435.html" title="运算符重载">运算符重载</a><time datetime="2023-09-11T11:46:43.000Z" title="发表于 2023-09-11 19:46:43">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1679445169.html" title="指针及动态内存管理">指针及动态内存管理</a><time datetime="2023-09-11T11:20:39.000Z" title="发表于 2023-09-11 19:20:39">2023-09-11</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Algorithm/"><span class="card-category-list-name">Algorithm</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CPP/"><span class="card-category-list-name">CPP</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Resources/"><span class="card-category-list-name">Resources</span><span class="card-category-list-count">1</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/LOL/" style="font-size: 1.3em; color: #99a1ac">LOL</a> <a href="/tags/c/" style="font-size: 1.1em; color: #999">c++</a> <a href="/tags/CS/" style="font-size: 1.1em; color: #999">CS</a> <a href="/tags/Arch/" style="font-size: 1.3em; color: #99a1ac">Arch</a> <a href="/tags/Tech/" style="font-size: 1.5em; color: #99a9bf">Tech</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/01/"><span class="card-archive-list-date">一月 2023</span><span class="card-archive-list-count">8</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">34</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">49.5k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-10-26T09:16:21.954Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By うずまきナルト</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="210,210,210" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/CS/" style="font-size: 1.1em; color: #999">CS</a> <a href="/tags/Tech/" style="font-size: 1.5em; color: #99a9bf">Tech</a> <a href="/tags/Arch/" style="font-size: 1.3em; color: #99a1ac">Arch</a> <a href="/tags/LOL/" style="font-size: 1.3em; color: #99a1ac">LOL</a> <a href="/tags/c/" style="font-size: 1.1em; color: #999">c++</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/01/"><span class="card-archive-list-date">一月 2023</span><span class="card-archive-list-count">8</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">34</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">49.5k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-10-27T07:41:08.048Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By うずまきナルト</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="210,210,210" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
