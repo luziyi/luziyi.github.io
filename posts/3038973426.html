@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LaTeX排版系统介绍 | うずまきナルト</title><meta name="author" content="うずまきナルト"><meta name="copyright" content="うずまきナルト"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="LaTeX 是一种“非所见即所得”的排版系统，用户需要输入特定的代码，保存在后缀为.tex 的文件中，通过编译得到所需的 pdf 文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX排版系统介绍">
+<meta property="og:url" content="https://tommygong.top/posts/3038973426.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="LaTeX 是一种“非所见即所得”的排版系统，用户需要输入特定的代码，保存在后缀为.tex 的文件中，通过编译得到所需的 pdf 文件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+<meta property="article:published_time" content="2023-01-19T03:55:10.000Z">
+<meta property="article:modified_time" content="2024-08-09T16:17:10.454Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="LaTeX">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png"><link rel="shortcut icon" href="/%5Bobject%20Object%5D"><link rel="canonical" href="https://tommygong.top/posts/3038973426.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="codeva-yFe4SsNpzF"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"https://cdn.jsdelivr.net/gh/luziyi/luziyi.github.io@main/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"简","msgToSimplifiedChinese":"繁"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"自从文章最后一次更新已经过去","messageNext":"天了，文章的内容可能已经过时。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LaTeX排版系统介绍',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-08-10 00:17:10'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="referrer" content="no-referrer-when-downgrade" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/css/custom@0.1.1.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/css/barber-shop.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="うずまきナルト"><span class="site-name">うずまきナルト</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LaTeX排版系统介绍</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-19T03:55:10.000Z" title="发表于 2023-01-19 11:55:10">2023-01-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-09T16:17:10.454Z" title="更新于 2024-08-10 00:17:10">2024-08-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言排版工具与书写工具的讨论"><a class="markdownIt-Anchor" href="#前言排版工具与书写工具的讨论"></a> 前言：排版工具与书写工具的讨论</h1>
+<p>LaTeX 是一种“非所见即所得”的排版系统，用户需要输入特定的代码，保存在后缀为.tex 的文件中，通过编译得到所需的 pdf 文件.</p>
+<span id="more"></span>
+<p>例如以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">Hello, world!</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<p>最后输出的结果是一个 pdf 文件，内容是”Hello, world!“。</p>
+<p>如何理解“非所见即所得”呢？在这里举个“所见即所得”的例子：Word。Word 的界面就是一张 A4 纸，输入的时候是什么样子，最后呈现出来就是什么样子。这给了我们极高的<strong>自由度</strong>，也非常容易上手，但是有如下问题： - 对于对细节不敏感的用户，Word 的排版常常会在细节存在问题，比如两段话之间行间距不同、字体不同、标题样式不同等； - 对于撰写论文的用户，Word 的标题、章节、图表、参考文献等无法自动标号，也很难在正文中引用； - 对于有公式输入需求的用户，Word 自带的公式不稳定，而公式插件效果常常不好。</p>
+<p>相比之下，使用 LaTeX 进行排版，就像是在铺好的轨道上驾驶火车一样。使用 LaTeX 没有办法像 Word 一样非常自由，但是可以保证<strong>规范性</strong>，这使得 LaTeX 非常适合用于<strong>论文的排版</strong>。在学习的过程中，也将会感受到这一点。</p>
+<p>无论是 LaTeX 还是 Word，其归根结底都只是<strong>排版工具</strong>，用 Word 也可以排出 LaTeX 的效果，用 LaTeX 也可以排出 Word 的效果。另外，笔者最建议的<strong>书写工具</strong>是 Markdown，其书写的过程中可以不在意排版，也支持使用 LaTeX 语法输入公式，与 LaTeX 之间的转换非常方便。</p>
+<h1 id="准备工作安装-latex-与配置环境"><a class="markdownIt-Anchor" href="#准备工作安装-latex-与配置环境"></a> 准备工作：安装 LaTeX 与配置环境</h1>
+<h2 id="安装-tex-live"><a class="markdownIt-Anchor" href="#安装-tex-live"></a> 安装 Tex Live</h2>
+<p>官方的地址是<a target="_blank" rel="noopener" href="http://mirror.ctan.org/systems/texlive/Images/texlive2021.iso%EF%BC%8C%E4%BD%86%E6%98%AF%E5%8F%AF%E8%83%BD%E9%80%9F%E5%BA%A6%E8%BE%83%E6%85%A2%EF%BC%8C%E4%BB%A5%E4%B8%8B%E6%98%AF%E4%B8%80%E4%BA%9B%E5%9B%BD%E5%86%85%E7%9A%84%E9%95%9C%E5%83%8F%E5%9C%B0%E5%9D%80%EF%BC%9A">http://mirror.ctan.org/systems/texlive/Images/texlive2021.iso，但是可能速度较慢，以下是一些国内的镜像地址：</a></p>
+<ul>
+<li>清华大学：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/texlive2021.iso%EF%BC%9B">https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/texlive2021.iso；</a></li>
+<li>北京交通大学：<a target="_blank" rel="noopener" href="https://mirror.bjtu.edu.cn/ctan/systems/texlive/Images/texlive2021.iso%EF%BC%9B">https://mirror.bjtu.edu.cn/ctan/systems/texlive/Images/texlive2021.iso；</a></li>
+<li>上海交通大学：<a target="_blank" rel="noopener" href="https://mirrors.sjtug.sjtu.edu.cn/ctan/systems/texlive/Images/texlive2021.iso%EF%BC%9B">https://mirrors.sjtug.sjtu.edu.cn/ctan/systems/texlive/Images/texlive2021.iso；</a></li>
+<li>中国科技大学：<a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/CTAN/systems/texlive/Images/texlive2021.iso%EF%BC%9B">https://mirrors.ustc.edu.cn/CTAN/systems/texlive/Images/texlive2021.iso；</a></li>
+<li>重庆大学：<a target="_blank" rel="noopener" href="https://mirrors.cqu.edu.cn/CTAN/systems/texlive/Images/texlive2021.iso%EF%BC%9B">https://mirrors.cqu.edu.cn/CTAN/systems/texlive/Images/texlive2021.iso；</a></li>
+<li>腾讯云：<a target="_blank" rel="noopener" href="https://mirrors.cloud.tencent.com/CTAN/systems/texlive/Images/texlive2021.iso%E3%80%82">https://mirrors.cloud.tencent.com/CTAN/systems/texlive/Images/texlive2021.iso。</a><br />
+其中的 iso 文件可以使用压缩软件解压，或者加载到光盘，接下来直接安装就行了。对于其他操作系统的用户（如 MacOS），可以参考<a target="_blank" rel="noopener" href="https://liam.page/texlive/">TeX Live 下载及安装说明 | 始终 (liam.page)</a>中的方法。</li>
+</ul>
+<h2 id="选择-tex-编辑器"><a class="markdownIt-Anchor" href="#选择-tex-编辑器"></a> 选择 TeX 编辑器</h2>
+<p>对于新手，最推荐的编辑器是 TeXworks，非常适合用来上手，也避免了配置环境带来的问题。如果想要提高效率的话，可以选用：</p>
+<p>TeXstudio，安装地址为<a target="_blank" rel="noopener" href="https://cn.overleaf.com/">TeXstudio - A LaTeX editor (sourceforge.net)</a>；<br />
+宇宙第一的 Visual Studio Code，这是笔者最建议的 TeX 编辑器，不过需要手动配置 LaTeX，较为麻烦；<br />
+另外，也有在线的编辑器，如<a target="_blank" rel="noopener" href="https://cn.overleaf.com/">Overleaf, 在线 LaTeX 编辑器</a>。</p>
+<h2 id="选择-pdf-阅读器和编辑器"><a class="markdownIt-Anchor" href="#选择-pdf-阅读器和编辑器"></a> 选择 pdf 阅读器和编辑器</h2>
+<p>LaTeX 编译的结果是 pdf 文件，建议选用专业的 pdf 阅读器或 pdf 编辑器。特别是在阅读 beamer 类型的文件时，不同的阅读器效果差别极大。在这里推荐 Acrobat：</p>
+<ul>
+<li>Adobe Acrobat Reader，免费，可用于查看、签署、协作处理和批注 PDF 文件，安装地址为<a target="_blank" rel="noopener" href="https://www.adobe.com/cn/acrobat/pdf-reader.html">Adobe Acrobat Reader (中国)</a>；</li>
+<li>Adobe Acrobat Pro，付费，可用于创建、保护、转换和编辑 PDF 文件，安装地址为 Adobe <a target="_blank" rel="noopener" href="https://www.adobe.com/cn/acrobat.html">Acrobat | Adobe Document Cloud</a>。</li>
+</ul>
+<h1 id="利用-latex-编写文档"><a class="markdownIt-Anchor" href="#利用-latex-编写文档"></a> 利用 LaTeX 编写文档</h1>
+<h2 id="文档类型"><a class="markdownIt-Anchor" href="#文档类型"></a> 文档类型</h2>
+<p>TeX 有多种文档类型可选，笔者较常用的有如下几种类型：</p>
+<ul>
+<li>对于英文，可以用<code>book</code>、<code>article</code>和<code>beamer</code>；</li>
+<li>对于中文，可以用<code>ctexbook</code>、<code>ctexart</code>和<code>ctexbeamer</code>，这些类型自带了对中文的支持。<br />
+不同的文件类型，编写的过程中也会有一定的差异，如果直接修改文件类型的话，甚至会报错。以下统一选用<code>ctexart</code>。在编辑框第一行，输入如下内容来设置文件类型：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass&#123;ctexart&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，一般也可以在<code>\documentclass</code>处设置基本参数，笔者通常设置默认字体大小为 12pt，纸张大小为 A4，单面打印。需要将第一行的内容替换为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;</span><br></pre></td></tr></table></figure>
+<p>文件的正文部分需要放入 document 环境中，在 document 环境外的部分不会出现在文件中。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">这里是正文.</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="宏包"><a class="markdownIt-Anchor" href="#宏包"></a> 宏包</h2>
+<p>为了完成一些功能（如定理环境），还需要在导言区，也即 document 环境之前加载宏包。加载宏包的代码是<code>\usepackage&#123;&#125;</code>。本份教程中，与数学公式与定理环境相关的宏包为<code>amsmath</code>、<code>amsthm</code>、<code>amssymb</code>，用于插入图片的宏包为<code>graphicx</code>，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，在加载宏包时还可以设置基本参数，如使用超链接宏包 hyperref，可以设置引用的颜色为黑色等，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h2>
+<p>标题可以用<code>\title&#123;&#125;</code>设置，作者可以用<code>\author</code>设置，日期可以用<code>\date&#123;&#125;</code>设置，这些都需要放在导言区。为了在文档中显示标题信息，需要使用<code>\maketitle</code>。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;</span><br><span class="line">\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;</span><br><span class="line">\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;</span><br><span class="line"></span><br><span class="line">% 导言区</span><br><span class="line"></span><br><span class="line">\title&#123;我的第一个\LaTeX 文档&#125;</span><br><span class="line">\author&#123;Dylaaan&#125;</span><br><span class="line">\date&#123;\today&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line"></span><br><span class="line">\maketitle</span><br><span class="line"></span><br><span class="line">这里是正文.</span><br><span class="line"></span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="正文"><a class="markdownIt-Anchor" href="#正文"></a> 正文</h2>
+<p>正文可以直接在 document 环境中书写，没有必要加入空格来缩进，因为文档默认会进行首行缩进。相邻的两行在编译时仍然会视为同一段。在 LaTeX 中，另起一段的方式是使用一行相隔，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">我是第一段.</span><br><span class="line"></span><br><span class="line">我是第二段.</span><br></pre></td></tr></table></figure>
+<p>这样编译出来就是两个段落。在正文部分，多余的空格、回车等等都会被自动忽略，这保证了全文排版不会突然多出一行或者多出一个空格。另外，另起一页的方式是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\newpage</span><br></pre></td></tr></table></figure>
+<p>在正文中，还可以设置局部的特殊字体：</p>
+<table>
+<thead>
+<tr>
+<th>字体</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直立</td>
+<td>\textup{}</td>
+</tr>
+<tr>
+<td>意大利</td>
+<td>\textit{}</td>
+</tr>
+<tr>
+<td>倾斜</td>
+<td>\textsl{}</td>
+</tr>
+<tr>
+<td>小型大写</td>
+<td>\textsc{}</td>
+</tr>
+<tr>
+<td>加宽加粗</td>
+<td>\textbf{}</td>
+</tr>
+</tbody>
+</table>
+<h2 id="章节"><a class="markdownIt-Anchor" href="#章节"></a> 章节</h2>
+<p>对于 ctexart 文件类型，章节可以用<code>\section&#123;&#125;</code>和<code>\subsection&#123;&#125;</code>命令来标记，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;</span><br><span class="line">\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;</span><br><span class="line">\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;</span><br><span class="line"></span><br><span class="line">% 导言区</span><br><span class="line"></span><br><span class="line">\title&#123;我的第一个\LaTeX 文档&#125;</span><br><span class="line">\author&#123;Dylaaan&#125;</span><br><span class="line">\date&#123;\today&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\maketitle</span><br><span class="line">\section&#123;一级标题&#125;</span><br><span class="line">\subsection&#123;二级标题&#125;</span><br><span class="line">这里是正文.</span><br><span class="line">\subsection&#123;二级标题&#125;</span><br><span class="line">这里是正文.</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h2>
+<p>在有了章节的结构之后，使用<code>\tableofcontents</code>命令就可以在指定位置生成目录。通常带有目录的文件需要编译两次，因为需要先在目录中生成.toc 文件，再据此生成目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\documentclass[12pt, a4paper, oneside]&#123;ctexart&#125;</span><br><span class="line">\usepackage&#123;amsmath, amsthm, amssymb, graphicx&#125;</span><br><span class="line">\usepackage[bookmarks=true, colorlinks, citecolor=blue, linkcolor=black]&#123;hyperref&#125;</span><br><span class="line"></span><br><span class="line">% 导言区</span><br><span class="line"></span><br><span class="line">\title&#123;我的第一个\LaTeX 文档&#125;</span><br><span class="line">\author&#123;Dylaaan&#125;</span><br><span class="line">\date&#123;\today&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line"></span><br><span class="line">\maketitle</span><br><span class="line"></span><br><span class="line">\tableofcontents</span><br><span class="line"></span><br><span class="line">\section&#123;一级标题&#125;</span><br><span class="line"></span><br><span class="line">\subsection&#123;二级标题&#125;</span><br><span class="line"></span><br><span class="line">这里是正文.</span><br><span class="line"></span><br><span class="line">\subsection&#123;二级标题&#125;</span><br><span class="line"></span><br><span class="line">这里是正文.</span><br><span class="line"></span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="图片"><a class="markdownIt-Anchor" href="#图片"></a> 图片</h2>
+<p>插入图片需要使用 graphicx 宏包，建议使用如下方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;figure&#125;[htbp]</span><br><span class="line">    \centering</span><br><span class="line">    \includegraphics[width=8cm]&#123;图片.jpg&#125;</span><br><span class="line">    \caption&#123;图片标题&#125;</span><br><span class="line">\end&#123;figure&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>[htbp]</code>的作用是自动选择插入图片的最优位置，<code>\centering</code>设置让图片居中，<code>[width=8cm]</code>设置了图片的宽度为 8cm，<code>\caption&#123;&#125;</code>用于设置图片的标题。</p>
+<h2 id="表格"><a class="markdownIt-Anchor" href="#表格"></a> 表格</h2>
+<p>LaTeX 中表格的插入较为麻烦，可以直接使用<a target="_blank" rel="noopener" href="https://www.tablesgenerator.com/#">Create LaTeX tables online – TablesGenerator.com</a>来生成。建议使用如下方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;table&#125;[htbp]</span><br><span class="line">    \centering</span><br><span class="line">    \caption&#123;表格标题&#125;</span><br><span class="line">    \begin&#123;tabular&#125;&#123;ccc&#125;</span><br><span class="line">        1 &amp; 2 &amp; 3 \\</span><br><span class="line">        4 &amp; 5 &amp; 6 \\</span><br><span class="line">        7 &amp; 8 &amp; 9</span><br><span class="line">    \end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h2>
+<p>LaTeX 中的列表环境包含无序列表<code>itemize</code>、有序列表<code>enumerate</code>和描述<code>description</code>，以<code>enumerate</code>为例，用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;enumerate&#125;</span><br><span class="line">    \item 这是第一点;</span><br><span class="line">    \item 这是第二点;</span><br><span class="line">    \item 这是第三点.</span><br><span class="line">\end&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，也可以自定义<code>\item</code>的样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;enumerate&#125;</span><br><span class="line">    \item[(1)] 这是第一点;</span><br><span class="line">    \item[(2)] 这是第二点;</span><br><span class="line">    \item[(3)] 这是第三点.</span><br><span class="line">\end&#123;enumerate&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="定理环境"><a class="markdownIt-Anchor" href="#定理环境"></a> 定理环境</h2>
+<p>定理环境需要使用 amsthm 宏包，首先在导言区加入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\newtheorem&#123;theorem&#125;&#123;定理&#125;[section]</span><br></pre></td></tr></table></figure>
+<p>其中<code>&#123;theorem&#125;</code>是环境的名称，<code>&#123;定理&#125;</code>设置了该环境显示的名称是“定理”，<code>[section]</code>的作用是让<code>theorem</code>环境在每个 section 中单独编号。在正文中，用如下方式来加入一条定理：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\begin&#123;theorem&#125;[定理名称]</span><br><span class="line">    这里是定理的内容.</span><br><span class="line">\end&#123;theorem&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>[定理名称]</code>不是必须的。另外，我们还可以建立新的环境，如果要让新的环境和<code>theorem</code>环境一起计数的话，可以用如下方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\newtheorem&#123;theorem&#125;&#123;定理&#125;[section]</span><br><span class="line">\newtheorem&#123;definition&#125;[theorem]&#123;定义&#125;</span><br><span class="line">\newtheorem&#123;lemma&#125;[theorem]&#123;引理&#125;</span><br><span class="line">\newtheorem&#123;corollary&#125;[theorem]&#123;推论&#125;</span><br><span class="line">\newtheorem&#123;example&#125;[theorem]&#123;例&#125;</span><br><span class="line">\newtheorem&#123;proposition&#125;[theorem]&#123;命题&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，定理的证明可以直接用 proof 环境。</p>
+<h2 id="页面"><a class="markdownIt-Anchor" href="#页面"></a> 页面</h2>
+<p>最开始选择文件类型时，我们设置的页面大小是 a4paper，除此之外，我们也可以修改页面大小为 b5paper 等等。</p>
+<p>一般情况下，LaTeX 默认的页边距很大，为了让每一页显示的内容更多一些，我们可以使用<code>geometry</code>宏包，并在导言区加入以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\usepackage&#123;geometry&#125;</span><br><span class="line">\geometry&#123;left=2.54cm, right=2.54cm, top=3.18cm, bottom=3.18cm&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，为了设置行间距，可以使用如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\linespread&#123;1.5&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="页码"><a class="markdownIt-Anchor" href="#页码"></a> 页码</h2>
+<p>默认的页码编码方式是阿拉伯数字，用户也可以自己设置为小写罗马数字：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\pagenumbering&#123;roman&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，<code>aiph</code>表示小写字母，<code>Aiph</code>表示大写字母，<code>Roman</code>表示大写罗马数字，<code>arabic</code>表示默认的阿拉伯数字。如果要设置页码的话，可以用如下代码来设置页码从 0 开始：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\setcounter&#123;page&#125;&#123;0&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://tommygong.top">うずまきナルト</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://tommygong.top/posts/3038973426.html">https://tommygong.top/posts/3038973426.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tommygong.top" target="_blank">うずまきナルト</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LaTeX/">LaTeX</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">うずまきナルト</div><div class="author-info__description">相信过程</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/luziyi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luziyi" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%E6%8E%92%E7%89%88%E5%B7%A5%E5%85%B7%E4%B8%8E%E4%B9%A6%E5%86%99%E5%B7%A5%E5%85%B7%E7%9A%84%E8%AE%A8%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text"> 前言：排版工具与书写工具的讨论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%E5%AE%89%E8%A3%85-latex-%E4%B8%8E%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text"> 准备工作：安装 LaTeX 与配置环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-tex-live"><span class="toc-number">2.1.</span> <span class="toc-text"> 安装 Tex Live</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9-tex-%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text"> 选择 TeX 编辑器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9-pdf-%E9%98%85%E8%AF%BB%E5%99%A8%E5%92%8C%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text"> 选择 pdf 阅读器和编辑器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8-latex-%E7%BC%96%E5%86%99%E6%96%87%E6%A1%A3"><span class="toc-number">3.</span> <span class="toc-text"> 利用 LaTeX 编写文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.1.</span> <span class="toc-text"> 文档类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8F%E5%8C%85"><span class="toc-number">3.2.</span> <span class="toc-text"> 宏包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E9%A2%98"><span class="toc-number">3.3.</span> <span class="toc-text"> 标题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">3.4.</span> <span class="toc-text"> 正文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%A0%E8%8A%82"><span class="toc-number">3.5.</span> <span class="toc-text"> 章节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">3.6.</span> <span class="toc-text"> 目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">3.7.</span> <span class="toc-text"> 图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC"><span class="toc-number">3.8.</span> <span class="toc-text"> 表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-number">3.9.</span> <span class="toc-text"> 列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83"><span class="toc-number">3.10.</span> <span class="toc-text"> 定理环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2"><span class="toc-number">3.11.</span> <span class="toc-text"> 页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E7%A0%81"><span class="toc-number">3.12.</span> <span class="toc-text"> 页码</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/788421571.html" title="机械工业出版社黑皮书ISBN收集">机械工业出版社黑皮书ISBN收集</a><time datetime="2024-08-05T02:17:41.000Z" title="发表于 2024-08-05 10:17:41">2024-08-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/1252164851.html" title="机器学习基础">机器学习基础</a><time datetime="2024-07-25T08:03:40.000Z" title="发表于 2024-07-25 16:03:40">2024-07-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2391826057.html" title="TJU-TCP 2024 暑期计算机网络综合实践 实验过程记录">TJU-TCP 2024 暑期计算机网络综合实践 实验过程记录</a><time datetime="2024-07-24T04:30:12.000Z" title="发表于 2024-07-24 12:30:12">2024-07-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3674948368.html" title="计算机网络笔记">计算机网络笔记</a><time datetime="2024-07-23T00:45:40.000Z" title="发表于 2024-07-23 08:45:40">2024-07-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/564726056.html" title="离散数学A重点整理">离散数学A重点整理</a><time datetime="2024-07-22T04:32:40.000Z" title="发表于 2024-07-22 12:32:40">2024-07-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By うずまきナルト</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="210,210,210" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
