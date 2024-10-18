@@ -1,0 +1,651 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>离散数学A重点整理 | うずまきナルト</title><meta name="author" content="うずまきナルト"><meta name="copyright" content="うずまきナルト"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="离散数学A重点整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学A重点整理">
+<meta property="og:url" content="https://tommygong.top/posts/564726056.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="离散数学A重点整理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+<meta property="article:published_time" content="2024-07-22T04:32:40.000Z">
+<meta property="article:modified_time" content="2024-10-18T01:11:55.858Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png"><link rel="shortcut icon" href="/%5Bobject%20Object%5D"><link rel="canonical" href="https://tommygong.top/posts/564726056.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><meta name="baidu-site-verification" content="codeva-yFe4SsNpzF"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"https://cdn.jsdelivr.net/gh/luziyi/luziyi.github.io@main/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"简","msgToSimplifiedChinese":"繁"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"自从文章最后一次更新已经过去","messageNext":"天了，文章的内容可能已经过时。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '离散数学A重点整理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2024-10-18 09:11:55'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="referrer" content="no-referrer-when-downgrade" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/css/custom@0.1.5.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="うずまきナルト"><span class="site-name">うずまきナルト</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">离散数学A重点整理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-22T04:32:40.000Z" title="发表于 2024-07-22 12:32:40">2024-07-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-18T01:11:55.858Z" title="更新于 2024-10-18 09:11:55">2024-10-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">569</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="离散数学"><a class="markdownIt-Anchor" href="#离散数学"></a> 离散数学</h1>
+<p>复习章节：</p>
+<p>第一章第7节的对偶不要求，第9节不要求，其他都要求</p>
+<p>第二章第6节的前束合取/析取范式不要求，其他都要求</p>
+<p>第三章第3节不要求，第8节warshall算法不要求，其他都要求</p>
+<p>第四章第3节不要求，其他都要求</p>
+<p>第五章第第6节不要求，第8节同余关系不要求，其他都要求</p>
+<p>第七章全部要求</p>
+<h2 id="第一章-命题逻辑"><a class="markdownIt-Anchor" href="#第一章-命题逻辑"></a> 第一章 命题逻辑</h2>
+<h3 id="11-命题及其表示法"><a class="markdownIt-Anchor" href="#11-命题及其表示法"></a> 1.1 命题及其表示法</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396486140.png" alt="1719396486140" /><br />
+真假可知但是不确定，认为是命题<br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396505354.png" alt="1719396505354" /><br />
+悖论</p>
+<p>定义：命题<br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396521621.png" alt="1719396521621" /></p>
+<h3 id="12-联结词"><a class="markdownIt-Anchor" href="#12-联结词"></a> 1.2 联结词</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396562870.png" alt="1719396562870" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396572744.png" alt="1719396572744" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396589282.png" alt="1719396589282" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396604061.png" alt="1719396604061" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396622069.png" alt="1719396622069" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396649124.png" alt="1719396649124" /></p>
+<h3 id="13-命题公式与翻译"><a class="markdownIt-Anchor" href="#13-命题公式与翻译"></a> 1.3 命题公式与翻译</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396698173.png" alt="1719396698173" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396706921.png" alt="1719396706921" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396727485.png" alt="1719396727485" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396744140.png" alt="1719396744140" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396766573.png" alt="1719396766573" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396797752.png" alt="1719396797752" /></p>
+<h3 id="14-真值表与等价公式"><a class="markdownIt-Anchor" href="#14-真值表与等价公式"></a> 1.4 真值表与等价公式</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397059612.png" alt="1719397059612" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396858392.png" alt="1719396858392" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396867675.png" alt="1719396867675" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396890558.png" alt="1719396890558" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719396901210.png" alt="1719396901210" /></p>
+<h3 id="15-重言式与蕴含式"><a class="markdownIt-Anchor" href="#15-重言式与蕴含式"></a> 1.5 重言式与蕴含式</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397000348.png" alt="1719397000348" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397011403.png" alt="1719397011403" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397184608.png" alt="1719397184608" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397173861.png" alt="1719397173861" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397235041.png" alt="1719397235041" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397263940.png" alt="1719397263940" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397283031.png" alt="1719397283031" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397319997.png" alt="1719397319997" /></p>
+<h3 id="16-其他联结词"><a class="markdownIt-Anchor" href="#16-其他联结词"></a> 1.6 其他联结词</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397413879.png" alt="1719397413879" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397429046.png" alt="1719397429046" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397446982.png" alt="1719397446982" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397883528.png" alt="1719397883528" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397900510.png" alt="1719397900510" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397919198.png" alt="1719397919198" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397911476.png" alt="1719397911476" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719397936387.png" alt="1719397936387" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398035020.png" alt="1719398035020" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398058859.png" alt="1719398058859" /></p>
+<h3 id="17-对偶与范式对偶不要求"><a class="markdownIt-Anchor" href="#17-对偶与范式对偶不要求"></a> 1.7 对偶与范式（对偶不要求）</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451444458.png" alt="1719451444458" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451455635.png" alt="1719451455635" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451469766.png" alt="1719451469766" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451494895.png" alt="1719451494895" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451504347.png" alt="1719451504347" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451516590.png" alt="1719451516590" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451529768.png" alt="1719451529768" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451541462.png" alt="1719451541462" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451550886.png" alt="1719451550886" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451561657.png" alt="1719451561657" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451573124.png" alt="1719451573124" /></p>
+<h3 id="18-推理理论"><a class="markdownIt-Anchor" href="#18-推理理论"></a> 1.8 推理理论</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398235676.png" alt="1719398235676" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398256823.png" alt="1719398256823" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398310762.png" alt="1719398310762" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398424783.png" alt="1719398424783" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398476389.png" alt="1719398476389" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398495378.png" alt="1719398495378" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398703676.png" alt="1719398703676" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719398746760.png" alt="1719398746760" /></p>
+<h2 id="第二章-谓词逻辑"><a class="markdownIt-Anchor" href="#第二章-谓词逻辑"></a> 第二章 谓词逻辑</h2>
+<h3 id="21-谓词的概念与表示"><a class="markdownIt-Anchor" href="#21-谓词的概念与表示"></a> 2.1 谓词的概念与表示</h3>
+<p>谓词定义：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719399079662.png" alt="1719399079662" /></p>
+<h3 id="22-命题函数与量词"><a class="markdownIt-Anchor" href="#22-命题函数与量词"></a> 2.2 命题函数与量词</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719399151575.png" alt="1719399151575" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719399207456.png" alt="1719399207456" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719399232911.png" alt="1719399232911" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719399244737.png" alt="1719399244737" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719399332717.png" alt="1719399332717" /></p>
+<h3 id="23-谓词公式与翻译"><a class="markdownIt-Anchor" href="#23-谓词公式与翻译"></a> 2.3 谓词公式与翻译</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719399685375.png" alt="1719399685375" /></p>
+<h3 id="24-变元的约束"><a class="markdownIt-Anchor" href="#24-变元的约束"></a> 2.4 变元的约束</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400088935.png" alt="1719400088935" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400129445.png" alt="1719400129445" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400191075.png" alt="1719400191075" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400198646.png" alt="1719400198646" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400239281.png" alt="1719400239281" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400414944.png" alt="1719400414944" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400422424.png" alt="1719400422424" /></p>
+<h3 id="25-谓词演算的等价式与蕴含式"><a class="markdownIt-Anchor" href="#25-谓词演算的等价式与蕴含式"></a> 2.5 谓词演算的等价式与蕴含式</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400463163.png" alt="1719400463163" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400476155.png" alt="1719400476155" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400492589.png" alt="1719400492589" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400500416.png" alt="1719400500416" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400542868.png" alt="1719400542868" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400592001.png" alt="1719400592001" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400644091.png" alt="1719400644091" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400836292.png" alt="1719400836292" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400868925.png" alt="1719400868925" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400885194.png" alt="1719400885194" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400897821.png" alt="1719400897821" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719400972755.png" alt="1719400972755" /></p>
+<h3 id="26-前束范式"><a class="markdownIt-Anchor" href="#26-前束范式"></a> 2.6 前束范式</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401107873.png" alt="1719401107873" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401196754.png" alt="1719401196754" /></p>
+<h3 id="27-谓词演算的推理理论"><a class="markdownIt-Anchor" href="#27-谓词演算的推理理论"></a> 2.7 谓词演算的推理理论</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401407248.png" alt="1719401407248" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401421016.png" alt="1719401421016" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401430986.png" alt="1719401430986" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401492564.png" alt="1719401492564" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401693994.png" alt="1719401693994" /></p>
+<h2 id="第三章-集合论"><a class="markdownIt-Anchor" href="#第三章-集合论"></a> 第三章 集合论</h2>
+<h3 id="31-集合的概念和表示法"><a class="markdownIt-Anchor" href="#31-集合的概念和表示法"></a> 3.1 集合的概念和表示法</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401797262.png" alt="1719401797262" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401844474.png" alt="1719401844474" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401880585.png" alt="1719401880585" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401893548.png" alt="1719401893548" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401977418.png" alt="1719401977418" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719401999619.png" alt="1719401999619" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402006589.png" alt="1719402006589" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402087856.png" alt="1719402087856" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402065082.png" alt="1719402065082" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402074413.png" alt="1719402074413" /></p>
+<h3 id="32-集合的运算"><a class="markdownIt-Anchor" href="#32-集合的运算"></a> 3.2 集合的运算</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402179779.png" alt="1719402179779" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402189592.png" alt="1719402189592" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402203153.png" alt="1719402203153" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402212330.png" alt="1719402212330" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719402343808.png" alt="1719402343808" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403012206.png" alt="1719403012206" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403024824.png" alt="1719403024824" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403061883.png" alt="1719403061883" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403088917.png" alt="1719403088917" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403112162.png" alt="1719403112162" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403120052.png" alt="1719403120052" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403132904.png" alt="1719403132904" /></p>
+<h3 id="34-序偶与笛卡尔积"><a class="markdownIt-Anchor" href="#34-序偶与笛卡尔积"></a> 3.4 序偶与笛卡尔积</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403176559.png" alt="1719403176559" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403195410.png" alt="1719403195410" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403211236.png" alt="1719403211236" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403260419.png" alt="1719403260419" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403278142.png" alt="1719403278142" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403301462.png" alt="1719403301462" /></p>
+<h3 id="35-关系及其表示"><a class="markdownIt-Anchor" href="#35-关系及其表示"></a> 3.5 关系及其表示</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403332677.png" alt="1719403332677" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403341642.png" alt="1719403341642" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403564123.png" alt="1719403564123" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403599839.png" alt="1719403599839" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403627869.png" alt="1719403627869" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403656020.png" alt="1719403656020" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403664243.png" alt="1719403664243" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403685739.png" alt="1719403685739" /></p>
+<h3 id="36-关系的性质"><a class="markdownIt-Anchor" href="#36-关系的性质"></a> 3.6 关系的性质</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403717925.png" alt="1719403717925" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403725232.png" alt="1719403725232" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403733455.png" alt="1719403733455" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403749246.png" alt="1719403749246" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403786141.png" alt="1719403786141" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403804563.png" alt="1719403804563" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403816116.png" alt="1719403816116" /></p>
+<h3 id="37-复合关系和逆关系"><a class="markdownIt-Anchor" href="#37-复合关系和逆关系"></a> 3.7 复合关系和逆关系</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403861364.png" alt="1719403861364" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403878860.png" alt="1719403878860" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403893825.png" alt="1719403893825" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403935572.png" alt="1719403935572" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403944669.png" alt="1719403944669" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403961554.png" alt="1719403961554" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403982642.png" alt="1719403982642" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403990633.png" alt="1719403990633" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719403997938.png" alt="1719403997938" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719404049969.png" alt="1719404049969" /></p>
+<h3 id="38-关系的闭包运算"><a class="markdownIt-Anchor" href="#38-关系的闭包运算"></a> 3.8 关系的闭包运算</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719404086741.png" alt="1719404086741" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719404210822.png" alt="1719404210822" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719404219041.png" alt="1719404219041" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719405176921.png" alt="1719405176921" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719405187319.png" alt="1719405187319" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719405201889.png" alt="1719405201889" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719406055232.png" alt="1719406055232" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719406203581.png" alt="1719406203581" /></p>
+<h3 id="39-集合的划分和覆盖"><a class="markdownIt-Anchor" href="#39-集合的划分和覆盖"></a> 3.9 集合的划分和覆盖</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407067437.png" alt="1719407067437" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407097215.png" alt="1719407097215" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407113124.png" alt="1719407113124" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407132206.png" alt="1719407132206" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407322511.png" alt="1719407322511" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407331199.png" alt="1719407331199" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407340291.png" alt="1719407340291" /></p>
+<h3 id="310-等价关系与等价类"><a class="markdownIt-Anchor" href="#310-等价关系与等价类"></a> 3.10 等价关系与等价类</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407365336.png" alt="1719407365336" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407393512.png" alt="1719407393512" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407512334.png" alt="1719407512334" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719407534606.png" alt="1719407534606" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451061224.png" alt="1719451061224" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451083328.png" alt="1719451083328" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451141986.png" alt="1719451141986" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451260706.png" alt="1719451260706" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451293862.png" alt="1719451293862" /></p>
+<h3 id="311-相容关系"><a class="markdownIt-Anchor" href="#311-相容关系"></a> 3.11 相容关系</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451607312.png" alt="1719451607312" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451660470.png" alt="1719451660470" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451675786.png" alt="1719451675786" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451699207.png" alt="1719451699207" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451712382.png" alt="1719451712382" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451887626.png" alt="1719451887626" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451909989.png" alt="1719451909989" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719451921738.png" alt="1719451921738" /></p>
+<h3 id="312-序关系"><a class="markdownIt-Anchor" href="#312-序关系"></a> 3.12 序关系（⭐）</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452597421.png" alt="1719452597421" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452623772.png" alt="1719452623772" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452649641.png" alt="1719452649641" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452639180.png" alt="1719452639180" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452701229.png" alt="1719452701229" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452878187.png" alt="1719452878187" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452913749.png" alt="1719452913749" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719452945477.png" alt="1719452945477" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453002498.png" alt="1719453002498" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453072026.png" alt="1719453072026" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453091365.png" alt="1719453091365" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453133016.png" alt="1719453133016" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453142895.png" alt="1719453142895" /></p>
+<h2 id="第四章-函数"><a class="markdownIt-Anchor" href="#第四章-函数"></a> 第四章 函数</h2>
+<h3 id="41-函数的概念"><a class="markdownIt-Anchor" href="#41-函数的概念"></a> 4.1 函数的概念</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453244753.png" alt="1719453244753" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453266570.png" alt="1719453266570" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453331958.png" alt="1719453331958" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453353209.png" alt="1719453353209" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453376625.png" alt="1719453376625" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453400956.png" alt="1719453400956" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453442715.png" alt="1719453442715" /></p>
+<h3 id="42-逆函数和复合函数"><a class="markdownIt-Anchor" href="#42-逆函数和复合函数"></a> 4.2 逆函数和复合函数</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453521891.png" alt="1719453521891" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453847397.png" alt="1719453847397" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453883149.png" alt="1719453883149" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453896773.png" alt="1719453896773" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453930829.png" alt="1719453930829" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719453975723.png" alt="1719453975723" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454218261.png" alt="1719454218261" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454208422.png" alt="1719454208422" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454232770.png" alt="1719454232770" /></p>
+<h3 id="44-基数的概念"><a class="markdownIt-Anchor" href="#44-基数的概念"></a> 4.4 基数的概念</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454481539.png" alt="1719454481539" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454554566.png" alt="1719454554566" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454585086.png" alt="1719454585086" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454619474.png" alt="1719454619474" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454635783.png" alt="1719454635783" /></p>
+<h3 id="45-可数集与不可数集"><a class="markdownIt-Anchor" href="#45-可数集与不可数集"></a> 4.5 可数集与不可数集</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454818175.png" alt="1719454818175" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454825611.png" alt="1719454825611" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454833353.png" alt="1719454833353" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454846067.png" alt="1719454846067" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454967548.png" alt="1719454967548" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454972389.png" alt="1719454972389" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719454995786.png" alt="1719454995786" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719455008140.png" alt="1719455008140" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719455018309.png" alt="1719455018309" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456327232.png" alt="1719456327232" /></p>
+<h3 id="46-基数的比较"><a class="markdownIt-Anchor" href="#46-基数的比较"></a> 4.6 基数的比较</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456352933.png" alt="1719456352933" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456373649.png" alt="1719456373649" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456385912.png" alt="1719456385912" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456392938.png" alt="1719456392938" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456401565.png" alt="1719456401565" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456408643.png" alt="1719456408643" /></p>
+<h2 id="第五章-代数结构"><a class="markdownIt-Anchor" href="#第五章-代数结构"></a> 第五章 代数结构</h2>
+<h3 id="51-代数系统的引入"><a class="markdownIt-Anchor" href="#51-代数系统的引入"></a> 5.1 代数系统的引入</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456508939.png" alt="1719456508939" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456515641.png" alt="1719456515641" /></p>
+<h3 id="52-运算及其性质"><a class="markdownIt-Anchor" href="#52-运算及其性质"></a> 5.2 运算及其性质</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456547421.png" alt="1719456547421" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456553679.png" alt="1719456553679" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456559750.png" alt="1719456559750" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456566044.png" alt="1719456566044" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456590551.png" alt="1719456590551" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456598068.png" alt="1719456598068" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456604851.png" alt="1719456604851" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456613687.png" alt="1719456613687" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456631996.png" alt="1719456631996" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456639227.png" alt="1719456639227" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456712700.png" alt="1719456712700" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456718940.png" alt="1719456718940" /></p>
+<h3 id="53-半群"><a class="markdownIt-Anchor" href="#53-半群"></a> 5.3 半群</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456741839.png" alt="1719456741839" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456748487.png" alt="1719456748487" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456762036.png" alt="1719456762036" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456771006.png" alt="1719456771006" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456778722.png" alt="1719456778722" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456786989.png" alt="1719456786989" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456797354.png" alt="1719456797354" /></p>
+<h3 id="54-群与子群"><a class="markdownIt-Anchor" href="#54-群与子群"></a> 5.4 群与子群</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456822382.png" alt="1719456822382" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456836286.png" alt="1719456836286" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456844259.png" alt="1719456844259" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456850205.png" alt="1719456850205" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456857606.png" alt="1719456857606" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456864799.png" alt="1719456864799" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456874942.png" alt="1719456874942" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456882704.png" alt="1719456882704" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456929971.png" alt="1719456929971" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456936418.png" alt="1719456936418" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456941780.png" alt="1719456941780" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456950766.png" alt="1719456950766" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456959545.png" alt="1719456959545" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456966726.png" alt="1719456966726" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719456979297.png" alt="1719456979297" /></p>
+<h3 id="55-阿贝尔群与循环群"><a class="markdownIt-Anchor" href="#55-阿贝尔群与循环群"></a> 5.5 阿贝尔群与循环群</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457000577.png" alt="1719457000577" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457006707.png" alt="1719457006707" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457013980.png" alt="1719457013980" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457019712.png" alt="1719457019712" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457026586.png" alt="1719457026586" /></p>
+<h3 id="57-陪集与拉格朗日定理"><a class="markdownIt-Anchor" href="#57-陪集与拉格朗日定理"></a> 5.7 陪集与拉格朗日定理</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457056912.png" alt="1719457056912" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457066752.png" alt="1719457066752" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457077256.png" alt="1719457077256" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457085129.png" alt="1719457085129" /></p>
+<h3 id="58-同态与同构"><a class="markdownIt-Anchor" href="#58-同态与同构"></a> 5.8 同态与同构</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457106492.png" alt="1719457106492" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457114179.png" alt="1719457114179" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457128859.png" alt="1719457128859" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457146732.png" alt="1719457146732" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457156223.png" alt="1719457156223" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457164739.png" alt="1719457164739" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457169640.png" alt="1719457169640" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457174259.png" alt="1719457174259" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457180015.png" alt="1719457180015" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457184785.png" alt="1719457184785" /></p>
+<h2 id="第七章-图论"><a class="markdownIt-Anchor" href="#第七章-图论"></a> 第七章 图论</h2>
+<h3 id="71-图的基本概念"><a class="markdownIt-Anchor" href="#71-图的基本概念"></a> 7.1 图的基本概念</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457227950.png" alt="1719457227950" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457240911.png" alt="1719457240911" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457250626.png" alt="1719457250626" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457255686.png" alt="1719457255686" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457271179.png" alt="1719457271179" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457283875.png" alt="1719457283875" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457288792.png" alt="1719457288792" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457298375.png" alt="1719457298375" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457305839.png" alt="1719457305839" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457358344.png" alt="1719457358344" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457364702.png" alt="1719457364702" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457374244.png" alt="1719457374244" /></p>
+<h3 id="72-路与回路"><a class="markdownIt-Anchor" href="#72-路与回路"></a> 7.2 路与回路</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457395862.png" alt="1719457395862" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457408431.png" alt="1719457408431" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457415982.png" alt="1719457415982" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457421072.png" alt="1719457421072" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457425926.png" alt="1719457425926" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457434504.png" alt="1719457434504" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457441146.png" alt="1719457441146" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457454818.png" alt="1719457454818" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457447460.png" alt="1719457447460" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457461891.png" alt="1719457461891" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457467583.png" alt="1719457467583" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457471546.png" alt="1719457471546" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457477047.png" alt="1719457477047" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457480955.png" alt="1719457480955" /></p>
+<h3 id="73-图的矩阵表示"><a class="markdownIt-Anchor" href="#73-图的矩阵表示"></a> 7.3 图的矩阵表示</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457494778.png" alt="1719457494778" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457500405.png" alt="1719457500405" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457525753.png" alt="1719457525753" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457531678.png" alt="1719457531678" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457537062.png" alt="1719457537062" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457541771.png" alt="1719457541771" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457557246.png" alt="1719457557246" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457572093.png" alt="1719457572093" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457596570.png" alt="1719457596570" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457632008.png" alt="1719457632008" /></p>
+<h3 id="74-欧拉图与汉密尔顿图"><a class="markdownIt-Anchor" href="#74-欧拉图与汉密尔顿图"></a> 7.4 欧拉图与汉密尔顿图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457654960.png" alt="1719457654960" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457662918.png" alt="1719457662918" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457669224.png" alt="1719457669224" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457674427.png" alt="1719457674427" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457679174.png" alt="1719457679174" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457687532.png" alt="1719457687532" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457693599.png" alt="1719457693599" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457699176.png" alt="1719457699176" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457704783.png" alt="1719457704783" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457709283.png" alt="1719457709283" /></p>
+<h3 id="75-平面图"><a class="markdownIt-Anchor" href="#75-平面图"></a> 7.5 平面图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457740107.png" alt="1719457740107" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457751224.png" alt="1719457751224" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457757367.png" alt="1719457757367" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457762108.png" alt="1719457762108" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457766437.png" alt="1719457766437" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457771237.png" alt="1719457771237" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457775718.png" alt="1719457775718" /></p>
+<h3 id="76-对偶图与着色"><a class="markdownIt-Anchor" href="#76-对偶图与着色"></a> 7.6 对偶图与着色</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457800710.png" alt="1719457800710" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457810616.png" alt="1719457810616" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457845010.png" alt="1719457845010" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457868501.png" alt="1719457868501" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457874665.png" alt="1719457874665" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457881127.png" alt="1719457881127" /></p>
+<h3 id="77-树与生成树"><a class="markdownIt-Anchor" href="#77-树与生成树"></a> 7.7 树与生成树</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457897491.png" alt="1719457897491" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457904148.png" alt="1719457904148" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457913261.png" alt="1719457913261" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457920347.png" alt="1719457920347" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457927167.png" alt="1719457927167" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457932666.png" alt="1719457932666" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457938360.png" alt="1719457938360" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457944291.png" alt="1719457944291" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457954109.png" alt="1719457954109" /></p>
+<h3 id="78-根树及其应用"><a class="markdownIt-Anchor" href="#78-根树及其应用"></a> 7.8 根树及其应用</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457978754.png" alt="1719457978754" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457983757.png" alt="1719457983757" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719457988721.png" alt="1719457988721" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458006354.png" alt="1719458006354" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458017008.png" alt="1719458017008" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458026122.png" alt="1719458026122" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458030215.png" alt="1719458030215" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458046515.png" alt="1719458046515" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458063949.png" alt="1719458063949" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458069977.png" alt="1719458069977" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458075469.png" alt="1719458075469" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719458079893.png" alt="1719458079893" /></p>
+<p>##重点习题</p>
+<p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719487416022.png" alt="1719487416022" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719487449588.png" alt="1719487449588" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719487470074.png" alt="1719487470074" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719487908974.png" alt="1719487908974" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719488917620.png" alt="1719488917620" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719542537832.png" alt="1719542537832" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719544183318.png" alt="1719544183318" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719555130880.png" alt="1719555130880" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719555311448.png" alt="1719555311448" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719555734318.png" alt="1719555734318" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719556759549.png" alt="1719556759549" /><br />
+<img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6A%E9%87%8D%E7%82%B9%E6%95%B4%E7%90%86/1719574217162.png" alt="1719574217162" /></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://tommygong.top">うずまきナルト</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://tommygong.top/posts/564726056.html">https://tommygong.top/posts/564726056.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://tommygong.top" target="_blank">うずまきナルト</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">うずまきナルト</div><div class="author-info__description">言出必行，相信过程</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/luziyi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/luziyi" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6"><span class="toc-number">1.</span> <span class="toc-text"> 离散数学</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91"><span class="toc-number">1.1.</span> <span class="toc-text"> 第一章 命题逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%91%BD%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">1.1.1.</span> <span class="toc-text"> 1.1 命题及其表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E8%81%94%E7%BB%93%E8%AF%8D"><span class="toc-number">1.1.2.</span> <span class="toc-text"> 1.2 联结词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%91%BD%E9%A2%98%E5%85%AC%E5%BC%8F%E4%B8%8E%E7%BF%BB%E8%AF%91"><span class="toc-number">1.1.3.</span> <span class="toc-text"> 1.3 命题公式与翻译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E7%9C%9F%E5%80%BC%E8%A1%A8%E4%B8%8E%E7%AD%89%E4%BB%B7%E5%85%AC%E5%BC%8F"><span class="toc-number">1.1.4.</span> <span class="toc-text"> 1.4 真值表与等价公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E9%87%8D%E8%A8%80%E5%BC%8F%E4%B8%8E%E8%95%B4%E5%90%AB%E5%BC%8F"><span class="toc-number">1.1.5.</span> <span class="toc-text"> 1.5 重言式与蕴含式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%85%B6%E4%BB%96%E8%81%94%E7%BB%93%E8%AF%8D"><span class="toc-number">1.1.6.</span> <span class="toc-text"> 1.6 其他联结词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E5%AF%B9%E5%81%B6%E4%B8%8E%E8%8C%83%E5%BC%8F%E5%AF%B9%E5%81%B6%E4%B8%8D%E8%A6%81%E6%B1%82"><span class="toc-number">1.1.7.</span> <span class="toc-text"> 1.7 对偶与范式（对偶不要求）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA"><span class="toc-number">1.1.8.</span> <span class="toc-text"> 1.8 推理理论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91"><span class="toc-number">1.2.</span> <span class="toc-text"> 第二章 谓词逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E8%B0%93%E8%AF%8D%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text"> 2.1 谓词的概念与表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E5%91%BD%E9%A2%98%E5%87%BD%E6%95%B0%E4%B8%8E%E9%87%8F%E8%AF%8D"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 2.2 命题函数与量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E8%B0%93%E8%AF%8D%E5%85%AC%E5%BC%8F%E4%B8%8E%E7%BF%BB%E8%AF%91"><span class="toc-number">1.2.3.</span> <span class="toc-text"> 2.3 谓词公式与翻译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-%E5%8F%98%E5%85%83%E7%9A%84%E7%BA%A6%E6%9D%9F"><span class="toc-number">1.2.4.</span> <span class="toc-text"> 2.4 变元的约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E7%AD%89%E4%BB%B7%E5%BC%8F%E4%B8%8E%E8%95%B4%E5%90%AB%E5%BC%8F"><span class="toc-number">1.2.5.</span> <span class="toc-text"> 2.5 谓词演算的等价式与蕴含式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-%E5%89%8D%E6%9D%9F%E8%8C%83%E5%BC%8F"><span class="toc-number">1.2.6.</span> <span class="toc-text"> 2.6 前束范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA"><span class="toc-number">1.2.7.</span> <span class="toc-text"> 2.7 谓词演算的推理理论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E9%9B%86%E5%90%88%E8%AE%BA"><span class="toc-number">1.3.</span> <span class="toc-text"> 第三章 集合论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#31-%E9%9B%86%E5%90%88%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 3.1 集合的概念和表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E9%9B%86%E5%90%88%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 3.2 集合的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-%E5%BA%8F%E5%81%B6%E4%B8%8E%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="toc-number">1.3.3.</span> <span class="toc-text"> 3.4 序偶与笛卡尔积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-%E5%85%B3%E7%B3%BB%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.3.4.</span> <span class="toc-text"> 3.5 关系及其表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36-%E5%85%B3%E7%B3%BB%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.3.5.</span> <span class="toc-text"> 3.6 关系的性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-%E5%A4%8D%E5%90%88%E5%85%B3%E7%B3%BB%E5%92%8C%E9%80%86%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.6.</span> <span class="toc-text"> 3.7 复合关系和逆关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#38-%E5%85%B3%E7%B3%BB%E7%9A%84%E9%97%AD%E5%8C%85%E8%BF%90%E7%AE%97"><span class="toc-number">1.3.7.</span> <span class="toc-text"> 3.8 关系的闭包运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#39-%E9%9B%86%E5%90%88%E7%9A%84%E5%88%92%E5%88%86%E5%92%8C%E8%A6%86%E7%9B%96"><span class="toc-number">1.3.8.</span> <span class="toc-text"> 3.9 集合的划分和覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#310-%E7%AD%89%E4%BB%B7%E5%85%B3%E7%B3%BB%E4%B8%8E%E7%AD%89%E4%BB%B7%E7%B1%BB"><span class="toc-number">1.3.9.</span> <span class="toc-text"> 3.10 等价关系与等价类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#311-%E7%9B%B8%E5%AE%B9%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.10.</span> <span class="toc-text"> 3.11 相容关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#312-%E5%BA%8F%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.11.</span> <span class="toc-text"> 3.12 序关系（⭐）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text"> 第四章 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#41-%E5%87%BD%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 4.1 函数的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#42-%E9%80%86%E5%87%BD%E6%95%B0%E5%92%8C%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 4.2 逆函数和复合函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#44-%E5%9F%BA%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.4.3.</span> <span class="toc-text"> 4.4 基数的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#45-%E5%8F%AF%E6%95%B0%E9%9B%86%E4%B8%8E%E4%B8%8D%E5%8F%AF%E6%95%B0%E9%9B%86"><span class="toc-number">1.4.4.</span> <span class="toc-text"> 4.5 可数集与不可数集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#46-%E5%9F%BA%E6%95%B0%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">1.4.5.</span> <span class="toc-text"> 4.6 基数的比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.</span> <span class="toc-text"> 第五章 代数结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%85%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 5.1 代数系统的引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E8%BF%90%E7%AE%97%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 5.2 运算及其性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-%E5%8D%8A%E7%BE%A4"><span class="toc-number">1.5.3.</span> <span class="toc-text"> 5.3 半群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#54-%E7%BE%A4%E4%B8%8E%E5%AD%90%E7%BE%A4"><span class="toc-number">1.5.4.</span> <span class="toc-text"> 5.4 群与子群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#55-%E9%98%BF%E8%B4%9D%E5%B0%94%E7%BE%A4%E4%B8%8E%E5%BE%AA%E7%8E%AF%E7%BE%A4"><span class="toc-number">1.5.5.</span> <span class="toc-text"> 5.5 阿贝尔群与循环群</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#57-%E9%99%AA%E9%9B%86%E4%B8%8E%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AE%9A%E7%90%86"><span class="toc-number">1.5.6.</span> <span class="toc-text"> 5.7 陪集与拉格朗日定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#58-%E5%90%8C%E6%80%81%E4%B8%8E%E5%90%8C%E6%9E%84"><span class="toc-number">1.5.7.</span> <span class="toc-text"> 5.8 同态与同构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%9B%BE%E8%AE%BA"><span class="toc-number">1.6.</span> <span class="toc-text"> 第七章 图论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#71-%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.6.1.</span> <span class="toc-text"> 7.1 图的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#72-%E8%B7%AF%E4%B8%8E%E5%9B%9E%E8%B7%AF"><span class="toc-number">1.6.2.</span> <span class="toc-text"> 7.2 路与回路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#73-%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.6.3.</span> <span class="toc-text"> 7.3 图的矩阵表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#74-%E6%AC%A7%E6%8B%89%E5%9B%BE%E4%B8%8E%E6%B1%89%E5%AF%86%E5%B0%94%E9%A1%BF%E5%9B%BE"><span class="toc-number">1.6.4.</span> <span class="toc-text"> 7.4 欧拉图与汉密尔顿图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#75-%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="toc-number">1.6.5.</span> <span class="toc-text"> 7.5 平面图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#76-%E5%AF%B9%E5%81%B6%E5%9B%BE%E4%B8%8E%E7%9D%80%E8%89%B2"><span class="toc-number">1.6.6.</span> <span class="toc-text"> 7.6 对偶图与着色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#77-%E6%A0%91%E4%B8%8E%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">1.6.7.</span> <span class="toc-text"> 7.7 树与生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#78-%E6%A0%B9%E6%A0%91%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8"><span class="toc-number">1.6.8.</span> <span class="toc-text"> 7.8 根树及其应用</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3508812232.html" title="CPP set集合容器自定义比较函数">CPP set集合容器自定义比较函数</a><time datetime="2024-09-25T11:40:24.000Z" title="发表于 2024-09-25 19:40:24">2024-09-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2449392461.html" title="CPP STL 容器介绍">CPP STL 容器介绍</a><time datetime="2024-09-23T06:21:15.000Z" title="发表于 2024-09-23 14:21:15">2024-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/3426030149.html" title="贝塞尔曲线">贝塞尔曲线</a><time datetime="2024-09-19T14:16:03.000Z" title="发表于 2024-09-19 22:16:03">2024-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2136557086.html" title="计算机存储层次">计算机存储层次</a><time datetime="2024-09-19T14:14:24.000Z" title="发表于 2024-09-19 22:14:24">2024-09-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/2756843955.html" title="MIT 6.828 实验记录">MIT 6.828 实验记录</a><time datetime="2024-09-13T01:23:57.000Z" title="发表于 2024-09-13 09:23:57">2024-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By うずまきナルト</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'luziyi/luziyi.github.io',
+      'data-repo-id': 'R_kgDOJdDDlQ',
+      'data-category-id': 'DIC_kwDOJdDDlc4CaS8o',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },{"mapping":"url","strict":0,"reactions-enabled":1,"emit-metadata":0,"input-position":"top","theme":"preferred_color_scheme","lang":"zh-CN","loading":"lazy","crossorigin":"anonymous"})
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="210,210,210" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
