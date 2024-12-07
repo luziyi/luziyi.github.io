@@ -254,33 +254,71 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="行内公式"><a href="#行内公式" class="headerlink" title="行内公式"></a>行内公式</h2><p>行内公式通常使用<code>$..$</code>来输入，这通常被称为公式环境，例如：若$a&gt;0$,$b&gt;0$，则$a+b&gt;0$.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">若$a&gt;0$,$b&gt;0$，则$a+b&gt;0$.</span><br></pre></td></tr></table></figure>
-<p>公式环境通常使用特殊字体，并且默认为斜体。需要注意的是，只要是公式，就需要放入公式环境中。如果需要在行内公式中展现出行间公式的效果，可以在前面加入<code>\displaystyle</code>，例如：设$\displaystyle\lim_{n\to\infty}x_n&#x3D;x$.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设$\displaystyle\lim_&#123;n\to\infty&#125;x_n=x$.</span><br></pre></td></tr></table></figure>
-<h2 id="行间公式"><a href="#行间公式" class="headerlink" title="行间公式"></a>行间公式</h2><p>行间公式需要用$$..$$来输入，笔者习惯的输入方式如下：若$a&gt;0$, $b&gt;0$, 则<br>$$<br>a+b&gt;0.<br>$$</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">若$a&gt;0$, $b&gt;0$, 则</span><br><span class="line">$$</span><br><span class="line">a+b&gt;0.</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-<p>这种输入方式的一个好处是，这同时也是Markdown的语法。需要注意的是，行间公式也是正文的一部分，需要与正文连贯，并且加入标点符号。<br>关于具体的输入方式，可以参考<a target="_blank" rel="noopener" href="https://latexlive.com/">在线LaTeX公式编辑器-编辑器 (latexlive.com)</a>，在这里只列举一些需要注意的。</p>
-<h3 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h3><p>上标可以用^输入，例如<code>a^n</code>，效果为 $a^n$；<br>下标可以用_来输入，例如<code>a_1</code>，效果为 $a_1$;<br>上下标只会读取第一个字符，如果上下标的内容较多的话，需要改成<code>^&#123;&#125;</code>或<code>_&#123;&#125;</code>。</p>
-<h3 id="分式"><a href="#分式" class="headerlink" title="分式"></a>分式</h3><p>分式可以用\dfrac{}{}来输入，例如<code>\dfrac&#123;a&#125;&#123;b&#125;</code>，效果为   $\dfrac{a}{b}$<br> 为了在行间、分子、分母或者指数上输入较小的分式，可以改用<code>\frac&#123;&#125;&#123;&#125;</code>，例如<code>a^\frac&#123;1&#125;&#123;n&#125;</code>，效果为    $a^\frac{1}{n}$</p>
-<h3 id="括号"><a href="#括号" class="headerlink" title="括号"></a>括号</h3><p>括号可以直接用(..)输入，但是需要注意的是，有时候括号内的内容高度较大，需要改用<code>\left(..\right)</code>。例如<code>\left(1+\dfrac&#123;1&#125;&#123;n&#125;\right)^n</code>，效果是<br>$$\left(1+\dfrac{1}{n}\right)^n$$</p>
+        <h2 id="行内公式">行内公式</h2>
+<p>行内公式通常使用<code>$..$</code>来输入，这通常被称为公式环境，例如：若<span
+class="math inline">\(a&gt;0\)</span>,<span
+class="math inline">\(b&gt;0\)</span>，则<span
+class="math inline">\(a+b&gt;0\)</span>. <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">若$a&gt;0$,$b&gt;0$，则$a+b&gt;0$.</span><br></pre></td></tr></table></figure>
+公式环境通常使用特殊字体，并且默认为斜体。需要注意的是，只要是公式，就需要放入公式环境中。如果需要在行内公式中展现出行间公式的效果，可以在前面加入<code>\displaystyle</code>，例如：设<span
+class="math inline">\(\displaystyle\lim_{n\to\infty}x_n=x\)</span>.
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设$\displaystyle\lim_&#123;n\to\infty&#125;x_n=x$.</span><br></pre></td></tr></table></figure> ## 行间公式 行间公式需要用<span
+class="math display">\[..\]</span>来输入，笔者习惯的输入方式如下：若<span
+class="math inline">\(a&gt;0\)</span>, <span
+class="math inline">\(b&gt;0\)</span>, 则 <span class="math display">\[
+a+b&gt;0.
+\]</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">若$a&gt;0$, $b&gt;0$, 则</span><br><span class="line">$$</span><br><span class="line">a+b&gt;0.</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+这种输入方式的一个好处是，这同时也是Markdown的语法。需要注意的是，行间公式也是正文的一部分，需要与正文连贯，并且加入标点符号。
+关于具体的输入方式，可以参考<a
+target="_blank" rel="noopener" href="https://latexlive.com">在线LaTeX公式编辑器-编辑器
+(latexlive.com)</a>，在这里只列举一些需要注意的。</p>
+<h3 id="上下标">上下标</h3>
+<p>上标可以用^输入，例如<code>a^n</code>，效果为 <span
+class="math inline">\(a^n\)</span>；
+下标可以用_来输入，例如<code>a_1</code>，效果为 <span
+class="math inline">\(a_1\)</span>;
+上下标只会读取第一个字符，如果上下标的内容较多的话，需要改成<code>^&#123;&#125;</code>或<code>_&#123;&#125;</code>。</p>
+<h3 id="分式">分式</h3>
+<p>分式可以用来输入，例如<code>\dfrac&#123;a&#125;&#123;b&#125;</code>，效果为 <span
+class="math inline">\(\dfrac{a}{b}\)</span>
+为了在行间、分子、分母或者指数上输入较小的分式，可以改用<code>\frac&#123;&#125;&#123;&#125;</code>，例如<code>a^\frac&#123;1&#125;&#123;n&#125;</code>，效果为
+<span class="math inline">\(a^\frac{1}{n}\)</span></p>
+<h3 id="括号">括号</h3>
+<p>括号可以直接用(..)输入，但是需要注意的是，有时候括号内的内容高度较大，需要改用<code>\left(..\right)</code>。例如<code>\left(1+\dfrac&#123;1&#125;&#123;n&#125;\right)^n</code>，效果是
+<span class="math display">\[\left(1+\dfrac{1}{n}\right)^n\]</span></p>
 <p>在中间需要隔开时，可以用<code>\left(..\middle|..\right)</code>。</p>
-<p>另外，输入大括号<code>&#123;&#125;</code>时需要用<code>\&#123;..\&#125;</code>，其中\起到了转义作用。</p>
-<h3 id="加粗"><a href="#加粗" class="headerlink" title="加粗"></a>加粗</h3><p>对于加粗的公式，建议使用bm宏包，并且用命令\bm{}来加粗，这可以保留公式的斜体。</p>
-<h3 id="大括号"><a href="#大括号" class="headerlink" title="大括号"></a>大括号</h3><p>在这里可以使用cases环境，可以用于分段函数或者方程组，例如<br>$$<br>f(x)&#x3D;\begin{cases}<br>    x, &amp; x&gt;0, \<br>    -x, &amp; x\leq 0.<br>\end{cases}<br>$$</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">f(x)=\begin&#123;cases&#125;</span><br><span class="line">    x, &amp; x&gt;0, \\</span><br><span class="line">    -x, &amp; x\leq 0.</span><br><span class="line">\end&#123;cases&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="多行公式"><a href="#多行公式" class="headerlink" title="多行公式"></a>多行公式</h2><p>多行公式通常使用aligned环境，例如<br>$$<br>\begin{aligned}<br>a &amp; &#x3D;b+c \<br>&amp; &#x3D;d+e<br>\end{aligned}<br>$$</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;aligned&#125;</span><br><span class="line">a &amp; =b+c \\</span><br><span class="line">&amp; =d+e</span><br><span class="line">\end&#123;aligned&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="矩阵和行列式"><a href="#矩阵和行列式" class="headerlink" title="矩阵和行列式"></a>矩阵和行列式</h2><p>矩阵可以用bmatrix环境和pmatrix环境，分别为方括号和圆括号，例如<br>$$<br>\begin{bmatrix}<br>    a &amp; b \<br>    c &amp; d<br>\end{bmatrix}<br>$$</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;bmatrix&#125;</span><br><span class="line">    a &amp; b \\</span><br><span class="line">    c &amp; d</span><br><span class="line">\end&#123;bmatrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-<p>如果要输入行列式的话，可以使用vmatrix环境，用法同上。<br>$$<br>\begin{vmatrix}<br>    a &amp; b \<br>    c &amp; d<br>\end{vmatrix}<br>$$</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;vmatrix&#125;</span><br><span class="line">    a &amp; b \\</span><br><span class="line">    c &amp; d</span><br><span class="line">\end&#123;vmatrix</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
-
-
+<p>另外，输入大括号<code>&#123;&#125;</code>时需要用<code>\&#123;..\&#125;</code>，其中。</p>
+<h3 id="加粗">加粗</h3>
+<p>对于加粗的公式，建议使用bm宏包，并且用命令来加粗，这可以保留公式的斜体。</p>
+<h3 id="大括号">大括号</h3>
+<p>在这里可以使用cases环境，可以用于分段函数或者方程组，例如 <span
+class="math display">\[
+f(x)=\begin{cases}
+    x, &amp; x&gt;0, \\
+    -x, &amp; x\leq 0.
+\end{cases}
+\]</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">f(x)=\begin&#123;cases&#125;</span><br><span class="line">    x, &amp; x&gt;0, \\</span><br><span class="line">    -x, &amp; x\leq 0.</span><br><span class="line">\end&#123;cases&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
+<h2 id="多行公式">多行公式</h2>
+<p>多行公式通常使用aligned环境，例如 <span class="math display">\[
+\begin{aligned}
+a &amp; =b+c \\
+&amp; =d+e
+\end{aligned}
+\]</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;aligned&#125;</span><br><span class="line">a &amp; =b+c \\</span><br><span class="line">&amp; =d+e</span><br><span class="line">\end&#123;aligned&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="矩阵和行列式">矩阵和行列式</h2>
+<p>矩阵可以用bmatrix环境和pmatrix环境，分别为方括号和圆括号，例如 <span
+class="math display">\[
+\begin{bmatrix}
+    a &amp; b \\
+    c &amp; d
+\end{bmatrix}
+\]</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;bmatrix&#125;</span><br><span class="line">    a &amp; b \\</span><br><span class="line">    c &amp; d</span><br><span class="line">\end&#123;bmatrix&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+如果要输入行列式的话，可以使用vmatrix环境，用法同上。 <span
+class="math display">\[
+\begin{vmatrix}
+    a &amp; b \\
+    c &amp; d
+\end{vmatrix}
+\]</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">\begin&#123;vmatrix&#125;</span><br><span class="line">    a &amp; b \\</span><br><span class="line">    c &amp; d</span><br><span class="line">\end&#123;vmatrix</span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
 <p>LaTeX的使用还需要一定的熟练度，仍有时间的读者还可以考虑：</p>
 <ul>
 <li>试着用LaTeX抄几页书籍或者写几页文章，增加熟练度；</li>
@@ -387,7 +425,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E5%85%AC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">行内公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E9%97%B4%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">行间公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="nav-number">2.1.</span> <span class="nav-text">上下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">分式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%AC%E5%8F%B7"><span class="nav-number">2.3.</span> <span class="nav-text">括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E7%B2%97"><span class="nav-number">2.4.</span> <span class="nav-text">加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E6%8B%AC%E5%8F%B7"><span class="nav-number">2.5.</span> <span class="nav-text">大括号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E5%85%AC%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">多行公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%92%8C%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">矩阵和行列式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E5%85%AC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">行内公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">上下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">分式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%AC%E5%8F%B7"><span class="nav-number">1.3.</span> <span class="nav-text">括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E7%B2%97"><span class="nav-number">1.4.</span> <span class="nav-text">加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E6%8B%AC%E5%8F%B7"><span class="nav-number">1.5.</span> <span class="nav-text">大括号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">多行公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%92%8C%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">矩阵和行列式</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -254,20 +254,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="C可变参数函数"><a href="#C可变参数函数" class="headerlink" title="C可变参数函数"></a>C可变参数函数</h1><p>在做操作系统原理的实验时，发现了Linux Manual中有函数的原型定义是这样的：</p>
+        <h1 id="c可变参数函数">C可变参数函数</h1>
+<p>在做操作系统原理的实验时，发现了Linux
+Manual中有函数的原型定义是这样的：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">printf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>可以接受任意个参数，其中 $\cdots$ 表示可变参数列表</p>
+<p>可以接受任意个参数，其中 <span class="math inline">\(\cdots\)</span>
+表示可变参数列表</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span>, ... )</span>  &#123;</span><br><span class="line">   .</span><br><span class="line">   .</span><br><span class="line">   .</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">   func(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">   func(<span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>函数 func() 最后一个参数写成省略号，即三个点号（…），省略号之前的那个参数是 int，代表了要传递的可变参数的总数。</p>
-<p>定义一个函数，最后一个参数为省略号，省略号前面可以设置自定义参数。<br>在函数定义中创建一个 va_list 类型变量，该类型是在 stdarg.h 头文件中定义的。<br>使用 int 参数和 va_start() 宏来初始化 va_list 变量为一个参数列表。宏 va_start() 是在 stdarg.h 头文件中定义的。<br>使用 va_arg() 宏和 va_list 变量来访问参数列表中的每个项。<br>使用宏 va_end() 来清理赋予 va_list 变量的内存。</p>
+<p>函数 func()
+最后一个参数写成省略号，即三个点号（...），省略号之前的那个参数是
+int，代表了要传递的可变参数的总数。</p>
+<p>定义一个函数，最后一个参数为省略号，省略号前面可以设置自定义参数。
+在函数定义中创建一个 va_list 类型变量，该类型是在 stdarg.h
+头文件中定义的。 使用 int 参数和 va_start() 宏来初始化 va_list
+变量为一个参数列表。宏 va_start() 是在 stdarg.h 头文件中定义的。 使用
+va_arg() 宏和 va_list 变量来访问参数列表中的每个项。 使用宏 va_end()
+来清理赋予 va_list 变量的内存。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="type">double</span> <span class="title function_">average</span><span class="params">(<span class="type">int</span> num,...)</span></span><br><span class="line">&#123;</span><br><span class="line"> </span><br><span class="line">    va_list valist;</span><br><span class="line">    <span class="type">double</span> sum = <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* 为 num 个参数初始化 valist */</span></span><br><span class="line">    va_start(valist, num);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* 访问所有赋给 valist 的参数 */</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">       sum += va_arg(valist, <span class="type">int</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 清理为 valist 保留的内存 */</span></span><br><span class="line">    va_end(valist);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> sum/num;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;Average of 2, 3, 4, 5 = %f\n&quot;</span>, average(<span class="number">4</span>, <span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;Average of 5, 10, 15 = %f\n&quot;</span>, average(<span class="number">3</span>, <span class="number">5</span>,<span class="number">10</span>,<span class="number">15</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>va_start(ap, last_arg)：初始化可变参数列表。ap 是一个 va_list 类型的变量，last_arg 是最后一个固定参数的名称（也就是可变参数列表之前的参数）。该宏将 ap 指向可变参数列表中的第一个参数。</li>
-<li>va_arg(ap, type)：获取可变参数列表中的下一个参数。ap 是一个 va_list 类型的变量，type 是下一个参数的类型。该宏返回类型为 type 的值，并将 ap 指向下一个参数。</li>
-<li>va_end(ap)：结束可变参数列表的访问。ap 是一个 va_list 类型的变量。该宏将 ap 置为 NULL。</li>
+<li>va_start(ap, last_arg)：初始化可变参数列表。ap 是一个 va_list
+类型的变量，last_arg
+是最后一个固定参数的名称（也就是可变参数列表之前的参数）。该宏将 ap
+指向可变参数列表中的第一个参数。</li>
+<li>va_arg(ap, type)：获取可变参数列表中的下一个参数。ap 是一个 va_list
+类型的变量，type 是下一个参数的类型。该宏返回类型为 type 的值，并将 ap
+指向下一个参数。</li>
+<li>va_end(ap)：结束可变参数列表的访问。ap 是一个 va_list
+类型的变量。该宏将 ap 置为 NULL。</li>
 </ul>
 <p>没用过，你们下次试试。</p>
 
@@ -370,7 +383,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">C可变参数函数</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#c%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">C可变参数函数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

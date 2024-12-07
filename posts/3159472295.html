@@ -255,18 +255,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Virtualbox 7.0.20 r163906 (Qt5.15.2)</p>
+        <h2 id="环境">环境</h2>
+<p>Virtualbox 7.0.20 r163906 (Qt5.15.2)</p>
 <p>Ubuntu-18.04.6 desktop</p>
-<h2 id="乱码的原因"><a href="#乱码的原因" class="headerlink" title="乱码的原因"></a>乱码的原因</h2><p>主要是因为<code>/ect/default</code>文件中的字符描述错误了，导致了顶部日期乱码与终端无法打开</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>首先图形界面无法使用命令行，需要切换到TTY终端，<code>Ctrl+Alt+F3</code>可以直接切换到TTY，完成修复或者中途需要退回可以使用<code>Ctrl+Alt+F1</code>。</p>
+<h2 id="乱码的原因">乱码的原因</h2>
+<p>主要是因为<code>/ect/default</code>文件中的字符描述错误了，导致了顶部日期乱码与终端无法打开</p>
+<h2 id="解决方法">解决方法</h2>
+<p>首先图形界面无法使用命令行，需要切换到TTY终端，<code>Ctrl+Alt+F3</code>可以直接切换到TTY，完成修复或者中途需要退回可以使用<code>Ctrl+Alt+F1</code>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/default</span><br><span class="line"><span class="built_in">sudo</span> nano locale</span><br><span class="line"><span class="comment"># 或者可以使用vim，看你虚拟机里有没有安装</span></span><br><span class="line"><span class="comment"># sudo vim locale </span></span><br><span class="line"><span class="comment"># 在控制台中把文件中的&quot;en-US&quot;改为&quot;en-US.UTF-8&quot; （我修改了两处）</span></span><br><span class="line"><span class="comment"># 保存退出，不会的查一下vim和nano的使用教程，简单看一下如何保存文件就好</span></span><br><span class="line"><span class="built_in">sudo</span> locale-gen --purge</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-
 <p>执行完<code>reboot</code>以后，虚拟机自动重启</p>
-<p>如果执行上面命令的时候，提示你的用户没有在sudoers中 <code>xxx is not in the sudoers</code></p>
+<p>如果执行上面命令的时候，提示你的用户没有在sudoers中
+<code>xxx is not in the sudoers</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su root</span><br><span class="line"><span class="comment"># 输入你设置的密码</span></span><br><span class="line">gedit /etc/sudoers</span><br><span class="line"><span class="comment"># 这是图形化编辑器，找到“root ALL=(ALL) ALL”，在下面插入“vboxuser ALL=(ALL) ALL”</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># 然后再次执行sudo指令就可以了</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 或者直接在TTY中输入root作为你的登录账户进行文件修改</span></span><br></pre></td></tr></table></figure>
-
 
     </div>
 
