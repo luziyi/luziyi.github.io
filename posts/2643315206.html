@@ -21,15 +21,15 @@
     var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="基本概念： 1、完全二叉树：若二叉树的深度为h，则除第h层外，其他层的结点全部达到最大值，且第h层的所有结点都集中在左子树。 2、满二叉树：满二叉树是一种特殊的的完全二叉树，所有层的结点都是最大值。 什么是堆？ 堆（英语：heap)是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵树的数组对象。堆总是满足下列性质：  堆中某个节点的值总是不大于或不小于其父节点的值；">
+  <meta name="description" content="本文介绍了堆的基本概念、性质、插入、删除操作，并给出了最大堆的构造过程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构堆(Heap)详解">
 <meta property="og:url" content="https://tommygong.top/posts/2643315206.html">
 <meta property="og:site_name" content="うずまきナルト">
-<meta property="og:description" content="基本概念： 1、完全二叉树：若二叉树的深度为h，则除第h层外，其他层的结点全部达到最大值，且第h层的所有结点都集中在左子树。 2、满二叉树：满二叉树是一种特殊的的完全二叉树，所有层的结点都是最大值。 什么是堆？ 堆（英语：heap)是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵树的数组对象。堆总是满足下列性质：  堆中某个节点的值总是不大于或不小于其父节点的值；">
+<meta property="og:description" content="本文介绍了堆的基本概念、性质、插入、删除操作，并给出了最大堆的构造过程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-12T08:00:17.000Z">
-<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:modified_time" content="2024-12-07T06:43:16.000Z">
 <meta property="article:author" content="うずまきナルト">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="堆">
@@ -231,10 +231,11 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+                <time title="修改时间：2024-12-07 14:43:16" itemprop="dateModified" datetime="2024-12-07T14:43:16+08:00">2024-12-07</time>
               </span>
 
           
+            <div class="post-description">本文介绍了堆的基本概念、性质、插入、删除操作，并给出了最大堆的构造过程。</div>
 
         </div>
       </header>
@@ -255,7 +256,10 @@
 <li><p>堆总是一棵完全二叉树。</p></li>
 </ul>
 <p>将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。常见的堆有二叉堆、斐波那契堆等。</p>
-<pre><code>       ![](https://i-blog.csdnimg.cn/blog_migrate/e4ecb1a8ef4456d88da12d8d472dcb81.png)![](https://i-blog.csdnimg.cn/blog_migrate/5ef19d242f141a1218580547e52f404d.png)</code></pre>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/image-20241207144217704.png" /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/image-20241207144233647.png" /></p>
 <p>堆是非线性数据结构，相当于一维数组，有两个直接后继。</p>
 <p>堆的定义如下：n个元素的序列{k1,k2,ki,…,kn}当且仅当满足下关系时，称之为堆。</p>
 <p>(ki &lt;= k2i,ki &lt;= k2i+1)或者(ki &gt;= k2i,ki &gt;= k2i+1), (i =
@@ -268,53 +272,53 @@ i/2，其左子节点的下标为 i*2，其右子节点的下标为i*2+1；</str
 <p>我们通过一个插入例子来看看插入操作的细节。我们将数字 <code>16</code>
 插入到这个堆中：</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\f5e2bd8c5cd23174ea4733b3de9bed13.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/f5e2bd8c5cd23174ea4733b3de9bed13.png" /></p>
 <p>堆的数组是： <code>[ 10, 7, 2, 5, 1 ]</code>。</p>
 <p>第一步是将新的元素插入到数组的尾部，数组变成：[ 10, 7, 2, 5, 1, 16
 ]；</p>
 <p>相应的树变成了：</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\476b7bea162959303bc60f29887f7d88.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/476b7bea162959303bc60f29887f7d88.png" /></p>
 <p><code>16</code> 被添加最后一行的第一个空位。</p>
 <p>不行的是，现在堆属性不满足，因为 <code>2</code> 在 <code>16</code>
 的上面，我们需要将大的数字在上面（这是一个最大堆）</p>
 <p>为了恢复堆属性，我们需要交换 <code>16</code> 和 <code>2</code>。</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\b01e2fe15b0746e37648947e3dc52efe.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/b01e2fe15b0746e37648947e3dc52efe.png" /></p>
 <p>现在还没有完成，因为 <code>10</code> 也比 <code>16</code>
 小。我们继续交换我们的插入元素和它的父节点，直到它的父节点比它大或者我们到达树的顶部。这就是所谓的
 <strong>shift-up</strong>，每一次插入操作后都需要进行。它将一个太大或者太小的数字“浮起”到树的顶部。</p>
 <p>最后我们得到的堆：</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\c4f062e9f353b77e73fa694bab67aac9.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/c4f062e9f353b77e73fa694bab67aac9.png" /></p>
 <p>现在每一个父节点都比它的子节点大。</p>
 <h2 id="堆的删除">堆的删除：</h2>
 <p>堆中每次都只能删除堆顶元素。为了便于重建堆，实际的操作是将最后一个数据的值赋给根结点，然后再从根结点开始进行一次从上向下的调整。调整时先在左右子结点中找最小的，如果父结点比这个最小的子结点还小说明不需要调整了，反之将父结点和它交换后再考虑后面的结点。相当于根结点数据的“下沉”过程。</p>
 <p>我们将这个树中的 <code>(10)</code> 删除：</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\3b1843281df1093f2f51e695a6a22134.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/3b1843281df1093f2f51e695a6a22134.png" /></p>
 <p>现在顶部有一个空的节点，怎么处理？</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\a73d1b9388cf6190e3965df91c93e314.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/a73d1b9388cf6190e3965df91c93e314.png" /></p>
 <p>当插入节点的时候，我们将新的值返给数组的尾部。现在我们来做相反的事情：我们取出数组中的最后一个元素，将它放到树的顶部，然后再修复堆属性。</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\48773339bf25b99d8c17a14c3a9655fc.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/48773339bf25b99d8c17a14c3a9655fc.png" /></p>
 <p>现在来看怎么 <strong>shift-down</strong>
 <code>(1)</code>。为了保持最大堆的堆属性，我们需要树的顶部是最大的数据。现在有两个数字可用于交换
 <code>7</code> 和
 <code>2</code>。我们选择这两者中的较大者称为最大值放在树的顶部，所以交换
 <code>7</code> 和 <code>1</code>，现在树变成了：</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\7de49e3f8841aa1d9d7f6c865e316f86.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/7de49e3f8841aa1d9d7f6c865e316f86.png" /></p>
 <p>继续堆化直到该节点没有任何子节点或者它比两个子节点都要大为止。对于我们的堆，我们只需要再有一次交换就恢复了堆属性：</p>
 <p><img
-src="E:\Github\image\数据结构堆(Heap)详解\b8d775a60047391847a4be533697c7d0.png" /></p>
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/b8d775a60047391847a4be533697c7d0.png" /></p>
 <h2 id="最大堆">最大堆：</h2>
 <h4 id="构造最大堆">1，构造最大堆</h4>
 <p>原始数据为a[] = {4, 1, 3, 2, 16, 9, 10, 14, 8,
-7}，采用顺序存储方式，对应的完全二叉树如下图所示：<br />
-<img
-src="E:\Github\image\数据结构堆(Heap)详解\bd6125df0507026075d897a710a5acd0.png" /></p>
+7}，采用顺序存储方式，对应的完全二叉树如下图所示：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/bd6125df0507026075d897a710a5acd0.png" /></p>
 <p><strong>基本思想</strong>：<br />
 首先将每个叶子节点视为一个堆，再将每个叶子节点与其父节点一起构造成一个包含更多节点的对。所以，在构造堆的时候，首先需要找到最后一个节点的父节点，从这个节点开始构造最大堆；直到该节点前面所有分支节点都处理完毕，这样最大堆就构造完毕了。<br />
 <em>假设树的节点个数为n，以1为下标开始编号，直到n结束。对于节点i，其父节点为i/2；左孩子节点为i*2，右孩子节点为i*2+1。最后一个节点的下标为n，其父节点的下标为n/2。</em><br />
