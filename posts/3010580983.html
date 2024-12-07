@@ -29,7 +29,7 @@
 <meta property="og:description" content="计算机组成与体系结构复习记录">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-04T12:13:58.000Z">
-<meta property="article:modified_time" content="2024-12-07T05:02:34.000Z">
+<meta property="article:modified_time" content="2024-12-07T12:55:50.000Z">
 <meta property="article:author" content="うずまきナルト">
 <meta property="article:tag" content="计算机组成与体系结构">
 <meta name="twitter:card" content="summary">
@@ -230,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-12-07 13:02:34" itemprop="dateModified" datetime="2024-12-07T13:02:34+08:00">2024-12-07</time>
+                <time title="修改时间：2024-12-07 20:55:50" itemprop="dateModified" datetime="2024-12-07T20:55:50+08:00">2024-12-07</time>
               </span>
 
           
@@ -417,6 +417,43 @@ src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%
 alt="动画3" />
 <figcaption aria-hidden="true">动画3</figcaption>
 </figure>
+<h3 id="虚拟索引虚拟标记vivt">虚拟索引虚拟标记（VIVT）</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/image-20241207204819592.png" /></p>
+<p>优点：
+不需要每次访存的时候把虚拟地址经过MMU转换为物理地址缩短了访存关键路径，
+提升了频率， 提升了Cache访问速度</p>
+<p>缺点： 即使Cache命中，也需要访问并更新TLB（两者可以并行）
+进程切换需要冲刷Cache，或者增加PID（进程ID）位 歧义问题（ambiguity）
+别名问题（alias）</p>
+<p>歧义问题： 相同的虚拟地址映射到不同的物理地址
+假设A进程的虚拟地址0x4000映射物理地址0x2000，B进程的虚拟地址0x4000映射物理地址0x3000。A进程切换到B进程，导致0x4000地址访问命中，而对应的是物理地址0x2000中的数据，从而出现错误
+解决方案：冲刷（flush）Cache（使用专门的Cache指令，例如MIPS中的Cache），保证切换后的进程不会错误的命中上一个进程的缓存数据</p>
+<p>别名问题：
+不同的虚拟地址映射到相同的物理地址，例如进程间通信假设虚拟地址0x2000和0x4000都映射到相同的物理地址0x3000，其中虚拟地址中的[15…4]位作为index，此时同一物理地址数据被加载到不同的Cache
+Line，容易破坏数据一致性。</p>
+<h3 id="物理索引物理标记">物理索引物理标记</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/image-20241207204925506.png" /></p>
+<p>从虚拟地址中抽取index查找Cache，从物理地址中抽取tag进行比较
+Cache的查找和物理地址的转换同时进行，性能优于PIPT
+不存在歧义问题，但依然存在别名问题。</p>
+<h3 id="vipt中的别名问题">VIPT中的别名问题</h3>
+<p>直接映射：当Cache容量不大于页大小时，将不会产生别名问题
+组相联：当Cache中一路的容量不大于页大小时，将不会产生别名问题
+此时，index位于页偏移之中，虚拟地址和物理地址对应的index相同
+VIPT相当于PIPT</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241207205415587.png"
+alt="image-20241207205415587" />
+<figcaption aria-hidden="true">image-20241207205415587</figcaption>
+</figure>
+<p>解决方案1：提高相联度，将索引index控制在page offset字段范围之内
+解决方案2：使用大页，将索引index控制在page offset字段范围之内
+解决方案3：调整虚实映射，避免相同物理地址数据加载到不同Cache行对于直接相联，在建立共享映射的时候，虚拟地址都是按照Cache大小对齐对于组相联，在建立共享映射的时候，虚拟地址都是按照一路Cache大小对齐
+解决方案4：但满足不了将索引VA的index控制在page
+offset字段范围之内时，需要操作系统提供支持，即Page Color功能。</p>
 
     </div>
 
@@ -514,7 +551,7 @@ alt="动画3" />
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mips%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">MIPS指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">一、计算机的寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%93%8D%E4%BD%9C%E7%A0%81%E7%BC%96%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">二、操作码编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89mips%E7%9A%84%E6%8C%87%E4%BB%A4%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA3%E7%A7%8D%E6%93%8D%E4%BD%9C%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">三、MIPS的指令可以分为3种操作类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.</span> <span class="nav-text">跳转指令寻址：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">伪直接寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.2.</span> <span class="nav-text">PC相对寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%92%8C%E4%B8%AD%E6%96%AD"><span class="nav-number">1.5.</span> <span class="nav-text">异常和中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.</span> <span class="nav-text">Cache映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.1.</span> <span class="nav-text">直接映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E7%9B%B8%E8%81%94%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.2.</span> <span class="nav-text">全相联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#n%E8%B7%AF%E7%BB%84%E7%9B%B8%E8%81%94%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.3.</span> <span class="nav-text">N路组相联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E7%BB%93%E6%9E%84%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.7.</span> <span class="nav-text">Cache结构的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E5%9D%97%E6%9B%BF%E6%8D%A2%E7%AD%96%E7%95%A5"><span class="nav-number">1.8.</span> <span class="nav-text">Cache块替换策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lru"><span class="nav-number">1.8.1.</span> <span class="nav-text">LRU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E5%86%99%E5%91%BD%E4%B8%AD%E7%AD%96%E7%95%A5"><span class="nav-number">1.9.</span> <span class="nav-text">Cache写命中策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E7%9B%B4%E8%BE%BE"><span class="nav-number">1.9.1.</span> <span class="nav-text">写直达</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9B%9E"><span class="nav-number">1.9.2.</span> <span class="nav-text">写回</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%88%86%E9%85%8D"><span class="nav-number">1.9.3.</span> <span class="nav-text">写分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E4%B8%8D%E5%88%86%E9%85%8D"><span class="nav-number">1.9.4.</span> <span class="nav-text">写不分配</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mips%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">MIPS指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">一、计算机的寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%93%8D%E4%BD%9C%E7%A0%81%E7%BC%96%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">二、操作码编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89mips%E7%9A%84%E6%8C%87%E4%BB%A4%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA3%E7%A7%8D%E6%93%8D%E4%BD%9C%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">三、MIPS的指令可以分为3种操作类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.</span> <span class="nav-text">跳转指令寻址：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">伪直接寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.2.</span> <span class="nav-text">PC相对寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%92%8C%E4%B8%AD%E6%96%AD"><span class="nav-number">1.5.</span> <span class="nav-text">异常和中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.</span> <span class="nav-text">Cache映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.1.</span> <span class="nav-text">直接映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E7%9B%B8%E8%81%94%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.2.</span> <span class="nav-text">全相联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#n%E8%B7%AF%E7%BB%84%E7%9B%B8%E8%81%94%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.3.</span> <span class="nav-text">N路组相联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E7%BB%93%E6%9E%84%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.7.</span> <span class="nav-text">Cache结构的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E5%9D%97%E6%9B%BF%E6%8D%A2%E7%AD%96%E7%95%A5"><span class="nav-number">1.8.</span> <span class="nav-text">Cache块替换策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lru"><span class="nav-number">1.8.1.</span> <span class="nav-text">LRU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E5%86%99%E5%91%BD%E4%B8%AD%E7%AD%96%E7%95%A5"><span class="nav-number">1.9.</span> <span class="nav-text">Cache写命中策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E7%9B%B4%E8%BE%BE"><span class="nav-number">1.9.1.</span> <span class="nav-text">写直达</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9B%9E"><span class="nav-number">1.9.2.</span> <span class="nav-text">写回</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%88%86%E9%85%8D"><span class="nav-number">1.9.3.</span> <span class="nav-text">写分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E4%B8%8D%E5%88%86%E9%85%8D"><span class="nav-number">1.9.4.</span> <span class="nav-text">写不分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%B4%A2%E5%BC%95%E8%99%9A%E6%8B%9F%E6%A0%87%E8%AE%B0vivt"><span class="nav-number">1.9.5.</span> <span class="nav-text">虚拟索引虚拟标记（VIVT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E7%B4%A2%E5%BC%95%E7%89%A9%E7%90%86%E6%A0%87%E8%AE%B0"><span class="nav-number">1.9.6.</span> <span class="nav-text">物理索引物理标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vipt%E4%B8%AD%E7%9A%84%E5%88%AB%E5%90%8D%E9%97%AE%E9%A2%98"><span class="nav-number">1.9.7.</span> <span class="nav-text">VIPT中的别名问题</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
