@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="环境Virtualbox 7.0.20 r163906 (Qt5.15.2) Ubuntu-18.04.6 desktop 一、配置共享文件夹 在VirtualBox中，选中Ubuntu 16.04虚拟机，点击“设置”按钮。 在左侧菜单中选择“共享文件夹”，点击右侧的“添加共享文件夹”按钮。 在弹出的对话框中，设置共享文件夹的名称、路径以及访问权限。 完成设置后，点击“确定”保存配置。  二、在U">
+  <meta name="description" content="环境 Virtualbox 7.0.20 r163906 (Qt5.15.2) Ubuntu-18.04.6 desktop 一、配置共享文件夹  在VirtualBox中，选中Ubuntu 16.04虚拟机，点击“设置”按钮。 在左侧菜单中选择“共享文件夹”，点击右侧的“添加共享文件夹”按钮。 在弹出的对话框中，设置共享文件夹的名称、路径以及访问权限。 完成设置后，点击“确定”保">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Virtualbox设置共享文件夹（Ubuntu）">
 <meta property="og:url" content="https://tommygong.top/posts/2319536131.html">
 <meta property="og:site_name" content="うずまきナルト">
-<meta property="og:description" content="环境Virtualbox 7.0.20 r163906 (Qt5.15.2) Ubuntu-18.04.6 desktop 一、配置共享文件夹 在VirtualBox中，选中Ubuntu 16.04虚拟机，点击“设置”按钮。 在左侧菜单中选择“共享文件夹”，点击右侧的“添加共享文件夹”按钮。 在弹出的对话框中，设置共享文件夹的名称、路径以及访问权限。 完成设置后，点击“确定”保存配置。  二、在U">
+<meta property="og:description" content="环境 Virtualbox 7.0.20 r163906 (Qt5.15.2) Ubuntu-18.04.6 desktop 一、配置共享文件夹  在VirtualBox中，选中Ubuntu 16.04虚拟机，点击“设置”按钮。 在左侧菜单中选择“共享文件夹”，点击右侧的“添加共享文件夹”按钮。 在弹出的对话框中，设置共享文件夹的名称、路径以及访问权限。 完成设置后，点击“确定”保">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-02T03:03:55.000Z">
 <meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
@@ -270,27 +270,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Virtualbox 7.0.20 r163906 (Qt5.15.2)</p>
+        <h2 id="环境">环境</h2>
+<p>Virtualbox 7.0.20 r163906 (Qt5.15.2)</p>
 <p>Ubuntu-18.04.6 desktop</p>
-<h2 id="一、配置共享文件夹"><a href="#一、配置共享文件夹" class="headerlink" title="一、配置共享文件夹"></a>一、配置共享文件夹</h2><ol>
+<h2 id="一配置共享文件夹">一、配置共享文件夹</h2>
+<ol type="1">
 <li>在VirtualBox中，选中Ubuntu 16.04虚拟机，点击“设置”按钮。</li>
 <li>在左侧菜单中选择“共享文件夹”，点击右侧的“添加共享文件夹”按钮。</li>
 <li>在弹出的对话框中，设置共享文件夹的名称、路径以及访问权限。</li>
 <li>完成设置后，点击“确定”保存配置。</li>
 </ol>
-<h2 id="二、在Ubuntu虚拟机中挂载共享文件夹"><a href="#二、在Ubuntu虚拟机中挂载共享文件夹" class="headerlink" title="二、在Ubuntu虚拟机中挂载共享文件夹"></a>二、在Ubuntu虚拟机中挂载共享文件夹</h2><ol>
-<li><p>打开终端，以root用户登录。</p>
-</li>
+<h2
+id="二在ubuntu虚拟机中挂载共享文件夹">二、在Ubuntu虚拟机中挂载共享文件夹</h2>
+<ol type="1">
+<li><p>打开终端，以root用户登录。</p></li>
 <li><p>创建一个目录，用于挂载共享文件夹。例如，我们可以创建一个名为“shared”的目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /mnt/shared</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /mnt/shared</span><br></pre></td></tr></table></figure></li>
 <li><p>使用<code>mount</code>命令将共享文件夹挂载到该目录：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t vboxsf [共享文件夹名称] /mnt/shared</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>[共享文件夹名称]</code>是我们在VirtualBox中设置的共享文件夹名称。</p>
-</li>
-<li><p>现在，我们就可以在<code>/mnt/shared</code>目录下访问Windows宿主机上的共享文件夹了。</p>
-</li>
+<p>其中，<code>[共享文件夹名称]</code>是我们在VirtualBox中设置的共享文件夹名称。</p></li>
+<li><p>现在，我们就可以在<code>/mnt/shared</code>目录下访问Windows宿主机上的共享文件夹了。</p></li>
 </ol>
 
     </div>
@@ -394,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.</span> <span class="nav-text">一、配置共享文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9C%A8Ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E6%8C%82%E8%BD%BD%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">3.</span> <span class="nav-text">二、在Ubuntu虚拟机中挂载共享文件夹</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.</span> <span class="nav-text">一、配置共享文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%9C%A8ubuntu%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E6%8C%82%E8%BD%BD%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">3.</span> <span class="nav-text">二、在Ubuntu虚拟机中挂载共享文件夹</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

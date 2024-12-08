@@ -1196,7 +1196,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d9ffff;
+  background: #d1ffb4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1286,11 +1286,11 @@ pre .javascript .function {
   color: #f5f5f5;
 }
 .sidebar-nav .sidebar-nav-active {
-  border-bottom-color: #87daff;
-  color: #87daff;
+  border-bottom-color: #ff2a2a;
+  color: #ff2a2a;
 }
 .sidebar-nav .sidebar-nav-active:hover {
-  color: #87daff;
+  color: #ff2a2a;
 }
 .sidebar-panel {
   display: none;
@@ -1319,7 +1319,7 @@ pre .javascript .function {
   }
 }
 .sidebar-toggle:hover .toggle-line {
-  background: #87daff;
+  background: #ff2a2a;
 }
 .post-toc {
   font-size: 0.875em;
@@ -1358,14 +1358,14 @@ pre .javascript .function {
   display: block;
 }
 .post-toc .nav .active > a {
-  border-bottom-color: #87daff;
-  color: #87daff;
+  border-bottom-color: #ff2a2a;
+  color: #ff2a2a;
 }
 .post-toc .nav .active-current > a {
-  color: #87daff;
+  color: #ff2a2a;
 }
 .post-toc .nav .active-current > a:hover {
-  color: #87daff;
+  color: #ff2a2a;
 }
 .site-state {
   display: flex;
@@ -1528,7 +1528,7 @@ pre .javascript .function {
   display: none;
 }
 .back-to-top:hover {
-  color: #87daff;
+  color: #ff2a2a;
 }
 .back-to-top.back-to-top-on {
   bottom: 19px;
@@ -1538,6 +1538,16 @@ pre .javascript .function {
     left: 20px;
     opacity: 0.8;
   }
+}
+.reading-progress-bar {
+  background: #d81b30;
+  display: block;
+  height: 3px;
+  left: 0;
+  position: fixed;
+  width: 0;
+  z-index: 1500;
+  top: 0;
 }
 .post-body {
   font-family: 'Noto Serif SC', "PingFang SC", "Microsoft YaHei", sans-serif;

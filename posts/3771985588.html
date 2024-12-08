@@ -28,27 +28,11 @@
 <meta property="og:site_name" content="うずまきナルト">
 <meta property="og:description" content="C++一共有 18个优先级，运算中按优先级进行性计算，当优先级相同时，根据结合性规则来决定。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250132292.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250141830.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250145920.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250152405.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250156314.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250163038.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250168606.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250173087.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250178096.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250182373.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250186826.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250193964.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250199706.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250203048.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250206228.png">
 <meta property="article:published_time" content="2023-04-23T11:38:09.000Z">
 <meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
 <meta property="article:author" content="うずまきナルト">
 <meta property="article:tag" content="CPP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250132292.png">
 
 <link rel="canonical" href="https://tommygong.top/posts/3771985588.html">
 
@@ -285,25 +269,61 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>C++一共有 18个优先级，运算中按优先级进行性计算，当优先级相同时，根据结合性规则来决定。<br>结合性：<br>1.从左到右（L-R）：操作数和操作符结合的顺序大部分是从左到右结合性的，例如（）、单独的算术运算符<br>2.从右到左（R-L）：最典型的是赋值运算符，当赋值符号与算术运算符结合后 ，整体也是R-L。另一个最常用的就是逻辑非运算符 “！”。</p>
+        <p>C++一共有
+18个优先级，运算中按优先级进行性计算，当优先级相同时，根据结合性规则来决定。
+结合性：
+1.从左到右（L-R）：操作数和操作符结合的顺序大部分是从左到右结合性的，例如（）、单独的算术运算符
+2.从右到左（R-L）：最典型的是赋值运算符，当赋值符号与算术运算符结合后
+，整体也是R-L。另一个最常用的就是逻辑非运算符 “！”。</p>
 <span id="more"></span>
-
-<p><strong>在使用的时候，如果不确定，或者运算符太多，就按照自己的思路用括号隔开。<br>因为在程序中，正确性&gt;可读性&gt;简洁性，万万不可本末倒置</strong></p>
-<h1 id="优先级1"><a href="#优先级1" class="headerlink" title="优先级1"></a>优先级1</h1><p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250132292.png"></p>
-<h1 id="优先级2"><a href="#优先级2" class="headerlink" title="优先级2"></a>优先级2</h1><p>平时常用的最高优先级操作符是从左向右结合的一批操作符，操作数和操作符结合的顺序是从左到右。包括：函数调用、数组下标、取成员、类型转换、后置运算符等。<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250141830.png"></p>
-<h1 id="优先级3"><a href="#优先级3" class="headerlink" title="优先级3"></a>优先级3</h1><p>此优先级都是一元运算符（单目运算符），从右向做结合。<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250145920.png"></p>
-<h1 id="优先级4"><a href="#优先级4" class="headerlink" title="优先级4"></a>优先级4</h1><p>类成员指针运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250152405.png"></p>
-<h1 id="优先级5"><a href="#优先级5" class="headerlink" title="优先级5"></a>优先级5</h1><p>算术运算符中的乘(*)、除(&#x2F;)、取余(%)<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250156314.png"></p>
-<h1 id="优先级6"><a href="#优先级6" class="headerlink" title="优先级6"></a>优先级6</h1><p>算术运算符中的加、减<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250163038.png"></p>
-<h1 id="优先级7"><a href="#优先级7" class="headerlink" title="优先级7"></a>优先级7</h1><p>移位运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250168606.png"></p>
-<h1 id="优先级8"><a href="#优先级8" class="headerlink" title="优先级8"></a>优先级8</h1><p>比较运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250173087.png"></p>
-<h1 id="优先级9"><a href="#优先级9" class="headerlink" title="优先级9"></a>优先级9</h1><p>比较运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250178096.png"></p>
-<h1 id="优先级10、11、12"><a href="#优先级10、11、12" class="headerlink" title="优先级10、11、12"></a>优先级10、11、12</h1><p>按位运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250182373.png"></p>
-<h1 id="优先级13、14"><a href="#优先级13、14" class="headerlink" title="优先级13、14"></a>优先级13、14</h1><p>逻辑运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250186826.png"></p>
-<h1 id="优先级15"><a href="#优先级15" class="headerlink" title="优先级15"></a>优先级15</h1><p>三目条件运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250193964.png"></p>
-<h1 id="优先级16"><a href="#优先级16" class="headerlink" title="优先级16"></a>优先级16</h1><p>赋值运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250199706.png"></p>
-<h1 id="优先级17"><a href="#优先级17" class="headerlink" title="优先级17"></a>优先级17</h1><p><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250203048.png"></p>
-<h1 id="优先级18"><a href="#优先级18" class="headerlink" title="优先级18"></a>优先级18</h1><p>逗号运算符<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250206228.png"></p>
+<p><strong>在使用的时候，如果不确定，或者运算符太多，就按照自己的思路用括号隔开。
+因为在程序中，正确性&gt;可读性&gt;简洁性，万万不可本末倒置</strong></p>
+<h1 id="优先级1">优先级1</h1>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250132292.png" /></p>
+<h1 id="优先级2">优先级2</h1>
+<p>平时常用的最高优先级操作符是从左向右结合的一批操作符，操作数和操作符结合的顺序是从左到右。包括：函数调用、数组下标、取成员、类型转换、后置运算符等。
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250141830.png" /></p>
+<h1 id="优先级3">优先级3</h1>
+<p>此优先级都是一元运算符（单目运算符），从右向做结合。 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250145920.png" /></p>
+<h1 id="优先级4">优先级4</h1>
+<p>类成员指针运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250152405.png" /></p>
+<h1 id="优先级5">优先级5</h1>
+<p>算术运算符中的乘(*)、除(/)、取余(%) <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250156314.png" /></p>
+<h1 id="优先级6">优先级6</h1>
+<p>算术运算符中的加、减 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250163038.png" /></p>
+<h1 id="优先级7">优先级7</h1>
+<p>移位运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250168606.png" /></p>
+<h1 id="优先级8">优先级8</h1>
+<p>比较运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250173087.png" /></p>
+<h1 id="优先级9">优先级9</h1>
+<p>比较运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250178096.png" /></p>
+<h1 id="优先级101112">优先级10、11、12</h1>
+<p>按位运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250182373.png" /></p>
+<h1 id="优先级1314">优先级13、14</h1>
+<p>逻辑运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250186826.png" /></p>
+<h1 id="优先级15">优先级15</h1>
+<p>三目条件运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250193964.png" /></p>
+<h1 id="优先级16">优先级16</h1>
+<p>赋值运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250199706.png" /></p>
+<h1 id="优先级17">优先级17</h1>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250203048.png" /></p>
+<h1 id="优先级18">优先级18</h1>
+<p>逗号运算符 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/1682250206228.png" /></p>
 
     </div>
 
@@ -404,7 +424,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A71"><span class="nav-number">1.</span> <span class="nav-text">优先级1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A72"><span class="nav-number">2.</span> <span class="nav-text">优先级2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A73"><span class="nav-number">3.</span> <span class="nav-text">优先级3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A74"><span class="nav-number">4.</span> <span class="nav-text">优先级4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A75"><span class="nav-number">5.</span> <span class="nav-text">优先级5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A76"><span class="nav-number">6.</span> <span class="nav-text">优先级6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A77"><span class="nav-number">7.</span> <span class="nav-text">优先级7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A78"><span class="nav-number">8.</span> <span class="nav-text">优先级8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A79"><span class="nav-number">9.</span> <span class="nav-text">优先级9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A710%E3%80%8111%E3%80%8112"><span class="nav-number">10.</span> <span class="nav-text">优先级10、11、12</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A713%E3%80%8114"><span class="nav-number">11.</span> <span class="nav-text">优先级13、14</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A715"><span class="nav-number">12.</span> <span class="nav-text">优先级15</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A716"><span class="nav-number">13.</span> <span class="nav-text">优先级16</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A717"><span class="nav-number">14.</span> <span class="nav-text">优先级17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A718"><span class="nav-number">15.</span> <span class="nav-text">优先级18</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A71"><span class="nav-number">1.</span> <span class="nav-text">优先级1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A72"><span class="nav-number">2.</span> <span class="nav-text">优先级2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A73"><span class="nav-number">3.</span> <span class="nav-text">优先级3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A74"><span class="nav-number">4.</span> <span class="nav-text">优先级4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A75"><span class="nav-number">5.</span> <span class="nav-text">优先级5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A76"><span class="nav-number">6.</span> <span class="nav-text">优先级6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A77"><span class="nav-number">7.</span> <span class="nav-text">优先级7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A78"><span class="nav-number">8.</span> <span class="nav-text">优先级8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A79"><span class="nav-number">9.</span> <span class="nav-text">优先级9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7101112"><span class="nav-number">10.</span> <span class="nav-text">优先级10、11、12</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A71314"><span class="nav-number">11.</span> <span class="nav-text">优先级13、14</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A715"><span class="nav-number">12.</span> <span class="nav-text">优先级15</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A716"><span class="nav-number">13.</span> <span class="nav-text">优先级16</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A717"><span class="nav-number">14.</span> <span class="nav-text">优先级17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A718"><span class="nav-number">15.</span> <span class="nav-text">优先级18</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
