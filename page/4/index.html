@@ -183,6 +183,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -239,7 +240,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -320,7 +335,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -401,7 +430,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>410</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -482,7 +525,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -493,79 +550,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="指向常量的指针">指向常量的指针</h1>
-<p>指向常量的指针，即
-<code>pointer to const</code>，即指针指向的是一个常量，你应该把这个词（指向常量的指针）当做一个整体来理解，而不是分开。（当然也有翻译成指针常量的，但我并不喜欢这种翻译方式）
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通常也将指针本身是一个常量称为顶层 const，将指针所指的对象是个常量称为底层 const</span><br></pre></td></tr></table></figure></p>
-<p>它的语法格式是 <code>const</code> 在 *
-左边，这一点很重要，因为后面要讲的常量指针是 <code>const</code> 在 *
-的右边。下面是它的基本语法格式</p>
+          <h1 id="指向常量的指针"><a href="#指向常量的指针" class="headerlink" title="指向常量的指针"></a>指向常量的指针</h1><p>指向常量的指针，即 <code>pointer to const</code>，即指针指向的是一个常量，你应该把这个词（指向常量的指针）当做一个整体来理解，而不是分开。（当然也有翻译成指针常量的，但我并不喜欢这种翻译方式）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通常也将指针本身是一个常量称为顶层 const，将指针所指的对象是个常量称为底层 const</span><br></pre></td></tr></table></figure>
+
+<p>它的语法格式是 <code>const</code> 在 * 左边，这一点很重要，因为后面要讲的常量指针是 <code>const</code> 在 * 的右边。下面是它的基本语法格式</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14</span>;   <span class="comment">// pi 是一个常量</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者，它的另一种写法是交换一下 const 和 double 的位置顺序</span></span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="type">const</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br></pre></td></tr></table></figure>
-<p>下面我们举一个例子来进行具体的讲解 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14</span>;   <span class="comment">// pi 是一个常量</span></span><br><span class="line">   <span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br><span class="line">   cout &lt;&lt;  *cptr &lt;&lt; endl;   <span class="comment">// 3.14</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 这里有一个常量
-pi，我用 cptr 这个指向常量的指针来指向它，它的内存示意图应该如下: <img
-src="https://tommygong.top/image/1682332506472.jpg" />
-【注】当我说指针的值（内容）的时候，我说的是
-0x456。当我说指针指向的值（内容），我说的是
-3.14，下面的语境请随着具体上下文自动脑修。 关于指针常量的两个扩展：
-第一个是我们用普通的指针不能指向这个常量 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14</span>; <span class="comment">// pi 是一个常量</span></span><br><span class="line">  <span class="type">double</span> *pnormal = &amp;pi;    <span class="comment">// 用普通指针指向常量 pi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// error: invalid conversion from ‘const double*’ to ‘double*’</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>下面我们举一个例子来进行具体的讲解</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14</span>;   <span class="comment">// pi 是一个常量</span></span><br><span class="line">   <span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br><span class="line">   cout &lt;&lt;  *cptr &lt;&lt; endl;   <span class="comment">// 3.14</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有一个常量 pi，我用 cptr 这个指向常量的指针来指向它，它的内存示意图应该如下:<br><img src="https://tommygong.top/image/1682332506472.jpg"><br>【注】当我说指针的值（内容）的时候，我说的是 0x456。当我说指针指向的值（内容），我说的是 3.14，下面的语境请随着具体上下文自动脑修。<br>关于指针常量的两个扩展：<br>第一个是我们用普通的指针不能指向这个常量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14</span>; <span class="comment">// pi 是一个常量</span></span><br><span class="line">  <span class="type">double</span> *pnormal = &amp;pi;    <span class="comment">// 用普通指针指向常量 pi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// error: invalid conversion from ‘const double*’ to ‘double*’</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+
 <p>答案显然是不行的，报错提示这是一个非法类型转换。</p>
-<p>事实上，有这样的一个指向关系，指向常量的指针可以指向常量和非常量，而普通指针只能指向非常量，如下图所示。
-<img src="https://tommygong.top/image/1682332589055.jpg" />
-对上图，从逻辑上是这么理解的，假设一个普通指针
-<code>common_pointer</code> 指向且只能指向非常量
-<code>non_const_var</code>，通过对 <code>common_pointer</code>
-的解引用，我们可以修改非常量 <code>non_const_var</code>
-的值。但是如果普通指针 <code>common_pointer</code> 指向一个常量
-<code>const_var</code>，理论上来说，可以对普通指针
-<code>common_pointer</code> 解引用而修改常量 <code>const_var</code>
-的值，但常量又不能修改，所以普通指针只能指向非常量。
-对于常量指针的逻辑亦是如此。 那么第二个问题是，<code>cptr</code>
-指针指向的内容可以修改吗？显然也是不能修改的，因为它此时指向的是一个常量
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14</span>;   <span class="comment">// pi 是一个常量</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;   <span class="comment">// 3.14</span></span><br><span class="line">*cptr = <span class="number">9.8</span>;              <span class="comment">// error: assignment of read-only location ‘* cptr’</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure> 可以看到报错的提示是， <code>cptr</code>
-具有只读属性。特别的是，即使 <code>cptr</code>
-指向的是非常量，它也不能修改这个非常量的内容（如下代码），仅记住一点即可，那就是
-<code>cptr</code> 自己本身具有的属性就是只读的。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> pi = <span class="number">3.14</span>;   <span class="comment">// pi 是一个变量</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;   <span class="comment">// 3.14</span></span><br><span class="line">*cptr = <span class="number">9.8</span>;              <span class="comment">// error: assignment of read-only location ‘* cptr’</span></span><br></pre></td></tr></table></figure>
-虽然指针常量不能修改指向地址的值，但是它可以修改指向的地址，如下可以看到指针常量
-a 先指向 b 的地址，之后有成功指向 c 的地址 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> c = <span class="number">20</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* a = &amp;b;</span><br><span class="line">	cout &lt;&lt; *a &lt;&lt; endl; <span class="comment">// 10</span></span><br><span class="line">	a = &amp;c;</span><br><span class="line">	cout &lt;&lt; *a &lt;&lt; endl; <span class="comment">// 20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> # 常量指针
-常量指针寓意着指针本身的内容不能被修改。它的语法是 const 在 *
-的右边：<code>char *const p = greeting;</code></p>
-<p>下面我们用一张图来解释什么叫“指针的值（指针本身的内容）不能被修改”
-<img src="https://tommygong.top/image/1682334139694.jpg" />
-虽然这幅图已经说明了一切，但我们还是不妨用代码来进一步解释 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">double</span> pi = <span class="number">3.14</span>;          <span class="comment">// pi 是一个变量</span></span><br><span class="line">   <span class="type">double</span> e = <span class="number">2.71</span>;           <span class="comment">// e 是一个变量</span></span><br><span class="line">   <span class="type">double</span> *<span class="type">const</span> cptr = &amp;pi;  <span class="comment">// cptr 本身的内容不能改变</span></span><br><span class="line">   cout &lt;&lt;  *cptr &lt;&lt; endl;    <span class="comment">// 3.14</span></span><br><span class="line">   cptr = &amp;e;                 <span class="comment">// error: assignment of read-only variable ‘cptr’</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-上面的代码中，cptr 本来是指向 pi，但是当 cptr 转而指向 e
-的时候就会报错，因为 cptr
-作为指针，它是常量的，它的内容是不可以改变的。</p>
-<p>但是 cptr 指向的内容却是可以改变的，这和
-<code>pointer to const</code> 不同 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> pi = <span class="number">3.14</span>;          <span class="comment">// pi 是一个变量</span></span><br><span class="line"><span class="type">double</span> e = <span class="number">2.71</span>;           <span class="comment">// e 是一个变量</span></span><br><span class="line"><span class="type">double</span> *<span class="type">const</span> cptr = &amp;pi;  <span class="comment">// cptr 本身的内容不能改变</span></span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;    <span class="comment">// 3.14</span></span><br><span class="line">*cptr = e;        </span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;    <span class="comment">// 2.71</span></span><br></pre></td></tr></table></figure>
-可以看到在执行完上面的程序后，cptr 指向的值（内容）发生了改变。</p>
-<h1 id="对比指向常量的指针与常量指针">对比指向常量的指针与常量指针</h1>
-<p>也许直接记忆中文的话会很容易绕进去，不如直接记忆它们各自对应的英文会要很多，即指向常量的指针是
-<code>pointer to const</code>，常量指针是
-<code>const pointer</code>。</p>
-<p>对于 <code>pointer to const</code>
-来说，显然指针指向的是一个常量（当然它也可以指向一个非常量），对于
-<code>const pointer</code>
-来说，显然它自己是一个常量，即这个指针是一个常量，它蕴含的意思是这个指针指向的地址永远不可以改变，就好像你永远住在
-xx 省 xx 市 xx 路 xx 号一样。</p>
-<p>最后还是用一幅图来解释二者的联系与区别 <img
-src="https://tommygong.top/image/1682334250249.jpg" />
-红色区域是不能改变的值。</p>
-<p>【注】在这幅图中，如果我们把 pi 改为非常量，即
-<code>double pi = 3.14</code>; 的形式，虽然依旧不能通过 cptr
-来修改它的值，如 <code>*cptr = 2.71 // error</code>，但是可以直接修改 pi
-的值是没问题的，如
-<code>pi = 2.71; // right</code>。这一点我已经在上面的部分讲过，但在这里还想重复提一下。
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">double</span> pi = <span class="number">3.14</span>;</span><br><span class="line">   <span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi;</span><br><span class="line">   cout &lt;&lt; *cptr &lt;&lt; endl; <span class="comment">// 3.14</span></span><br><span class="line">   <span class="comment">// *cptr = 2.71; error</span></span><br><span class="line">   pi = <span class="number">2.71</span>;</span><br><span class="line">   cout &lt;&lt; *cptr &lt;&lt; endl; <span class="comment">// 2.71</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> # 拓展
-现在我们思考这样一个问题，存在以下代码，它能否通过编译呢？
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> c = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">	<span class="type">char</span>* pc;</span><br><span class="line">	pc = &amp;c;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>** pcc = &amp;pc;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 事实是不能的，在 <code>const char** pcc = &amp;pc;</code>
-位置会报错
-<code>error: invalid conversion from ‘char**’ to ‘const char**’</code>。原因是，我们的二重指针是
-<code>const</code> 的，当 pcc 通过 pc 指向 c 后，逻辑上，我们不希望通过
-pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，意味着 pc
-可以随时改变指针的指向。</p>
+<p>事实上，有这样的一个指向关系，指向常量的指针可以指向常量和非常量，而普通指针只能指向非常量，如下图所示。<br><img src="https://tommygong.top/image/1682332589055.jpg"><br>对上图，从逻辑上是这么理解的，假设一个普通指针 <code>common_pointer</code> 指向且只能指向非常量 <code>non_const_var</code>，通过对 <code>common_pointer</code> 的解引用，我们可以修改非常量 <code>non_const_var</code> 的值。但是如果普通指针 <code>common_pointer</code> 指向一个常量 <code>const_var</code>，理论上来说，可以对普通指针 <code>common_pointer</code> 解引用而修改常量 <code>const_var</code> 的值，但常量又不能修改，所以普通指针只能指向非常量。<br>对于常量指针的逻辑亦是如此。<br>那么第二个问题是，<code>cptr</code> 指针指向的内容可以修改吗？显然也是不能修改的，因为它此时指向的是一个常量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">double</span> pi = <span class="number">3.14</span>;   <span class="comment">// pi 是一个常量</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;   <span class="comment">// 3.14</span></span><br><span class="line">*cptr = <span class="number">9.8</span>;              <span class="comment">// error: assignment of read-only location ‘* cptr’</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>可以看到报错的提示是， <code>cptr</code> 具有只读属性。特别的是，即使 <code>cptr</code> 指向的是非常量，它也不能修改这个非常量的内容（如下代码），仅记住一点即可，那就是 <code>cptr</code> 自己本身具有的属性就是只读的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> pi = <span class="number">3.14</span>;   <span class="comment">// pi 是一个变量</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi; <span class="comment">// cptr 是一个指向常量的指针</span></span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;   <span class="comment">// 3.14</span></span><br><span class="line">*cptr = <span class="number">9.8</span>;              <span class="comment">// error: assignment of read-only location ‘* cptr’</span></span><br></pre></td></tr></table></figure>
+<p>虽然指针常量不能修改指向地址的值，但是它可以修改指向的地址，如下可以看到指针常量 a 先指向 b 的地址，之后有成功指向 c 的地址<br>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> c = <span class="number">20</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* a = &amp;b;</span><br><span class="line">	cout &lt;&lt; *a &lt;&lt; endl; <span class="comment">// 10</span></span><br><span class="line">	a = &amp;c;</span><br><span class="line">	cout &lt;&lt; *a &lt;&lt; endl; <span class="comment">// 20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="常量指针"><a href="#常量指针" class="headerlink" title="常量指针"></a>常量指针</h1><p>常量指针寓意着指针本身的内容不能被修改。它的语法是 const 在 * 的右边：<code>char *const p = greeting;</code></p>
+<p>下面我们用一张图来解释什么叫“指针的值（指针本身的内容）不能被修改”<br>   <img src="https://tommygong.top/image/1682334139694.jpg"><br>虽然这幅图已经说明了一切，但我们还是不妨用代码来进一步解释</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">double</span> pi = <span class="number">3.14</span>;          <span class="comment">// pi 是一个变量</span></span><br><span class="line">   <span class="type">double</span> e = <span class="number">2.71</span>;           <span class="comment">// e 是一个变量</span></span><br><span class="line">   <span class="type">double</span> *<span class="type">const</span> cptr = &amp;pi;  <span class="comment">// cptr 本身的内容不能改变</span></span><br><span class="line">   cout &lt;&lt;  *cptr &lt;&lt; endl;    <span class="comment">// 3.14</span></span><br><span class="line">   cptr = &amp;e;                 <span class="comment">// error: assignment of read-only variable ‘cptr’</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，cptr 本来是指向 pi，但是当 cptr 转而指向 e 的时候就会报错，因为 cptr 作为指针，它是常量的，它的内容是不可以改变的。</p>
+<p>但是 cptr 指向的内容却是可以改变的，这和 <code>pointer to const</code> 不同</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> pi = <span class="number">3.14</span>;          <span class="comment">// pi 是一个变量</span></span><br><span class="line"><span class="type">double</span> e = <span class="number">2.71</span>;           <span class="comment">// e 是一个变量</span></span><br><span class="line"><span class="type">double</span> *<span class="type">const</span> cptr = &amp;pi;  <span class="comment">// cptr 本身的内容不能改变</span></span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;    <span class="comment">// 3.14</span></span><br><span class="line">*cptr = e;        </span><br><span class="line">cout &lt;&lt;  *cptr &lt;&lt; endl;    <span class="comment">// 2.71</span></span><br></pre></td></tr></table></figure>
+<p>可以看到在执行完上面的程序后，cptr 指向的值（内容）发生了改变。</p>
+<h1 id="对比指向常量的指针与常量指针"><a href="#对比指向常量的指针与常量指针" class="headerlink" title="对比指向常量的指针与常量指针"></a>对比指向常量的指针与常量指针</h1><p>也许直接记忆中文的话会很容易绕进去，不如直接记忆它们各自对应的英文会要很多，即指向常量的指针是 <code>pointer to const</code>，常量指针是 <code>const pointer</code>。</p>
+<p>对于 <code>pointer to const</code> 来说，显然指针指向的是一个常量（当然它也可以指向一个非常量），对于 <code>const pointer</code> 来说，显然它自己是一个常量，即这个指针是一个常量，它蕴含的意思是这个指针指向的地址永远不可以改变，就好像你永远住在 xx 省 xx 市 xx 路 xx 号一样。</p>
+<p>最后还是用一幅图来解释二者的联系与区别<br><img src="https://tommygong.top/image/1682334250249.jpg"><br>红色区域是不能改变的值。</p>
+<p>【注】在这幅图中，如果我们把 pi 改为非常量，即 <code>double pi = 3.14</code>; 的形式，虽然依旧不能通过 cptr 来修改它的值，如 <code>*cptr = 2.71 // error</code>，但是可以直接修改 pi 的值是没问题的，如 <code>pi = 2.71; // right</code>。这一点我已经在上面的部分讲过，但在这里还想重复提一下。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">double</span> pi = <span class="number">3.14</span>;</span><br><span class="line">   <span class="type">const</span> <span class="type">double</span> *cptr = &amp;pi;</span><br><span class="line">   cout &lt;&lt; *cptr &lt;&lt; endl; <span class="comment">// 3.14</span></span><br><span class="line">   <span class="comment">// *cptr = 2.71; error</span></span><br><span class="line">   pi = <span class="number">2.71</span>;</span><br><span class="line">   cout &lt;&lt; *cptr &lt;&lt; endl; <span class="comment">// 2.71</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><p>现在我们思考这样一个问题，存在以下代码，它能否通过编译呢？</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> c = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">	<span class="type">char</span>* pc;</span><br><span class="line">	pc = &amp;c;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>** pcc = &amp;pc;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>事实是不能的，在 <code>const char** pcc = &amp;pc;</code> 位置会报错 <code>error: invalid conversion from ‘char**’ to ‘const char**’</code>。原因是，我们的二重指针是 <code>const</code> 的，当 pcc 通过 pc 指向 c 后，逻辑上，我们不希望通过 pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，意味着 pc 可以随时改变指针的指向。</p>
 <p>上面的代码将 pc 设置为 const 就可以正常运行了</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> c = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>* pc;</span><br><span class="line">	pc = &amp;c;</span><br><span class="line">	<span class="type">const</span> <span class="type">char</span>** pcc = &amp;pc;</span><br><span class="line">	</span><br><span class="line">	c = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">	cout &lt;&lt; c &lt;&lt; endl; <span class="comment">// a</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
       
     </div>
 
@@ -627,7 +645,21 @@ pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，�
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -708,7 +740,21 @@ pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，�
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>775</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -789,7 +835,21 @@ pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，�
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -870,7 +930,21 @@ pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，�
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>249</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -951,7 +1025,21 @@ pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，�
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -1032,7 +1120,21 @@ pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，�
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>780</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -1190,6 +1292,16 @@ pcc 来改变 c，但是，pcc 在指向 pc 的时候，pc 不是 const 的，�
     <i class="fa-solid fa-shield-halved"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">81k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:54</span>
 </div>
 
         

@@ -186,6 +186,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -242,7 +243,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>452</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
             <div class="post-description">new操作符可以在运行时为基本数据类型、数组和对象分配持久的内存空间。另外，新版c++标准中可以用变量名称作为数组大小。</div>
 
         </div>
@@ -254,30 +269,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="动态持久内存分配">动态持久内存分配</h2>
-<p>KEY POINT</p>
+        <h2 id="动态持久内存分配"><a href="#动态持久内存分配" class="headerlink" title="动态持久内存分配"></a>动态持久内存分配</h2><p>KEY POINT</p>
 <p>new操作符可以在运行时为基本数据类型、数组和对象分配持久的内存空间。</p>
 <p>另外，新版c++标准中可以用变量名称作为数组大小。</p>
 <p>之前创建动态数组的方法</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;<span class="string">&quot;Enter the size of the array: &quot;</span>;</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line">cin&gt;&gt;size;</span><br><span class="line"><span class="type">int</span>* list = <span class="keyword">new</span> <span class="type">int</span>[size];</span><br></pre></td></tr></table></figure>
+
 <p>就可以被替换为：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;<span class="string">&quot;Enter the size of the array: &quot;</span>;</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line">cin&gt;&gt;size;</span><br><span class="line"><span class="type">int</span> list[size];</span><br></pre></td></tr></table></figure>
-<h2 id="创建及访问动态对象">创建及访问动态对象</h2>
-<p><strong>关键点</strong>：调用对象的构造函数可以动态的创建对象，语法是
-<code>new ClassNmae(arguments)</code>
-可以使用如下的语句在堆中动态创建对象：</p>
+
+<h2 id="创建及访问动态对象"><a href="#创建及访问动态对象" class="headerlink" title="创建及访问动态对象"></a>创建及访问动态对象</h2><p><strong>关键点</strong>：调用对象的构造函数可以动态的创建对象，语法是 <code>new ClassNmae(arguments)</code><br>可以使用如下的语句在堆中动态创建对象：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClassName* pObject1 = <span class="keyword">new</span> <span class="built_in">ClassName</span>(); <span class="comment">//这里使用无参构造函数创建对象，并将对象赋予指针pObject1</span></span><br><span class="line">ClassName* pObject2 = <span class="keyword">new</span> <span class="built_in">ClassName</span>(arguments); <span class="comment">//这里使用有参构造函数创建对象，并将对象赋予指针pObject2</span></span><br></pre></td></tr></table></figure>
+
 <p>通过指针访问对象的数据成员以及成员函数需要先进行<strong>解引用</strong>操作，然后使用点操作符。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(*pObject1).member = value;</span><br><span class="line">(*pObject1).<span class="built_in">memberFunction</span>(arguments);</span><br></pre></td></tr></table></figure>
+
 <p>或者使用箭头操作符</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pObject1-&gt;member = value;</span><br><span class="line">pObject1-&gt;<span class="built_in">memberFunction</span>(arguments);</span><br></pre></td></tr></table></figure>
+
 <p><strong>注意</strong>：在使用new操作符创建对象时，必须使用delete操作符来释放内存，否则会造成内存泄漏。</p>
-<h2 id="this指针">this指针</h2>
-<p><strong>关键点</strong>：this指针是一个隐式的指针，指向当前对象，可以用来访问对象的数据成员和成员函数。</p>
+<h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2><p><strong>关键点</strong>：this指针是一个隐式的指针，指向当前对象，可以用来访问对象的数据成员和成员函数。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Circle</span>();</span><br><span class="line">        <span class="built_in">Circle</span>(<span class="type">double</span>);</span><br><span class="line">        <span class="function"><span class="type">double</span> <span class="title">getArea</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="type">double</span> <span class="title">getRadius</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">setRadius</span><span class="params">(<span class="type">double</span>)</span></span>;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="type">double</span> radius;</span><br><span class="line">&#125;</span><br><span class="line">Circle::<span class="built_in">Circle</span>() &#123;</span><br><span class="line">    radius = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">Circle::<span class="built_in">Circle</span>(<span class="type">double</span> radius) &#123;</span><br><span class="line">    <span class="keyword">this</span> -&gt; radius = radius;<span class="comment">//or (*this).radius = radius;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">Circle::getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3.14</span> * radius * radius;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">Circle::getRadius</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> radius;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Circle::setRadius</span><span class="params">(<span class="type">double</span> radius)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span> -&gt; radius = radius &gt;= <span class="number">0</span> ? radius : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="析构函数">析构函数</h2>
-<p><strong>关键点</strong>
-析构函数没有参数，没有返回值，名字是类名前加上~，一般是释放对象的资源。</p>
+
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p><strong>关键点</strong> 析构函数没有参数，没有返回值，名字是类名前加上~，一般是释放对象的资源。</p>
 
     </div>
 
@@ -447,6 +461,16 @@
     <i class="fa-solid fa-shield-halved"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">81k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:54</span>
 </div>
 
         

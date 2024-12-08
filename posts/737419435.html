@@ -28,11 +28,14 @@
 <meta property="og:site_name" content="うずまきナルト">
 <meta property="og:description" content="Rational是用来描述有理数的工具。由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1&#x2F;3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/2023-09-11_19-53-50.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/2023-09-11_19-48-35.png">
 <meta property="article:published_time" content="2023-09-11T11:46:43.000Z">
 <meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
 <meta property="article:author" content="うずまきナルト">
 <meta property="article:tag" content="CPP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/2023-09-11_19-53-50.png">
 
 <link rel="canonical" href="https://tommygong.top/posts/737419435.html">
 
@@ -186,6 +189,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -242,7 +246,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>139</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
             <div class="post-description">Rational是用来描述有理数的工具。由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1/3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。</div>
 
         </div>
@@ -254,16 +272,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="rational类">Rational类</h1>
-<p><strong>关键点</strong>：Rational是用来描述有理数的工具。
-由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1/3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。
-另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。
-<img
-src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/运算符重载/2023-09-11_19-53-50.png" /></p>
-<h1 id="运算符函数">运算符函数</h1>
-<p><strong>关键点</strong>：运算符函数是类的成员函数，用于重载运算符。
-<img
-src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/运算符重载/2023-09-11_19-48-35.png" /></p>
+        <h1 id="Rational类"><a href="#Rational类" class="headerlink" title="Rational类"></a>Rational类</h1><p><strong>关键点</strong>：Rational是用来描述有理数的工具。<br>由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1&#x2F;3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。<br>另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/2023-09-11_19-53-50.png"></p>
+<h1 id="运算符函数"><a href="#运算符函数" class="headerlink" title="运算符函数"></a>运算符函数</h1><p><strong>关键点</strong>：运算符函数是类的成员函数，用于重载运算符。<br><img src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/2023-09-11_19-48-35.png"></p>
 
     </div>
 
@@ -364,7 +374,7 @@ src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/运算符重载/2023
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rational%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">Rational类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">运算符函数</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Rational%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">Rational类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">运算符函数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -433,6 +443,16 @@ src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/运算符重载/2023
     <i class="fa-solid fa-shield-halved"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">81k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:54</span>
 </div>
 
         

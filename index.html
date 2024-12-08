@@ -183,6 +183,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -230,7 +231,21 @@
                 <time title="修改时间：2024-12-07 20:55:50" itemprop="dateModified" datetime="2024-12-07T20:55:50+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -302,7 +317,21 @@
                 <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>353</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -319,8 +348,10 @@
 <p>编写比较函数的两张方法：</p>
 <p>1.如果元素不是结构体，那么可以编写比较函数。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//自定义比较函数myComp，重载操作符 ()</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">myComp</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="type">const</span> <span class="type">int</span> &amp;a, <span class="type">const</span> <span class="type">int</span> &amp;b)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a &gt; b;	<span class="comment">//从大到小排序</span></span><br><span class="line">		<span class="comment">//return a &lt; b;	//从小到大排序</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	set&lt;<span class="type">int</span>, myComp&gt; s1;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">		s<span class="number">1.</span><span class="built_in">insert</span>(i*i);</span><br><span class="line">	s<span class="number">1.</span><span class="built_in">insert</span>(<span class="number">8</span>);</span><br><span class="line">	<span class="comment">//ostream_iterator&lt;int&gt; output(cout, &quot; &quot;);</span></span><br><span class="line">	set&lt;<span class="type">int</span>, myComp&gt;::iterator it = s<span class="number">1.</span><span class="built_in">begin</span>();</span><br><span class="line">	<span class="keyword">for</span>(; it != s<span class="number">1.</span><span class="built_in">end</span>(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>2.如果元素是结构体，那么可以直接把比较函数写在结构体内。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Info</span></span><br><span class="line">&#123;</span><br><span class="line">	string name;</span><br><span class="line">	<span class="type">float</span> score;</span><br><span class="line">	<span class="comment">//重载操作符&lt;,自定义排序规则</span></span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span>&lt; (<span class="type">const</span> Info &amp;a)<span class="type">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//return a.score &lt; score;	//按score由大到小排列</span></span><br><span class="line">		<span class="keyword">return</span> a.score &gt; score;	<span class="comment">//由小到大排列</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	set&lt;Info&gt; s;</span><br><span class="line">	Info info;</span><br><span class="line">	info.name = <span class="string">&quot;Messi&quot;</span>;</span><br><span class="line">	info.score = <span class="number">8.5</span>;</span><br><span class="line">	s.<span class="built_in">insert</span>(info);</span><br><span class="line">	info.name = <span class="string">&quot;Ronae&quot;</span>;</span><br><span class="line">	info.score = <span class="number">9.0</span>;</span><br><span class="line">	s.<span class="built_in">insert</span>(info);</span><br><span class="line">	info.name = <span class="string">&quot;My&quot;</span>;</span><br><span class="line">	info.score = <span class="number">7.0</span>;</span><br><span class="line">	s.<span class="built_in">insert</span>(info);</span><br><span class="line">	info.name = <span class="string">&quot;Perno&quot;</span>;</span><br><span class="line">	info.score = <span class="number">8.0</span>;</span><br><span class="line">	s.<span class="built_in">insert</span>(info);</span><br><span class="line">	info.name = <span class="string">&quot;Arzar&quot;</span>;</span><br><span class="line">	info.score = <span class="number">8.5</span>;</span><br><span class="line">	s.<span class="built_in">insert</span>(info);</span><br><span class="line">	set&lt;Info&gt;::iterator it;</span><br><span class="line">	<span class="keyword">for</span>(it = s.<span class="built_in">begin</span>(); it != s.<span class="built_in">end</span>(); it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;it-&gt;name&lt;&lt;<span class="string">&quot; : &quot;</span>;</span><br><span class="line">		cout&lt;&lt;(*it).score&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -374,7 +405,21 @@
                 <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>20 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -446,7 +491,21 @@
                 <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -518,7 +577,21 @@
                 <time title="修改时间：2024-12-07 13:23:04" itemprop="dateModified" datetime="2024-12-07T13:23:04+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>383</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -529,37 +602,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>存储层次</strong>是在<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/電腦架構">计算机体系结构</a>下<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/儲存系統">存储系统</a>层次结构的排列顺序。每一层于下一层相比都拥有较高的<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/速度">速度</a>和较低<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/w/index.php?title=延遲性&amp;action=edit&amp;redlink=1">延迟性</a>，以及较小的容量（也有少量例外，如AMD早期的<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/Duron">Duron</a>
-CPU）。大部分现今的<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/中央處理器">中央处理器</a>的速度都非常的快。大部分程序工作量需要存储器访问。由于<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/快取">高速缓存</a>的效率和存储器传输位于层次结构中的不同等级，所以实际上会限制处理的速度，导致中央处理器花费大量的时间等待存储器I/O完成工作。</p>
+          <p><strong>存储层次</strong>是在<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E9%9B%BB%E8%85%A6%E6%9E%B6%E6%A7%8B">计算机体系结构</a>下<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E5%84%B2%E5%AD%98%E7%B3%BB%E7%B5%B1">存储系统</a>层次结构的排列顺序。每一层于下一层相比都拥有较高的<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E9%80%9F%E5%BA%A6">速度</a>和较低<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/w/index.php?title=%E5%BB%B6%E9%81%B2%E6%80%A7&action=edit&redlink=1">延迟性</a>，以及较小的容量（也有少量例外，如AMD早期的<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/Duron">Duron</a> CPU）。大部分现今的<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E4%B8%AD%E5%A4%AE%E8%99%95%E7%90%86%E5%99%A8">中央处理器</a>的速度都非常的快。大部分程序工作量需要存储器访问。由于<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E5%BF%AB%E5%8F%96">高速缓存</a>的效率和存储器传输位于层次结构中的不同等级，所以实际上会限制处理的速度，导致中央处理器花费大量的时间等待存储器I&#x2F;O完成工作。</p>
 <p>大部分电脑中的存储层次如下四层：</p>
-<ol type="1">
-<li><p><a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/暫存器">寄存器</a>–可能是最快的访问。在32位处理器，每个寄存器就是32位。<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/X86">x86</a>处理器共有16个寄存器。</p></li>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E6%9A%AB%E5%AD%98%E5%99%A8">寄存器</a>–可能是最快的访问。在32位处理器，每个寄存器就是32位。<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/X86">x86</a>处理器共有16个寄存器。</p>
+</li>
 <li><p>高速缓存</p>
 <p>（L1-L3：SRAM、L4：DRAM）</p>
-<ol type="1">
-<li>第一级<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/快取">高速缓存</a>（L1）–通常访问只需要几个周期，通常是几十个KB。</li>
-<li>第二级<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/快取">高速缓存</a>（L2）–比L1约有2到10倍较高延迟性，通常是几百个KB或更多。</li>
-<li>第三级<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/快取">高速缓存</a>（L3）–比L2更高的延迟性，通常有数MB之大。</li>
-<li>第四级<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/快取">高速缓存</a>（L4）（不一定有）–CPU外部的DRAM，但速度较主存储器高。</li>
-</ol></li>
-<li><p><a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/隨機存取記憶體">主存储器</a>（<a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/DRAM">DRAM</a>）–访问需要几百个周期，可以大到数十GB。</p></li>
-<li><p><a
-target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲存">磁盘存储</a>–需要成千上万个周期，容量非常大。</p></li>
+<ol>
+<li>第一级<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E5%BF%AB%E5%8F%96">高速缓存</a>（L1）–通常访问只需要几个周期，通常是几十个KB。</li>
+<li>第二级<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E5%BF%AB%E5%8F%96">高速缓存</a>（L2）–比L1约有2到10倍较高延迟性，通常是几百个KB或更多。</li>
+<li>第三级<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E5%BF%AB%E5%8F%96">高速缓存</a>（L3）–比L2更高的延迟性，通常有数MB之大。</li>
+<li>第四级<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E5%BF%AB%E5%8F%96">高速缓存</a>（L4）（不一定有）–CPU外部的DRAM，但速度较主存储器高。</li>
+</ol>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E9%9A%A8%E6%A9%9F%E5%AD%98%E5%8F%96%E8%A8%98%E6%86%B6%E9%AB%94">主存储器</a>（<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/DRAM">DRAM</a>）–访问需要几百个周期，可以大到数十GB。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E7%A3%81%E7%A2%9F%E5%84%B2%E5%AD%98">磁盘存储</a>–需要成千上万个周期，容量非常大。</p>
+</li>
 </ol>
 
       
@@ -594,7 +654,7 @@ target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/2756843955.html" class="post-title-link" itemprop="url">MIT 6.828 实验记录</a>
+            <a href="/posts/2756843955.html" class="post-title-link" itemprop="url">MIT 6.828 实验记录 (一)</a>
         </h2>
 
         <div class="post-meta">
@@ -611,10 +671,24 @@ target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+                <time title="修改时间：2024-12-08 15:04:56" itemprop="dateModified" datetime="2024-12-08T15:04:56+08:00">2024-12-08</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>32 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -686,7 +760,21 @@ target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲�
                 <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>644</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -758,7 +846,21 @@ target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲�
                 <time title="修改时间：2024-12-07 14:43:16" itemprop="dateModified" datetime="2024-12-07T14:43:16+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -830,7 +932,21 @@ target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲�
                 <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -911,7 +1027,21 @@ target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲�
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>20 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -1069,6 +1199,16 @@ target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/磁碟儲�
     <i class="fa-solid fa-shield-halved"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">81k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:54</span>
 </div>
 
         
