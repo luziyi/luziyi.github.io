@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="POSIX兼容操作系统中的一个系统级别的定时器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux定时器（setitimer定时）">
+<meta property="og:url" content="https://tommygong.top/posts/3461879022.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="POSIX兼容操作系统中的一个系统级别的定时器">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-12T07:48:25.000Z">
+<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="LINUX">
+<meta property="article:tag" content="定时器">
+<meta property="article:tag" content="time.h">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/3461879022.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux定时器（setitimer定时） | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/3461879022.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux定时器（setitimer定时）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-12 15:48:25" itemprop="dateCreated datePublished" datetime="2024-09-12T15:48:25+08:00">2024-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+            <div class="post-description">POSIX兼容操作系统中的一个系统级别的定时器</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="定时器流程">定时器流程</h2>
+<p>1、itimerval——设置定时器的初值和周期值</p>
+<p>2、setitimer——设置定时器</p>
+<p>3、sigaction（）/signal（）——处理信号，执行定时功能</p>
+<p>4、SIGALRM——触发信号</p>
+<h2
+id="itimerval设置定时器的初值和周期值">itimerval（设置定时器的初值和周期值）</h2>
+<p><code>itimerval</code> 是一个结构体，它在 POSIX
+兼容的操作系统中定义于 <code>&lt;sys/time.h&gt;</code>
+头文件中。这个结构体用于 <code>setitimer</code>
+系统调用，以便获取或设置进程的虚拟定时器和实时定时器。</p>
+<p><strong>结构体定义：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">itimerval</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">timeval</span> it_interval; <span class="comment">/* 定时器重复触发的时间周期 */</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">timeval</span> it_value;    <span class="comment">/* 从当前时间到定时器第一次触发的剩余时间 */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>成员解释：</strong></p>
+<ul>
+<li><p><strong><code>it_interval</code></strong>：这是一个
+<code>timeval</code>
+结构，它指定了定时器的间隔时间，即定时器重复触发的时间周期。<code>timeval</code>
+结构包含两个字段：<strong><code>tv_sec</code></strong>（秒）和
+<strong><code>tv_usec</code></strong>（微秒）。</p></li>
+<li><p><strong><code>it_value</code></strong>：这也是一个
+<code>timeval</code>
+结构，它指定了定时器的到期时间，即从当前时间到定时器第一次触发的剩余时间。</p></li>
+</ul>
+<h2 id="setitimer设置定时器">setitimer（设置定时器）</h2>
+<p><code>setitimer</code> 是 UNIX 和类 UNIX 系统（包括
+Linux）中的一个系统调用，用于设置进程的虚拟、实时或性能定时器。这个系统调用提供了一种机制，允许进程接收定时信号，例如，<code>SIGALRM</code>。</p>
+<p><strong>函数原型：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">setitimer</span><span class="params">(<span class="type">int</span> which, <span class="type">const</span> <span class="keyword">struct</span> itimerspec *new_value, <span class="keyword">struct</span> itimerspec *old_value)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>参数：</strong></p>
+<ul>
+<li><strong><code>which</code></strong>：指定要设置的定时器类型，可以是以下之一：
+<ul>
+<li><code>ITIMER_REAL</code>：实时定时器，基于系统时钟。</li>
+<li><code>ITIMER_VIRTUAL</code>：虚拟定时器，基于进程的虚拟执行时间。</li>
+<li><code>ITIMER_PROF</code>：性能定时器，用于采样程序的执行时间。</li>
+</ul></li>
+<li><strong><code>new_value</code></strong>：指向
+<code>itimerspec</code> 结构的指针，该结构包含两个 <code>timespec</code>
+结构，分别指定定时器的初值和周期值。<code>timespec</code> 结构包含
+<code>tv_sec</code>（秒）和 <code>tv_nsec</code>（纳秒）。</li>
+<li><strong><code>old_value</code></strong>：指向
+<code>itimerspec</code>
+结构的指针，用于存储定时器被设置前的旧值。如果设置为
+<code>NULL</code>，则忽略旧值。</li>
+</ul>
+<p>要使用 <code>setitimer</code>
+创建一个周期性执行的任务，你需要设置定时器的初值（<code>it_value</code>）和周期值（<code>it_interval</code>），这两者都定义在
+<code>itimerspec</code>
+结构体中。周期值设置了定时器触发的频率，而初值设置了第一次触发前的时间间隔。</p>
+<h2 id="signal-sigaction函数">signal（）/ sigaction（）函数</h2>
+<p>在 UNIX 和类 UNIX 系统中，<strong><code>signal</code></strong> 和
+<strong><code>sigaction</code></strong>
+都是用来处理信号的函数。信号是一种特殊的软件中断，当程序接收到某些事件（比如用户按下
+Ctrl+C 或者定时器到期）时，操作系统会发送信号给程序。</p>
+<p><code>signal</code>
+是一个用于处理异步事件的机制，它允许程序对操作系统发送的信号进行响应。在
+UNIX 和类 UNIX 系统（包括
+Linux）中，信号是一种软件中断，用于通知进程发生了某个事件，如用户按下中断键（通常是
+Ctrl+C），或者系统检测到一个错误条件。</p>
+<p>信号可以由多种不同的源触发，包括硬件事件、软件条件或系统调用。它们通常用于中断正在执行的进程，以便进程可以采取适当的行动，比如清理资源、记录日志或优雅地终止。</p>
+<p><strong>捕获并自定义处理信号</strong>：进程可以通过
+<code>signal</code>
+函数来捕获信号，并为其定义自定义的处理函数。这个处理函数将在信号到达时被调用，如下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SIGALRM 信号处理函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">signal_handler</span><span class="params">(<span class="type">int</span> signum)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;SIGALRM received!\n&quot;</span>);</span><br><span class="line">    <span class="comment">// 这里可以放置你想要周期性执行的代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置信号处理函数</span></span><br><span class="line"><span class="built_in">signal</span>(SIGALRM, signal_handler);</span><br></pre></td></tr></table></figure>
+<p><strong><code>sigaction</code></strong> 函数是 <code>signal</code>
+函数的现代替代品，它提供了更多的功能和更好的可移植性。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="built_in">void</span> (*<span class="built_in">sigaction</span>(<span class="type">int</span> signum, <span class="type">const</span> <span class="keyword">struct</span> sigaction *act, <span class="keyword">struct</span> sigaction *oldact))(<span class="type">int</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong><code>signum</code></strong>
+是要处理的信号的编号。</p></li>
+<li><p><strong><code>act</code></strong> 是指向 <code>sigaction</code>
+结构的指针，该结构定义了信号的处理方式。</p></li>
+<li><p><strong><code>oldact</code></strong> 是指向
+<code>sigaction</code> 结构的指针，用于存储旧的信号处理函数。</p></li>
+</ul>
+<p>使用 <code>sigaction</code>
+时，可以更安全地处理信号，并且可以设置信号处理函数的额外属性，如
+<code>sa_mask</code>（信号屏蔽字），<code>sa_flags</code>（信号处理标志），以及
+<code>sa_handler</code>（信号处理函数）。</p>
+<h2 id="signal与-sigaction区别">signal（）与 sigaction（）区别</h2>
+<p><code>signal</code> 是较旧的函数，它有一些限制。例如，你不能在
+<code>signal</code>
+函数中使用某些会阻塞的函数，因为这可能会导致程序无法响应其他信号。而且，<code>signal</code>
+函数本身的限制也比较多，比如它不能处理一些新的信号。</p>
+<p><code>sigaction</code> 是一个更新的函数，它解决了 <code>signal</code>
+的一些问题。使用
+<code>sigaction</code>，你可以更安全地处理信号，并且可以设置更多的信号处理选项。例如，可以告诉操作系统在处理信号时是否应该暂停其他信号的接收，这样可以避免在处理一个信号时被另一个信号打断。</p>
+<h2 id="sigalrm定时器信号">SIGALRM（定时器信号）</h2>
+<p><code>SIGALRM</code>（Signal Alarm）是一个在 UNIX 和类 UNIX
+系统（包括
+Linux）中广泛使用的信号，它用于处理定时器到期事件。当一个进程设置了闹钟（alarm
+clock），并在指定的时间间隔后，<code>SIGALRM</code>
+信号会被发送给该进程。这个信号可以用来提醒进程执行某些操作，或者在特定的时间点触发某些事件。</p>
+<h2 id="示例">示例</h2>
+<p>以下是一个简单的 C 程序示例，演示如何使用 <code>setitimer</code> 和
+<code>SIGALRM</code> 信号来创建一个周期性的定时器：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// SIGALRM 信号处理函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">signal_handler</span><span class="params">(<span class="type">int</span> signum)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;SIGALRM received!\n&quot;</span>);</span><br><span class="line">    <span class="comment">// 这里可以放置你想要周期性执行的代码</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">itimerspec</span> its;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置信号处理函数</span></span><br><span class="line">    <span class="built_in">signal</span>(SIGALRM, signal_handler);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置定时器的周期值和初值</span></span><br><span class="line">    its.it_value.tv_sec = <span class="number">2</span>;  <span class="comment">// 2 秒后触发</span></span><br><span class="line">    its.it_value.tv_nsec = <span class="number">0</span>;</span><br><span class="line">    its.it_interval.tv_sec = <span class="number">2</span>; <span class="comment">// 每隔 2 秒触发一次</span></span><br><span class="line">    its.it_interval.tv_nsec = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 setitimer 设置定时器</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">setitimer</span>(ITIMER_REAL, &amp;its, <span class="literal">NULL</span>) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;setitimer failed&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 无限循环，等待定时器触发</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">pause</span>(); <span class="comment">// pause 函数会使进程休眠，直到收到 SIGALRM 或其他信号</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个示例中，首先设置了一个信号处理函数 <code>signal_handler</code>
+来处理 <code>SIGALRM</code> 信号。然后，使用 <code>setitimer</code>
+函数设置了一个周期性的定时器，每隔 2 秒触发一次 <code>SIGALRM</code>
+信号。最后，使用 <code>pause</code>
+函数进入一个无限循环，等待信号的到来。</p>
+<p>信号处理函数 <code>signal_handler</code>
+是一个特殊的函数，它在信号到达时被操作系统调用。在这个例子中，<code>signal_handler</code>
+函数只是简单地打印一条消息到控制台。每次定时器触发时，<code>signal_handler</code>
+都会被调用一次。</p>
+<p><strong>注意事项 ：</strong></p>
+<ul>
+<li>信号处理函数应该尽可能地短小，避免执行复杂的操作，因为这可能会影响系统的信号处理效率。</li>
+<li>在信号处理函数中，应该避免使用可能会阻塞的系统调用或库函数。</li>
+<li>如果需要长时间运行的操作，应该在信号处理函数中安排这些操作在进程的主体中异步执行。</li>
+</ul>
+<h2 id="设定定时器与-while-循环有本质的区别">设定定时器与
+<code>while</code> 循环有本质的区别</h2>
+<ol type="1">
+<li><p><strong>异步执行</strong>：
+信号处理函数是异步执行的，这意味着它们是由操作系统在信号到达时调用的，而不是程序的主执行流程（如
+<code>while</code>
+循环）的一部分。这意味着信号处理函数可以在程序的任何地方被调用，而不仅仅是在
+<code>while</code> 循环中。</p></li>
+<li><p><strong>实时性</strong>： 使用 <code>setitimer</code>
+和信号处理函数可以确保某些操作以固定的频率发生，即使程序的主线程正在忙于其他任务。这在需要实时响应的情况下非常有用，例如在嵌入式系统或实时操作系统中。</p></li>
+<li><p><strong>主线程的阻塞</strong>： <code>while</code>
+循环会阻塞程序的主线程，直到循环条件不再满足。在循环内部执行的任务会连续不断地运行，直到循环结束。而信号处理函数则是在
+<code>while</code>
+循环之外独立执行的，它们不会阻塞主线程，也不会影响主线程的执行顺序。</p></li>
+<li><p><strong>周期性任务的实现方式</strong>： 在 <code>while</code>
+循环中实现周期性任务通常需要在循环内部使用延时函数（如
+<code>sleep</code>），这会导致程序的整体执行速度降低，因为主线程必须等待延时结束才能继续执行。而使用
+<code>setitimer</code>
+和信号处理函数，周期性任务是由操作系统在后台管理的，不会影响主线程的执行。</p></li>
+</ol>
+<p>总结来说，<code>setitimer</code>
+和信号处理函数提供了一种异步和实时的方式来周期性地执行任务，而
+<code>while</code>
+循环提供了一种同步和阻塞的方式来执行任务。选择哪种方式取决于具体需求和程序的设计。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LINUX/" rel="tag"># LINUX</a>
+              <a href="/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/" rel="tag"># 定时器</a>
+              <a href="/tags/time-h/" rel="tag"># time.h</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/706526112.html" rel="prev" title="APICO 蜜蜂种类及说明">
+      <i class="fa fa-chevron-left"></i> APICO 蜜蜂种类及说明
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2643315206.html" rel="next" title="数据结构堆(Heap)详解">
+      数据结构堆(Heap)详解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">定时器流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#itimerval%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%88%9D%E5%80%BC%E5%92%8C%E5%91%A8%E6%9C%9F%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">itimerval（设置定时器的初值和周期值）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setitimer%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">setitimer（设置定时器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#signal-sigaction%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">signal（）&#x2F; sigaction（）函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#signal%E4%B8%8E-sigaction%E5%8C%BA%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text">signal（）与 sigaction（）区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sigalrm%E5%AE%9A%E6%97%B6%E5%99%A8%E4%BF%A1%E5%8F%B7"><span class="nav-number">6.</span> <span class="nav-text">SIGALRM（定时器信号）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">7.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E-while-%E5%BE%AA%E7%8E%AF%E6%9C%89%E6%9C%AC%E8%B4%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">8.</span> <span class="nav-text">设定定时器与
+while 循环有本质的区别</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

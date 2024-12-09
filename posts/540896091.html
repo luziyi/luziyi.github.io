@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="algorithm头文件是C++的标准算法库，它主要应用在容器上。 因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的 ，也就是说，具有低耦合性。 因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="algorithm头文件函数全集——史上最全，最贴心">
+<meta property="og:url" content="https://tommygong.top/posts/540896091.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="algorithm头文件是C++的标准算法库，它主要应用在容器上。 因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的 ，也就是说，具有低耦合性。 因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-17T01:49:19.000Z">
+<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="CPP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/540896091.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>algorithm头文件函数全集——史上最全，最贴心 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/540896091.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          algorithm头文件函数全集——史上最全，最贴心
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-17 09:49:19" itemprop="dateCreated datePublished" datetime="2023-05-17T09:49:19+08:00">2023-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+            <div class="post-description">algorithm头文件是C++的标准算法库，它主要应用在容器上。 因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的 ，也就是说，具有低耦合性。 因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="简介">简介：</h2>
+<p>algorithm头文件是C++的标准算法库，它主要应用在容器上。
+因为所有的算法都是通过迭代器进行操作的，所以算法的运算实际上是和具体的数据结构相分离的
+，也就是说，具有低耦合性。
+因此，任何数据结构都能使用这套算法库，只要它具有相应的迭代器类型。</p>
+<span id="more"></span>
+<h2 id="常用函数">常用函数：</h2>
+<h3 id="一maxminabs函数">一、max()、min()、abs()函数</h3>
+<p>max()：求两个数最大值 min()：求两个数最小值 abs()：求一个数的绝对值
+代码:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line">	<span class="comment">//求最大值</span></span><br><span class="line">	<span class="type">int</span> Max = <span class="built_in">max</span>(a,b);</span><br><span class="line">	<span class="comment">//求最小值</span></span><br><span class="line">	<span class="type">int</span> Min = <span class="built_in">min</span>(a,b);</span><br><span class="line">	<span class="comment">//求绝对值</span></span><br><span class="line">	<span class="type">int</span> Abs = <span class="built_in">abs</span>(<span class="number">-3</span>);</span><br><span class="line">	cout &lt;&lt; Max &lt;&lt; Min &lt;&lt; Abs;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：433 注意：
+1、max()和min()函数中的参数只能是两个，如果想求3个数的最大值，需要嵌套一下
+同理：如果想求数组中的最大值，需要在循环中写。
+2、写了algorithm头文件后，
+max就变成了函数名，在自己定义变量时，要避免使用max，min等。
+3、abs()函数只能用于求整型变量的绝对值，而##include<code>&lt;cmath&gt;</code>中的fabs()函数还可用于求浮点型变量的绝对值，不要搞混~</p>
+<h4 id="交换函数swap">2、交换函数：swap()</h4>
+<p>用来交换x和y的值</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line">	<span class="built_in">swap</span>(a,b);</span><br><span class="line">	cout &lt;&lt; a &lt;&lt; b;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：43</p>
+<h4 id="翻转函数reverse">3、翻转函数：reverse()</h4>
+<p><strong>翻转x-y区间的数组、容器的值。</strong></p>
+<h5 id="翻转整个数组">1、翻转整个数组</h5>
+<p>翻转整个数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>&#125;;</span><br><span class="line">	<span class="built_in">reverse</span>(a,a<span class="number">+5</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：55 44 33 22 11</p>
+<h6
+id="也可以实现对部分值的翻转像这样">2、也可以实现对部分值的翻转，像这样：</h6>
+<p>翻转部分数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>&#125;;</span><br><span class="line">	<span class="built_in">reverse</span>(a<span class="number">+3</span>,a<span class="number">+5</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：11 22 33 55 44</p>
+<h6
+id="翻转容器若想对容器中所有的数进行翻转则需要用到beginend函数像这样">3、翻转容器：若想对容器中所有的数进行翻转，则需要用到begin()、end()函数，像这样：</h6>
+<p>翻转整个容器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;v;</span><br><span class="line">	<span class="comment">//输入： </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		v.<span class="built_in">push_back</span>(i);</span><br><span class="line">	<span class="comment">//输出： </span></span><br><span class="line">	<span class="built_in">reverse</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		cout &lt;&lt; v[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：4 3 2 1 0</p>
+<h6
+id="翻转容器容器的翻转也可以用迭代器来实现指定位数的翻转像这样">4、翻转容器：容器的翻转也可以用迭代器，来实现指定位数的翻转，像这样：</h6>
+<p>翻转部分容器：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;v;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;::iterator it;</span><br><span class="line">	<span class="comment">//输入： </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		v.<span class="built_in">push_back</span>(i);</span><br><span class="line">	<span class="comment">//输出： </span></span><br><span class="line">	it = v.<span class="built_in">begin</span>(); </span><br><span class="line">	<span class="built_in">reverse</span>(it, it<span class="number">+3</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		cout &lt;&lt; v[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：2 1 0 3 4</p>
+<p>注意： 如果想在翻转时指定位数，则其为半开半闭区间。 如reserve(a+2,
+a+4);翻转数组中第2-4之间的数，不包括第二个，但包括第四个。</p>
+<h4 id="四排序函数sort">四、排序函数：sort()</h4>
+<h6
+id="对x-y区间的数组容器进行排序默认升序排列">1、对x-y区间的数组、容器进行排序。默认升序排列。</h6>
+<p>数组升序排序：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">55</span>,<span class="number">44</span>,<span class="number">33</span>,<span class="number">22</span>,<span class="number">11</span>&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">sort</span>(a,a<span class="number">+5</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>输出：11 22 33 44 55</p>
+<h6
+id="如果想将数组降序排序就需要写一个简单的函数改变默认的排序功能像这样">2、如果想将数组降序排序，就需要写一个简单的函数，改变默认的排序功能，像这样：</h6>
+<p>数组降序排序：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="comment">//意思是：若a&gt;b，则a的优先级更大！ 也就是说大的在前面。</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a &gt; b; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">55</span>,<span class="number">44</span>,<span class="number">33</span>,<span class="number">22</span>,<span class="number">11</span>&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">sort</span>(a,a<span class="number">+5</span>,cmp);			<span class="comment">//这里需要加上自己自定义的函数</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：55 44 33 22 11</p>
+<h6
+id="同理如果想对结构体排序也需要自定义优先级像这样">3、同理，如果想对结构体排序，也需要自定义优先级。像这样：</h6>
+<p>结构体排序：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//用sort函数对结构体排序 </span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">	<span class="type">int</span> high;</span><br><span class="line">	<span class="type">int</span> weigh;</span><br><span class="line">&#125;student[<span class="number">10</span>];</span><br><span class="line"><span class="comment">//a.high如果小于b.high，则a结构体的优先级更大， 也就是说：high小的结构体排在前面。 </span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(Student a, Student b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.high &lt; b.high;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		student[i].high = i ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(student, student<span class="number">+10</span>, cmp);		<span class="comment">//将自定义的函数添加上。</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		cout &lt;&lt; student[i].high &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：0 1 2 3 4 5 6 7 8 9</p>
+<h6
+id="如果想对容器排序就需要使用迭代器或beginend函数像这样">4、如果想对容器排序，就需要使用迭代器，或begin(),end()函数。像这样：</h6>
+<p>容器升序排序：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;v;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;::iterator it;</span><br><span class="line">	<span class="comment">//输入： </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">5</span>; i &gt; <span class="number">0</span>; i--) </span><br><span class="line">		v.<span class="built_in">push_back</span>(i); </span><br><span class="line">	<span class="comment">//输出： </span></span><br><span class="line">	it = v.<span class="built_in">begin</span>(); </span><br><span class="line">	<span class="built_in">sort</span>(it, it<span class="number">+3</span>);</span><br><span class="line"><span class="comment">//	sort(v.begin(), v.end())</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		cout &lt;&lt; v[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：3 4 5 2 1</p>
+<h6
+id="同理如果想对容器降序排序或对容器结构体排序向数组那样操作就可以了">5、同理，如果想对容器降序排序，或对容器结构体排序，向数组那样操作就可以了。</h6>
+<p>注意：
+1、sort()排序函数的时间复杂度大概在o(nlogn)，比冒泡、简单排序等效率高 。
+2、和reverse()函数一样，可以自由指定排序范围，也是半开半闭区间（左闭右开）。</p>
+<h4 id="五查找函数find">五、查找函数：find()</h4>
+<p>查找某数组指定区间x-y内是否有x，若有，则返回该位置的地址，若没有，则返回该数组第n+1个值的地址。(好烦有木有，为啥要返回地址。还要转化o(╥﹏╥)o)
+1、数组中查找是否有某值：一定一定一定要满足代码中这两个条件。
+第一个条件是：p-a != 数组的长度。p是查找数值的地址，a是a[0]的地址。
+第二个条件是：*p == x; 也就是该地址指向的值等于我们要查找的值。
+最后输出p-a+1； p-a相当于x所在位置的地址-a[0]所在位置的地址，
+但因为是从0开始算， 所以最后需要+1。</p>
+<h6 id="对数组查找">1、对数组查找：</h6>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> *p = <span class="built_in">find</span>(a,a<span class="number">+5</span>,<span class="number">33</span>);				<span class="comment">//定义指针，指向查找完成后返回的地址，5为a2数组长度 </span></span><br><span class="line">  	<span class="keyword">if</span>(((p-a) != <span class="number">5</span>) &amp;&amp; (*p == x))		<span class="comment">//若同时满足这两个条件，则查找成功，输出 </span></span><br><span class="line">  		cout &lt;&lt; (p-a<span class="number">+1</span>);					<span class="comment">//输出所在位置 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：3</p>
+<h6
+id="对容器进行查找同理也要满足这两个条件">2、对容器进行查找同理：也要满足这两个条件：</h6>
+<p>对容器查找：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;v;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;::iterator it, it1;</span><br><span class="line">	<span class="comment">//输入： </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		v.<span class="built_in">push_back</span>(i); </span><br><span class="line">	<span class="comment">//查找 </span></span><br><span class="line">	<span class="type">int</span> size = v.<span class="built_in">size</span>();					<span class="comment">//第一步：求长度</span></span><br><span class="line">	it = <span class="built_in">find</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), <span class="number">3</span>);		<span class="comment">//第二步：查找x在容器的位置，返回迭代器1</span></span><br><span class="line">	it1 = v.<span class="built_in">begin</span>();						<span class="comment">//第三步：令迭代器2指向容器头 </span></span><br><span class="line">	<span class="keyword">if</span>(((it-it1)!=size)&amp;&amp;(*it==<span class="number">3</span>))			<span class="comment">//第四步：若同时满足这两个条件，则查找成功，输出 </span></span><br><span class="line">		cout &lt;&lt; (it-it1<span class="number">+1</span>) &lt;&lt; endl;			<span class="comment">//输出所在位置 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>输出：4</p>
+<h4
+id="六查找函数upper_boundlower_bound">六、查找函数：upper_bound()、lower_bound()</h4>
+<p>1、upper_bound()：查找第一个大于x的值的位置
+2、lower_bound()：查找第一个大于等于x的值的位置
+同样是返回地址，用法和find()函数一毛一样，限制条件也一毛一样，照着扒就行了。</p>
+<h4 id="七填充函数fill">七、填充函数：fill()</h4>
+<p>在区间内填充某一个值。同样适用所有类型数组，容器。
+1、举例：在数组中未赋值的地方填充9999</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">11</span>,<span class="number">33</span>,<span class="number">22</span>&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">fill</span>(a<span class="number">+3</span>,a<span class="number">+5</span>,<span class="number">9999</span>);							</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：11 33 22 9999 9999</p>
+<p>应用：
+常用在大数加法中，因为数太大，需要用字符串保存，如果在运算时需要填充0，就要用这个函数。</p>
+<h4 id="八查找某值出现的次数count">八、查找某值出现的次数：count()</h4>
+<p>1、在数组中查找x 在某区间出现的次数：</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">44</span>&#125;;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="built_in">count</span>(a, a<span class="number">+5</span>, <span class="number">44</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出：2</p>
+<p>2、在容器中查找同理，只是需要用iterator迭代器或begin()、end()函数。</p>
+<p>注意：
+和前几个函数一样，如果需要指定区间查询，注意是半开半闭区间(左闭右开区间)。</p>
+<h4 id="八求最大公因数__gcd">八、求最大公因数：__gcd()</h4>
+<p>震惊把！在我最开始知道竟然有这个函数时，我也是震惊的！
+另外，用二者乘积除以最大公因数即可得到最小公倍数。
+因此没有求最小公倍数的函数。</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">	<span class="type">int</span> a = <span class="number">12</span>, b = <span class="number">4</span>;</span><br><span class="line">	<span class="type">int</span> Gcd = __gcd(a,b);</span><br><span class="line">	cout &lt;&lt; Gcd;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>注意： __gcd() 需要写两个下划线！</p>
+<h4
+id="九求交集并集差集set_intersectionset_unionset_difference">九、求交集、并集、差集：set_intersection()、set_union()、set_difference()</h4>
+<h6 id="求交集">1、求交集：</h6>
+<p>（1）：将两个数组的交集赋给一个容器(为什么不能赋给数组呢？因为数组不能动态开辟，且inserter()函数中的参数必须是指向容器的迭代器。)：
+代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;, b[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>&#125;;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;::iterator it;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;v4;</span><br><span class="line">	<span class="built_in">set_intersection</span>(a, a<span class="number">+5</span>, b, b<span class="number">+5</span>, <span class="built_in">inserter</span>(v4,v<span class="number">4.</span><span class="built_in">begin</span>()));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; v<span class="number">4.</span><span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		cout &lt;&lt; v4[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：1 2</p>
+<p>（2）：将两个容器的交集赋给另一个容器： 代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v1, v2, v3;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		v<span class="number">1.</span><span class="built_in">push_back</span>(i);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">3</span>; i &lt; <span class="number">8</span>; i++) </span><br><span class="line">		v<span class="number">2.</span><span class="built_in">push_back</span>(i);</span><br><span class="line">	  </span><br><span class="line">	<span class="built_in">set_intersection</span>(v<span class="number">1.</span><span class="built_in">begin</span>(), v<span class="number">1.</span><span class="built_in">end</span>(), v<span class="number">2.</span><span class="built_in">begin</span>(), v<span class="number">2.</span><span class="built_in">end</span>(), <span class="built_in">inserter</span>(v3,v<span class="number">3.</span><span class="built_in">begin</span>()));  </span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; v<span class="number">3.</span><span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		cout &lt;&lt; v3[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>输出：3 4</p>
+<h6 id="求并集">2、求并集：</h6>
+<p>（1）：将两个数组的并集赋给一个容器(为什么不能赋给数组呢？因为数组不能动态开辟，且inserter()函数中的参数必须是指向容器的迭代器。)：</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;, b[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>&#125;;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;::iterator it;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;v4;</span><br><span class="line">	<span class="built_in">set_union</span>(a, a<span class="number">+5</span>, b, b<span class="number">+5</span>, <span class="built_in">inserter</span>(v4,v<span class="number">4.</span><span class="built_in">begin</span>()));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; v<span class="number">4.</span><span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		cout &lt;&lt; v4[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：1 2 3 4 5 33 44 55 （2）：将两个容器的并集赋给另一个容器：</p>
+<p>代码： ##include<code>&lt;algorithm&gt;</code>
+##include<code>&lt;iostream&gt;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; v1, v2, v3;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) </span><br><span class="line">		v<span class="number">1.</span><span class="built_in">push_back</span>(i);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">3</span>; i &lt; <span class="number">8</span>; i++) </span><br><span class="line">		v<span class="number">2.</span><span class="built_in">push_back</span>(i);</span><br><span class="line">	  </span><br><span class="line">	<span class="built_in">set_union</span>(v<span class="number">1.</span><span class="built_in">begin</span>(), v<span class="number">1.</span><span class="built_in">end</span>(), v<span class="number">2.</span><span class="built_in">begin</span>(), v<span class="number">2.</span><span class="built_in">end</span>(), <span class="built_in">inserter</span>(v3,v<span class="number">3.</span><span class="built_in">begin</span>()));  </span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; v<span class="number">3.</span><span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">		cout &lt;&lt; v3[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：0 1 2 3 4 5 6 7</p>
+<h6 id="差集完全同理">3、差集完全同理。</h6>
+<p>注意： inserter(c,c.begin()）为插入迭代器
+此函数接受第二个参数，这个参数必须是一个指向给定容器的迭代器。元素将被插入到给定迭代器所表示的元素之前。</p>
+<h4 id="十全排列next_permutation">十、全排列：next_permutation()</h4>
+<p>将给定区间的数组、容器全排列</p>
+<h6 id="将给定区间的数组全排列">1、将给定区间的数组全排列：</h6>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">#<span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">	<span class="type">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		cout&lt;&lt;a[<span class="number">0</span>]&lt;&lt;a[<span class="number">1</span>]&lt;&lt;a[<span class="number">2</span>]&lt;&lt;endl; </span><br><span class="line">	&#125;<span class="keyword">while</span>(<span class="built_in">next_permutation</span>(a,a<span class="number">+3</span>));	<span class="comment">//输出1、2、3的全排列 </span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+<p>输出： 123 132 213 231 312 321</p>
+<h6
+id="容器全排列同理只不过将参数换成iterator迭代器或beginend函数">2、容器全排列同理：只不过将参数换成iterator迭代器或begin()、end()函数。</h6>
+<p>注意：
+和之前的一样，如果指定全排列区间，则该区间是半开半闭区间（左闭右开）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">                   _ooOoo_</span></span><br><span class="line"><span class="comment">                  o8888888o</span></span><br><span class="line"><span class="comment">                  88&quot; . &quot;88</span></span><br><span class="line"><span class="comment">                  (| -_- |)</span></span><br><span class="line"><span class="comment">                  O\  =  /O</span></span><br><span class="line"><span class="comment">               ____/`---&#x27;\____</span></span><br><span class="line"><span class="comment">             .&#x27;  \\|     |//  `.</span></span><br><span class="line"><span class="comment">            /  \\|||  :  |||//  \</span></span><br><span class="line"><span class="comment">           /  _||||| -:- |||||-  \</span></span><br><span class="line"><span class="comment">           |   | \\\  -  /// |   |</span></span><br><span class="line"><span class="comment">           | \_|  &#x27;&#x27;\---/&#x27;&#x27;  |   |</span></span><br><span class="line"><span class="comment">           \  .-\__  `-`  ___/-. /</span></span><br><span class="line"><span class="comment">         ___`. .&#x27;  /--.--\  `. . __</span></span><br><span class="line"><span class="comment">      .&quot;&quot; &#x27;&lt;  `.___\_&lt;|&gt;_/___.&#x27;  &gt;&#x27;&quot;&quot;.</span></span><br><span class="line"><span class="comment">     | | :  `- \`.;`\ _ /`;.`/ - ` : | |</span></span><br><span class="line"><span class="comment">     \  \ `-.   \_ __\ /__ _/   .-` /  /</span></span><br><span class="line"><span class="comment">======`-.____`-.___\_____/___.-`____.-&#x27;======</span></span><br><span class="line"><span class="comment">                   `=---=&#x27;</span></span><br><span class="line"><span class="comment">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span></span><br><span class="line"><span class="comment">         I have a dream! An AC dream!!</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p>————————————————
+版权声明：本文为CSDN博主「来老铁干了这碗代码」的原创文章，遵循CC 4.0
+BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_43899069/article/details/104450000</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CPP/" rel="tag"># CPP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/941783862.html" rel="prev" title="Prim算法（普里姆算法）详解">
+      <i class="fa fa-chevron-left"></i> Prim算法（普里姆算法）详解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/1679445169.html" rel="next" title="指针及动态内存管理">
+      指针及动态内存管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">常用函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80maxminabs%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">一、max()、min()、abs()函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E5%87%BD%E6%95%B0swap"><span class="nav-number">2.1.1.</span> <span class="nav-text">2、交换函数：swap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BF%BB%E8%BD%AC%E5%87%BD%E6%95%B0reverse"><span class="nav-number">2.1.2.</span> <span class="nav-text">3、翻转函数：reverse()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BF%BB%E8%BD%AC%E6%95%B4%E4%B8%AA%E6%95%B0%E7%BB%84"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">1、翻转整个数组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0%E5%AF%B9%E9%83%A8%E5%88%86%E5%80%BC%E7%9A%84%E7%BF%BB%E8%BD%AC%E5%83%8F%E8%BF%99%E6%A0%B7"><span class="nav-number">2.1.2.1.1.</span> <span class="nav-text">2、也可以实现对部分值的翻转，像这样：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BF%BB%E8%BD%AC%E5%AE%B9%E5%99%A8%E8%8B%A5%E6%83%B3%E5%AF%B9%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%89%80%E6%9C%89%E7%9A%84%E6%95%B0%E8%BF%9B%E8%A1%8C%E7%BF%BB%E8%BD%AC%E5%88%99%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0beginend%E5%87%BD%E6%95%B0%E5%83%8F%E8%BF%99%E6%A0%B7"><span class="nav-number">2.1.2.1.2.</span> <span class="nav-text">3、翻转容器：若想对容器中所有的数进行翻转，则需要用到begin()、end()函数，像这样：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BF%BB%E8%BD%AC%E5%AE%B9%E5%99%A8%E5%AE%B9%E5%99%A8%E7%9A%84%E7%BF%BB%E8%BD%AC%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%8C%87%E5%AE%9A%E4%BD%8D%E6%95%B0%E7%9A%84%E7%BF%BB%E8%BD%AC%E5%83%8F%E8%BF%99%E6%A0%B7"><span class="nav-number">2.1.2.1.3.</span> <span class="nav-text">4、翻转容器：容器的翻转也可以用迭代器，来实现指定位数的翻转，像这样：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0sort"><span class="nav-number">2.1.3.</span> <span class="nav-text">四、排序函数：sort()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AF%B9x-y%E5%8C%BA%E9%97%B4%E7%9A%84%E6%95%B0%E7%BB%84%E5%AE%B9%E5%99%A8%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E9%BB%98%E8%AE%A4%E5%8D%87%E5%BA%8F%E6%8E%92%E5%88%97"><span class="nav-number">2.1.3.0.1.</span> <span class="nav-text">1、对x-y区间的数组、容器进行排序。默认升序排列。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%83%B3%E5%B0%86%E6%95%B0%E7%BB%84%E9%99%8D%E5%BA%8F%E6%8E%92%E5%BA%8F%E5%B0%B1%E9%9C%80%E8%A6%81%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%BD%E6%95%B0%E6%94%B9%E5%8F%98%E9%BB%98%E8%AE%A4%E7%9A%84%E6%8E%92%E5%BA%8F%E5%8A%9F%E8%83%BD%E5%83%8F%E8%BF%99%E6%A0%B7"><span class="nav-number">2.1.3.0.2.</span> <span class="nav-text">2、如果想将数组降序排序，就需要写一个简单的函数，改变默认的排序功能，像这样：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%90%8C%E7%90%86%E5%A6%82%E6%9E%9C%E6%83%B3%E5%AF%B9%E7%BB%93%E6%9E%84%E4%BD%93%E6%8E%92%E5%BA%8F%E4%B9%9F%E9%9C%80%E8%A6%81%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BC%98%E5%85%88%E7%BA%A7%E5%83%8F%E8%BF%99%E6%A0%B7"><span class="nav-number">2.1.3.0.3.</span> <span class="nav-text">3、同理，如果想对结构体排序，也需要自定义优先级。像这样：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%83%B3%E5%AF%B9%E5%AE%B9%E5%99%A8%E6%8E%92%E5%BA%8F%E5%B0%B1%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%88%96beginend%E5%87%BD%E6%95%B0%E5%83%8F%E8%BF%99%E6%A0%B7"><span class="nav-number">2.1.3.0.4.</span> <span class="nav-text">4、如果想对容器排序，就需要使用迭代器，或begin(),end()函数。像这样：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%90%8C%E7%90%86%E5%A6%82%E6%9E%9C%E6%83%B3%E5%AF%B9%E5%AE%B9%E5%99%A8%E9%99%8D%E5%BA%8F%E6%8E%92%E5%BA%8F%E6%88%96%E5%AF%B9%E5%AE%B9%E5%99%A8%E7%BB%93%E6%9E%84%E4%BD%93%E6%8E%92%E5%BA%8F%E5%90%91%E6%95%B0%E7%BB%84%E9%82%A3%E6%A0%B7%E6%93%8D%E4%BD%9C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BA%86"><span class="nav-number">2.1.3.0.5.</span> <span class="nav-text">5、同理，如果想对容器降序排序，或对容器结构体排序，向数组那样操作就可以了。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E6%9F%A5%E6%89%BE%E5%87%BD%E6%95%B0find"><span class="nav-number">2.1.4.</span> <span class="nav-text">五、查找函数：find()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E7%BB%84%E6%9F%A5%E6%89%BE"><span class="nav-number">2.1.4.0.1.</span> <span class="nav-text">1、对数组查找：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AF%B9%E5%AE%B9%E5%99%A8%E8%BF%9B%E8%A1%8C%E6%9F%A5%E6%89%BE%E5%90%8C%E7%90%86%E4%B9%9F%E8%A6%81%E6%BB%A1%E8%B6%B3%E8%BF%99%E4%B8%A4%E4%B8%AA%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.1.4.0.2.</span> <span class="nav-text">2、对容器进行查找同理：也要满足这两个条件：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E6%9F%A5%E6%89%BE%E5%87%BD%E6%95%B0upper_boundlower_bound"><span class="nav-number">2.1.5.</span> <span class="nav-text">六、查找函数：upper_bound()、lower_bound()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%83%E5%A1%AB%E5%85%85%E5%87%BD%E6%95%B0fill"><span class="nav-number">2.1.6.</span> <span class="nav-text">七、填充函数：fill()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AB%E6%9F%A5%E6%89%BE%E6%9F%90%E5%80%BC%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0count"><span class="nav-number">2.1.7.</span> <span class="nav-text">八、查找某值出现的次数：count()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AB%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0__gcd"><span class="nav-number">2.1.8.</span> <span class="nav-text">八、求最大公因数：__gcd()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%9D%E6%B1%82%E4%BA%A4%E9%9B%86%E5%B9%B6%E9%9B%86%E5%B7%AE%E9%9B%86set_intersectionset_unionset_difference"><span class="nav-number">2.1.9.</span> <span class="nav-text">九、求交集、并集、差集：set_intersection()、set_union()、set_difference()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B1%82%E4%BA%A4%E9%9B%86"><span class="nav-number">2.1.9.0.1.</span> <span class="nav-text">1、求交集：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B1%82%E5%B9%B6%E9%9B%86"><span class="nav-number">2.1.9.0.2.</span> <span class="nav-text">2、求并集：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B7%AE%E9%9B%86%E5%AE%8C%E5%85%A8%E5%90%8C%E7%90%86"><span class="nav-number">2.1.9.0.3.</span> <span class="nav-text">3、差集完全同理。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%81%E5%85%A8%E6%8E%92%E5%88%97next_permutation"><span class="nav-number">2.1.10.</span> <span class="nav-text">十、全排列：next_permutation()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B0%86%E7%BB%99%E5%AE%9A%E5%8C%BA%E9%97%B4%E7%9A%84%E6%95%B0%E7%BB%84%E5%85%A8%E6%8E%92%E5%88%97"><span class="nav-number">2.1.10.0.1.</span> <span class="nav-text">1、将给定区间的数组全排列：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%85%A8%E6%8E%92%E5%88%97%E5%90%8C%E7%90%86%E5%8F%AA%E4%B8%8D%E8%BF%87%E5%B0%86%E5%8F%82%E6%95%B0%E6%8D%A2%E6%88%90iterator%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%88%96beginend%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.10.0.2.</span> <span class="nav-text">2、容器全排列同理：只不过将参数换成iterator迭代器或begin()、end()函数。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

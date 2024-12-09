@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="大二学习操作系统的时候，老师给我们介绍了MIT6.828的实验，由于课程安排的原因，我们并没有完成MIT6.828太多的实验，记忆中应该是只看了和xv6相关的内容辅助理解操作系统，以至于我现在几乎忘记了当时做了哪些实验。趁大三上课不是很多，想重新自己完整完成这7个实验。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT 6.828 实验记录 (一)">
+<meta property="og:url" content="https://tommygong.top/posts/2756843955.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="大二学习操作系统的时候，老师给我们介绍了MIT6.828的实验，由于课程安排的原因，我们并没有完成MIT6.828太多的实验，记忆中应该是只看了和xv6相关的内容辅助理解操作系统，以至于我现在几乎忘记了当时做了哪些实验。趁大三上课不是很多，想重新自己完整完成这7个实验。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-13T01:23:57.000Z">
+<meta property="article:modified_time" content="2024-12-09T13:14:28.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="MIT">
+<meta property="article:tag" content="6.828">
+<meta property="article:tag" content="JOS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/2756843955.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MIT 6.828 实验记录 (一) | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/2756843955.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIT 6.828 实验记录 (一)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-13 09:23:57" itemprop="dateCreated datePublished" datetime="2024-09-13T09:23:57+08:00">2024-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-09 21:14:28" itemprop="dateModified" datetime="2024-12-09T21:14:28+08:00">2024-12-09</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>39 分钟</span>
+            </span>
+            <div class="post-description">大二学习操作系统的时候，老师给我们介绍了MIT6.828的实验，由于课程安排的原因，我们并没有完成MIT6.828太多的实验，记忆中应该是只看了和xv6相关的内容辅助理解操作系统，以至于我现在几乎忘记了当时做了哪些实验。趁大三上课不是很多，想重新自己完整完成这7个实验。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>大二学习操作系统的时候，老师给我们介绍了MIT6.828的实验，由于课程安排的原因，我们并没有完成MIT6.828太多的实验，记忆中应该是只看了和xv6相关的内容辅助理解操作系统，以至于我现在几乎忘记了当时做了哪些实验。趁大三上课不是很多，想重新自己完整完成这7个实验。
+## Part 0: 6.828 Build Environment</p>
+<ul>
+<li>虚拟机环境：Ubuntu 18.04（64位）</li>
+<li>仿真器（qemu）：<code>git clone https://github.com/mit-pdos/6.828-qemu.git qemu</code></li>
+<li>实验代码（lab）：<code>git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab</code></li>
+</ul>
+<p>虚拟机环境<code>32位</code>，因为<code>JOS</code>就是32位的操作系统。
+仿真器使用MIT进行patch过的(见上链接)。原因是实验中分页机制是有意修改过的，使用<code>patched version</code>的话在后面<code>Exercise</code>中不需要手动转换地址。
+关于实验代码，默认熟悉<code>Git</code>和<code>MakeFile</code>。每做完一个<code>Exercise</code>可以使用<code>make grade</code>进行测试。
+<code>./configure</code>时候可能会出现库缺失导致无法完成配置，可以根据报错提示将缺失的库重新安装补全，Google一下。详细的搭建过程见<a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/tools.html#">Tools
+Guide</a>。</p>
+<p>关于Tool
+Guide中给出的配置指令，如果<code>[--prefix=PFX]</code>参数没有指定的话，默认会安装在<code>/usr/local/share/qemu</code>中，这个目录需要管理员权限才能修改，所以安装时需要使用<code>sudo make install</code></p>
+<p>关于在<code>make install</code>过程中可能会出现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: qga/commands-posix.o: in function `dev_major_minor&#x27;:</span><br><span class="line">/qemu/qga/commands-posix.c:633: undefined reference to `major&#x27;</span><br><span class="line">/usr/bin/ld: /qemu/qga/commands-posix.c:634: undefined reference to `minor&#x27;</span><br></pre></td></tr></table></figure>
+<p>解决办法是：在<code>/qemu/qga/commands-posix.c</code>头文件中插入<code>#include &lt;sys/sysmacros.h&gt;</code></p>
+<hr />
+<h2 id="part-1-pc-bootstrap">Part 1: PC Bootstrap</h2>
+<p>如果您还不熟悉 x86 汇编语言，那么在本课程中您将很快熟悉它！<a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/readings/pcasm-book.pdf">PC
+汇编语言手册</a>是一个很好的起点。希望这本书包含新旧材料的混合供你参考。</p>
+<p><em>警告：</em>不幸的是，书中的例子是为 NASM
+汇编器编写的，而我们将使用 GNU 汇编器。NASM 使用所谓的 <em>Intel</em>
+语法，而 GNU 使用 <em>AT&amp;T</em>
+语法。虽然在语义上是等效的，但程序集文件将有很大差异，至少在表面上是这样，具体取决于使用的语法。幸运的是，两者之间的转换非常简单，<a
+target="_blank" rel="noopener" href="http://www.delorie.com/djgpp/doc/brennan/brennan_att_inline_djgpp.html">Brennan's
+Guide to Inline Assembly</a> 中对此进行了介绍。</p>
+<blockquote>
+<p>Exercise 1. Familiarize yourself with the assembly language materials
+available on <a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/reference.html">the 6.828
+reference page</a>. You don't have to read them now, but you'll almost
+certainly want to refer to some of this material when reading and
+writing x86 assembly. We do recommend reading the section "The Syntax"
+in <a
+target="_blank" rel="noopener" href="http://www.delorie.com/djgpp/doc/brennan/brennan_att_inline_djgpp.html">Brennan's
+Guide to Inline Assembly</a>. It gives a good (and quite brief)
+description of the AT&amp;T assembly syntax we'll be using with the GNU
+assembler in JOS.</p>
+</blockquote>
+<h3 id="simulating-the-x86">Simulating the x86</h3>
+<p>我们不是在真实的物理个人计算机 （PC）
+上开发操作系统，而是使用忠实模拟完整 PC
+的程序：您为仿真器编写的代码也可以在真实 PC
+上启动。使用仿真器可以简化调试;例如，您可以在模拟的 x86
+中设置断点，这对于 x86 的 Silicon 版本来说很难做到。 在 6.828
+中，我们将使用 <a target="_blank" rel="noopener" href="http://www.qemu.org/">QEMU
+Emulator</a>，这是一种现代且相对较快的仿真器。虽然 QEMU
+的内置监视器仅提供有限的调试支持，但 QEMU 可以充当 <a
+target="_blank" rel="noopener" href="http://www.gnu.org/software/gdb/">GNU 调试器</a> （GDB）
+的远程调试目标，我们将在本实验中使用它来逐步完成早期启动过程。</p>
+<p>接下来我们就可以编译并尝试在QEMU上运行JOS了，进入之前clone的lab文件夹，执行make指令，可以看到下面的输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">tommygong@TommyGong:~/lab$ make</span><br><span class="line">+ as kern/entry.S</span><br><span class="line">+ cc kern/entrypgdir.c</span><br><span class="line">+ cc kern/init.c</span><br><span class="line">+ cc kern/console.c</span><br><span class="line">+ cc kern/monitor.c</span><br><span class="line">+ cc kern/printf.c</span><br><span class="line">+ cc kern/kdebug.c</span><br><span class="line">+ cc lib/printfmt.c</span><br><span class="line">+ cc lib/readline.c</span><br><span class="line">+ cc lib/string.c</span><br><span class="line">+ ld obj/kern/kernel</span><br><span class="line">ld: warning: section `.bss<span class="string">&#x27; type changed to PROGBITS</span></span><br><span class="line"><span class="string">+ as boot/boot.S</span></span><br><span class="line"><span class="string">+ cc -Os boot/main.c</span></span><br><span class="line"><span class="string">+ ld boot/boot</span></span><br><span class="line"><span class="string">boot block is 397 bytes (max 510)</span></span><br><span class="line"><span class="string">+ mk obj/kern/kernel.img</span></span><br></pre></td></tr></table></figure>
+<p>这就表示已经成功编译出了镜像文件。
+现在可以运行qemu，将上面创建的<code>obj/kern/kernel.img</code>作为模拟PC的“虚拟硬盘”的内容提供。这个硬盘映像包含我们的引导加载程序
+（ <code>obj/boot/boot</code> ） 和内核 （ <code>obj/kernel</code>
+）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">tommygong@TommyGong:~/lab$ make qemu</span><br><span class="line">sed <span class="string">&quot;s/localhost:1234/localhost:26000/&quot;</span> &lt; .gdbinit.tmpl &gt; .gdbinit</span><br><span class="line">qemu-system-i386 -drive file=obj/kern/kernel.img,index=0,media=disk,format=raw -serial mon:stdio -gdb tcp::26000 -D qemu.log </span><br><span class="line">6828 decimal is XXX octal!</span><br><span class="line">entering test_backtrace 5</span><br><span class="line">entering test_backtrace 4</span><br><span class="line">entering test_backtrace 3</span><br><span class="line">entering test_backtrace 2</span><br><span class="line">entering test_backtrace 1</span><br><span class="line">entering test_backtrace 0</span><br><span class="line">leaving test_backtrace 0</span><br><span class="line">leaving test_backtrace 1</span><br><span class="line">leaving test_backtrace 2</span><br><span class="line">leaving test_backtrace 3</span><br><span class="line">leaving test_backtrace 4</span><br><span class="line">leaving test_backtrace 5</span><br><span class="line">Welcome to the JOS kernel monitor!</span><br><span class="line">Type <span class="string">&#x27;help&#x27;</span> <span class="keyword">for</span> a list of commands.</span><br><span class="line">K&gt;</span><br></pre></td></tr></table></figure>
+<p>要退出QEMU，请键入 <code>Ctrl+a x</code></p>
+<h3 id="the-pcs-physical-address-space">The PC's Physical Address
+Space</h3>
+<p>PC 的物理地址空间是硬连线的，具有以下常规布局：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">+------------------+  &lt;- 0xFFFFFFFF (4GB)</span><br><span class="line">|      32-bit      |</span><br><span class="line">|  memory mapped   |</span><br><span class="line">|     devices      |</span><br><span class="line">|                  |</span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line">|                  |</span><br><span class="line">|      Unused      |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- depends on amount of RAM</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">| Extended Memory  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00100000 (1MB)</span><br><span class="line">|     BIOS ROM     |</span><br><span class="line">+------------------+  &lt;- 0x000F0000 (960KB)</span><br><span class="line">|  16-bit devices, |</span><br><span class="line">|  expansion ROMs  |</span><br><span class="line">+------------------+  &lt;- 0x000C0000 (768KB)</span><br><span class="line">|   VGA Display    |</span><br><span class="line">+------------------+  &lt;- 0x000A0000 (640KB)</span><br><span class="line">|                  |</span><br><span class="line">|    Low Memory    |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00000000</span><br></pre></td></tr></table></figure>
+<p>第一台基于 16 位 Intel 8088 处理器的 PC 只能寻址 1MB
+的物理内存。因此，早期 PC 的物理地址空间将从 0x00000000 开始，但以
+0x000FFFFF 结束，而不是 0xFFFFFFFF。标记为“Low Memory”的 640KB
+区域是早期 PC 唯一<em>可以使用的随机</em>存取存储器
+（RAM）;事实上，最早的 PC 只能配置 16KB、32KB 或 64KB 的 RAM！</p>
+<p>从 0x000A0000 到 0x000FFFFF 的 384KB
+区域由硬件保留用于特殊用途，例如视频显示缓冲区和非易失性存储器中保存的固件。此保留区域最重要的部分是基本输入/输出系统
+（BIOS），它占据了从 0x000F0000 到 0x000FFFFF 的 64KB 区域。在早期的 PC
+中，BIOS 保存在真正的只读存储器 （ROM） 中，但当前的 PC 将 BIOS
+存储在可更新的闪存中。BIOS
+负责执行基本的系统初始化，例如激活视频卡和检查安装的内存量。执行此初始化后，BIOS
+会从某个适当的位置（如软盘、硬盘、CD-ROM
+或网络）加载操作系统，并将计算机的控制权传递给操作系统。</p>
+<p>当英特尔最终用分别支持 16MB 和 4GB 物理地址空间的 80286 和 80386
+处理器“打破 1MB 的障碍”时，PC 架构师仍然保留了 1MB
+物理地址空间的原始布局，以确保与现有软件的向后兼容性。因此，现代 PC
+在物理内存上有一个从 0x000A0000 到 0x00100000 的“漏洞”，将 RAM
+分为“低内存”或“传统内存”（前
+640KB）和“扩展内存”（其他所有内存）。此外，PC 的 32
+位物理地址空间最顶部的一些空间（尤其是物理 RAM）现在通常由 BIOS 保留供
+32 位 PCI 设备使用。</p>
+<p>最新的 x86 处理器可以支持<em>超过</em> 4GB 的物理 RAM，因此 RAM
+可以进一步扩展到 0xFFFFFFFF 以上。在这种情况下，BIOS 必须在系统 RAM 的
+32 位可寻址区域顶部留出<em>第二个</em>孔，以便为这些 32
+位设备留出空间进行映射。由于设计限制，JOS 无论如何都会只使用 PC
+物理内存的前 256MB，所以现在我们假设所有 PC 都“只有”一个 32
+位的物理地址空间。但是，处理复杂的物理地址空间和多年来发展起来的硬件组织的其他方面是操作系统开发的重要实际挑战之一。</p>
+<h3 id="the-rom-bios">The ROM BIOS</h3>
+<p>打开两个终端窗口和 cd 两个 shell
+进入您的实验室目录。在一个版本中，输入 <code>make qemu-gdb</code>
+。这将启动 QEMU，但 QEMU 在处理器执行第一条指令并等待来自 GDB
+的调试连接之前停止。在第二个终端中，从您运行的同一目录中运行
+<code>make gdb</code>。然后应该就能看到下面的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tommygong@TommyGong:~/lab$  make gdb</span><br><span class="line">gdb -n -x .gdbinit</span><br><span class="line">GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1</span><br><span class="line">Copyright (C) 2018 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;</span><br><span class="line">and &quot;show warranty&quot; for details.</span><br><span class="line">This GDB was configured as &quot;x86_64-linux-gnu&quot;.</span><br><span class="line">Type &quot;show configuration&quot; for configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line">For help, type &quot;help&quot;.</span><br><span class="line">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;.</span><br><span class="line">+ target remote localhost:26000</span><br><span class="line">warning: No executable has been specified and target does not support</span><br><span class="line">determining executable automatically.  Try using the &quot;file&quot; command.</span><br><span class="line">warning: A handler for the OS ABI &quot;GNU/Linux&quot; is not built into this configuration</span><br><span class="line">of GDB.  Attempting to continue with the default i8086 settings.</span><br><span class="line"></span><br><span class="line">The target architecture is assumed to be i8086</span><br><span class="line">[f000:fff0]    0xffff0:	ljmp   $0xf000,$0xe05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br></pre></td></tr></table></figure>
+<p><code>[f000:fff0]    0xffff0:    ljmp   $0xf000,$0xe05b</code>是GDB对QEMU执行的第一条指令的反汇编。</p>
+<ul>
+<li><p>IBM PC 从物理地址 <code>0x000ffff0</code> 开始执行，该地址位于为
+ROM BIOS 保留的 64KB 区域的最顶部。</p></li>
+<li><p>PC 以 <code>CS(Code Segment) = 0xf000</code> 和
+<code>IP(Instruction Pointer) = 0xfff0</code> 开始执行。</p></li>
+<li><p>要执行的第一条指令是一条 <code>jmp</code>
+指令，该指令跳转到分段地址 <code>CS = 0xf000</code> 和
+<code>IP = 0xe05b</code> 。</p></li>
+</ul>
+<p>这条指令 <code>0xffff0: ljmp $0xf000,$0xe05b</code>
+是一个远跳转（<code>ljmp</code>）指令，它用于将程序的执行流跳转到特定的段和偏移地址。
+<code>0xffff0</code>: 这是指令在内存中的地址，意味着当前指令位于内存的
+<code>0xFFFF0</code> 地址处。<code>ljmp $0xf000, $0xe05b</code>:
+这是一条远跳转指令（long jump，简称
+<code>ljmp</code>），它包含两个部分：</p>
+<ul>
+<li><strong>段选择符</strong> <code>$0xf000</code>:
+段寄存器的值，即代码段的基地址。</li>
+<li><strong>偏移地址</strong> <code>$0xe05b</code>:
+相对于段基地址的偏移量。</li>
+</ul>
+<p>在 x86
+保护模式之前的实模式下，内存地址是通过段和偏移组合的形式访问的：</p>
+<ul>
+<li><code>物理地址 = 段选择符 × 16 + 偏移地址</code></li>
+</ul>
+<p>因此，执行这条指令后，CPU 会跳转到段 <code>$0xf000</code> 和偏移
+<code>$0xe05b</code> 组合形成的物理地址：</p>
+<ul>
+<li>物理地址 = <code>0xf000 * 16 + 0xe05b</code></li>
+<li>物理地址 = <code>0xf0000 + 0xe05b = 0xfe05b</code></li>
+</ul>
+<p>这种指令通常出现在系统启动时（例如，BIOS 启动阶段）。当 CPU
+加电或者复位时，它会从 <code>0xFFFF0</code>
+这个地址开始执行，通常这是一条跳转指令，将 CPU 引导到系统 BIOS
+的实际启动代码处。</p>
+<p><strong>实模式 (Real Mode)</strong></p>
+<p>实模式是x86处理器上电或重置后默认的工作模式，最早用于<strong>8086</strong>处理器，并且向后兼容现代处理器。</p>
+<ul>
+<li><strong>内存寻址</strong>：处理器只能访问 <strong>1MB</strong>
+的内存空间。这是由于实模式只能使用20位地址（段寄存器16位+偏移量16位，实际结果为20位地址线）。</li>
+<li><strong>段寄存器</strong>：内存寻址采用分段机制，内存地址是通过段寄存器和偏移量相加来计算的。例如，物理地址
+= <code>段基址 × 16 + 偏移量</code>。</li>
+<li><strong>没有内存保护</strong>：在实模式下，程序可以直接访问任何内存地址，导致多个程序之间可能会互相覆盖内存，容易出现系统崩溃。</li>
+<li><strong>多任务处理</strong>：没有内建的硬件支持多任务处理，处理器无法有效地管理多个程序的并行执行。</li>
+<li><strong>应用</strong>：实模式主要用于早期的操作系统（如DOS），以及一些简单的嵌入式系统。</li>
+</ul>
+<p><strong>保护模式 (Protected Mode)</strong></p>
+<p>保护模式是现代x86处理器的主要工作模式，最早引入于<strong>80286</strong>处理器，后来在<strong>80386</strong>及以后的处理器中得到了大幅改进。</p>
+<ul>
+<li><strong>内存寻址</strong>：使用32位地址总线，最多可以寻址
+<strong>4GB</strong>
+的内存。并且支持更复杂的内存管理机制，如分页（Paging）和虚拟内存（Virtual
+Memory）。</li>
+<li><strong>段管理</strong>：保护模式中的段寄存器不再简单地提供段基址，而是与<strong>全局描述符表（GDT）</strong>和<strong>局部描述符表（LDT）</strong>关联，提供段保护。每个段都有自己的权限、大小等信息。</li>
+<li><strong>内存保护</strong>：每个程序运行在自己的地址空间内，处理器能够检测非法的内存访问。通过段和分页机制，操作系统可以防止不同程序互相干扰，增强系统的稳定性和安全性。</li>
+<li><strong>多任务处理</strong>：硬件支持多任务处理，处理器能够通过任务状态段（TSS）快速切换任务。内存保护机制使得每个任务在自己的地址空间中运行，确保系统的稳定性。</li>
+<li><strong>虚拟内存</strong>：保护模式支持虚拟内存，通过分页机制将虚拟地址映射到物理地址，允许程序使用比实际物理内存更大的地址空间。</li>
+<li><strong>应用</strong>：所有现代操作系统（如Windows、Linux、macOS）都运行在保护模式下。</li>
+</ul>
+<p><strong>实模式和保护模式的对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>实模式</th>
+<th>保护模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内存寻址</td>
+<td>最大 1MB</td>
+<td>最大 4GB（支持分页）</td>
+</tr>
+<tr>
+<td>段寄存器</td>
+<td>简单的段+偏移</td>
+<td>与 GDT/LDT 关联，支持权限</td>
+</tr>
+<tr>
+<td>内存保护</td>
+<td>无内存保护</td>
+<td>内存保护，防止进程冲突</td>
+</tr>
+<tr>
+<td>多任务处理</td>
+<td>不支持</td>
+<td>支持，硬件层面支持</td>
+</tr>
+<tr>
+<td>虚拟内存</td>
+<td>不支持</td>
+<td>支持（通过分页实现）</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>早期操作系统、嵌入式系统</td>
+<td>现代操作系统和应用</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Exercise 2. Use GDB's si (Step Instruction) command to trace into the
+ROM BIOS for a few more instructions, and try to guess what it might be
+doing. You might want to look at <a
+target="_blank" rel="noopener" href="http://web.archive.org/web/20040404164813/members.iweb.net.au/~pstorr/pcbook/book2/book2.htm">Phil
+Storrs I/O Ports Description</a>, as well as other materials on the <a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/reference.html">6.828
+reference materials page</a>. No need to figure out all the details -
+just the general idea of what the BIOS is doing first.</p>
+</blockquote>
+<p>当 BIOS 运行时，它会设置中断描述符表并初始化各种设备，例如 VGA
+显示器。这就是您在 QEMU 窗口中看到的 “ <code>Starting SeaBIOS</code> ”
+消息的来源。 在初始化 PCI 总线和 BIOS
+知道的所有重要设备后，它会搜索可启动设备，例如软盘、硬盘驱动器或
+CD-ROM。最终，当它找到可启动磁盘时，BIOS 会从磁盘中读取 <em>boot
+loader</em> 并将控制权转移给它。</p>
+<h2 id="part-2-the-boot-loader">Part 2: The Boot Loader</h2>
+<p>用于 PC 的软盘和硬盘被划分为 512
+字节的区域，称为<em>扇区</em>。扇区是磁盘的最小传输粒度：每个读取或写入操作的大小必须是一个或多个扇区，并在扇区边界上对齐。如果磁盘是可引导的，则第一个扇区称为<em>引导扇区</em>，因为这是引导加载程序代码所在的位置。当
+BIOS 找到可启动的软盘或硬盘时，它会将 512
+字节的引导扇区加载到物理地址的内存中，0x7c00 到 0x7dff，然后使用
+<code>jmp</code> 指令将 CS：IP 设置为 <code>0000:7c00</code>
+，将控制权传递给引导加载程序。与 BIOS 加载地址一样，这些地址相当任意 -
+但它们对于 PC 来说是固定和标准化的。</p>
+<p>在 PC 的发展过程中，从 CD-ROM 启动的能力出现得要晚得多，因此 PC
+架构师借此机会稍微重新考虑了启动过程。因此，现代 BIOS 从 CD-ROM
+启动的方式稍微复杂一些（也更强大）。CD-ROM 使用的扇区大小为 2048
+字节而不是 512 字节，并且 BIOS
+可以在将控制权转移到磁盘之前将更大的引导映像从磁盘加载到内存中（而不仅仅是一个扇区）。有关更多信息，请参见<a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/readings/boot-cdrom.pdf">“El
+Torito”可启动 CD-ROM 格式规范</a>。</p>
+<p>然而，对于
+6.828，我们将使用传统的硬盘驱动器启动机制，这意味着我们的启动加载程序必须适合区区
+512 字节。引导加载程序由一个汇编语言源文件 <code>boot/boot.S</code>
+和一个 C 源文件组成， <code>boot/main.c</code>
+请仔细查看这些源文件，并确保您了解发生了什么。引导加载程序必须执行两个主要功能：</p>
+<ol type="1">
+<li>首先，boot loader 将处理器从实模式切换到 <em>32
+位保护模式</em>，因为只有在这种模式下，软件才能访问处理器物理地址空间中
+1MB 以上的所有内存。保护模式在 <a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/readings/pcasm-book.pdf">PC
+汇编语言</a>的 1.2.7 和 1.2.8 节中简要描述，在 Intel
+架构手册中也有非常详细的描述。此时，您只需要了解分段地址
+（segment：offset pairs）
+到物理地址的转换在保护模式下的发生方式不同，并且在转换后偏移量是 32
+位而不是 16 位。</li>
+<li>其次，引导加载程序通过 x86 的特殊 I/O 指令直接访问 IDE
+磁盘设备寄存器，从硬盘读取内核。如果您想更好地理解此处的特定 I/O
+指令的含义，请查看 <a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/reference.html">6.828
+参考页面上的</a>“IDE
+硬盘驱动器控制器”部分。在本课程中，您不需要学习太多有关特定设备编程的知识：编写设备驱动程序实际上是操作系统开发中非常重要的部分，但从概念或体系结构的角度来看，它也是最不有趣的部分之一。</li>
+</ol>
+<p>了解引导加载程序源代码后，请查看文件 <code>obj/boot/boot.asm</code>
+.这个文件是我们的 GNUmakefile 在编译 boot loader <em>后</em>创建的 boot
+loader 的反汇编。这个反汇编文件可以很容易地看到所有 boot loader
+代码在物理内存中的确切位置，并且更容易跟踪在 GDB 中单步执行 boot loader
+时发生的情况。同样， <code>obj/kern/kernel.asm</code> 包含 JOS
+内核的反汇编，这通常对调试很有用。</p>
+<p>您可以使用该 <code>b</code> 命令在 GDB 中设置地址断点。例如，
+<code>b *0x7c00</code> 在地址 <code>0x7C00</code>
+处设置断点。到达断点后，您可以使用 c and si 命令继续执行： c 使 QEMU
+继续执行，直到下一个断点（或直到您按下 <code>Ctrl-C</code> ），并
+<code>si N</code> 一次单步执行 <em><code>N</code></em> 指令。</p>
+<p>要检查内存中的指令（除了 GDB
+自动打印的下一个要执行的指令），请使用命令 <code>x/i</code>
+。此命令的语法 <code>x/Ni ADDR</code> 为 ，其中 <em>N</em>
+是要反汇编的连续指令数，<em>ADDR</em> 是开始反汇编的内存地址。</p>
+<blockquote>
+<p>Exercise 3. Take a look at the <a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/labguide.html">lab tools
+guide</a>, especially the section on GDB commands. Even if you're
+familiar with GDB, this includes some esoteric GDB commands that are
+useful for OS work. Set a breakpoint at address 0x7c00, which is where
+the boot sector will be loaded. Continue execution until that
+breakpoint. Trace through the code in <code>boot/boot.S</code>, using
+the source code and the disassembly file <code>obj/boot/boot.asm</code>
+to keep track of where you are. Also use the <code>x/i</code> command in
+GDB to disassemble sequences of instructions in the boot loader, and
+compare the original boot loader source code with both the disassembly
+in <code>obj/boot/boot.asm</code> and GDB. Trace into
+<code>bootmain()</code> in <code>boot/main.c</code>, and then into
+<code>readsect()</code>. Identify the exact assembly instructions that
+correspond to each of the statements in <code>readsect()</code>. Trace
+through the rest of <code>readsect()</code> and back out into
+<code>bootmain()</code>, and identify the begin and end of the
+<code>for</code> loop that reads the remaining sectors of the kernel
+from the disk. Find out what code will run when the loop is finished,
+set a breakpoint there, and continue to that breakpoint. Then step
+through the remainder of the boot loader.</p>
+</blockquote>
+<p>Quesiton：</p>
+<ol type="1">
+<li><p>At what point does the processor start executing 32-bit code?
+What exactly causes the switch from 16- to 32-bit mode?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># Switch from real to protected mode, using a bootstrap GDT</span><br><span class="line"># and segment translation that makes virtual addresses </span><br><span class="line"># identical to their physical addresses, so that the </span><br><span class="line"># effective memory map does not change during the switch.</span><br><span class="line">lgdt    gdtdesc</span><br><span class="line">  7c1e:	0f 01 16             	lgdtl  (%esi)</span><br><span class="line">  7c21:	64 7c 0f             	fs jl  7c33 &lt;protcseg+0x1&gt;</span><br><span class="line">movl    %cr0, %eax</span><br><span class="line">  7c24:	20 c0                	and    %al,%al</span><br><span class="line">orl     $CR0_PE_ON, %eax</span><br><span class="line">  7c26:	66 83 c8 01          	or     $0x1,%ax</span><br><span class="line">movl    %eax, %cr0</span><br><span class="line">  7c2a:	0f 22 c0             	mov    %eax,%cr0</span><br><span class="line"></span><br><span class="line"># Jump to next instruction, but in 32-bit code segment.</span><br><span class="line"># Switches processor into 32-bit mode.</span><br><span class="line">ljmp    $PROT_MODE_CSEG, $protcseg</span><br><span class="line">  7c2d:	ea                   	.byte 0xea</span><br><span class="line">  7c2e:	32 7c 08 00          	xor    0x0(%eax,%ecx,1),%bh</span><br></pre></td></tr></table></figure>
+<p>在这里，引导程序从实模式切换到保护模式，支持更大的内存访问，在GDT（Global
+Descriptor
+Table）加载完成之后，处理器就可以开始处理32位指令了，</p></li>
+<li><p>What is the <em>last</em> instruction of the boot loader
+executed, and what is the <em>first</em> instruction of the kernel it
+just loaded?</p></li>
+<li><p><em>Where</em> is the first instruction of the kernel?</p></li>
+<li><p>How does the boot loader decide how many sectors it must read in
+order to fetch the entire kernel from disk? Where does it find this
+information?</p></li>
+</ol>
+<h3 id="loading-the-kernel">Loading the Kernel</h3>
+<p>现在，我们将更详细地查看引导加载程序的 C 语言部分。
+<code>boot/main.c</code> 但在此之前，现在是停下来回顾一下 C
+编程的一些基础知识的好时机。</p>
+<blockquote>
+<p>Exercise 4. Read about programming with pointers in C. The best
+reference for the C language is <em>The C Programming Language</em> by
+Brian Kernighan and Dennis Ritchie (known as 'K&amp;R'). We recommend
+that students purchase this book (here is an <a
+target="_blank" rel="noopener" href="http://www.amazon.com/C-Programming-Language-2nd/dp/0131103628/sr=8-1/qid=1157812738/ref=pd_bbs_1/104-1502762-1803102?ie=UTF8&amp;s=books">Amazon
+Link</a>) or find one of <a
+target="_blank" rel="noopener" href="http://library.mit.edu/F/AI9Y4SJ2L5ELEE2TAQUAAR44XV5RTTQHE47P9MKP5GQDLR9A8X-10422?func=item-global&amp;doc_library=MIT01&amp;doc_number=000355242&amp;year=&amp;volume=&amp;sub_library=">MIT's
+7 copies</a>. Read 5.1 (Pointers and Addresses) through 5.5 (Character
+Pointers and Functions) in K&amp;R. Then download the code for <a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1/pointers.c">pointers.c</a>,
+run it, and make sure you understand where all of the printed values
+come from. In particular, make sure you understand where the pointer
+addresses in printed lines 1 and 6 come from, how all the values in
+printed lines 2 through 4 get there, and why the values printed in line
+5 are seemingly corrupted. There are other references on pointers in C
+(e.g., <a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/readings/pointers.pdf">A
+tutorial by Ted Jensen</a> that cites K&amp;R heavily), though not as
+strongly recommended. <em>Warning:</em> Unless you are already
+thoroughly versed in C, do not skip or even skim this reading exercise.
+If you do not really understand pointers in C, you will suffer untold
+pain and misery in subsequent labs, and then eventually come to
+understand them the hard way. Trust us; you don't want to find out what
+"the hard way" is.</p>
+</blockquote>
+<p>要弄清楚这一点， <code>boot/main.c</code> 您需要知道什么是 ELF
+二进制文件。编译和链接 C 程序（如 JOS 内核）时，编译器会将每个 C 源 （'
+<code>.c</code> '） 文件转换为<em>一个对象</em> （' <code>.o</code> '）
+文件，其中包含以硬件所需的二进制格式编码的汇编语言指令。然后，链接器将所有已编译的目标文件组合成一个<em>二进制映像</em>，例如
+<code>obj/kern/kernel</code> ，在本例中是 ELF
+格式的二进制文件，代表“可执行和可链接格式”。</p>
+<p>有关此格式的完整信息可在<a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/reference.html">我们的参考页面上</a><a
+target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2018/readings/elf.pdf">的 ELF
+规范</a>中找到，但您无需在本课程中深入研究此格式的详细信息。尽管整体格式非常强大和复杂，但大多数复杂的部分都是为了支持共享库的动态加载，我们不会在本课程中这样做。<a
+target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Executable_and_Linkable_Format">维基百科页面</a>有一个简短的描述。</p>
+<p>对于 6.828，您可以将 ELF
+可执行文件视为具有加载信息的标头，后跟几个<em>程序部分</em>，每个部分都是要加载到指定地址的内存中的连续代码块或数据。引导加载程序不会修改代码或数据;它会将其加载到内存中并开始执行它。</p>
+<p>ELF 二进制文件以固定长度的 <em>ELF
+标头</em>开头，后跟一个可变长度的<em>程序标头</em>，其中列出了要加载的每个程序部分。这些
+ELF 标头的 C 定义位于 <code>inc/elf.h</code>
+中。我们感兴趣的节目部分是：</p>
+<ul>
+<li><code>.text</code> ：程序的可执行指令。</li>
+<li><code>.rodata</code> ：只读数据，例如 C 编译器生成的 ASCII
+字符串常量。（但是，我们不会费心设置硬件来禁止写入。）</li>
+<li><code>.data</code> ：data
+部分保存程序的初始化数据，例如使用初始化器声明的全局变量，如
+<code>int x = 5;</code> .</li>
+</ul>
+<p>当链接器计算程序的内存布局时，它会为<em>未初始化的</em>全局变量保留空间，例如
+<code>int x;</code> ，在内存中紧随其后的 <code>.data</code> 名为 section
+<code>.bss</code> called 中。C
+要求“未初始化”的全局变量以零值开头。因此，无需在 ELF
+二进制文件中存储内容 <code>.bss</code> ;相反，链接器仅记录
+<code>.bss</code> 节的地址和大小。加载器或程序本身必须将
+<code>.bss</code> 部分归零。</p>
+<p>通过键入以下内容，检查内核可执行文件中所有部分的名称、大小和链接地址的完整列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">tommygong@TommyGong:~/lab$ objdump -h obj/kern/kernel</span><br><span class="line"></span><br><span class="line">obj/kern/kernel:     file format elf32-i386</span><br><span class="line"></span><br><span class="line">Sections:</span><br><span class="line">Idx Name          Size      VMA       LMA       File off  Algn</span><br><span class="line">  0 .text         00001925  f0100000  00100000  00001000  2**4</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</span><br><span class="line">  1 .rodata       00000704  f0101940  00101940  00002940  2**5</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, DATA</span><br><span class="line">  2 .stab         00003a15  f0102044  00102044  00003044  2**2</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, DATA</span><br><span class="line">  3 .stabstr      00001989  f0105a59  00105a59  00006a59  2**0</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, DATA</span><br><span class="line">  4 .data         0000a300  f0108000  00108000  00009000  2**12</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, DATA</span><br><span class="line">  5 .bss          00000648  f0112300  00112300  00013300  2**5</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, DATA</span><br><span class="line">  6 .comment      0000002a  00000000  00000000  00013948  2**0</span><br><span class="line">                  CONTENTS, READONLY</span><br></pre></td></tr></table></figure>
+<p>这些信息通常包含在程序的可执行文件中，但不会由程序加载器加载到内存中。</p>
+<p>请特别注意该 <code>.text</code> 部分的 “VMA” （或<em>链接地址</em>）
+和 “LMA”
+（或<em>加载地址</em>）。节的加载地址是该节应加载到内存中的内存地址。</p>
+<p>节的 link address 是 section
+预期执行的内存地址。链接器以各种方式对二进制文件中的链接地址进行编码，例如，当代码需要全局变量的地址时，结果是如果二进制文件从未链接的地址执行，则二进制文件通常不起作用。（可以生成不包含任何此类绝对地址的<em>与位置无关</em>的代码。这被现代共享库广泛使用，但它有性能和复杂性成本，因此我们不会在
+6.828 中使用它。</p>
+<p>通常，链路地址和加载地址相同。例如，查看 boot loader
+<code>.text</code> 的部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">tommygong@TommyGong:~/lab$ objdump -h obj/boot/boot.out</span><br><span class="line"></span><br><span class="line">obj/boot/boot.out:     file format elf32-i386</span><br><span class="line"></span><br><span class="line">Sections:</span><br><span class="line">Idx Name          Size      VMA       LMA       File off  Algn</span><br><span class="line">  0 .text         0000018d  00007c00  00007c00  00000074  2**2</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, CODE</span><br><span class="line">  1 .stab         0000084c  00000000  00000000  00000204  2**2</span><br><span class="line">                  CONTENTS, READONLY, DEBUGGING</span><br><span class="line">  2 .stabstr      00000862  00000000  00000000  00000a50  2**0</span><br><span class="line">                  CONTENTS, READONLY, DEBUGGING</span><br><span class="line">  3 .comment      0000002a  00000000  00000000  000012b2  2**0</span><br><span class="line">                  CONTENTS, READONLY</span><br></pre></td></tr></table></figure>
+<p>引导加载程序使用 ELF
+<em>程序头</em>文件来决定如何加载这些部分。程序头文件指定要加载到内存中的
+ELF
+对象的哪些部分，以及每个部分应占用的目标地址。您可以通过键入以下内容来检查程序头文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">tommygong@TommyGong:~/lab$ objdump -x obj/kern/kernel</span><br><span class="line"></span><br><span class="line">obj/kern/kernel:     file format elf32-i386</span><br><span class="line">obj/kern/kernel</span><br><span class="line">architecture: i386, flags 0x00000112:</span><br><span class="line">EXEC_P, HAS_SYMS, D_PAGED</span><br><span class="line">start address 0x0010000c</span><br><span class="line"></span><br><span class="line">Program Header:</span><br><span class="line">    LOAD off    0x00001000 vaddr 0xf0100000 paddr 0x00100000 align 2**12</span><br><span class="line">         filesz 0x000073e2 memsz 0x000073e2 flags r-x</span><br><span class="line">    LOAD off    0x00009000 vaddr 0xf0108000 paddr 0x00108000 align 2**12</span><br><span class="line">         filesz 0x0000a948 memsz 0x0000a948 flags rw-</span><br><span class="line">   STACK off    0x00000000 vaddr 0x00000000 paddr 0x00000000 align 2**4</span><br><span class="line">         filesz 0x00000000 memsz 0x00000000 flags rwx</span><br><span class="line"></span><br><span class="line">Sections:</span><br><span class="line">Idx Name          Size      VMA       LMA       File off  Algn</span><br><span class="line">  0 .text         00001925  f0100000  00100000  00001000  2**4</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</span><br><span class="line">  1 .rodata       00000704  f0101940  00101940  00002940  2**5</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, DATA</span><br><span class="line">  2 .stab         00003a15  f0102044  00102044  00003044  2**2</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, DATA</span><br><span class="line">  3 .stabstr      00001989  f0105a59  00105a59  00006a59  2**0</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, DATA</span><br><span class="line">  4 .data         0000a300  f0108000  00108000  00009000  2**12</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, DATA</span><br><span class="line">  5 .bss          00000648  f0112300  00112300  00013300  2**5</span><br><span class="line">                  CONTENTS, ALLOC, LOAD, DATA</span><br><span class="line">  6 .comment      0000002a  00000000  00000000  00013948  2**0</span><br><span class="line">                  CONTENTS, READONLY</span><br><span class="line">SYMBOL TABLE:</span><br><span class="line">f0100000 l    d  .text	00000000 .text</span><br><span class="line">f0101940 l    d  .rodata	00000000 .rodata</span><br><span class="line">f0102044 l    d  .stab	00000000 .stab</span><br><span class="line">f0105a59 l    d  .stabstr	00000000 .stabstr</span><br><span class="line">f0108000 l    d  .data	00000000 .data</span><br><span class="line">f0112300 l    d  .bss	00000000 .bss</span><br><span class="line">00000000 l    d  .comment	00000000 .comment</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 obj/kern/entry.o</span><br><span class="line">f010002f l       .text	00000000 relocated</span><br><span class="line">f010003e l       .text	00000000 spin</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 entrypgdir.c</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 init.c</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 console.c</span><br><span class="line">f01001a0 l     F .text	0000000e delay</span><br><span class="line">f01001ae l     F .text	00000020 serial_proc_data</span><br><span class="line">f01001ce l     F .text	00000041 cons_intr</span><br><span class="line">f0112320 l     O .bss	00000208 cons</span><br><span class="line">f010058a l     F .text	0000010c kbd_proc_data</span><br><span class="line">f0112304 l     O .bss	00000001 serial_exists</span><br><span class="line">f010029a l     F .text	000001f0 cons_putc</span><br><span class="line">f0112310 l     O .bss	00000002 crt_pos</span><br><span class="line">f011230c l     O .bss	00000004 crt_buf</span><br><span class="line">f0112308 l     O .bss	00000004 addr_6845</span><br><span class="line">f0112300 l     O .bss	00000004 shift.1300</span><br><span class="line">f0101a00 l     O .rodata	00000100 shiftcode</span><br><span class="line">f0101b00 l     O .rodata	00000100 togglecode</span><br><span class="line">f0101c00 l     O .rodata	00000010 charcode</span><br><span class="line">f0112000 l     O .data	00000100 normalmap</span><br><span class="line">f0112100 l     O .data	00000100 shiftmap</span><br><span class="line">f0112200 l     O .data	00000100 ctlmap</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 monitor.c</span><br><span class="line">f0101df4 l     O .rodata	00000018 commands</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 printf.c</span><br><span class="line">f010094d l     F .text	00000013 putch</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 kdebug.c</span><br><span class="line">f0100960 l     F .text	00000101 stab_binsearch</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 printfmt.c</span><br><span class="line">f0100c40 l     F .text	000000e8 printnum</span><br><span class="line">f0100d28 l     F .text	0000003a getuint</span><br><span class="line">f0100d62 l     F .text	0000001d sprintputch</span><br><span class="line">f0102018 l     O .rodata	0000001c error_string</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 readline.c</span><br><span class="line">f0112540 l     O .bss	00000400 buf</span><br><span class="line">00000000 l    <span class="built_in">df</span> *ABS*	00000000 string.c</span><br><span class="line">f010000c g       .text	00000000 entry</span><br><span class="line">f0101339 g     F .text	00000020 strcpy</span><br><span class="line">f010020f g     F .text	00000012 kbd_intr</span><br><span class="line">f01006a0 g     F .text	0000000a mon_backtrace</span><br><span class="line">f0100085 g     F .text	0000005f _panic</span><br><span class="line">f0100141 g     F .text	0000005b i386_init</span><br><span class="line">f01014e0 g     F .text	0000007c memmove</span><br><span class="line">f01011cf g     F .text	00000028 snprintf</span><br><span class="line">f0100d7f g     F .text	000003f8 vprintfmt</span><br><span class="line">f010023c g     F .text	00000043 cons_getc</span><br><span class="line">f0100933 g     F .text	0000001a cprintf</span><br><span class="line">f010155c g     F .text	00000021 memcpy</span><br><span class="line">f0101220 g     F .text	000000d3 readline</span><br><span class="line">f0111000 g     O .data	00001000 entry_pgtable</span><br><span class="line">f01000e4 g     F .text	0000005d test_backtrace</span><br><span class="line">f0101177 g     F .text	00000058 vsnprintf</span><br><span class="line">f0112300 g       .bss	00000000 edata</span><br><span class="line">f010049a g     F .text	000000f0 cons_init</span><br><span class="line">f0105a58 g       .stab	00000000 __STAB_END__</span><br><span class="line">f0105a59 g       .stabstr	00000000 __STABSTR_BEGIN__</span><br><span class="line">f01017f0 g     F .text	00000135 .hidden __umoddi3</span><br><span class="line">f0100221 g     F .text	0000001b serial_intr</span><br><span class="line">f01016c0 g     F .text	00000128 .hidden __udivdi3</span><br><span class="line">f0100290 g     F .text	0000000a iscons</span><br><span class="line">f01015da g     F .text	000000e4 strtol</span><br><span class="line">f0101318 g     F .text	00000021 strnlen</span><br><span class="line">f0101359 g     F .text	0000002c strcat</span><br><span class="line">f0112944 g     O .bss	00000004 panicstr</span><br><span class="line">f0112940 g       .bss	00000000 end</span><br><span class="line">f0100040 g     F .text	00000045 _warn</span><br><span class="line">f0101464 g     F .text	0000001d strfind</span><br><span class="line">f0101925 g       .text	00000000 etext</span><br><span class="line">0010000c g       .text	00000000 _start</span><br><span class="line">f01013b1 g     F .text	00000033 strlcpy</span><br><span class="line">f010140a g     F .text	00000039 strncmp</span><br><span class="line">f0101385 g     F .text	0000002c strncpy</span><br><span class="line">f010157d g     F .text	00000040 memcmp</span><br><span class="line">f010048a g     F .text	00000010 cputchar</span><br><span class="line">f0101481 g     F .text	0000005f memset</span><br><span class="line">f010027f g     F .text	00000011 getchar</span><br><span class="line">f01011f7 g     F .text	00000028 printfmt</span><br><span class="line">f01073e1 g       .stabstr	00000000 __STABSTR_END__</span><br><span class="line">f01013e4 g     F .text	00000026 strcmp</span><br><span class="line">f0100a61 g     F .text	000001d6 debuginfo_eip</span><br><span class="line">f0100900 g     F .text	00000033 vcprintf</span><br><span class="line">f0110000 g       .data	00000000 bootstacktop</span><br><span class="line">f0110000 g     O .data	00001000 entry_pgdir</span><br><span class="line">f0108000 g       .data	00000000 bootstack</span><br><span class="line">f0102044 g       .stab	00000000 __STAB_BEGIN__</span><br><span class="line">f0101300 g     F .text	00000018 strlen</span><br><span class="line">f0101443 g     F .text	00000021 strchr</span><br><span class="line">f01006aa g     F .text	000000ca mon_kerninfo</span><br><span class="line">f01007bd g     F .text	00000143 monitor</span><br><span class="line">f01015bd g     F .text	0000001d memfind</span><br><span class="line">f0100774 g     F .text	00000049 mon_help</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Exercise 5. Trace through the first few instructions of the boot
+loader again and identify the first instruction that would "break" or
+otherwise do the wrong thing if you were to get the boot loader's link
+address wrong. Then change the link address in
+<code>boot/Makefrag</code> to something wrong, run make clean, recompile
+the lab with make, and trace into the boot loader again to see what
+happens. Don't forget to change the link address back and make clean
+again afterward!</p>
+</blockquote>
+<p>在一个<code>terminal</code>中cd到<code>lab</code>目录下，执行
+<code>make qemu-gdb</code>。再开一个
+<code>terminal</code>执行<code>make gdb</code>。 因为BIOS会把boot
+loader加载到0x7c00的位置，因此设置断点<code>b *0x7c00</code>。再执行<code>c</code>,会看到QUMU终端上显示<code>Booting from hard disk</code>。
+执行<code>x/30i 0x7c00</code>就能看到与<code>boot.S</code>中类似的汇编代码了。</p>
+<p>BIOS会将引导扇区的内容加载到 0x7c00
+的位置，引导程序也就从0x7C00的位置开始执行。我们通过<code>-Ttext 0x7C00</code>将链接地址传递给<code>boot / Makefrag</code>中的链接器，因此链接器将在生成的代码中生成正确的内存地址。
+除了部分信息之外，ELF头中还有一个对我们很重要的字段，名为<code>e_entry</code>。该字段保存程序中入口点的链接地址：程序应该开始执行的代码段的存储地址。
+在反汇编代码中，可以看到最后call 了 0x10018地址。</p>
+<p>boot loader程序，最后会调用entry point</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call the entry point from the ELF header</span></span><br><span class="line"><span class="comment">// note: does not return!</span></span><br><span class="line">((<span class="type">void</span> (*)(<span class="type">void</span>)) (ELFHDR-&gt;e_entry))();</span><br></pre></td></tr></table></figure>
+<p>通过boot.asm文件，可以得知，我们的entry地址是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">((void (*)(void)) (ELFHDR-&gt;e_entry))();</span><br><span class="line">   7d71:	ff 15 18 00 01 00    	call   *0x10018</span><br></pre></td></tr></table></figure>
+<p>与实际执行<code>objdump -f kernel</code>的 结果一致。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./obj/kern/kernel:     file format elf32-i386</span><br><span class="line">architecture: i386, flags 0x00000112:</span><br><span class="line">EXEC_P, HAS_SYMS, D_PAGED</span><br><span class="line">start address 0x0010000c</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Exercise 6.</strong> We can examine memory using GDB's x
+command. The <a
+target="_blank" rel="noopener" href="https://sourceware.org/gdb/current/onlinedocs/gdb/Memory.html">GDB
+manual</a> has full details, but for now, it is enough to know that the
+command x/<em>N</em>x <em>ADDR</em> prints <em><code>N</code></em> words
+of memory at <em><code>ADDR</code></em>. (Note that both
+'<code>x</code>'s in the command are lowercase.) <em>Warning</em>: The
+size of a word is not a universal standard. In GNU assembly, a word is
+two bytes (the 'w' in xorw, which stands for word, means 2 bytes).</p>
+</blockquote>
+<p>答案应该很明显，在BIOS进入Boot
+loader时，0x100000内存后的8个字都为零，因为此时内核程序还没有加载进入内存。
+内核的加载在<code>bootmain</code>函数中完成。
+若需要用gdb调试，可以使用<code>x/8x 0x100000</code> 查看其内存内容。</p>
+<h2 id="part-3-the-kernel">Part 3: The Kernel</h2>
+<h3 id="using-virtual-memory-to-work-around-position-dependence">Using
+virtual memory to work around position dependence</h3>
+<p>操作系统内核通常喜欢在非常高的<em>虚拟地址</em>（例如0xf0100000）上链接和运行，以便将处理器虚拟地址空间的较低部分留给用户程序使用。这种安排的原因将在下一个实验中变得更加清楚。
+许多机器在地址 0xf0100000
+处没有任何物理内存，因此我们不能指望能够在那里存储内核。相反，我们将使用处理器的内存管理硬件将虚拟地址
+0xf0100000（内核代码<em>预期</em>运行的链接地址）映射到物理地址
+0x00100000（引导加载程序将内核加载到物理内存中）。这样，虽然内核的虚拟地址足够高，可以为用户进程留下足够的地址空间，但它将被加载到物理内存中，位于
+PC RAM 中的 1MB 点处，就在 BIOS ROM 上方。这种方法要求 PC
+至少有几兆字节的物理内存（以便物理地址 0x00100000 有效），但这对于 1990
+年左右制造的任何 PC 来说可能都是如此。</p>
+<blockquote>
+<p><strong>Exercise 7.</strong> Use QEMU and GDB to trace into the JOS
+kernel and stop at the <code>movl %eax, %cr0</code>. Examine memory at
+0x00100000 and at 0xf0100000. Now, single step over that instruction
+using the stepi GDB command. Again, examine memory at 0x00100000 and at
+0xf0100000. Make sure you understand what just happened. What is the
+first instruction <em>after</em> the new mapping is established that
+would fail to work properly if the mapping weren't in place? Comment out
+the <code>movl %eax, %cr0</code> in <code>kern/entry.S</code>, trace
+into it, and see if you were right.</p>
+</blockquote>
+<p>在执行<code>movl％eax，％cr0</code>之前</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/8x 0x100000</span><br><span class="line">0x100000:       0x1badb002      0x00000000      0xe4524ffe      0x7205c766</span><br><span class="line">0x100010:       0x34000004      0x1000b812      0x220f0011      0xc0200fd8</span><br><span class="line">(gdb) x/8x 0xf0100000</span><br><span class="line">0xf0100000 &lt;_start-268435468&gt;:  0x00000000      0x00000000      0x00000000      0x00000000</span><br><span class="line">0xf0100010 &lt;entry+4&gt;:   0x00000000      0x00000000      0x00000000      0x00000000</span><br></pre></td></tr></table></figure>
+<p>之后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/8x 0x100000</span><br><span class="line">0x100000:       0x1badb002      0x00000000      0xe4524ffe      0x7205c766</span><br><span class="line">0x100010:       0x34000004      0x1000b812      0x220f0011      0xc0200fd8</span><br><span class="line">(gdb)  x/8x 0xf0100000</span><br><span class="line">0xf0100000 &lt;_start-268435468&gt;:  0x1badb002      0x00000000      0xe4524ffe      0x7205c766</span><br><span class="line">0xf0100010 &lt;entry+4&gt;:   0x34000004      0x1000b812      0x220f0011      0xc0200fd8</span><br></pre></td></tr></table></figure>
+<p>虚拟地址<code>0xf0100000</code>已经被映射到<code>0x00100000</code>处
+在修改cr0之前修改了cr3寄存器。将地址<code>0x118000</code>写入了页目录寄存器，页目录表应该就是存放在地址<code>0x118000</code>处。其他操作应该是由<code>entry_pgdir</code>的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">pde_t</span> entry_pgdir[NPDENTRIES] = &#123;</span><br><span class="line">	<span class="comment">// Map VA&#x27;s [0, 4MB) to PA&#x27;s [0, 4MB)</span></span><br><span class="line">	[<span class="number">0</span>]</span><br><span class="line">		= ((<span class="type">uintptr_t</span>)entry_pgtable - KERNBASE) + PTE_P,</span><br><span class="line">	<span class="comment">// Map VA&#x27;s [KERNBASE, KERNBASE+4MB) to PA&#x27;s [0, 4MB)</span></span><br><span class="line">	[KERNBASE&gt;&gt;PDXSHIFT]</span><br><span class="line">		= ((<span class="type">uintptr_t</span>)entry_pgtable - KERNBASE) + PTE_P + PTE_W</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>完成了映射。使得再读取<code>0xf0100000</code>地址时，自动映射到了<code>0~4M</code>的某个位置</p>
+<blockquote>
+<p>CR3是页目录基址寄存器，保存页目录表的物理地址，页目录表总是放在以4K字节为单位的存储器边界上，因此，它的地址的低12位总为0，不起作用，即使写上内容，也不会被理会。</p>
+</blockquote>
+<p>注释掉kern/entry.S中的<code>movl %eax, %cr0</code>因为没有开启分页虚拟存储机制，当访问高位地址时，会出现RAM
+or ROM 越界错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0x0010002a in ?? ()</span><br><span class="line">(gdb) si</span><br><span class="line">=&gt; 0xf010002c &lt;relocated&gt;:      add    %al,(%eax)</span><br><span class="line">relocated () at kern/entry.S:74</span><br><span class="line">74              movl    $0x0,%ebp                       # nuke frame pointer</span><br><span class="line">(gdb) si</span><br><span class="line">Remote connection closed</span><br></pre></td></tr></table></figure>
+<p>在执行0xf010002c之后就出错了</p>
+<h3 id="formatted-printing-to-the-console">Formatted Printing to the
+Console</h3>
+<blockquote>
+<p><strong>Exercise 8.</strong> We have omitted a small fragment of code
+- the code necessary to print octal numbers using patterns of the form
+"%o". Find and fill in this code fragment.</p>
+</blockquote>
+<p>就是把%u的代码复制一遍，base 改为 8 就差不多了，并不复杂。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (unsigned) octal</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">&#x27;o&#x27;</span>:</span><br><span class="line">	<span class="comment">// Replace this with your code.</span></span><br><span class="line">          num = getuint(&amp;ap, lflag);</span><br><span class="line">          base = <span class="number">8</span>;</span><br><span class="line">          <span class="keyword">goto</span> number;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Explain the interface between <code>printf.c</code> and
+<code>console.c</code>. Specifically, what function does
+<code>console.c</code> export? How is this function used by
+<code>printf.c</code>?</p>
+</blockquote>
+<p>printf.c中使用了console.c
+中的<code>cputchar</code>函数，并封装为<code>putch</code>函数。并以函数形参传递到printfmt.c中的<code>vprintfmt</code>函数，用于向屏幕上输出一个字符。</p>
+<blockquote>
+<p>Explain the following from <code>console.c</code>:</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// What is the purpose of this?</span></span><br><span class="line"><span class="keyword">if</span> (crt_pos &gt;= CRT_SIZE) &#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">  </span><br><span class="line">	memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * <span class="keyword">sizeof</span>(<span class="type">uint16_t</span>));</span><br><span class="line">	<span class="keyword">for</span> (i = CRT_SIZE - CRT_COLS; i &lt; CRT_SIZE; i++)</span><br><span class="line">		crt_buf[i] = <span class="number">0x0700</span> | <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	crt_pos -= CRT_COLS;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>CRT_ROWS，CRT_COLS：CRT显示器行列最大值， 此处是<em>25x80</em></li>
+<li>ctr_buf 在初始化时指向了显示器I/O地址</li>
+<li><code>memmove</code> 没有理清哪个是源，哪个是目的。
+按理解清除第一行的数据，应该第二个是源。即2~n行的数据（CRT_SIZE -
+CRT_COLS）个，移动到1~n-1行的位置。</li>
+</ul>
+<blockquote>
+<p>For the following questions you might wish to consult the notes for
+Lecture 2. These notes cover GCC's calling convention on the x86.</p>
+</blockquote>
+<p>在kern/init.c的<code>i386_init()</code>下加入代码，就可以直接测试；加Lab1_exercise8_3标号的目的是为了在kern/kernel.asm反汇编代码中容易找到添加的代码的位置。可以看到地址在<code>0xf0100080</code>处</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// lab1 Exercise_8</span><br><span class="line">&#123;</span><br><span class="line">    cprintf(&quot;Lab1_Exercise_8:\n&quot;);</span><br><span class="line">    int x = 1, y = 3, z = 4;</span><br><span class="line">    // </span><br><span class="line">    Lab1_exercise8_3:</span><br><span class="line">    cprintf(&quot;x %d, y %x, z %d\n&quot;, x, y, z);</span><br><span class="line"></span><br><span class="line">    unsigned int i = 0x00646c72;</span><br><span class="line">    cprintf(&quot;H%x Wo%s&quot;, 57616, &amp;i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cprintf (fmt=0xf010478d &quot;x %d, y %x, z %d\n&quot;) </span><br><span class="line">可以看到以上地址处就存了字符串</span><br><span class="line">(gdb) x/s 0xf010478d</span><br><span class="line">0xf010478d:    &quot;x %d, y %x, z %d\n&quot;</span><br><span class="line"></span><br><span class="line">(gdb) si</span><br><span class="line">=&gt; 0xf0102f85 &lt;vcprintf&gt;:    push   %ebp</span><br><span class="line">vcprintf (fmt=0xf010478d &quot;x %d, y %x, z %d\n&quot;, ap=0xf0118fc4 &quot;\001&quot;)</span><br><span class="line">    at kern/printf.c:18</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(gdb) x/16b 0xf0118fc4</span><br><span class="line">0xf0118fc4:    0x01    0x00    0x00    0x00    0x03    0x00    0x00    0x00</span><br><span class="line">0xf0118fcc:    0x04    0x00    0x00    0x00    0x7b    0x47    0x10    0xf0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">=&gt; 0xf0100a41 &lt;vcprintf&gt;:       push   %ebp</span><br><span class="line">vcprintf (fmt=0xf0101a97 &quot;6828 decimal is %o octal!\n&quot;, ap=0xf010efd4 &quot;\254\032&quot;) at kern/printf.c:18</span><br><span class="line">18      &#123;</span><br><span class="line"></span><br><span class="line">(gdb) x/s 0xf0101a97</span><br><span class="line">0xf0101a97:     &quot;6828 decimal is %o octal!\n&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="the-stack">The Stack</h3>
+<blockquote>
+<p><strong>Exercise 9.</strong> Determine where the kernel initializes
+its stack, and exactly where in memory its stack is located. How does
+the kernel reserve space for its stack? And at which "end" of this
+reserved area is the stack pointer initialized to point to?</p>
+</blockquote>
+<ul>
+<li>entry.S 77行初始化栈</li>
+<li>栈的位置是0xf0108000-0xf0110000</li>
+<li>设置栈的方法是在kernel的数据段预留32KB空间(entry.S 92行)</li>
+<li>栈顶的初始化位置是0xf0110000</li>
+</ul>
+<blockquote>
+<p><strong>Exercise 10.</strong> To become familiar with the C calling
+conventions on the x86, find the address of the
+<code>test_backtrace</code> function in
+<code>obj/kern/kernel.asm</code>, set a breakpoint there, and examine
+what happens each time it gets called after the kernel starts. How many
+32-bit words does each recursive nesting level of
+<code>test_backtrace</code> push on the stack, and what are those
+words?</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">void</span><br><span class="line">test_backtrace(int x)</span><br><span class="line">&#123;</span><br><span class="line">f0100040:	55                   	push   %ebp</span><br><span class="line">f0100041:	89 e5                	mov    %esp,%ebp</span><br><span class="line">f0100043:	56                   	push   %esi</span><br><span class="line">f0100044:	53                   	push   %ebx</span><br><span class="line">f0100045:	e8 91 01 00 00       	call   f01001db &lt;__x86.get_pc_thunk.bx&gt;</span><br><span class="line">f010004a:	81 c3 be 02 01 00    	add    $0x102be,%ebx</span><br><span class="line">f0100050:	8b 75 08             	mov    0x8(%ebp),%esi</span><br><span class="line">	cprintf(&quot;entering test_backtrace %d\n&quot;, x);</span><br><span class="line">f0100053:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line">f0100056:	56                   	push   %esi</span><br><span class="line">f0100057:	8d 83 38 17 ff ff    	lea    -0xe8c8(%ebx),%eax</span><br><span class="line">f010005d:	50                   	push   %eax</span><br><span class="line">f010005e:	e8 f5 09 00 00       	call   f0100a58 &lt;cprintf&gt;</span><br><span class="line">	if (x &gt; 0)</span><br><span class="line">f0100063:	83 c4 10             	add    $0x10,%esp</span><br><span class="line">f0100066:	85 f6                	test   %esi,%esi</span><br><span class="line">f0100068:	7e 29                	jle    f0100093 &lt;test_backtrace+0x53&gt;</span><br><span class="line">		test_backtrace(x-1);</span><br><span class="line">f010006a:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line">f010006d:	8d 46 ff             	lea    -0x1(%esi),%eax</span><br><span class="line">f0100070:	50                   	push   %eax</span><br><span class="line">f0100071:	e8 ca ff ff ff       	call   f0100040 &lt;test_backtrace&gt;</span><br><span class="line">f0100076:	83 c4 10             	add    $0x10,%esp</span><br><span class="line">	else</span><br><span class="line">		mon_backtrace(0, 0, 0);</span><br><span class="line">	cprintf(&quot;leaving test_backtrace %d\n&quot;, x);</span><br><span class="line">f0100079:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line">f010007c:	56                   	push   %esi</span><br><span class="line">f010007d:	8d 83 54 17 ff ff    	lea    -0xe8ac(%ebx),%eax</span><br><span class="line">f0100083:	50                   	push   %eax</span><br><span class="line">f0100084:	e8 cf 09 00 00       	call   f0100a58 &lt;cprintf&gt;</span><br><span class="line">&#125;</span><br><span class="line">f0100089:	83 c4 10             	add    $0x10,%esp</span><br><span class="line">f010008c:	8d 65 f8             	lea    -0x8(%ebp),%esp</span><br><span class="line">f010008f:	5b                   	pop    %ebx</span><br><span class="line">f0100090:	5e                   	pop    %esi</span><br><span class="line">f0100091:	5d                   	pop    %ebp</span><br><span class="line">f0100092:	c3                   	ret    </span><br><span class="line">		mon_backtrace(0, 0, 0);</span><br><span class="line">f0100093:	83 ec 04             	sub    $0x4,%esp</span><br><span class="line">f0100096:	6a 00                	push   $0x0</span><br><span class="line">f0100098:	6a 00                	push   $0x0</span><br><span class="line">f010009a:	6a 00                	push   $0x0</span><br><span class="line">f010009c:	e8 f5 07 00 00       	call   f0100896 &lt;mon_backtrace&gt;</span><br><span class="line">f01000a1:	83 c4 10             	add    $0x10,%esp</span><br><span class="line">f01000a4:	eb d3                	jmp    f0100079 &lt;test_backtrace+0x39&gt;</span><br></pre></td></tr></table></figure>
+<p>上面是asm中完整的test_backtrace函数定义。</p>
+<blockquote>
+<p><strong>Exercise 11.</strong> Implement the backtrace function as
+specified above. Use the same format as in the example, since otherwise
+the grading script will be confused. When you think you have it working
+right, run make grade to see if its output conforms to what our grading
+script expects, and fix it if it doesn't. <em>After</em> you have handed
+in your Lab 1 code, you are welcome to change the output format of the
+backtrace function any way you like.</p>
+<p><strong>Exercise 12.</strong> Modify your stack backtrace function to
+display, for each <code>eip</code>, the function name, source file name,
+and line number corresponding to that <code>eip</code>. In
+<code>debuginfo_eip</code>, where do <code>__STAB_*</code> come from?
+This question has a long answer; to help you to discover the answer,
+here are some things you might want to do:</p>
+<ul>
+<li>look in the file <code>kern/kernel.ld</code> for
+<code>__STAB_*</code></li>
+<li>run objdump -h obj/kern/kernel</li>
+<li>run objdump -G obj/kern/kernel</li>
+<li>run gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format
+-DJOS_KERNEL -gstabs -c -S kern/init.c, and look at init.s.</li>
+<li>see if the bootloader loads the symbol table in memory as part of
+loading the kernel binary</li>
+</ul>
+<p>Complete the implementation of <code>debuginfo_eip</code> by
+inserting the call to <code>stab_binsearch</code> to find the line
+number for an address. Add a <code>backtrace</code> command to the
+kernel monitor, and extend your implementation of
+<code>mon_backtrace</code> to call <code>debuginfo_eip</code> and print
+a line for each stack frame of the form:</p>
+<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">K&gt; backtrace</span><br><span class="line">Stack backtrace:</span><br><span class="line">  ebp f010ff78  eip f01008ae  args 00000001 f010ff8c 00000000 f0110580 00000000</span><br><span class="line">         kern/monitor.c:143: monitor+106</span><br><span class="line">  ebp f010ffd8  eip f0100193  args 00000000 00001aac 00000660 00000000 00000000</span><br><span class="line">         kern/init.c:49: i386_init+59</span><br><span class="line">  ebp f010fff8  eip f010003d  args 00000000 00000000 0000ffff 10cf9a00 0000ffff</span><br><span class="line">         kern/entry.S:70: &lt;unknown&gt;+0</span><br><span class="line">K&gt; </span><br></pre></td></tr></table></figure></p>
+<p>Each line gives the file name and line within that file of the stack
+frame's <code>eip</code>, followed by the name of the function and the
+offset of the <code>eip</code> from the first instruction of the
+function (e.g., <code>monitor+106</code> means the return
+<code>eip</code> is 106 bytes past the beginning of
+<code>monitor</code>). Be sure to print the file and function names on a
+separate line, to avoid confusing the grading script. Tip: printf format
+strings provide an easy, albeit obscure, way to print
+non-null-terminated strings like those in STABS tables.
+<code>printf("%.*s", length, string)</code> prints at most
+<code>length</code> characters of <code>string</code>. Take a look at
+the printf man page to find out why this works. You may find that some
+functions are missing from the backtrace. For example, you will probably
+see a call to <code>monitor()</code> but not to <code>runcmd()</code>.
+This is because the compiler in-lines some function calls. Other
+optimizations may cause you to see unexpected line numbers. If you get
+rid of the <code>-O2</code> from <code>GNUMakefile</code>, the
+backtraces may make more sense (but your kernel will run more
+slowly).</p>
+</blockquote>
+<p>需要实现monitor.c中的一个函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">mon_backtrace</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv, <span class="keyword">struct</span> Trapframe *tf)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Your code here.</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">mon_backtrace</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv, <span class="keyword">struct</span> Trapframe *tf)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint32_t</span> *ebp;</span><br><span class="line">     ebp = (<span class="type">uint32_t</span> *)read_ebp();</span><br><span class="line">    cprintf(<span class="string">&quot;Stack backtrace:\n&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span>(ebp!=<span class="number">0</span>)&#123;</span><br><span class="line">        cprintf(<span class="string">&quot;  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n&quot;</span>,ebp,eip, *(ebp+<span class="number">2</span>), *(ebp+<span class="number">3</span>), *(ebp+<span class="number">4</span>), *(ebp+<span class="number">5</span>), *(ebp+<span class="number">6</span>));</span><br><span class="line">        ebp  = (<span class="type">uint32_t</span>*) *ebp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>mon_backtrace</code>函数中调用的<code>read_ebp()</code>函数声明在
+<code>inc/x86.h</code>中，函数实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> __inline <span class="type">uint32_t</span></span><br><span class="line"><span class="title function_">read_ebp</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint32_t</span> ebp;</span><br><span class="line">    __asm __volatile(<span class="string">&quot;movl %%ebp,%0&quot;</span> : <span class="string">&quot;=r&quot;</span> (ebp));</span><br><span class="line">    <span class="keyword">return</span> ebp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里就已经可以输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ebp f010ff08  eip f01000a1  args 00000000 00000000 00000000 f010004a f0111308</span><br></pre></td></tr></table></figure>
+<p>但是，还需要获取eip对应的文件名，行号，函数名等信息。</p>
+<p>在阅读实验指导书之后，发现代码提供了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">debuginfo_eip</span><span class="params">(<span class="type">uintptr_t</span> eip, <span class="keyword">struct</span> Eipdebuginfo *info)</span>;</span><br></pre></td></tr></table></figure>
+<p>用于eip信息的获取，直接调用并输出结构体中的信息就可以了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">mon_backtrace</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv, <span class="keyword">struct</span> Trapframe *tf)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint32_t</span> *ebp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Eipdebuginfo</span> <span class="title">info</span>;</span></span><br><span class="line">	ebp = (<span class="type">uint32_t</span> *)read_ebp();</span><br><span class="line">    cprintf(<span class="string">&quot;Stack backtrace:\n&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span>(ebp!=<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="type">uint32_t</span> eip = *(ebp+<span class="number">1</span>);</span><br><span class="line">		debuginfo_eip(eip,&amp;info);</span><br><span class="line">        cprintf(<span class="string">&quot;  ebp %08x  eip %08x  args %08x %08x %08x %08x %08x\n&quot;</span>,ebp,eip, *(ebp+<span class="number">2</span>), *(ebp+<span class="number">3</span>), *(ebp+<span class="number">4</span>), *(ebp+<span class="number">5</span>), *(ebp+<span class="number">6</span>));</span><br><span class="line">		cprintf(<span class="string">&quot;%s:%d: %.*s+%d\n&quot;</span>, info.eip_file, info.eip_line, info.eip_fn_namelen, info.eip_fn_name, ebp[<span class="number">1</span>] - info.eip_fn_addr);</span><br><span class="line">        ebp  = (<span class="type">uint32_t</span>*) *ebp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现过程中发现，行号的获取始终是0，查阅代码的时候发现行号的获取需要自己实现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Search within [lline, rline] for the line number stab.</span></span><br><span class="line"><span class="comment">// If found, set info-&gt;eip_line to the right line number.</span></span><br><span class="line"><span class="comment">// If not found, return -1.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Hint:</span></span><br><span class="line"><span class="comment">//	There&#x27;s a particular stabs type used for line numbers.</span></span><br><span class="line"><span class="comment">//	Look at the STABS documentation and &lt;inc/stab.h&gt; to find</span></span><br><span class="line"><span class="comment">//	which one. N_SLINE</span></span><br><span class="line"><span class="comment">// Your code here.</span></span><br><span class="line"></span><br><span class="line">stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line">   <span class="keyword">if</span> (lline &gt; rline)</span><br><span class="line">       <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">   info-&gt;eip_line = stabs[lline].n_desc;</span><br></pre></td></tr></table></figure>
+<p>原来输出是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ebp f010ffa8  eip f0100076  args 00000004 00000005 00000000 f010004a f0111308</span><br><span class="line">kern/init.c:0: test_backtrace:F(0,1)=(0,1)+54</span><br></pre></td></tr></table></figure>
+<p>变成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ebp f010ffa8  eip f0100076  args 00000004 00000005 00000000 f010004a f0111308</span><br><span class="line">kern/init.c:16 test_backtrace+54</span><br></pre></td></tr></table></figure>
+<p>make grade 成功通过测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">tommygong@TommyGong:~/MIT-6.828/lab$ make grade</span><br><span class="line">make clean</span><br><span class="line">make[1]: Entering directory <span class="string">&#x27;/home/tommygong/MIT-6.828/lab&#x27;</span></span><br><span class="line"><span class="built_in">rm</span> -rf obj .gdbinit jos.in qemu.log</span><br><span class="line">make[1]: Leaving directory <span class="string">&#x27;/home/tommygong/MIT-6.828/lab&#x27;</span></span><br><span class="line">./grade-lab1 </span><br><span class="line">make[1]: Entering directory <span class="string">&#x27;/home/tommygong/MIT-6.828/lab&#x27;</span></span><br><span class="line">+ as kern/entry.S</span><br><span class="line">+ cc kern/entrypgdir.c</span><br><span class="line">+ cc kern/init.c</span><br><span class="line">+ cc kern/console.c</span><br><span class="line">+ cc kern/monitor.c</span><br><span class="line">+ cc kern/printf.c</span><br><span class="line">+ cc kern/kdebug.c</span><br><span class="line">+ cc lib/printfmt.c</span><br><span class="line">+ cc lib/readline.c</span><br><span class="line">+ cc lib/string.c</span><br><span class="line">+ ld obj/kern/kernel</span><br><span class="line">ld: warning: section `.bss<span class="string">&#x27; type changed to PROGBITS</span></span><br><span class="line"><span class="string">+ as boot/boot.S</span></span><br><span class="line"><span class="string">+ cc -Os boot/main.c</span></span><br><span class="line"><span class="string">+ ld boot/boot</span></span><br><span class="line"><span class="string">boot block is 396 bytes (max 510)</span></span><br><span class="line"><span class="string">+ mk obj/kern/kernel.img</span></span><br><span class="line"><span class="string">make[1]: Leaving directory &#x27;</span>/home/tommygong/MIT-6.828/lab<span class="string">&#x27;</span></span><br><span class="line"><span class="string">running JOS: (1.2s) </span></span><br><span class="line"><span class="string">  printf: OK </span></span><br><span class="line"><span class="string">  backtrace count: OK </span></span><br><span class="line"><span class="string">  backtrace arguments: OK </span></span><br><span class="line"><span class="string">  backtrace symbols: OK </span></span><br><span class="line"><span class="string">  backtrace lines: OK </span></span><br><span class="line"><span class="string">Score: 50/50</span></span><br></pre></td></tr></table></figure>
+<p>最后还要添加一下指令支持，修改一下<em>static</em> struct Command
+commands<em>[]</em>即可</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">Command</span> <span class="title">commands</span>[] =</span> &#123;</span><br><span class="line">	&#123; <span class="string">&quot;help&quot;</span>, <span class="string">&quot;Display this list of commands&quot;</span>, mon_help &#125;,</span><br><span class="line">	&#123; <span class="string">&quot;kerninfo&quot;</span>, <span class="string">&quot;Display information about the kernel&quot;</span>, mon_kerninfo &#125;,</span><br><span class="line">	&#123; <span class="string">&quot;backtrace&quot;</span>, <span class="string">&quot;Display the call stack&quot;</span>, mon_backtrace &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="part-5-note">Part 5: Note</h2>
+<p>终于是写完了，断断续续持续了一个学期吧，期间有别的实验需要写。也就在期末才有空余的时间来重新看一下这个实验。
+老实说，这个实验上手难度还是有一点的，哪怕我学完了操作系统，计算机组成原理，体系结构等课程，回来看这个实验的前大半部分还是比较难以理解。
+所幸英语水平在不断提高，学的东西也在不断变多。
+编写代码的部分不是很多，主要是对整个过程有一个清晰的认识，才是这个lab1所困难的地方。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MIT/" rel="tag"># MIT</a>
+              <a href="/tags/6-828/" rel="tag"># 6.828</a>
+              <a href="/tags/JOS/" rel="tag"># JOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/1452544539.html" rel="prev" title="Git回退版本">
+      <i class="fa fa-chevron-left"></i> Git回退版本
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/3426030149.html" rel="next" title="贝塞尔曲线">
+      贝塞尔曲线 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#part-1-pc-bootstrap"><span class="nav-number">1.</span> <span class="nav-text">Part 1: PC Bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#simulating-the-x86"><span class="nav-number">1.1.</span> <span class="nav-text">Simulating the x86</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-pcs-physical-address-space"><span class="nav-number">1.2.</span> <span class="nav-text">The PC&#39;s Physical Address
+Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-rom-bios"><span class="nav-number">1.3.</span> <span class="nav-text">The ROM BIOS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-2-the-boot-loader"><span class="nav-number">2.</span> <span class="nav-text">Part 2: The Boot Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#loading-the-kernel"><span class="nav-number">2.1.</span> <span class="nav-text">Loading the Kernel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-3-the-kernel"><span class="nav-number">3.</span> <span class="nav-text">Part 3: The Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#using-virtual-memory-to-work-around-position-dependence"><span class="nav-number">3.1.</span> <span class="nav-text">Using
+virtual memory to work around position dependence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#formatted-printing-to-the-console"><span class="nav-number">3.2.</span> <span class="nav-text">Formatted Printing to the
+Console</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-stack"><span class="nav-number">3.3.</span> <span class="nav-text">The Stack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-5-note"><span class="nav-number">4.</span> <span class="nav-text">Part 5: Note</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

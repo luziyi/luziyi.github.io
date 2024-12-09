@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="计算机组成与体系结构复习记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIPS指令类型">
+<meta property="og:url" content="https://tommygong.top/posts/3010580983.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="计算机组成与体系结构复习记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-04T12:13:58.000Z">
+<meta property="article:modified_time" content="2024-12-07T12:55:50.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="计算机组成与体系结构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/3010580983.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MIPS指令类型 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/3010580983.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIPS指令类型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-12-04 20:13:58" itemprop="dateCreated datePublished" datetime="2024-12-04T20:13:58+08:00">2024-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 20:55:50" itemprop="dateModified" datetime="2024-12-07T20:55:50+08:00">2024-12-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+            <div class="post-description">计算机组成与体系结构复习记录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="mips指令">MIPS指令</h1>
+<p>操作码的长度决定了可以提供多少个指令数；操作码的编码一定要有唯一的解释</p>
+<h2 id="一计算机的寻址方式">一、计算机的寻址方式</h2>
+<ol type="1">
+<li>立即寻址：指令中给出操作数</li>
+<li>直接寻址：指令中给出操作数所在的有效地址</li>
+<li>间接寻址：指令中给出一个间接地址，间接地址在内存中寻找直接地址，直接地址读出操作数</li>
+<li>寄存器间接寻址：指令给出寄存器编号，根据寄存器内容找出操作数</li>
+<li>基址寻址：指令中给出一个寄存器编号，同时给出一个偏移地址，基址寄存器内容+偏移地址从内存中取操作数</li>
+</ol>
+<h2 id="二操作码编码">二、操作码编码</h2>
+<ol type="1">
+<li>定长操作码编码</li>
+<li>扩展操作码编码</li>
+</ol>
+<h2
+id="三mips的指令可以分为3种操作类型">三、MIPS的指令可以分为3种操作类型</h2>
+<ol type="1">
+<li>R型</li>
+<li>I型</li>
+<li>J型</li>
+</ol>
+<p>1、R型指令</p>
+<ul>
+<li>OP：000000 由func来决定他的功能</li>
+<li>rs、rt是两个源操作数所在的寄存器号</li>
+<li>rd是目的操作数所在的寄存器号</li>
+<li>shamt是位移量，执行移位操作的时候指明需要移动的次数</li>
+</ul>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/6a90526e0372ab06887ff12d9a1ab421.png" /></p>
+<p>同时也要牢记R型指令的指令表：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/13823636d7033879cbecad68090ada93.png" /></p>
+<p>2、I型指令</p>
+<ul>
+<li>操作功能由OP决定</li>
+<li>rs是第一个源操作数，immediate是第二个源操作数</li>
+<li>rt是目的操作数所在的寄存器编号</li>
+</ul>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/580d2e491a84537b5b19defbf0d87ff3.png" /></p>
+<p>I型指令的操作表：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/0c570f3582b99b2dbfde54ce045ad0ec.png" /></p>
+<ul>
+<li>在I型指令中，addi指令是需要进行符号位扩展，但是andi、ori、xori指令只需要进行零扩展即可</li>
+<li>sw、lw、beq、bne等操作都是进行符号位扩展</li>
+</ul>
+<p>3、J型指令</p>
+<ul>
+<li>操作功能由OP决定</li>
+<li>转移地址：26位（立即数）<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/44fd4af08ce66b1a54a681e5f09494e9.png" /></li>
+</ul>
+<p>J型指令操作表：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/cc597cdea27b10e64a6e1d62b5c536e0.png" /></p>
+<h2 id="跳转指令寻址">跳转指令寻址：</h2>
+<h3 id="伪直接寻址">伪直接寻址</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204201758789.png"
+alt="image-20241204201758789" />
+<figcaption aria-hidden="true">image-20241204201758789</figcaption>
+</figure>
+<h3 id="pc相对寻址">PC相对寻址</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204201816128.png"
+alt="image-20241204201816128" />
+<figcaption aria-hidden="true">image-20241204201816128</figcaption>
+</figure>
+<h2 id="异常和中断">异常和中断</h2>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204202419275.png"
+alt="image-20241204202419275" />
+<figcaption aria-hidden="true">image-20241204202419275</figcaption>
+</figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204202444945.png"
+alt="image-20241204202444945" />
+<figcaption aria-hidden="true">image-20241204202444945</figcaption>
+</figure>
+<h2 id="cache映射">Cache映射</h2>
+<h3 id="直接映射">直接映射</h3>
+<p>主存中的每个块只能放在Cache中的唯一位置（行）</p>
+<p>Cache行号=主存块号 mod Cache 行数</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204202801123.png"
+alt="image-20241204202801123" />
+<figcaption aria-hidden="true">image-20241204202801123</figcaption>
+</figure>
+<h3 id="全相联映射">全相联映射</h3>
+<p>主存中的每个块可放置在Cache中的<strong>任何</strong>位置（行）</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204202851289.png"
+alt="image-20241204202851289" />
+<figcaption aria-hidden="true">image-20241204202851289</figcaption>
+</figure>
+<h3 id="n路组相联映射">N路组相联映射</h3>
+<p>一个Set是若干块的集合</p>
+<p>主存和Cache中的组都具有同样大小（组内块数相同）</p>
+<p>“N路”指每个组中包含的块（行）的数目，也称为相联度</p>
+<p>主存中的一个块首先被映射到Cache中的唯一一组中，然后该块可以放在这个组的任何一行中</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204203017769.png"
+alt="image-20241204203017769" />
+<figcaption aria-hidden="true">image-20241204203017769</figcaption>
+</figure>
+<h3 id="总结">总结</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204203026144.png"
+alt="image-20241204203026144" />
+<figcaption aria-hidden="true">image-20241204203026144</figcaption>
+</figure>
+<h2 id="cache结构的表示">Cache结构的表示</h2>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204203049833.png"
+alt="image-20241204203049833" />
+<figcaption aria-hidden="true">image-20241204203049833</figcaption>
+</figure>
+<h2 id="cache块替换策略">Cache块替换策略</h2>
+<h3 id="lru">LRU</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204203225314.png"
+alt="image-20241204203225314" />
+<figcaption aria-hidden="true">image-20241204203225314</figcaption>
+</figure>
+<h2 id="cache写命中策略">Cache写命中策略</h2>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241204203412872.png"
+alt="image-20241204203412872" />
+<figcaption aria-hidden="true">image-20241204203412872</figcaption>
+</figure>
+<h3 id="写直达">写直达</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/%E5%8A%A8%E7%94%BB.gif"
+alt="动画" />
+<figcaption aria-hidden="true">动画</figcaption>
+</figure>
+<h3 id="写回">写回</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/%E5%8A%A8%E7%94%BB1.gif"
+alt="动画1" />
+<figcaption aria-hidden="true">动画1</figcaption>
+</figure>
+<h3 id="写分配">写分配</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/%E5%8A%A8%E7%94%BB2.gif"
+alt="动画2" />
+<figcaption aria-hidden="true">动画2</figcaption>
+</figure>
+<h3 id="写不分配">写不分配</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/%E5%8A%A8%E7%94%BB3.gif"
+alt="动画3" />
+<figcaption aria-hidden="true">动画3</figcaption>
+</figure>
+<h3 id="虚拟索引虚拟标记vivt">虚拟索引虚拟标记（VIVT）</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/image-20241207204819592.png" /></p>
+<p>优点：
+不需要每次访存的时候把虚拟地址经过MMU转换为物理地址缩短了访存关键路径，
+提升了频率， 提升了Cache访问速度</p>
+<p>缺点： 即使Cache命中，也需要访问并更新TLB（两者可以并行）
+进程切换需要冲刷Cache，或者增加PID（进程ID）位 歧义问题（ambiguity）
+别名问题（alias）</p>
+<p>歧义问题： 相同的虚拟地址映射到不同的物理地址
+假设A进程的虚拟地址0x4000映射物理地址0x2000，B进程的虚拟地址0x4000映射物理地址0x3000。A进程切换到B进程，导致0x4000地址访问命中，而对应的是物理地址0x2000中的数据，从而出现错误
+解决方案：冲刷（flush）Cache（使用专门的Cache指令，例如MIPS中的Cache），保证切换后的进程不会错误的命中上一个进程的缓存数据</p>
+<p>别名问题：
+不同的虚拟地址映射到相同的物理地址，例如进程间通信假设虚拟地址0x2000和0x4000都映射到相同的物理地址0x3000，其中虚拟地址中的[15…4]位作为index，此时同一物理地址数据被加载到不同的Cache
+Line，容易破坏数据一致性。</p>
+<h3 id="物理索引物理标记">物理索引物理标记</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/image-20241207204925506.png" /></p>
+<p>从虚拟地址中抽取index查找Cache，从物理地址中抽取tag进行比较
+Cache的查找和物理地址的转换同时进行，性能优于PIPT
+不存在歧义问题，但依然存在别名问题。</p>
+<h3 id="vipt中的别名问题">VIPT中的别名问题</h3>
+<p>直接映射：当Cache容量不大于页大小时，将不会产生别名问题
+组相联：当Cache中一路的容量不大于页大小时，将不会产生别名问题
+此时，index位于页偏移之中，虚拟地址和物理地址对应的index相同
+VIPT相当于PIPT</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/MIPS%E6%8C%87%E4%BB%A4%E7%B1%BB%E5%9E%8B/image-20241207205415587.png"
+alt="image-20241207205415587" />
+<figcaption aria-hidden="true">image-20241207205415587</figcaption>
+</figure>
+<p>解决方案1：提高相联度，将索引index控制在page offset字段范围之内
+解决方案2：使用大页，将索引index控制在page offset字段范围之内
+解决方案3：调整虚实映射，避免相同物理地址数据加载到不同Cache行对于直接相联，在建立共享映射的时候，虚拟地址都是按照Cache大小对齐对于组相联，在建立共享映射的时候，虚拟地址都是按照一路Cache大小对齐
+解决方案4：但满足不了将索引VA的index控制在page
+offset字段范围之内时，需要操作系统提供支持，即Page Color功能。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" rel="tag"># 计算机组成与体系结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3508812232.html" rel="prev" title="CPP set集合容器自定义比较函数">
+      <i class="fa fa-chevron-left"></i> CPP set集合容器自定义比较函数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/1297384559.html" rel="next" title="MIT 6.828 实验记录 (二)">
+      MIT 6.828 实验记录 (二) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mips%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">MIPS指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">一、计算机的寻址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%93%8D%E4%BD%9C%E7%A0%81%E7%BC%96%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">二、操作码编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89mips%E7%9A%84%E6%8C%87%E4%BB%A4%E5%8F%AF%E4%BB%A5%E5%88%86%E4%B8%BA3%E7%A7%8D%E6%93%8D%E4%BD%9C%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">三、MIPS的指令可以分为3种操作类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.</span> <span class="nav-text">跳转指令寻址：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">伪直接寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80"><span class="nav-number">1.4.2.</span> <span class="nav-text">PC相对寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%92%8C%E4%B8%AD%E6%96%AD"><span class="nav-number">1.5.</span> <span class="nav-text">异常和中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.</span> <span class="nav-text">Cache映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.1.</span> <span class="nav-text">直接映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E7%9B%B8%E8%81%94%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.2.</span> <span class="nav-text">全相联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#n%E8%B7%AF%E7%BB%84%E7%9B%B8%E8%81%94%E6%98%A0%E5%B0%84"><span class="nav-number">1.6.3.</span> <span class="nav-text">N路组相联映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E7%BB%93%E6%9E%84%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.7.</span> <span class="nav-text">Cache结构的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E5%9D%97%E6%9B%BF%E6%8D%A2%E7%AD%96%E7%95%A5"><span class="nav-number">1.8.</span> <span class="nav-text">Cache块替换策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lru"><span class="nav-number">1.8.1.</span> <span class="nav-text">LRU</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache%E5%86%99%E5%91%BD%E4%B8%AD%E7%AD%96%E7%95%A5"><span class="nav-number">1.9.</span> <span class="nav-text">Cache写命中策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E7%9B%B4%E8%BE%BE"><span class="nav-number">1.9.1.</span> <span class="nav-text">写直达</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9B%9E"><span class="nav-number">1.9.2.</span> <span class="nav-text">写回</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%88%86%E9%85%8D"><span class="nav-number">1.9.3.</span> <span class="nav-text">写分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E4%B8%8D%E5%88%86%E9%85%8D"><span class="nav-number">1.9.4.</span> <span class="nav-text">写不分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%B4%A2%E5%BC%95%E8%99%9A%E6%8B%9F%E6%A0%87%E8%AE%B0vivt"><span class="nav-number">1.9.5.</span> <span class="nav-text">虚拟索引虚拟标记（VIVT）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E7%B4%A2%E5%BC%95%E7%89%A9%E7%90%86%E6%A0%87%E8%AE%B0"><span class="nav-number">1.9.6.</span> <span class="nav-text">物理索引物理标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vipt%E4%B8%AD%E7%9A%84%E5%88%AB%E5%90%8D%E9%97%AE%E9%A2%98"><span class="nav-number">1.9.7.</span> <span class="nav-text">VIPT中的别名问题</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

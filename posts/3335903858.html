@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="理解程序如何在计算机上运行的根本途径是实现一个完整的计算机系统。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机系统综合实践PA2">
+<meta property="og:url" content="https://tommygong.top/posts/3335903858.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="理解程序如何在计算机上运行的根本途径是实现一个完整的计算机系统。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-12T02:11:23.000Z">
+<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="计算机系统">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/3335903858.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算机系统综合实践PA2 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/3335903858.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机系统综合实践PA2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-12 10:11:23" itemprop="dateCreated datePublished" datetime="2024-07-12T10:11:23+08:00">2024-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
+            <div class="post-description">理解程序如何在计算机上运行的根本途径是实现一个完整的计算机系统。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="计算机系统基础综合实践-pa2">计算机系统基础综合实践 PA2</h1>
+<h2 id="x86-指令系统">x86 指令系统</h2>
+<p>PA2的任务是实现基本x86指令，i386手册——<a
+target="_blank" rel="noopener" href="http://css.csail.mit.edu/6.858/2013/readings/i386.pdf">INTEL 80386
+PROGRAMMER’S REFERENCE MANUAL 1986
+(mit.edu)</a>里全面地列出了所有指令的细节。</p>
+<h2 id="前言">前言</h2>
+<p>此次实验目的是为了能够了解汇编语言中指令的各处细节，掌握IA-32指令格式，并且对NEMU平台中的指令周期了解地更加全面。PA2会开始涉及到一些计算机系统基础的知识。</p>
+<h2 id="实验内容">实验内容</h2>
+<ul>
+<li>阶段 1: 编写 helper 函数, 在 NEMU 中运行第一个 C 程序——mov-c.c</li>
+<li>阶段 2: 实现更多的指令，并通过测试</li>
+<li>阶段 3：完善简易调试器</li>
+<li>阶段 4：实现 loader</li>
+<li>最后阶段: 实现黑客运行时劫持实验（选做）</li>
+</ul>
+<h2 id="开始实验">开始实验</h2>
+<hr />
+<h2 id="x86指令格式">x86指令格式</h2>
+<p><strong>指令格式</strong></p>
+<p>x86指令的格式由这几个部分组成。除了Opcode一定出现以外，其他都是可选的。当Opcode前缀为66时，表示16位操作数，否则表示32位操作数。</p>
+<p><strong>MOV</strong></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/odJSiul48aTM61Q.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>i386手册里的都是Intel格式，objdump的默认格式为AT&amp;T。这里以mov为例，功能描述里r/m表示为寄存器或内存，r/m后面的数值表示为多少位的寄存器，Opcode为89的有两种形式，而前面提到Opcode前缀就是用来区分16位和32位的，例如开始如果出现66
+8B，则应该被解释成MOV
+r16,r/m16。Sreg表示段寄存器，moffs表示段内偏移，段的概念会以后提到。+rb
++rw
++rd则表示8位，16位，32位寄存器，可以通过按数值加法来确定唯一的寄存器。</p>
+<p><strong>ModR/M Table</strong></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/8FBG6UvHwaRQxkf.png"
+alt="pa2-1.png" />
+<figcaption aria-hidden="true">pa2-1.png</figcaption>
+</figure>
+<p>ModR/M域分成三个部分，Mod为2位，所以Mod可以指定4种寻址方式，每一种选择里还对应着不同的选择，这些便是由R/M来决定，而R/M为3位，所以又可以选择8种寻址方式。所以Mod
++
+R/M可以组合成32种寻址方式，其中为8种为寄存器寻址，另24种为存储器寻址。Reg/Opcode则可以表示成8个寄存器或者对于Opcode的一个补充。以上为32位ModR/M的表。</p>
+<p><strong>SIB Table</strong></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/WqXkFDJhBmsj2aC.png"
+alt="image.png" />
+<figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>R/M代表的是寄存器还是内存，是由Mod决定的，当mod =
+3时，r/m表示的是寄存器操作，否则为内存操作。ModR/M表中画横线的部分表示要使用到索引寻址，这时候便会使用到SIB，SIB由三个部分组成，Base代表基址寄存器，Index表示变址寄存器，SS表示比例系数。举个例子，例如
+mov [ebx + eax * 2], ecx
+，ebx为Base，eax为Index，2为SS。以上为SIB的表。</p>
+<p>至于Displacement和Immediate则分别表示成偏移数和立即数，这两个都是按照小端序排列。例如，mov
+0x1a2b[ebx + eax * 2], ecx ，其中的0x1a2b表示Displacement。</p>
+<p><strong>这里的图都是还未被修正过的，图中画蓝线的部分是错误的，需要自行对照勘误表</strong></p>
+<h3 id="补充">补充</h3>
+<p>由于一个字节为8位，最多只能表示成256个形式，一旦指令形式的数目大于256时，这时候就需要用到转移码的概念或者利用Reg/Opcode中的Opcode来补充指令。</p>
+<ul>
+<li>x86中分别有两字节转移码和三字节转移码，当Opcode前一个字节为0x0f或者前两个字节为0x0f和0x38的时候，表示需要再读入一个字节来确定唯一的指令形式。</li>
+<li>当Reg/Opcode域被当作Opcode来解释的时候，这些指令会被划分为不同的指令组，在同一个指令组的指令则需要通过Reg/Opcode域中的Opcode来唯一确定。</li>
+</ul>
+<hr />
+<h2 id="必做任务-1运行用户程序-mov-c">必做任务 1：运行用户程序
+mov-c</h2>
+<p>首先需要查找<a
+target="_blank" rel="noopener" href="http://css.csail.mit.edu/6.858/2013/readings/i386.pdf">i386</a>手册中指令的相关篇幅，通过指令的Opcode决定指令的具体形式。之后根据实验给出的代码框架，实现指令需要创建三个文件，分别为xxx-template.h、xxx.c、xxx.h。最后必须在<strong>nemu/src/cpu/exec/all-instar.h</strong>包含所创建的指令头文件，并且在<strong>nemu/src/cpu/exec/exec.c</strong>中依照Opcode在正确的位置添加与之相对应的指令。<strong>PA2代码框架中所定义的宏极为重要，在实现指令时可以省去很多重复的步骤，需要仔细阅读实验指导书并且理解。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(nemu) c</span><br><span class="line">invalid opcode(eip = 0x001012c5): e8 c6 fe ff ff e8 d1 fe ...</span><br><span class="line"></span><br><span class="line">There are two cases <span class="built_in">which</span> will trigger this unexpected exception:</span><br><span class="line">1. The instruction at eip = 0x001012c5 is not implemented.</span><br><span class="line">2. Something is implemented incorrectly.</span><br><span class="line">Find this eip value(0x001012c5) <span class="keyword">in</span> the disassembling result to distinguish <span class="built_in">which</span> <span class="keyword">case</span> it is.</span><br><span class="line"></span><br><span class="line">If it is the first <span class="keyword">case</span>, see</span><br><span class="line"> _ ____   ___    __    __  __                         _ </span><br><span class="line">(_)___ \ / _ \  / /   |  \/  |                       | |</span><br><span class="line"> _  __) | (_) |/ /_   | \  / | __ _ _ __  _   _  __ _| |</span><br><span class="line">| ||__ &lt; &gt; _ &lt;| <span class="string">&#x27;_ \  | |\/| |/ _` | &#x27;</span>_ \| | | |/ _` | |</span><br><span class="line">| |___) | (_) | (_) | | |  | | (_| | | | | |_| | (_| | |</span><br><span class="line">|_|____/ \___/ \___/  |_|  |_|\__,_|_| |_|\__,_|\__,_|_|</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> more details.</span><br><span class="line"></span><br><span class="line">If it is the second <span class="keyword">case</span>, remember:</span><br><span class="line">* The machine is always right!</span><br><span class="line">* Every line of untested code is always wrong!</span><br><span class="line"></span><br><span class="line">nemu: nemu/src/cpu/exec/special/special.c:24: inv: Assertion `0<span class="string">&#x27; failed.</span></span><br><span class="line"><span class="string">Makefile:63: recipe for target &#x27;</span>run<span class="string">&#x27; fail</span></span><br></pre></td></tr></table></figure>
+<p>修改NEMU根目录下Make
+File中的用户程序后，执行NEMU会发现报错，错误原因是还没有实现0xe8为首字节的指令。下面会给出两个实现指令的过程，剩余指令就不给出了。</p>
+<hr />
+<h3 id="实现call指令">实现call指令</h3>
+<p><strong>nemu/src/cpu/exec/control/call-template.h</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cpu/exec/template-start.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> instr call</span></span><br><span class="line"></span><br><span class="line">make_helper(concat(call_i_, SUFFIX)) &#123;</span><br><span class="line">	<span class="type">int</span> len = concat(decode_i_, SUFFIX)(eip + <span class="number">1</span>); <span class="comment">//calculate the length of instr (include opcode)</span></span><br><span class="line">	reg_l(R_ESP) -= DATA_BYTE; <span class="comment">//esp - 4 (push)</span></span><br><span class="line">	MEM_W(reg_l(R_ESP), cpu.eip + len + <span class="number">1</span>); <span class="comment">//write current eip next address to esp (mov)</span></span><br><span class="line">	cpu.eip += (DATA_TYPE_S)op_src-&gt;val; <span class="comment">//length from eip to function</span></span><br><span class="line">	print_asm(<span class="string">&quot;call: 0x%x&quot;</span>, cpu.eip + len + <span class="number">1</span>); <span class="comment">// eip update</span></span><br><span class="line">	<span class="keyword">return</span> len + <span class="number">1</span>; <span class="comment">// return opcode + behind</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">make_helper(concat(call_rm_, SUFFIX)) &#123;</span><br><span class="line">	<span class="type">int</span> len = concat(decode_rm_, SUFFIX)(eip + <span class="number">1</span>);</span><br><span class="line">	reg_l(R_ESP) -= DATA_BYTE;</span><br><span class="line">	MEM_W(reg_l(R_ESP), cpu.eip + len + <span class="number">1</span>);</span><br><span class="line">	cpu.eip = (DATA_TYPE_S)op_src-&gt;val - len - <span class="number">1</span>;</span><br><span class="line">	print_asm(<span class="string">&quot;call: %s&quot;</span>, op_src-&gt;str);</span><br><span class="line">	<span class="keyword">return</span> len + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cpu/exec/template-end.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>编写call指令模板文件。call指令可以大致分成三个步骤。</p>
+<ul>
+<li>esp = esp - DATA_BYTE，栈腾出位置。</li>
+<li>[esp] = 返回地址 ，把返回地址压入栈中。</li>
+<li>eip跳转到函数地址。</li>
+</ul>
+<p>这里涉及了对指针ESP、帧指针EBP、栈函数调用栈、栈帧等各方面的理解。栈指针ESP永远指向系统栈中最上面一个栈帧的栈顶，而帧指针EBP则永远指向系统战中最上面一个栈帧的栈底，这两个指针的作用主要是用来保存（或恢复）堆栈。后续有个选做任务也是和这个的类似。</p>
+<p><strong>nemu/src/cpu/exec/control/call.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cpu/exec/helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_BYTE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;call-template.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> DATA_BYTE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_BYTE 2</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;call-template.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> DATA_BYTE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_BYTE 4</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;call-template.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> DATA_BYTE</span></span><br><span class="line"></span><br><span class="line">make_helper_v(call_i)</span><br><span class="line">make_helper_v(call_rm)</span><br></pre></td></tr></table></figure>
+<p>编写call指令实例化文件。</p>
+<p><strong>nemu/src/cpu/exec/control/call.h</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cpu/exec/helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">make_helper(call_i_v);</span><br><span class="line"></span><br><span class="line">make_helper(call_rm_v);</span><br></pre></td></tr></table></figure>
+<p>编写call指令头文件。</p>
+<hr />
+<h2 id="eflags寄存器">EFLAGS寄存器</h2>
+<p><strong>EFLAGS寄存器结构</strong></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/bPO1iHDalk9jp3g.png"
+alt="image.png" />
+<figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>一些指令执行的时候会更新EFLAGSZ中某些标志位的值，例如test指令，这是一个32位寄存器。第1、3、5、15以及22到31位会被保留，其余的标志位有些可以被特殊的指令直接被修改，但是并没有任何一条指令可以查看或者修改整个寄存器。</p>
+<ul>
+<li>CF：进位标志，如果运算的结果最高位产生了进位或借位，其值为1，否则为0。</li>
+<li>PF：奇偶标志，计算运算结果里1的奇偶性，偶数为1，否则为0。</li>
+<li>AF：辅助进位标志，取运算结果最后四位，最后四位向前有进位或借位，其值为1，否则为0。</li>
+<li>ZF：零标志，相关指令结束后判断是否为0，结果为0，其值为1，否则为0。</li>
+<li>SF：符号标志，相关质量结束后判断正负，结果为负，其值为1，否则为0。</li>
+<li>TF：单步标志，当其值为1时，表示处理器每次只执行一条指令。</li>
+<li>IF：中断使能标志，表示能否响应外部中断，若能响应外部中断，其值为1，否则为0。</li>
+<li>DF：方向标志，当DF为1，ESI、EDI自动递减，否则自动递增。</li>
+<li>OF：溢出标志，反映有符号数运算结果是否溢出，如果溢出，其值为1，否则为0。</li>
+</ul>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/rblRGK4Bo69ca5E.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>代码框架已经为我们实现好了EFLAGS寄存器的结构，但是需要为EFLAGS寄存器初始化。i386手册第十章有给出EFLAGS寄存器的初始值。</p>
+<hr />
+<h3 id="实现test指令">实现test指令</h3>
+<p><strong>nemu/src/monitor/monitor.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">restart</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">	<span class="comment">/* Set EFLAGS. */</span></span><br><span class="line">	cpu.eflags.val = <span class="number">0x00000002</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将EFLAGS寄存器初始为0x00000002。</p>
+<p><strong>nemu/src/cpu/exec/logic/test-template.h</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cpu/exec/template-start.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> instr test</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">do_execute</span><span class="params">()</span> &#123;</span><br><span class="line">  DATA_TYPE ret = op_dest -&gt; val &amp; op_src -&gt; val; <span class="comment">// cmp two statement bit</span></span><br><span class="line">  cpu.eflags.SF = ret &gt;&gt; ((DATA_BYTE &lt;&lt; <span class="number">3</span>) - <span class="number">1</span>); <span class="comment">// left 31 bit, SF == 1, negative number</span></span><br><span class="line">  cpu.eflags.ZF = !ret; <span class="comment">// Zf == 1, zero number</span></span><br><span class="line">  cpu.eflags.CF = <span class="number">0</span>; <span class="comment">//test excustive CF = 0</span></span><br><span class="line">  cpu.eflags.OF = <span class="number">0</span>; <span class="comment">//test excustive OF = 0</span></span><br><span class="line">  ret ^= ret &gt;&gt; <span class="number">4</span>;</span><br><span class="line">  ret ^= ret &gt;&gt; <span class="number">2</span>;</span><br><span class="line">  ret ^= ret &gt;&gt; <span class="number">1</span>;</span><br><span class="line">  ret &amp;= <span class="number">1</span>; <span class="comment">// if last bit == 1, odd number</span></span><br><span class="line">  cpu.eflags.PF = !ret; <span class="comment">// PF == 1, even number, Pf == 0, odd number</span></span><br><span class="line">  DATA_TYPE result = op_dest -&gt; val &amp; op_src -&gt; val;</span><br><span class="line">  update_eflags_pf_zf_sf((DATA_TYPE_S)result);</span><br><span class="line">  cpu.eflags.CF = cpu.eflags.OF = <span class="number">0</span>;</span><br><span class="line">  print_asm_template1();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">make_instr_helper(i2a)</span><br><span class="line">make_instr_helper(i2rm)</span><br><span class="line">make_instr_helper(r2rm)</span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cpu/exec/template-end.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>编写test指令模板文件。由于test指令执行需要更新标志位，这里可以手动为EFLAGS寄存器的各个标志位赋值，也可以利用代码框架提供的函数update_eflags_pf_zf_sf()更新pf、zf、sf这三个标志位。</p>
+<p><strong>nemu/src/cpu/exec/logic/test.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;cpu/exec/helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_BYTE 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;test-template.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> DATA_BYTE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_BYTE 2</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;test-template.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> DATA_BYTE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_BYTE 4</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;test-template.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">undef</span> DATA_BYTE</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* for instruction encoding overloading */</span></span><br><span class="line"></span><br><span class="line">make_helper_v(test_i2a)</span><br><span class="line">make_helper_v(test_i2rm)</span><br><span class="line">make_helper_v(test_r2rm)</span><br></pre></td></tr></table></figure>
+<p>编写test指令实例化文件。</p>
+<p><strong>nemu/src/cpu/exec/logic/test.h</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __TEST_H__</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __TEST_H__</span></span><br><span class="line"></span><br><span class="line">make_helper(test_i2a_b);</span><br><span class="line">make_helper(test_i2rm_b);</span><br><span class="line">make_helper(test_r2rm_b);</span><br><span class="line"></span><br><span class="line">make_helper(test_i2a_v);</span><br><span class="line">make_helper(test_i2rm_v);</span><br><span class="line">make_helper(test_r2rm_v);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>编写test指令头文件。</p>
+<h3 id="输出结果">输出结果</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">objcopy -S -O binary obj/kernel/kernel entry</span><br><span class="line">obj/nemu/nemu obj/testcase/mov-c</span><br><span class="line">Welcome to NEMU!</span><br><span class="line">The executable is obj/testcase/mov-c.</span><br><span class="line">For <span class="built_in">help</span>, <span class="built_in">type</span> <span class="string">&quot;help&quot;</span></span><br><span class="line">(nemu) c</span><br><span class="line">.nemu: HIT GOOD TRAP at eip = 0xc0101325</span><br></pre></td></tr></table></figure>
+<p>成功运行用户程序mov-c。</p>
+<hr />
+<h2 id="必做任务-2实现更多指令">必做任务 2：实现更多指令</h2>
+<p>此次任务需要通过所有testcase下目录的程序，除了这五个hello-inline-asm、
+hello、integral、quadratic-eq、print-FLOAT。这个可以说是整个PA代码量最大的一次任务，需要反复查阅i386手册。</p>
+<hr />
+<h2 id="浮点数">浮点数</h2>
+<p><strong>单精度浮点数结构</strong></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/H7a7342f3dcc641c7a8bf3541376b015dJ.jpg"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>浮点数遵循着IEEE 754标准。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/fang0jun/Blog/issues/27">浮点数详解(IEEE
+754标准） · Issue #27 · fang0jun/Blog · GitHub</a></p>
+</blockquote>
+<hr />
+<h2 id="定点化浮点数">定点化浮点数</h2>
+<p>x86架构上引进了协处理器x87架构，所以就可以处理浮点数运算相关的指令。但是NEMU中不实现类似x87架构的指令系统，所以引进了一个概念，”浮点数定点化”，是通过32位整数来模拟浮点数，就是为了让NEMU实现类似浮点数的机制，称作定点数。</p>
+<p><strong>定点数结构</strong></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/2dNeVOFmCjIU69s.png"
+alt="image.png" />
+<figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<ul>
+<li>sign为1位，负数，其值为1，否则为0。</li>
+<li>integer为15位，表示实数中整数的部分，如果整数部分超过15位则会发生溢出。</li>
+<li>fraction为16位，表示实数中小数的部分，只保留小数16位。</li>
+</ul>
+<p>实数转为定点数的时候需要乘2^16，相反亦是如此。例如实数1.5，1.5 * 2^16
+= 98304 ，也就是0x18000。</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/AwxaM9m4vXJkItQ.png"
+alt="image.png" />
+<figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p>0x18000 / 2^16 = 1.5
+，这样就完成了实数和定点数相互转换的过程。实数转定点数会失去表数范围和精度，但是这样的做法可以换取速度，只不过这里的例子恰好没有让实数失去精度。</p>
+<hr />
+<h2 id="必做任务3实现-binary-scaling">必做任务3：实现 binary
+scaling</h2>
+<p>此次任务需要通过integral和quadratic-eq这两个程序，这两个程序涉及到了浮点数的使用。NEMU中可以识别浮点数，但是却没有与之相对应的浮点数运算指令。而我们需要做的是把浮点数转为定点数，并且实现基本运算。</p>
+<p><strong>nemu/lib-common/FLOAT.h</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __FLOAT_H__</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __FLOAT_H__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;trap.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> FLOAT;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">int</span> <span class="title function_">F2int</span><span class="params">(FLOAT a)</span> &#123;</span><br><span class="line">	a &amp;= <span class="number">0xffff0000</span>;</span><br><span class="line">	<span class="keyword">return</span> a &gt;&gt; <span class="number">16</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> FLOAT <span class="title function_">int2F</span><span class="params">(<span class="type">int</span> a)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> a &lt;&lt; <span class="number">16</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> FLOAT <span class="title function_">F_mul_int</span><span class="params">(FLOAT a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> a * b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="keyword">inline</span> FLOAT <span class="title function_">F_div_int</span><span class="params">(FLOAT a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>定点数转整数只要取出低四位然后右移16位就可以了，右移16位就是等于/
+2^16，整数转定点数直接 * 2^16。定点数和整数的乘法和除法不用 *
+2<sup>16，因为当中的定点数的结果已经是*
+2</sup>16了，再乘的话就等于乘上两个2的16次方了。</p>
+<p><strong>nemu/lib-common/FLOAT/FLOAT.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;FLOAT.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">FLOAT <span class="title function_">F_mul_F</span><span class="params">(FLOAT a, FLOAT b)</span> &#123;</span><br><span class="line">	<span class="type">long</span> <span class="type">long</span> c = (<span class="type">long</span> <span class="type">long</span>)a * (<span class="type">long</span> <span class="type">long</span>)b;</span><br><span class="line">	<span class="keyword">return</span> (FLOAT)(c &gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FLOAT <span class="title function_">F_div_F</span><span class="params">(FLOAT a, FLOAT b)</span> &#123;</span><br><span class="line">	FLOAT p, q;</span><br><span class="line">	<span class="keyword">asm</span> <span class="title function_">volatile</span><span class="params">(<span class="string">&quot;idiv %2&quot;</span> : <span class="string">&quot;=a&quot;</span>(p), <span class="string">&quot;=d&quot;</span>(q) : <span class="string">&quot;r&quot;</span>(b), <span class="string">&quot;a&quot;</span>(a &lt;&lt; <span class="number">16</span>), <span class="string">&quot;d&quot;</span>(a &gt;&gt; <span class="number">16</span>))</span>;</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FLOAT <span class="title function_">f2F</span><span class="params">(<span class="type">float</span> a)</span> &#123;</span><br><span class="line">	<span class="type">int</span> b = *(<span class="type">int</span> *)&amp;a;</span><br><span class="line">	<span class="type">int</span> sign = b &gt;&gt; <span class="number">31</span>;</span><br><span class="line">	<span class="type">int</span> <span class="built_in">exp</span> = (b &gt;&gt; <span class="number">23</span>) &amp; <span class="number">0xff</span>;</span><br><span class="line">	FLOAT c = b &amp; <span class="number">0x7fffff</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">exp</span> != <span class="number">0</span>) &#123;</span><br><span class="line">		c += <span class="number">1</span> &lt;&lt; <span class="number">23</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">exp</span> -= <span class="number">150</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">exp</span> &lt; <span class="number">-16</span>) &#123;</span><br><span class="line">		c &gt;&gt;= <span class="number">-16</span> - <span class="built_in">exp</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">exp</span> &gt; <span class="number">-16</span>) &#123;</span><br><span class="line">		c &lt;&lt;= <span class="built_in">exp</span> + <span class="number">16</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sign == <span class="number">0</span> ? c : -c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FLOAT <span class="title function_">Fabs</span><span class="params">(FLOAT a)</span> &#123;</span><br><span class="line">	FLOAT b;</span><br><span class="line">	<span class="keyword">if</span> (a &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		b = a;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		b = -a;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>两个定点数相乘要用long
+long的类型，绝对值的话直接把小于0的数乘上个负数。剩余有两点需要注意，一个是浮点数如何转换成定点数，需要了解<a
+target="_blank" rel="noopener" href="https://aa10n.github.io/计算机系统基础/NEMUPA2/#浮点数">浮点数</a>具体的结构，另一个则是运用内联汇编。</p>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_35834894/article/details/108875451">gcc
+内联汇编格式以及详解_坚持的力量-CSDN博客</a></p>
+</blockquote>
+<p>之后根据实验指导书中需要修改的地方都修改后，便可运行integral和quadratic-eq这两个程序。</p>
+<hr />
+<h2 id="必做任务-4为表达式求值添加变量的支持">必做任务
+4：为表达式求值添加变量的支持</h2>
+<p>这里涉及到了一些ELF文件里的一些细节，在下面有一个任务也是要去理解elf文件。</p>
+<p><strong>nemu/src/monitor/debug/elf.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint32_t</span> <span class="title function_">getValue</span><span class="params">(<span class="type">char</span>* str,<span class="type">bool</span>* success)</span>&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; nr_symtab_entry; i++)&#123;</span><br><span class="line">        <span class="comment">//STT_OBJECT代表符号的类型是一个数据对象，例如变量、数组、指针（符号的类型在低四位）</span></span><br><span class="line">		<span class="keyword">if</span> ((symtab[i].st_info &amp; <span class="number">0xf</span>) == STT_OBJECT || (symtab[i].st_info &amp; <span class="number">0xf</span>) == STT_FUNC)&#123; </span><br><span class="line">            <span class="comment">//字符串表+符号偏移量 = 符号所在地址STT_FUNC代表符号的类型是一个函数（符号的类型在低四位）</span></span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">strcmp</span>(strtab + symtab[i].st_name, str) == <span class="number">0</span>)&#123; </span><br><span class="line">				<span class="keyword">return</span> symtab[i].st_value;</span><br><span class="line">			&#125; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	*success = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span>* <span class="title function_">getFuncName</span><span class="params">(<span class="type">swaddr_t</span> eip)</span> &#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; nr_symtab_entry; i ++) &#123;</span><br><span class="line">		<span class="keyword">if</span>((symtab[i].st_info &amp; <span class="number">0xf</span>) == STT_FUNC )&#123;</span><br><span class="line">				<span class="keyword">if</span>(eip &gt;= symtab[i].st_value &amp;&amp; eip &lt;= symtab[i].st_value + symtab[i].st_size)  &#123;</span><br><span class="line">				<span class="keyword">return</span> strtab + symtab[i].st_name;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>STT_OBJECT代表符号的类型是一个数据对象，例如变量、数组、指针，STT_FUNC则代表符号的类型是一个函数。符号的类型在低四位，所以这边要与上一个0xf用来对比地址低4位。字符串表（st_name）加上符号偏移量（strtab）等于符号所在地址。在符号表中取出相应函数的地址和函数名(选做任务)，之后在<strong>nemu/src/monitor/debug/expr.c</strong>添加相应的规则后，便可在表达式中使用变量了。</p>
+<hr />
+<h2 id="栈帧链">栈帧链</h2>
+<p><strong>栈帧链</strong></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5_PA2/stack_frame_structure.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>栈帧链大致的概念就是，在若干次函数调用时会在堆栈中形成栈帧。在调用函数之前，调用函数的当前栈帧会保存自己的信息，此时ESP指向当前栈帧底部、EBP指向当前栈帧顶部。而调用函数之后，首先会把被调用函数的参数和调用函数的返回地址压入栈，并且被调用函数现在有了一个自己的栈帧，此时EBP和ESP分别指向被调用函数的栈帧底部和栈帧顶部。</p>
+<hr />
+<h2 id="选做任务-1打印栈帧链">选做任务 1：打印栈帧链</h2>
+<p>这里需要理解栈帧和函数过程调用。</p>
+<p><strong>nemu/src/monitor/debug/ui.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	<span class="type">swaddr_t</span> prev_ebp;</span><br><span class="line">	<span class="type">swaddr_t</span> ret_addr;</span><br><span class="line">	<span class="comment">//uint32_t args[4];</span></span><br><span class="line">&#125;PartOfStackFrame ;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span>* <span class="title function_">getFuncName</span><span class="params">(<span class="type">int</span> eip)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">cmd_bt</span><span class="params">(<span class="type">char</span> *args)</span>&#123;</span><br><span class="line">	PartOfStackFrame frame;</span><br><span class="line">	frame.ret_addr = cpu.eip;</span><br><span class="line">	<span class="type">swaddr_t</span> temp_ebp = cpu.ebp;</span><br><span class="line">	<span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(temp_ebp)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;#%d\t0x%x\t%s\t0x%x\t0x%x\t0x%x\t0x%x\n&quot;</span>, count++, frame.ret_addr, getFuncName(cpu.eip), swaddr_read(temp_ebp + <span class="number">8</span>, <span class="number">4</span>), swaddr_read(temp_ebp + <span class="number">12</span>, <span class="number">4</span>), swaddr_read(temp_ebp + <span class="number">16</span>, <span class="number">4</span>), swaddr_read(temp_ebp + <span class="number">20</span>, <span class="number">4</span>));</span><br><span class="line">		<span class="comment">//current_sreg = R_SS;</span></span><br><span class="line">		frame.prev_ebp = swaddr_read(temp_ebp, <span class="number">4</span>);</span><br><span class="line">		frame.ret_addr = swaddr_read(temp_ebp + <span class="number">4</span>, <span class="number">4</span>);</span><br><span class="line">		temp_ebp = frame.prev_ebp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>只需要打印出函数名、返回地址以及前四个参数。利用一个变量temp_ebp记录当前ebp的值，需要记录当前ebp和上一个栈帧链的返回地址（存在当前ebp上面，参数存在当前ebp上上面），最后更新temp_ebp，此时temp_ebp指向当前栈帧底部，ret_addr指向栈帧顶部，当ebp不为空则表示当前还有栈帧。</p>
+<hr />
+<h2 id="elf文件">ELF文件</h2>
+<p>ELF文件提供了两个视角，分别为面向链接的<strong>section</strong>视角和面向执行的<strong>segment</strong>视角。里面很多细节，直接上链接。</p>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/jiqingwu/p/elf_format_research_01.html">ELF文件解析（一）：Segment和Section
+- JollyWing - 博客园 (cnblogs.com)</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/jiqingwu/p/elf_explore_2.html">ELF文件解析（二）：ELF
+header详解 - JollyWing - 博客园 (cnblogs.com)</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/jiqingwu/p/elf_explore_3.html">ELF格式探析之三：sections
+- JollyWing - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<hr />
+<h2 id="必做任务-5实现-loader">必做任务 5：实现 loader</h2>
+<p><strong>kernel/src/elf/elf.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint32_t</span> <span class="title function_">loader</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">	<span class="comment">/* <span class="doctag">TODO:</span> fix the magic number with the correct one */</span></span><br><span class="line">	<span class="type">const</span> <span class="type">uint32_t</span> elf_magic = <span class="number">0x464c457f</span>;</span><br><span class="line">	<span class="type">uint32_t</span> *p_magic = (<span class="type">void</span> *)buf;</span><br><span class="line">	nemu_assert(*p_magic == elf_magic);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Load each program segment */</span></span><br><span class="line">	<span class="comment">//panic(&quot;please implement me&quot;);</span></span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	ph = (<span class="type">void</span>*)(buf + elf-&gt;e_phoff);</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; elf-&gt;e_phnum; i++) &#123;</span><br><span class="line">		<span class="comment">/* Scan the program header table, load each segment into memory */</span></span><br><span class="line">		<span class="keyword">if</span>(ph-&gt;p_type == PT_LOAD) &#123;</span><br><span class="line">			<span class="type">uint32_t</span> pa = ph-&gt;p_vaddr;</span><br><span class="line">			<span class="comment">/* <span class="doctag">TODO:</span> read the content of the segment from the ELF file </span></span><br><span class="line"><span class="comment">			 * to the memory region [VirtAddr, VirtAddr + FileSiz)</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			ramdisk_read((<span class="type">void</span> *)pa,ph-&gt;p_offset,ph-&gt;p_filesz);</span><br><span class="line">			<span class="comment">/* <span class="doctag">TODO:</span> zero the memory region </span></span><br><span class="line"><span class="comment">			 * [VirtAddr + FileSiz, VirtAddr + MemSiz)</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			<span class="built_in">memset</span>((<span class="type">void</span>*)pa+ph-&gt;p_filesz,<span class="number">0</span>,ph-&gt;p_memsz-ph-&gt;p_filesz);</span><br><span class="line">			</span><br><span class="line">			ph ++;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先需要正确定义ELF的Magic
+Word用来识别文件是否为ELF格式，这里用了框架代码中给出的函数ramdisk_read()用于读出ramdisk里的内容，然后把segment的代码正确加载。最后依照实验指导书中指示需要修改的部分后修改，即可完成此次任务，算是为PA3开一个头。</p>
+<hr />
+<h2 id="选做任务2-实现黑客运行时劫持实验">选做任务2：
+实现黑客运行时劫持实验</h2>
+<p>有时间再做，好像是有点类似csapp的lab。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" rel="tag"># 计算机系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/1608289224.html" rel="prev" title="计算机系统综合实践PA1">
+      <i class="fa fa-chevron-left"></i> 计算机系统综合实践PA1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2396792509.html" rel="next" title="数据库原理笔记">
+      数据库原理笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5-pa2"><span class="nav-number">1.</span> <span class="nav-text">计算机系统基础综合实践 PA2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#x86-%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">x86 指令系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">实验内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.4.</span> <span class="nav-text">开始实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x86%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">x86指令格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">1.5.1.</span> <span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E5%81%9A%E4%BB%BB%E5%8A%A1-1%E8%BF%90%E8%A1%8C%E7%94%A8%E6%88%B7%E7%A8%8B%E5%BA%8F-mov-c"><span class="nav-number">1.6.</span> <span class="nav-text">必做任务 1：运行用户程序
+mov-c</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0call%E6%8C%87%E4%BB%A4"><span class="nav-number">1.6.1.</span> <span class="nav-text">实现call指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eflags%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text">EFLAGS寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0test%E6%8C%87%E4%BB%A4"><span class="nav-number">1.7.1.</span> <span class="nav-text">实现test指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="nav-number">1.7.2.</span> <span class="nav-text">输出结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E5%81%9A%E4%BB%BB%E5%8A%A1-2%E5%AE%9E%E7%8E%B0%E6%9B%B4%E5%A4%9A%E6%8C%87%E4%BB%A4"><span class="nav-number">1.8.</span> <span class="nav-text">必做任务 2：实现更多指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">1.9.</span> <span class="nav-text">浮点数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%82%B9%E5%8C%96%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">1.10.</span> <span class="nav-text">定点化浮点数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E5%81%9A%E4%BB%BB%E5%8A%A13%E5%AE%9E%E7%8E%B0-binary-scaling"><span class="nav-number">1.11.</span> <span class="nav-text">必做任务3：实现 binary
+scaling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E5%81%9A%E4%BB%BB%E5%8A%A1-4%E4%B8%BA%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%E6%B7%BB%E5%8A%A0%E5%8F%98%E9%87%8F%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-number">1.12.</span> <span class="nav-text">必做任务
+4：为表达式求值添加变量的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88%E5%B8%A7%E9%93%BE"><span class="nav-number">1.13.</span> <span class="nav-text">栈帧链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E5%81%9A%E4%BB%BB%E5%8A%A1-1%E6%89%93%E5%8D%B0%E6%A0%88%E5%B8%A7%E9%93%BE"><span class="nav-number">1.14.</span> <span class="nav-text">选做任务 1：打印栈帧链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elf%E6%96%87%E4%BB%B6"><span class="nav-number">1.15.</span> <span class="nav-text">ELF文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E5%81%9A%E4%BB%BB%E5%8A%A1-5%E5%AE%9E%E7%8E%B0-loader"><span class="nav-number">1.16.</span> <span class="nav-text">必做任务 5：实现 loader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E5%81%9A%E4%BB%BB%E5%8A%A12-%E5%AE%9E%E7%8E%B0%E9%BB%91%E5%AE%A2%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%AB%E6%8C%81%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.17.</span> <span class="nav-text">选做任务2：
+实现黑客运行时劫持实验</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

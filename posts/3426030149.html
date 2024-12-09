@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="贝塞尔曲线（读作 [bezje]）是一种使用数学方法描述的曲线，被广泛用于计算机图形学和动画中。在矢量图中，贝塞尔曲线用于定义可无限放大的光滑曲线。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贝塞尔曲线">
+<meta property="og:url" content="https://tommygong.top/posts/3426030149.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="贝塞尔曲线（读作 [bezje]）是一种使用数学方法描述的曲线，被广泛用于计算机图形学和动画中。在矢量图中，贝塞尔曲线用于定义可无限放大的光滑曲线。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-19T14:16:03.000Z">
+<meta property="article:modified_time" content="2024-12-09T13:12:22.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="计算机图形学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/3426030149.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>贝塞尔曲线 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/3426030149.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          贝塞尔曲线
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-19 22:16:03" itemprop="dateCreated datePublished" datetime="2024-09-19T22:16:03+08:00">2024-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-09 21:12:22" itemprop="dateModified" datetime="2024-12-09T21:12:22+08:00">2024-12-09</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+            <div class="post-description">贝塞尔曲线（读作 [bezje]）是一种使用数学方法描述的曲线，被广泛用于计算机图形学和动画中。在矢量图中，贝塞尔曲线用于定义可无限放大的光滑曲线。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="贝塞尔曲线">贝塞尔曲线</h2>
+<p><strong>贝塞尔曲线</strong>（读作
+[bezje]）是一种使用数学方法描述的曲线，被广泛用于计算机图形学和动画中。在矢量图中，贝塞尔曲线用于定义可无限放大的光滑曲线。</p>
+<p>贝塞尔曲线由至少两个控制点进行描述。Web
+技术中使用的是三次贝塞尔曲线，即使用四个控制点 P0、P1、P2 和 P3
+描述的曲线。</p>
+<p>在绘制二次贝塞尔曲线的过程中，需要先作两条辅助线：P0 到 P1 和 P1 到
+P2；第三条辅助线从其起点稳步移动到第一辅助线上，终点在第二辅助线上。在这条辅助线上，有一个点从其起点稳步移动到其终点。这个点描述的曲线就是贝塞尔曲线。以下是一个动画示例，展示了曲线的创建过程：</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF/bezier_2_big.gif"
+alt="绘制一条贝塞尔曲线" />
+<figcaption aria-hidden="true">绘制一条贝塞尔曲线</figcaption>
+</figure>
+<h3 id="一般化">一般化</h3>
+<p><span
+class="math inline">\(n\)</span>阶贝塞尔曲线可如下推断。给定点<span
+class="math inline">\(P_0,P_1,P_2,\cdots,P_n\)</span>，其贝塞尔曲线即</p>
+<p><span class="math display">\[
+\displaystyle \mathbf {B} (t)=\sum _{i=0}^{n}{n \choose i}\mathbf {P}
+_{i}(1-t)^{n-i}t^{i}={n \choose 0}\mathbf {P} _{0}(1-t)^{n}t^{0}+{n
+\choose 1}\mathbf {P} _{1}(1-t)^{n-1}t^{1}+\cdots +{n \choose
+n-1}\mathbf {P} _{n-1}(1-t)^{1}t^{n-1}+{n \choose n}\mathbf {P}
+_{n}(1-t)^{0}t^{n}{\mbox{ , }}t\in [0,1]
+\]</span></p>
+<h3 id="术语">术语</h3>
+<p>一些关于参数曲线的术语，有</p>
+<p><span class="math display">\[
+{\displaystyle \mathbf {B} (t)=\sum _{i=0}^{n}\mathbf {P} _{i}\mathbf
+{b} _{i,n}(t),\quad t\in [0,1]}
+\]</span></p>
+<p><span class="math inline">\({\displaystyle \mathbf {b} _{i,n}(t)={n
+\choose i}t^{i}(1-t)^{n-i},\quad i=0,\ldots n}\)</span></p>
+<p>又称作<em>n</em>阶的<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=伯恩斯坦多項式&amp;action=edit&amp;redlink=1">伯恩斯坦基底多项式</a>，定义<span
+class="math inline">\(0^0\)</span> = 1。</p>
+<p>点<span
+class="math inline">\(P_i\)</span>*称作贝塞尔曲线的<strong>控制点</strong>。多边形以带有线的贝兹点连接而成，起始于<span
+class="math inline">\(P_0\)</span>并以<span
+class="math inline">\(P_n\)</span>终止，称作<strong>贝兹多边形</strong>（或<strong>控制多边形</strong>）。贝兹多边形的<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/凸包">凸包</a>（convex
+hull）包含有贝塞尔曲线。</p>
+<h2 id="构建贝塞尔曲线">构建贝塞尔曲线</h2>
+<h3 id="线性曲线">线性曲线</h3>
+<p>线性贝塞尔曲线函数中的<em>t</em>会经过由<span
+class="math inline">\(P_0\)</span>至<span
+class="math inline">\(P_1\)</span>的<span
+class="math inline">\(B(t)\)</span>所描述的曲线。例如当<em>t=0.25</em>时，<span
+class="math inline">\(B(t)\)</span>即一条由点至<span
+class="math inline">\(P_0\)</span>至<span
+class="math inline">\(P_1\)</span>路径的四分之一处。就像由0至1的连续<em>t</em>，描<span
+class="math inline">\(B(t)\)</span>述一条由<span
+class="math inline">\(P_0\)</span>至<span
+class="math inline">\(P_1\)</span>的直线。</p>
+<h3 id="二次曲线">二次曲线</h3>
+<p>为建构二次贝塞尔曲线，可以中介点<strong>Q</strong>0和<strong>Q</strong>1作为由0至1的<em>t</em>：</p>
+<ul>
+<li>由<strong>P</strong>0至<strong>P</strong>1的连续点<strong>Q</strong>0，描述一条线性贝塞尔曲线。</li>
+<li>由<strong>P</strong>1至<strong>P</strong>2的连续点<strong>Q</strong>1，描述一条线性贝塞尔曲线。</li>
+<li>由<strong>Q</strong>0至<strong>Q</strong>1的连续点<strong>B</strong>（<em>t</em>），描述一条二次贝塞尔曲线。</li>
+</ul>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF/B%C3%A9zier_2_big.gif"
+alt="https://upload.wikimedia.org/wikipedia/commons/3/3d/B%C3%A9zier_2_big.gif" />
+<figcaption
+aria-hidden="true">https://upload.wikimedia.org/wikipedia/commons/3/3d/B%C3%A9zier_2_big.gif</figcaption>
+</figure>
+<h3 id="高阶曲线">高阶曲线</h3>
+<p>为建构高阶曲线，便需要相应更多的中介点。对于三次曲线，可由线性贝塞尔曲线描述的中介点<strong>Q</strong>0、<strong>Q</strong>1、<strong>Q</strong>2，和由二次曲线描述的点<strong>R</strong>0、<strong>R</strong>1所建构：</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF/B%C3%A9zier_3_big.gif"
+alt="https://upload.wikimedia.org/wikipedia/commons/d/db/B%C3%A9zier_3_big.gif" />
+<figcaption
+aria-hidden="true">https://upload.wikimedia.org/wikipedia/commons/d/db/B%C3%A9zier_3_big.gif</figcaption>
+</figure>
+<p>对于四次曲线，可由线性贝塞尔曲线描述的中介点<strong>Q</strong>0、<strong>Q</strong>1、<strong>Q</strong>2、<strong>Q</strong>3，由二次贝塞尔曲线描述的点<strong>R</strong>0、<strong>R</strong>1、<strong>R</strong>2，和由三次贝塞尔曲线描述的点<strong>S</strong>0、<strong>S</strong>1所建构：</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF/B%C3%A9zier_4_big.gif"
+alt="https://upload.wikimedia.org/wikipedia/commons/a/a4/B%C3%A9zier_4_big.gif" />
+<figcaption
+aria-hidden="true">https://upload.wikimedia.org/wikipedia/commons/a/a4/B%C3%A9zier_4_big.gif</figcaption>
+</figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF/BezierCurve.gif"
+alt="https://upload.wikimedia.org/wikipedia/commons/0/0b/BezierCurve.gif" />
+<figcaption
+aria-hidden="true">https://upload.wikimedia.org/wikipedia/commons/0/0b/BezierCurve.gif</figcaption>
+</figure>
+<h2 id="升阶">升阶</h2>
+<p><em>n</em>次贝塞尔曲线可以变换为一个形状完全相同的<em>n+1</em>次贝塞尔曲线。
+这在软件只支持特定阶次的贝塞尔曲线时很有用。 例如，<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Cairo_(繪圖)">Cairo</a>只支持三次贝塞尔曲线，你就可以用升阶的方法在Cairo画出二次贝塞尔曲线。</p>
+<p>我们利用<span class="math inline">\({\displaystyle \mathbf {B}
+(t)=(1-t)\mathbf {B} (t)+t\mathbf {B}
+(t)}\)</span>这个特性来做升阶。我们把曲线方程式中每一项<span
+class="math inline">\({\displaystyle \mathbf {b} _{i,n}(t)\mathbf {P}
+_{i}}\)</span>都乘上 (1 − <em>t</em>) 或
+<em>t</em>，让每一项都往上升一阶。以下是将二阶升为三阶的示例</p>
+<p><span class="math display">\[
+{\displaystyle {\begin{aligned}&amp;{}\quad (1-t)^{2}\mathbf {P}
+_{0}+2(1-t)t\mathbf {P} _{1}+t^{2}\mathbf {P}
+_{2}\\&amp;=(1-t)^{3}\mathbf {P} _{0}+(1-t)^{2}t\mathbf {P}
+_{0}+2(1-t)^{2}t\mathbf {P} _{1}\\&amp;{}\qquad +2(1-t)t^{2}\mathbf {P}
+_{1}+(1-t)t^{2}\mathbf {P} _{2}+t^{3}\mathbf {P}
+_{2}\\&amp;=(1-t)^{3}\mathbf {P} _{0}+3(1-t)^{2}t{\frac {\mathbf {P}
+_{0}+2\mathbf {P} _{1}}{3}}+3(1-t)t^{2}{\frac {2\mathbf {P} _{1}+\mathbf
+{P} _{2}}{3}}+t^{3}\mathbf {P} _{2}\end{aligned}}}
+\]</span></p>
+<p>对任何的<em>n</em>值，我们都可以使用以下等式</p>
+<p><span class="math display">\[
+{\displaystyle {n+1 \choose i}(1-t)\mathbf {b} _{i,n}={n \choose
+i}\mathbf {b} _{i,n+1},\quad (1-t)\mathbf {b} _{i,n}={\frac
+{n+1-i}{n+1}}\mathbf {b} _{i,n+1}}
+\]</span> <span class="math display">\[
+{\displaystyle {n+1 \choose i+1}t\mathbf {b} _{i,n}={n \choose i}\mathbf
+{b} _{i+1,n+1},\quad t\mathbf {b} _{i,n}={\frac {i+1}{n+1}}\mathbf {b}
+_{i+1,n+1}}
+\]</span> <span class="math display">\[
+{\displaystyle {\begin{aligned}\mathbf {B} (t)&amp;=(1-t)\sum
+_{i=0}^{n}\mathbf {b} _{i,n}(t)\mathbf {P} _{i}+t\sum _{i=0}^{n}\mathbf
+{b} _{i,n}(t)\mathbf {P} _{i}\\&amp;=\sum _{i=0}^{n}{\frac
+{n+1-i}{n+1}}\mathbf {b} _{i,n+1}(t)\mathbf {P} _{i}+\sum
+_{i=0}^{n}{\frac {i+1}{n+1}}\mathbf {b} _{i+1,n+1}(t)\mathbf {P}
+_{i}\\&amp;=\sum _{i=0}^{n+1}\left({\frac {i}{n+1}}\mathbf {P}
+_{i-1}+{\frac {n+1-i}{n+1}}\mathbf {P} _{i}\right)\mathbf {b}
+_{i,n+1}(t)=\sum _{i=0}^{n+1}\mathbf {b} _{i,n+1}(t)\mathbf {P&#39;}
+_{i}\end{aligned}}}
+\]</span></p>
+<p>式中<span class="math inline">\({\displaystyle \mathbf {P}
+_{-1}}\)</span>和<span class="math inline">\({\displaystyle \mathbf {P}
+_{n+1}}\)</span>可以任意挑选。</p>
+<p>因此，新的控制点为 <span class="math display">\[
+{\displaystyle \mathbf {P&#39;} _{i}={\frac {i}{n+1}}\mathbf {P}
+_{i-1}+{\frac {n+1-i}{n+1}}\mathbf {P} _{i},\quad i=0,\ldots ,n+1.}
+\]</span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="tag"># 计算机图形学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2756843955.html" rel="prev" title="MIT 6.828 实验记录 (一)">
+      <i class="fa fa-chevron-left"></i> MIT 6.828 实验记录 (一)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2449392461.html" rel="next" title="CPP STL 容器介绍">
+      CPP STL 容器介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">贝塞尔曲线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">一般化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.2.</span> <span class="nav-text">术语</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">构建贝塞尔曲线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%9B%B2%E7%BA%BF"><span class="nav-number">2.1.</span> <span class="nav-text">线性曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">2.2.</span> <span class="nav-text">二次曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E6%9B%B2%E7%BA%BF"><span class="nav-number">2.3.</span> <span class="nav-text">高阶曲线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E9%98%B6"><span class="nav-number">3.</span> <span class="nav-text">升阶</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="离散数学A重点整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学A重点整理">
+<meta property="og:url" content="https://tommygong.top/posts/564726056.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="离散数学A重点整理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-22T04:32:40.000Z">
+<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/564726056.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>离散数学A重点整理 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/564726056.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          离散数学A重点整理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-22 12:32:40" itemprop="dateCreated datePublished" datetime="2024-07-22T12:32:40+08:00">2024-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>896</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">离散数学A重点整理</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="离散数学">离散数学</h1>
+<p>复习章节：</p>
+<p>第一章第7节的对偶不要求，第9节不要求，其他都要求</p>
+<p>第二章第6节的前束合取/析取范式不要求，其他都要求</p>
+<p>第三章第3节不要求，第8节warshall算法不要求，其他都要求</p>
+<p>第四章第3节不要求，其他都要求</p>
+<p>第五章第第6节不要求，第8节同余关系不要求，其他都要求</p>
+<p>第七章全部要求</p>
+<h2 id="第一章-命题逻辑">第一章 命题逻辑</h2>
+<h3 id="命题及其表示法">1.1 命题及其表示法</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396486140.png"
+alt="1719396486140" /> 真假可知但是不确定，认为是命题 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396505354.png"
+alt="1719396505354" /> 悖论</p>
+<p>定义：命题 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396521621.png"
+alt="1719396521621" /></p>
+<h3 id="联结词">1.2 联结词</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396562870.png"
+alt="1719396562870" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396572744.png"
+alt="1719396572744" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396589282.png"
+alt="1719396589282" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396604061.png"
+alt="1719396604061" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396622069.png"
+alt="1719396622069" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396649124.png"
+alt="1719396649124" /></p>
+<h3 id="命题公式与翻译">1.3 命题公式与翻译</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396698173.png"
+alt="1719396698173" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396706921.png"
+alt="1719396706921" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396727485.png"
+alt="1719396727485" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396744140.png"
+alt="1719396744140" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396766573.png"
+alt="1719396766573" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396797752.png"
+alt="1719396797752" /></p>
+<h3 id="真值表与等价公式">1.4 真值表与等价公式</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397059612.png"
+alt="1719397059612" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396858392.png"
+alt="1719396858392" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396867675.png"
+alt="1719396867675" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396890558.png"
+alt="1719396890558" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719396901210.png"
+alt="1719396901210" /></p>
+<h3 id="重言式与蕴含式">1.5 重言式与蕴含式</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397000348.png"
+alt="1719397000348" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397011403.png"
+alt="1719397011403" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397184608.png"
+alt="1719397184608" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397173861.png"
+alt="1719397173861" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397235041.png"
+alt="1719397235041" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397263940.png"
+alt="1719397263940" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397283031.png"
+alt="1719397283031" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397319997.png"
+alt="1719397319997" /></p>
+<h3 id="其他联结词">1.6 其他联结词</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397413879.png"
+alt="1719397413879" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397429046.png"
+alt="1719397429046" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397446982.png"
+alt="1719397446982" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397883528.png"
+alt="1719397883528" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397900510.png"
+alt="1719397900510" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397919198.png"
+alt="1719397919198" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397911476.png"
+alt="1719397911476" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719397936387.png"
+alt="1719397936387" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398035020.png"
+alt="1719398035020" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398058859.png"
+alt="1719398058859" /></p>
+<h3 id="对偶与范式对偶不要求">1.7 对偶与范式（对偶不要求）</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451444458.png"
+alt="1719451444458" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451455635.png"
+alt="1719451455635" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451469766.png"
+alt="1719451469766" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451494895.png"
+alt="1719451494895" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451504347.png"
+alt="1719451504347" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451516590.png"
+alt="1719451516590" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451529768.png"
+alt="1719451529768" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451541462.png"
+alt="1719451541462" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451550886.png"
+alt="1719451550886" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451561657.png"
+alt="1719451561657" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451573124.png"
+alt="1719451573124" /></p>
+<h3 id="推理理论">1.8 推理理论</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398235676.png"
+alt="1719398235676" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398256823.png"
+alt="1719398256823" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398310762.png"
+alt="1719398310762" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398424783.png"
+alt="1719398424783" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398476389.png"
+alt="1719398476389" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398495378.png"
+alt="1719398495378" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398703676.png"
+alt="1719398703676" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719398746760.png"
+alt="1719398746760" /></p>
+<h2 id="第二章-谓词逻辑">第二章 谓词逻辑</h2>
+<h3 id="谓词的概念与表示">2.1 谓词的概念与表示</h3>
+<p>谓词定义：</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719399079662.png"
+alt="1719399079662" />
+<figcaption aria-hidden="true">1719399079662</figcaption>
+</figure>
+<h3 id="命题函数与量词">2.2 命题函数与量词</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719399151575.png"
+alt="1719399151575" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719399207456.png"
+alt="1719399207456" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719399232911.png"
+alt="1719399232911" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719399244737.png"
+alt="1719399244737" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719399332717.png"
+alt="1719399332717" /></p>
+<h3 id="谓词公式与翻译">2.3 谓词公式与翻译</h3>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719399685375.png"
+alt="1719399685375" />
+<figcaption aria-hidden="true">1719399685375</figcaption>
+</figure>
+<h3 id="变元的约束">2.4 变元的约束</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400088935.png"
+alt="1719400088935" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400129445.png"
+alt="1719400129445" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400191075.png"
+alt="1719400191075" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400198646.png"
+alt="1719400198646" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400239281.png"
+alt="1719400239281" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400414944.png"
+alt="1719400414944" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400422424.png"
+alt="1719400422424" /></p>
+<h3 id="谓词演算的等价式与蕴含式">2.5 谓词演算的等价式与蕴含式</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400463163.png"
+alt="1719400463163" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400476155.png"
+alt="1719400476155" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400492589.png"
+alt="1719400492589" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400500416.png"
+alt="1719400500416" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400542868.png"
+alt="1719400542868" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400592001.png"
+alt="1719400592001" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400644091.png"
+alt="1719400644091" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400836292.png"
+alt="1719400836292" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400868925.png"
+alt="1719400868925" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400885194.png"
+alt="1719400885194" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400897821.png"
+alt="1719400897821" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719400972755.png"
+alt="1719400972755" /></p>
+<h3 id="前束范式">2.6 前束范式</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401107873.png"
+alt="1719401107873" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401196754.png"
+alt="1719401196754" /></p>
+<h3 id="谓词演算的推理理论">2.7 谓词演算的推理理论</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401407248.png"
+alt="1719401407248" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401421016.png"
+alt="1719401421016" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401430986.png"
+alt="1719401430986" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401492564.png"
+alt="1719401492564" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401693994.png"
+alt="1719401693994" /></p>
+<h2 id="第三章-集合论">第三章 集合论</h2>
+<h3 id="集合的概念和表示法">3.1 集合的概念和表示法</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401797262.png"
+alt="1719401797262" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401844474.png"
+alt="1719401844474" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401880585.png"
+alt="1719401880585" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401893548.png"
+alt="1719401893548" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401977418.png"
+alt="1719401977418" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719401999619.png"
+alt="1719401999619" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402006589.png"
+alt="1719402006589" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402087856.png"
+alt="1719402087856" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402065082.png"
+alt="1719402065082" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402074413.png"
+alt="1719402074413" /></p>
+<h3 id="集合的运算">3.2 集合的运算</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402179779.png"
+alt="1719402179779" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402189592.png"
+alt="1719402189592" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402203153.png"
+alt="1719402203153" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402212330.png"
+alt="1719402212330" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719402343808.png"
+alt="1719402343808" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403012206.png"
+alt="1719403012206" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403024824.png"
+alt="1719403024824" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403061883.png"
+alt="1719403061883" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403088917.png"
+alt="1719403088917" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403112162.png"
+alt="1719403112162" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403120052.png"
+alt="1719403120052" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403132904.png"
+alt="1719403132904" /></p>
+<h3 id="序偶与笛卡尔积">3.4 序偶与笛卡尔积</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403176559.png"
+alt="1719403176559" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403195410.png"
+alt="1719403195410" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403211236.png"
+alt="1719403211236" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403260419.png"
+alt="1719403260419" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403278142.png"
+alt="1719403278142" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403301462.png"
+alt="1719403301462" /></p>
+<h3 id="关系及其表示">3.5 关系及其表示</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403332677.png"
+alt="1719403332677" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403341642.png"
+alt="1719403341642" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403564123.png"
+alt="1719403564123" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403599839.png"
+alt="1719403599839" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403627869.png"
+alt="1719403627869" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403656020.png"
+alt="1719403656020" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403664243.png"
+alt="1719403664243" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403685739.png"
+alt="1719403685739" /></p>
+<h3 id="关系的性质">3.6 关系的性质</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403717925.png"
+alt="1719403717925" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403725232.png"
+alt="1719403725232" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403733455.png"
+alt="1719403733455" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403749246.png"
+alt="1719403749246" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403786141.png"
+alt="1719403786141" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403804563.png"
+alt="1719403804563" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403816116.png"
+alt="1719403816116" /></p>
+<h3 id="复合关系和逆关系">3.7 复合关系和逆关系</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403861364.png"
+alt="1719403861364" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403878860.png"
+alt="1719403878860" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403893825.png"
+alt="1719403893825" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403935572.png"
+alt="1719403935572" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403944669.png"
+alt="1719403944669" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403961554.png"
+alt="1719403961554" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403982642.png"
+alt="1719403982642" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403990633.png"
+alt="1719403990633" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719403997938.png"
+alt="1719403997938" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719404049969.png"
+alt="1719404049969" /></p>
+<h3 id="关系的闭包运算">3.8 关系的闭包运算</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719404086741.png"
+alt="1719404086741" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719404210822.png"
+alt="1719404210822" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719404219041.png"
+alt="1719404219041" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719405176921.png"
+alt="1719405176921" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719405187319.png"
+alt="1719405187319" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719405201889.png"
+alt="1719405201889" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719406055232.png"
+alt="1719406055232" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719406203581.png"
+alt="1719406203581" /></p>
+<h3 id="集合的划分和覆盖">3.9 集合的划分和覆盖</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407067437.png"
+alt="1719407067437" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407097215.png"
+alt="1719407097215" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407113124.png"
+alt="1719407113124" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407132206.png"
+alt="1719407132206" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407322511.png"
+alt="1719407322511" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407331199.png"
+alt="1719407331199" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407340291.png"
+alt="1719407340291" /></p>
+<h3 id="等价关系与等价类">3.10 等价关系与等价类</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407365336.png"
+alt="1719407365336" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407393512.png"
+alt="1719407393512" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407512334.png"
+alt="1719407512334" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719407534606.png"
+alt="1719407534606" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451061224.png"
+alt="1719451061224" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451083328.png"
+alt="1719451083328" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451141986.png"
+alt="1719451141986" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451260706.png"
+alt="1719451260706" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451293862.png"
+alt="1719451293862" /></p>
+<h3 id="相容关系">3.11 相容关系</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451607312.png"
+alt="1719451607312" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451660470.png"
+alt="1719451660470" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451675786.png"
+alt="1719451675786" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451699207.png"
+alt="1719451699207" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451712382.png"
+alt="1719451712382" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451887626.png"
+alt="1719451887626" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451909989.png"
+alt="1719451909989" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719451921738.png"
+alt="1719451921738" /></p>
+<h3 id="序关系">3.12 序关系（⭐）</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452597421.png"
+alt="1719452597421" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452623772.png"
+alt="1719452623772" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452649641.png"
+alt="1719452649641" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452639180.png"
+alt="1719452639180" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452701229.png"
+alt="1719452701229" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452878187.png"
+alt="1719452878187" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452913749.png"
+alt="1719452913749" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719452945477.png"
+alt="1719452945477" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453002498.png"
+alt="1719453002498" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453072026.png"
+alt="1719453072026" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453091365.png"
+alt="1719453091365" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453133016.png"
+alt="1719453133016" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453142895.png"
+alt="1719453142895" /></p>
+<h2 id="第四章-函数">第四章 函数</h2>
+<h3 id="函数的概念">4.1 函数的概念</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453244753.png"
+alt="1719453244753" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453266570.png"
+alt="1719453266570" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453331958.png"
+alt="1719453331958" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453353209.png"
+alt="1719453353209" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453376625.png"
+alt="1719453376625" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453400956.png"
+alt="1719453400956" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453442715.png"
+alt="1719453442715" /></p>
+<h3 id="逆函数和复合函数">4.2 逆函数和复合函数</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453521891.png"
+alt="1719453521891" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453847397.png"
+alt="1719453847397" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453883149.png"
+alt="1719453883149" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453896773.png"
+alt="1719453896773" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453930829.png"
+alt="1719453930829" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719453975723.png"
+alt="1719453975723" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454218261.png"
+alt="1719454218261" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454208422.png"
+alt="1719454208422" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454232770.png"
+alt="1719454232770" /></p>
+<h3 id="基数的概念">4.4 基数的概念</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454481539.png"
+alt="1719454481539" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454554566.png"
+alt="1719454554566" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454585086.png"
+alt="1719454585086" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454619474.png"
+alt="1719454619474" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454635783.png"
+alt="1719454635783" /></p>
+<h3 id="可数集与不可数集">4.5 可数集与不可数集</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454818175.png"
+alt="1719454818175" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454825611.png"
+alt="1719454825611" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454833353.png"
+alt="1719454833353" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454846067.png"
+alt="1719454846067" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454967548.png"
+alt="1719454967548" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454972389.png"
+alt="1719454972389" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719454995786.png"
+alt="1719454995786" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719455008140.png"
+alt="1719455008140" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719455018309.png"
+alt="1719455018309" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456327232.png"
+alt="1719456327232" /></p>
+<h3 id="基数的比较">4.6 基数的比较</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456352933.png"
+alt="1719456352933" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456373649.png"
+alt="1719456373649" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456385912.png"
+alt="1719456385912" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456392938.png"
+alt="1719456392938" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456401565.png"
+alt="1719456401565" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456408643.png"
+alt="1719456408643" /></p>
+<h2 id="第五章-代数结构">第五章 代数结构</h2>
+<h3 id="代数系统的引入">5.1 代数系统的引入</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456508939.png"
+alt="1719456508939" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456515641.png"
+alt="1719456515641" /></p>
+<h3 id="运算及其性质">5.2 运算及其性质</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456547421.png"
+alt="1719456547421" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456553679.png"
+alt="1719456553679" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456559750.png"
+alt="1719456559750" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456566044.png"
+alt="1719456566044" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456590551.png"
+alt="1719456590551" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456598068.png"
+alt="1719456598068" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456604851.png"
+alt="1719456604851" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456613687.png"
+alt="1719456613687" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456631996.png"
+alt="1719456631996" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456639227.png"
+alt="1719456639227" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456712700.png"
+alt="1719456712700" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456718940.png"
+alt="1719456718940" /></p>
+<h3 id="半群">5.3 半群</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456741839.png"
+alt="1719456741839" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456748487.png"
+alt="1719456748487" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456762036.png"
+alt="1719456762036" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456771006.png"
+alt="1719456771006" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456778722.png"
+alt="1719456778722" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456786989.png"
+alt="1719456786989" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456797354.png"
+alt="1719456797354" /></p>
+<h3 id="群与子群">5.4 群与子群</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456822382.png"
+alt="1719456822382" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456836286.png"
+alt="1719456836286" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456844259.png"
+alt="1719456844259" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456850205.png"
+alt="1719456850205" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456857606.png"
+alt="1719456857606" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456864799.png"
+alt="1719456864799" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456874942.png"
+alt="1719456874942" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456882704.png"
+alt="1719456882704" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456929971.png"
+alt="1719456929971" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456936418.png"
+alt="1719456936418" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456941780.png"
+alt="1719456941780" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456950766.png"
+alt="1719456950766" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456959545.png"
+alt="1719456959545" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456966726.png"
+alt="1719456966726" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719456979297.png"
+alt="1719456979297" /></p>
+<h3 id="阿贝尔群与循环群">5.5 阿贝尔群与循环群</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457000577.png"
+alt="1719457000577" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457006707.png"
+alt="1719457006707" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457013980.png"
+alt="1719457013980" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457019712.png"
+alt="1719457019712" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457026586.png"
+alt="1719457026586" /></p>
+<h3 id="陪集与拉格朗日定理">5.7 陪集与拉格朗日定理</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457056912.png"
+alt="1719457056912" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457066752.png"
+alt="1719457066752" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457077256.png"
+alt="1719457077256" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457085129.png"
+alt="1719457085129" /></p>
+<h3 id="同态与同构">5.8 同态与同构</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457106492.png"
+alt="1719457106492" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457114179.png"
+alt="1719457114179" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457128859.png"
+alt="1719457128859" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457146732.png"
+alt="1719457146732" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457156223.png"
+alt="1719457156223" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457164739.png"
+alt="1719457164739" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457169640.png"
+alt="1719457169640" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457174259.png"
+alt="1719457174259" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457180015.png"
+alt="1719457180015" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457184785.png"
+alt="1719457184785" /></p>
+<h2 id="第七章-图论">第七章 图论</h2>
+<h3 id="图的基本概念">7.1 图的基本概念</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457227950.png"
+alt="1719457227950" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457240911.png"
+alt="1719457240911" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457250626.png"
+alt="1719457250626" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457255686.png"
+alt="1719457255686" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457271179.png"
+alt="1719457271179" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457283875.png"
+alt="1719457283875" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457288792.png"
+alt="1719457288792" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457298375.png"
+alt="1719457298375" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457305839.png"
+alt="1719457305839" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457358344.png"
+alt="1719457358344" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457364702.png"
+alt="1719457364702" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457374244.png"
+alt="1719457374244" /></p>
+<h3 id="路与回路">7.2 路与回路</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457395862.png"
+alt="1719457395862" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457408431.png"
+alt="1719457408431" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457415982.png"
+alt="1719457415982" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457421072.png"
+alt="1719457421072" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457425926.png"
+alt="1719457425926" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457434504.png"
+alt="1719457434504" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457441146.png"
+alt="1719457441146" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457454818.png"
+alt="1719457454818" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457447460.png"
+alt="1719457447460" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457461891.png"
+alt="1719457461891" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457467583.png"
+alt="1719457467583" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457471546.png"
+alt="1719457471546" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457477047.png"
+alt="1719457477047" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457480955.png"
+alt="1719457480955" /></p>
+<h3 id="图的矩阵表示">7.3 图的矩阵表示</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457494778.png"
+alt="1719457494778" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457500405.png"
+alt="1719457500405" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457525753.png"
+alt="1719457525753" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457531678.png"
+alt="1719457531678" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457537062.png"
+alt="1719457537062" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457541771.png"
+alt="1719457541771" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457557246.png"
+alt="1719457557246" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457572093.png"
+alt="1719457572093" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457596570.png"
+alt="1719457596570" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457632008.png"
+alt="1719457632008" /></p>
+<h3 id="欧拉图与汉密尔顿图">7.4 欧拉图与汉密尔顿图</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457654960.png"
+alt="1719457654960" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457662918.png"
+alt="1719457662918" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457669224.png"
+alt="1719457669224" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457674427.png"
+alt="1719457674427" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457679174.png"
+alt="1719457679174" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457687532.png"
+alt="1719457687532" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457693599.png"
+alt="1719457693599" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457699176.png"
+alt="1719457699176" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457704783.png"
+alt="1719457704783" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457709283.png"
+alt="1719457709283" /></p>
+<h3 id="平面图">7.5 平面图</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457740107.png"
+alt="1719457740107" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457751224.png"
+alt="1719457751224" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457757367.png"
+alt="1719457757367" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457762108.png"
+alt="1719457762108" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457766437.png"
+alt="1719457766437" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457771237.png"
+alt="1719457771237" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457775718.png"
+alt="1719457775718" /></p>
+<h3 id="对偶图与着色">7.6 对偶图与着色</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457800710.png"
+alt="1719457800710" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457810616.png"
+alt="1719457810616" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457845010.png"
+alt="1719457845010" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457868501.png"
+alt="1719457868501" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457874665.png"
+alt="1719457874665" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457881127.png"
+alt="1719457881127" /></p>
+<h3 id="树与生成树">7.7 树与生成树</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457897491.png"
+alt="1719457897491" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457904148.png"
+alt="1719457904148" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457913261.png"
+alt="1719457913261" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457920347.png"
+alt="1719457920347" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457927167.png"
+alt="1719457927167" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457932666.png"
+alt="1719457932666" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457938360.png"
+alt="1719457938360" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457944291.png"
+alt="1719457944291" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457954109.png"
+alt="1719457954109" /></p>
+<h3 id="根树及其应用">7.8 根树及其应用</h3>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457978754.png"
+alt="1719457978754" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457983757.png"
+alt="1719457983757" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719457988721.png"
+alt="1719457988721" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458006354.png"
+alt="1719458006354" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458017008.png"
+alt="1719458017008" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458026122.png"
+alt="1719458026122" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458030215.png"
+alt="1719458030215" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458046515.png"
+alt="1719458046515" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458063949.png"
+alt="1719458063949" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458069977.png"
+alt="1719458069977" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458075469.png"
+alt="1719458075469" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719458079893.png"
+alt="1719458079893" /></p>
+<p>##重点习题</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719487416022.png"
+alt="1719487416022" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719487449588.png"
+alt="1719487449588" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719487470074.png"
+alt="1719487470074" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719487908974.png"
+alt="1719487908974" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719488917620.png"
+alt="1719488917620" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719542537832.png"
+alt="1719542537832" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719544183318.png"
+alt="1719544183318" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719555130880.png"
+alt="1719555130880" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719555311448.png"
+alt="1719555311448" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719555734318.png"
+alt="1719555734318" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719556759549.png"
+alt="1719556759549" /> <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/离散数学A重点整理/1719574217162.png"
+alt="1719574217162" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag"># 离散数学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2396792509.html" rel="prev" title="数据库原理笔记">
+      <i class="fa fa-chevron-left"></i> 数据库原理笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/3674948368.html" rel="next" title="计算机网络笔记">
+      计算机网络笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">离散数学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91"><span class="nav-number">1.1.</span> <span class="nav-text">第一章 命题逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 命题及其表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E7%BB%93%E8%AF%8D"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 联结词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E9%A2%98%E5%85%AC%E5%BC%8F%E4%B8%8E%E7%BF%BB%E8%AF%91"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 命题公式与翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E5%80%BC%E8%A1%A8%E4%B8%8E%E7%AD%89%E4%BB%B7%E5%85%AC%E5%BC%8F"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 真值表与等价公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A8%80%E5%BC%8F%E4%B8%8E%E8%95%B4%E5%90%AB%E5%BC%8F"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5 重言式与蕴含式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%81%94%E7%BB%93%E8%AF%8D"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.6 其他联结词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%81%B6%E4%B8%8E%E8%8C%83%E5%BC%8F%E5%AF%B9%E5%81%B6%E4%B8%8D%E8%A6%81%E6%B1%82"><span class="nav-number">1.1.7.</span> <span class="nav-text">1.7 对偶与范式（对偶不要求）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA"><span class="nav-number">1.1.8.</span> <span class="nav-text">1.8 推理理论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91"><span class="nav-number">1.2.</span> <span class="nav-text">第二章 谓词逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%93%E8%AF%8D%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 谓词的概念与表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E9%A2%98%E5%87%BD%E6%95%B0%E4%B8%8E%E9%87%8F%E8%AF%8D"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 命题函数与量词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%93%E8%AF%8D%E5%85%AC%E5%BC%8F%E4%B8%8E%E7%BF%BB%E8%AF%91"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 谓词公式与翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%85%83%E7%9A%84%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 变元的约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E7%AD%89%E4%BB%B7%E5%BC%8F%E4%B8%8E%E8%95%B4%E5%90%AB%E5%BC%8F"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 谓词演算的等价式与蕴含式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%9D%9F%E8%8C%83%E5%BC%8F"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 前束范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.7 谓词演算的推理理论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E9%9B%86%E5%90%88%E8%AE%BA"><span class="nav-number">1.3.</span> <span class="nav-text">第三章 集合论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 集合的概念和表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 集合的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%81%B6%E4%B8%8E%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.4 序偶与笛卡尔积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%8F%8A%E5%85%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.5 关系及其表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.6 关系的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E5%85%B3%E7%B3%BB%E5%92%8C%E9%80%86%E5%85%B3%E7%B3%BB"><span class="nav-number">1.3.6.</span> <span class="nav-text">3.7 复合关系和逆关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E7%9A%84%E9%97%AD%E5%8C%85%E8%BF%90%E7%AE%97"><span class="nav-number">1.3.7.</span> <span class="nav-text">3.8 关系的闭包运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%88%92%E5%88%86%E5%92%8C%E8%A6%86%E7%9B%96"><span class="nav-number">1.3.8.</span> <span class="nav-text">3.9 集合的划分和覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7%E5%85%B3%E7%B3%BB%E4%B8%8E%E7%AD%89%E4%BB%B7%E7%B1%BB"><span class="nav-number">1.3.9.</span> <span class="nav-text">3.10 等价关系与等价类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%AE%B9%E5%85%B3%E7%B3%BB"><span class="nav-number">1.3.10.</span> <span class="nav-text">3.11 相容关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%85%B3%E7%B3%BB"><span class="nav-number">1.3.11.</span> <span class="nav-text">3.12 序关系（⭐）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">第四章 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 函数的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%87%BD%E6%95%B0%E5%92%8C%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 逆函数和复合函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.4 基数的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%95%B0%E9%9B%86%E4%B8%8E%E4%B8%8D%E5%8F%AF%E6%95%B0%E9%9B%86"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.5 可数集与不可数集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%95%B0%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.6 基数的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.</span> <span class="nav-text">第五章 代数结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 代数系统的引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 运算及其性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E7%BE%A4"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 半群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%A4%E4%B8%8E%E5%AD%90%E7%BE%A4"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.4 群与子群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BF%E8%B4%9D%E5%B0%94%E7%BE%A4%E4%B8%8E%E5%BE%AA%E7%8E%AF%E7%BE%A4"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.5 阿贝尔群与循环群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%AA%E9%9B%86%E4%B8%8E%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AE%9A%E7%90%86"><span class="nav-number">1.5.6.</span> <span class="nav-text">5.7 陪集与拉格朗日定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%80%81%E4%B8%8E%E5%90%8C%E6%9E%84"><span class="nav-number">1.5.7.</span> <span class="nav-text">5.8 同态与同构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%9B%BE%E8%AE%BA"><span class="nav-number">1.6.</span> <span class="nav-text">第七章 图论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.6.1.</span> <span class="nav-text">7.1 图的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E4%B8%8E%E5%9B%9E%E8%B7%AF"><span class="nav-number">1.6.2.</span> <span class="nav-text">7.2 路与回路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.6.3.</span> <span class="nav-text">7.3 图的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%9B%BE%E4%B8%8E%E6%B1%89%E5%AF%86%E5%B0%94%E9%A1%BF%E5%9B%BE"><span class="nav-number">1.6.4.</span> <span class="nav-text">7.4 欧拉图与汉密尔顿图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="nav-number">1.6.5.</span> <span class="nav-text">7.5 平面图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%81%B6%E5%9B%BE%E4%B8%8E%E7%9D%80%E8%89%B2"><span class="nav-number">1.6.6.</span> <span class="nav-text">7.6 对偶图与着色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E4%B8%8E%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">1.6.7.</span> <span class="nav-text">7.7 树与生成树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%A0%91%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8"><span class="nav-number">1.6.8.</span> <span class="nav-text">7.8 根树及其应用</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

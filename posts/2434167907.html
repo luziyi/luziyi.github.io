@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="克鲁斯卡尔算法，是用来求加权连通图的最小生成树的算法。基本思想 ：按照权值从小到大的顺序选择 n-1 条边，并保证这 n-1 条边不构成回路。具体做法 ：首先构造一个只含 n 个顶点的森林，然后依权值从小到大从连通网中选择边加入到森林中，并使森林中不产生回路，直至森林变成一棵树为止。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="克鲁斯卡尔算法（Kruskal）详解">
+<meta property="og:url" content="https://tommygong.top/posts/2434167907.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="克鲁斯卡尔算法，是用来求加权连通图的最小生成树的算法。基本思想 ：按照权值从小到大的顺序选择 n-1 条边，并保证这 n-1 条边不构成回路。具体做法 ：首先构造一个只含 n 个顶点的森林，然后依权值从小到大从连通网中选择边加入到森林中，并使森林中不产生回路，直至森林变成一棵树为止。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-11T06:01:55.000Z">
+<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/2434167907.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>克鲁斯卡尔算法（Kruskal）详解 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/2434167907.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          克鲁斯卡尔算法（Kruskal）详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-11 14:01:55" itemprop="dateCreated datePublished" datetime="2023-05-11T14:01:55+08:00">2023-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+            <div class="post-description">克鲁斯卡尔算法，是用来求加权连通图的最小生成树的算法。基本思想 ：按照权值从小到大的顺序选择 n-1 条边，并保证这 n-1 条边不构成回路。具体做法 ：首先构造一个只含 n 个顶点的森林，然后依权值从小到大从连通网中选择边加入到森林中，并使森林中不产生回路，直至森林变成一棵树为止。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="应用场景-公交站问题">应用场景-公交站问题</h2>
+<p>看一个应用场景和问题： <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/克鲁斯卡尔算法（Kruskal）详解/1683784970527.jpg"
+alt="1" /></p>
+<ol type="1">
+<li>某城市新增 7 个站点 (A, B, C, D, E, F, G) ，现在需要修路把 7
+个站点连通</li>
+<li>各个站点的距离用边线表示 ( 权 ) ，比如 A – B 距离 12 公里</li>
+<li>问：如何修路保证各个站点都能连通，并且总的修建公路总里程最短 ?</li>
+</ol>
+<h2 id="克鲁斯卡尔算法介绍">克鲁斯卡尔算法介绍</h2>
+<ol type="1">
+<li>克鲁斯卡尔 (Kruskal) 算法，是用来求加权连通图的最小生成树的算法
+。</li>
+<li>基本思想 ：按照权值从小到大的顺序选择 n-1 条边，并保证这 n-1
+条边不构成回路</li>
+<li>具体做法 ：首先构造一个只含 n
+个顶点的森林，然后依权值从小到大从连通网中选择边加入到森林中，并使森林中不产生回路，直至森林变成一棵树为止</li>
+</ol>
+<h2 id="克鲁斯卡尔算法图解说明">克鲁斯卡尔算法图解说明</h2>
+<p>以城市公交站问题来图解说明 克鲁斯卡尔算法的原理和步骤：</p>
+<p>在含有n个顶点的连通图中选择n-1条边，构成一棵极小连通子图，并使该连通子图中n-1条边上权值之和达到最小，则称其为连通网的最小生成树。</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/克鲁斯卡尔算法（Kruskal）详解/1683785025522.jpg"
+alt="2" />
+<figcaption aria-hidden="true">2</figcaption>
+</figure>
+<p>例如，对于如上图G4所示的连通网可以有多棵权值总和不相同的生成树。 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/克鲁斯卡尔算法（Kruskal）详解/1683785031002.jpg"
+alt="3" /></p>
+<h2 id="克鲁斯卡尔算法图解">克鲁斯卡尔算法图解</h2>
+<p>以上图G4为例，来对克鲁斯卡尔进行演示(假设，用数组R保存最小生成树结果)。</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/克鲁斯卡尔算法（Kruskal）详解/1683785054264.png"
+alt="4" />
+<figcaption aria-hidden="true">4</figcaption>
+</figure>
+<p><strong>第1步</strong>：将边&lt;E,F&gt;加入R中。
+边&lt;E,F&gt;的权值最小，因此将它加入到最小生成树结果R中。
+<strong>第2步</strong>：将边&lt;C,D&gt;加入R中。
+上一步操作之后，边&lt;C,D&gt;的权值最小，因此将它加入到最小生成树结果R中。
+<strong>第3步</strong>：将边&lt;D,E&gt;加入R中。
+上一步操作之后，边&lt;D,E&gt;的权值最小，因此将它加入到最小生成树结果R中。
+<strong>第4步</strong>：将边&lt;B,F&gt;加入R中。
+上一步操作之后，边&lt;C,E&gt;的权值最小，但&lt;C,E&gt;会和已有的边构成回路；因此，跳过边&lt;C,E&gt;。同理，跳过边&lt;C,F&gt;。将边&lt;B,F&gt;加入到最小生成树结果R中。
+<strong>第5步</strong>：将边&lt;E,G&gt;加入R中。
+上一步操作之后，边&lt;E,G&gt;的权值最小，因此将它加入到最小生成树结果R中。
+<strong>第6步</strong>：将边&lt;A,B&gt;加入R中。
+上一步操作之后，边&lt;F,G&gt;的权值最小，但&lt;F,G&gt;会和已有的边构成回路；因此，跳过边&lt;F,G&gt;。同理，跳过边&lt;B,C&gt;。将边&lt;A,B&gt;加入到最小生成树结果R中。</p>
+<p>此时，最小生成树构造完成！它包括的边依次是：<strong>&lt;E,F&gt;
+&lt;C,D&gt; &lt;D,E&gt; &lt;B,F&gt; &lt;E,G&gt;
+&lt;A,B&gt;</strong>。</p>
+<h2 id="克鲁斯卡尔算法分析">克鲁斯卡尔算法分析</h2>
+<p>根据前面介绍的克鲁斯卡尔算法的基本思想和做法，我们能够了解到，克鲁斯卡尔算法重点需要解决的以下两个问题：
+<strong>问题一</strong> 对图的所有边按照权值大小进行排序。
+<strong>问题二</strong>
+将边添加到最小生成树中时，怎么样判断是否形成了回路。</p>
+<p>问题一很好解决，采用排序算法进行排序即可。</p>
+<p>问题二，处理方式是：记录顶点在"最小生成树"中的终点，顶点的终点是"在最小生成树中与它连通的最大顶点"。然后每次需要将一条边添加到最小生存树时，判断该边的两个顶点的终点是否重合，重合的话则会构成回路。</p>
+<p>如何判断是否构成回路-举例说明(如图)</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/克鲁斯卡尔算法（Kruskal）详解/1683785097950.jpg"
+alt="5" />
+<figcaption aria-hidden="true">5</figcaption>
+</figure>
+<p>在将&lt;E,F&gt; &lt;C,D&gt;
+&lt;D,E&gt;加入到最小生成树R中之后，这几条边的顶点就都有了终点：</p>
+<p><strong>(01)</strong> C的终点是F。 <strong>(02)</strong> D的终点是F。
+<strong>(03)</strong> E的终点是F。 <strong>(04)</strong>
+F的终点是F。</p>
+<p>关于终点的说明：</p>
+<p>就是将所有顶点按照从小到大的顺序排列好之后；某个顶点的终点就是"与它连通的最大顶点"。
+因此，接下来，虽然&lt;C,E&gt;是权值最小的边。但是C和E的终点都是F，即它们的终点相同，因此，将&lt;C,E&gt;加入最小生成树的话，会形成回路。这就是判断回路的方式。也就是说，我们加入的<strong>边</strong>的<strong>两个顶点</strong>不能<strong>都指向同一个终点</strong>，否则将构成回路。【后面有代码说明】</p>
+<h2 id="克鲁斯卡尔算法的代码说明">克鲁斯卡尔算法的代码说明</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.liu.kruskal;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KruskalCase</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="type">int</span> edgeNum; <span class="comment">//边的个数</span></span><br><span class="line">		<span class="keyword">private</span> <span class="type">char</span>[] vertexs; <span class="comment">//顶点数组</span></span><br><span class="line">		<span class="keyword">private</span> <span class="type">int</span>[][] matrix; <span class="comment">//邻接矩阵</span></span><br><span class="line">		<span class="comment">//使用 INF 表示两个顶点不能连通</span></span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INF</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">			<span class="type">char</span>[] vertexs = &#123;<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;G&#x27;</span>&#125;;</span><br><span class="line">			<span class="comment">//克鲁斯卡尔算法的邻接矩阵  </span></span><br><span class="line">		      <span class="type">int</span> matrix[][] = &#123;</span><br><span class="line">		      <span class="comment">/*A*/</span><span class="comment">/*B*/</span><span class="comment">/*C*/</span><span class="comment">/*D*/</span><span class="comment">/*E*/</span><span class="comment">/*F*/</span><span class="comment">/*G*/</span></span><br><span class="line">		<span class="comment">/*A*/</span> &#123;   <span class="number">0</span>,  <span class="number">12</span>, INF, INF, INF,  <span class="number">16</span>,  <span class="number">14</span>&#125;,</span><br><span class="line">		<span class="comment">/*B*/</span> &#123;  <span class="number">12</span>,   <span class="number">0</span>,  <span class="number">10</span>, INF, INF,   <span class="number">7</span>, INF&#125;,</span><br><span class="line">		<span class="comment">/*C*/</span> &#123; INF,  <span class="number">10</span>,   <span class="number">0</span>,   <span class="number">3</span>,   <span class="number">5</span>,   <span class="number">6</span>, INF&#125;,</span><br><span class="line">		<span class="comment">/*D*/</span> &#123; INF, INF,   <span class="number">3</span>,   <span class="number">0</span>,   <span class="number">4</span>, INF, INF&#125;,</span><br><span class="line">		<span class="comment">/*E*/</span> &#123; INF, INF,   <span class="number">5</span>,   <span class="number">4</span>,   <span class="number">0</span>,   <span class="number">2</span>,   <span class="number">8</span>&#125;,</span><br><span class="line">		<span class="comment">/*F*/</span> &#123;  <span class="number">16</span>,   <span class="number">7</span>,   <span class="number">6</span>, INF,   <span class="number">2</span>,   <span class="number">0</span>,   <span class="number">9</span>&#125;,</span><br><span class="line">		<span class="comment">/*G*/</span> &#123;  <span class="number">14</span>, INF, INF, INF,   <span class="number">8</span>,   <span class="number">9</span>,   <span class="number">0</span>&#125;&#125;; </span><br><span class="line">		      <span class="comment">//大家可以在去测试其它的邻接矩阵，结果都可以得到最小生成树.</span></span><br><span class="line">		  </span><br><span class="line">		      <span class="comment">//创建KruskalCase 对象实例</span></span><br><span class="line">		      <span class="type">KruskalCase</span> <span class="variable">kruskalCase</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">KruskalCase</span>(vertexs, matrix);</span><br><span class="line">		      <span class="comment">//输出构建的</span></span><br><span class="line">		      kruskalCase.print();</span><br><span class="line">		      kruskalCase.kruskal();</span><br><span class="line">	&#125;</span><br><span class="line">		<span class="keyword">public</span> <span class="title function_">KruskalCase</span><span class="params">(<span class="type">char</span>[] vertexs, <span class="type">int</span>[][] matrix)</span> &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">			<span class="comment">//初始化顶点数和边的个数</span></span><br><span class="line">			<span class="type">int</span> <span class="variable">vlen</span> <span class="operator">=</span> vertexs.length;</span><br><span class="line">	</span><br><span class="line">			<span class="comment">//初始化顶点, 复制拷贝的方式</span></span><br><span class="line">			<span class="built_in">this</span>.vertexs = <span class="keyword">new</span> <span class="title class_">char</span>[vlen];</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; vertexs.length; i++) &#123;</span><br><span class="line">				<span class="built_in">this</span>.vertexs[i] = vertexs[i];</span><br><span class="line">			&#125;</span><br><span class="line">	</span><br><span class="line">			<span class="comment">//初始化边, 使用的是复制拷贝的方式</span></span><br><span class="line">			<span class="built_in">this</span>.matrix = <span class="keyword">new</span> <span class="title class_">int</span>[vlen][vlen];</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; vlen; i++) &#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j= <span class="number">0</span>; j &lt; vlen; j++) &#123;</span><br><span class="line">					<span class="built_in">this</span>.matrix[i][j] = matrix[i][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//统计边的条数</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span><span class="number">0</span>; i &lt; vlen; i++) &#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i+<span class="number">1</span>; j &lt; vlen; j++) &#123;</span><br><span class="line">					<span class="keyword">if</span>(<span class="built_in">this</span>.matrix[i][j] != INF) &#123;</span><br><span class="line">						edgeNum++;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">kruskal</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			<span class="type">int</span> index=<span class="number">0</span>;<span class="comment">//表示最后结果数组的索引</span></span><br><span class="line">			<span class="type">int</span> ends[]=<span class="keyword">new</span> <span class="title class_">int</span>[edgeNum];<span class="comment">//用于保存&quot;已有最小生成树&quot; 中的每个顶点在最小生成树中的终点</span></span><br><span class="line">			<span class="comment">//创建结果数组, 保存最后的最小生成树</span></span><br><span class="line">			Edata[] result=<span class="keyword">new</span> <span class="title class_">Edata</span>[edgeNum];</span><br><span class="line">	</span><br><span class="line">			<span class="comment">//获取图中 所有的边的集合 ， 一共有12边</span></span><br><span class="line">			Edata[] edges = getEdges();</span><br><span class="line">			System.out.println(<span class="string">&quot;图的边的集合=&quot;</span> + Arrays.toString(edges) + <span class="string">&quot; 共&quot;</span>+ edges.length); <span class="comment">//12</span></span><br><span class="line">			<span class="comment">//按照边的权值大小进行排序(从小到大)</span></span><br><span class="line">			Arrays.sort(edges);</span><br><span class="line">	</span><br><span class="line">			<span class="comment">//遍历edges 数组，将边添加到最小生成树中时，判断是准备加入的边否形成了回路，如果没有，就加入 rets, 否则不能加入</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;edgeNum; i++) &#123;</span><br><span class="line">				<span class="comment">//获取到第i条边的第一个顶点(起点)</span></span><br><span class="line">				<span class="type">int</span> p1=getPosition(edges[i].start);<span class="comment">//p1=4</span></span><br><span class="line">				<span class="comment">//获取到第i条边的第2个顶点</span></span><br><span class="line">				<span class="type">int</span> p2=getPosition(edges[i].end); <span class="comment">//p2 = 5</span></span><br><span class="line">		</span><br><span class="line">				<span class="comment">//获取p1这个顶点在已有最小生成树中的终点	</span></span><br><span class="line">				<span class="type">int</span> n=getEnd(ends,p1);<span class="comment">//m = 4</span></span><br><span class="line">				<span class="comment">//获取p2这个顶点在已有最小生成树中的终点</span></span><br><span class="line">				<span class="type">int</span> m=getEnd(ends, p2);<span class="comment">// n = 5</span></span><br><span class="line">				<span class="comment">//是否构成回路</span></span><br><span class="line">				<span class="keyword">if</span>(n!=m) &#123;<span class="comment">//没有构成回路</span></span><br><span class="line">					ends[n]=m; <span class="comment">// 设置m 在&quot;已有最小生成树&quot;中的终点 &lt;E,F&gt; [0,0,0,0,5,0,0,0,0,0,0,0]</span></span><br><span class="line">			</span><br><span class="line">					result[index++]=edges[i];<span class="comment">//有一条边加入到rets数组</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//&lt;E,F&gt; &lt;C,D&gt; &lt;D,E&gt; &lt;B,F&gt; &lt;E,G&gt; &lt;A,B&gt;。</span></span><br><span class="line">			<span class="comment">//统计并打印 &quot;最小生成树&quot;, 输出  rets</span></span><br><span class="line">			System.out.println(<span class="string">&quot;最小生成树为&quot;</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">				System.out.println(result[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 功能: 获取下标为i的顶点的终点(), 用于后面判断两个顶点的终点是否相同</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> ends ： 数组就是记录了各个顶点对应的终点是哪个,ends 数组是在遍历过程中，逐步形成</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> i : 表示传入的顶点对应的下标</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@return</span> 返回的就是 下标为i的这个顶点对应的终点的下标, 一会回头还有来理解</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getEnd</span><span class="params">(<span class="type">int</span>[] ends, <span class="type">int</span> p1)</span> &#123;<span class="comment">// i = 4 [0,0,0,0,5,0,0,0,0,0,0,0]</span></span><br><span class="line">			<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			<span class="keyword">while</span>(ends[p1]!=<span class="number">0</span>) &#123;</span><br><span class="line">				p1=ends[p1];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> p1;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * </span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@param</span> ch 顶点的值，比如&#x27;A&#x27;,&#x27;B&#x27;</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@return</span> 返回ch顶点对应的下标，如果找不到，返回-1</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getPosition</span><span class="params">(<span class="type">char</span> ch)</span> &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; vertexs.length; i++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(vertexs[i] == ch) &#123;<span class="comment">//找到</span></span><br><span class="line">					<span class="keyword">return</span> i;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//找不到,返回-1</span></span><br><span class="line">			<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 功能: 获取图中边，放到EData[] 数组中，后面我们需要遍历该数组</span></span><br><span class="line"><span class="comment">		 * 是通过matrix 邻接矩阵来获取</span></span><br><span class="line"><span class="comment">		 * EData[] 形式 [[&#x27;A&#x27;,&#x27;B&#x27;, 12], [&#x27;B&#x27;,&#x27;F&#x27;,7], .....]</span></span><br><span class="line"><span class="comment">		 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">private</span> Edata[] getEdges() &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">			Edata[] edges = <span class="keyword">new</span> <span class="title class_">Edata</span>[edgeNum];</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;vertexs.length;i++) &#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j=i+<span class="number">1</span>;j&lt;vertexs.length;j++) &#123;</span><br><span class="line">					<span class="keyword">if</span>(matrix[i][j]!=INF) &#123;</span><br><span class="line">						edges[index++] = <span class="keyword">new</span> <span class="title class_">Edata</span>(vertexs[i], vertexs[j], matrix[i][j]);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> edges;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//打印邻接矩阵</span></span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">()</span> &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">			System.out.println(<span class="string">&quot;邻接矩阵为: \n&quot;</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; vertexs.length; i++) &#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j &lt; vertexs.length; j++) &#123;</span><br><span class="line">					System.out.printf(<span class="string">&quot;%12d&quot;</span>, matrix[i][j]);</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println();<span class="comment">//换行</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//创建一个类EData ，它的对象实例就表示一条边</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Edata</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Edata&gt;&#123;</span><br><span class="line">	<span class="type">char</span> start;<span class="comment">//边的一个点</span></span><br><span class="line">	<span class="type">char</span> end;<span class="comment">//边的另外一个点</span></span><br><span class="line">	<span class="type">int</span> weight;<span class="comment">//边的权值</span></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Edata</span><span class="params">(<span class="type">char</span> start, <span class="type">char</span> end, <span class="type">int</span> weight)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>();</span><br><span class="line">		<span class="built_in">this</span>.start = start;</span><br><span class="line">		<span class="built_in">this</span>.end = end;</span><br><span class="line">		<span class="built_in">this</span>.weight = weight;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;Edate [start=&quot;</span> + start + <span class="string">&quot;, end=&quot;</span> + end + <span class="string">&quot;, weight=&quot;</span> + weight + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Edata o)</span> &#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">this</span>.weight-o.weight;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>————————————————
+版权声明：本文为CSDN博主「一只猪的思考」的原创文章，遵循CC 4.0
+BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_45829957/article/details/108001882</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/1170831533.html" rel="prev" title="KMP算法详解">
+      <i class="fa fa-chevron-left"></i> KMP算法详解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/941783862.html" rel="next" title="Prim算法（普里姆算法）详解">
+      Prim算法（普里姆算法）详解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-%E5%85%AC%E4%BA%A4%E7%AB%99%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">应用场景-公交站问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">克鲁斯卡尔算法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E8%AF%B4%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">克鲁斯卡尔算法图解说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">克鲁斯卡尔算法图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">克鲁斯卡尔算法分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%95%E7%9A%84%E4%BB%A3%E7%A0%81%E8%AF%B4%E6%98%8E"><span class="nav-number">6.</span> <span class="nav-text">克鲁斯卡尔算法的代码说明</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

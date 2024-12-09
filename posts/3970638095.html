@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在本实验中，您将构建一个 MapReduce 系统。您将实施一个调用应用程序 Map 和 Reduce 函数并处理文件读写的工作进程，以及一个将任务分配给工作程序并处理失败的工作程序的主进程。您将构建类似于 MapReduce 论文的内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT-6.5840 Assignment Instruction">
+<meta property="og:url" content="https://tommygong.top/posts/3970638095.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="在本实验中，您将构建一个 MapReduce 系统。您将实施一个调用应用程序 Map 和 Reduce 函数并处理文件读写的工作进程，以及一个将任务分配给工作程序并处理失败的工作程序的主进程。您将构建类似于 MapReduce 论文的内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-01T07:35:00.000Z">
+<meta property="article:modified_time" content="2024-12-09T13:59:02.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="MIT">
+<meta property="article:tag" content="分布式系统">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/3970638095.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MIT-6.5840 Assignment Instruction | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/3970638095.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIT-6.5840 Assignment Instruction
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-01 15:35:00" itemprop="dateCreated datePublished" datetime="2024-09-01T15:35:00+08:00">2024-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-09 21:59:02" itemprop="dateModified" datetime="2024-12-09T21:59:02+08:00">2024-12-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>18 分钟</span>
+            </span>
+            <div class="post-description">在本实验中，您将构建一个 MapReduce 系统。您将实施一个调用应用程序 Map 和 Reduce 函数并处理文件读写的工作进程，以及一个将任务分配给工作程序并处理失败的工作程序的主进程。您将构建类似于 MapReduce 论文的内容。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="introduction-介绍">Introduction 介绍</h3>
+<p>In this lab you'll build a MapReduce system. You'll implement a
+worker process that calls application Map and Reduce functions and
+handles reading and writing files, and a master process that hands out
+tasks to workers and copes with failed workers. You'll be building
+something similar to the <a
+target="_blank" rel="noopener" href="http://research.google.com/archive/mapreduce-osdi04.pdf">MapReduce
+paper</a>. 在本实验中，您将构建一个 MapReduce
+系统。您将实施一个调用应用程序 Map 和 Reduce
+函数并处理文件读写的工作进程，以及一个将任务分配给工作程序并处理失败的工作程序的主进程。您将构建类似于
+<a
+target="_blank" rel="noopener" href="http://research.google.com/archive/mapreduce-osdi04.pdf">MapReduce
+论文</a>的内容。</p>
+<h3 id="collaboration-policy-合作政策">Collaboration Policy
+合作政策</h3>
+<p>You must write all the code you hand in for 6.824, except for code
+that we give you as part of assignments. You are not allowed to look at
+anyone else's solution, and you are not allowed to look at solutions
+from previous years. You may discuss the assignments with other
+students, but you may not look at or copy each others' code. The reason
+for this rule is that we believe you will learn the most by designing
+and implementing your lab solution yourself. 您必须编写为 6.824
+提交的所有代码，但我们作为作业的一部分提供给您的代码除外。你不能看别人的解决方案，也不能看前几年的解决方案。您可以与其他学生讨论作业，但不得查看或复制彼此的代码。制定此规则的原因是，我们相信您自己设计和实施实验室解决方案会学到最多。</p>
+<p>Please do not publish your code or make it available to current or
+future 6.824 students. <code>github.com</code> repositories are public
+by default, so please don't put your code there unless you make the
+repository private. You may find it convenient to use <a
+target="_blank" rel="noopener" href="https://github.mit.edu/">MIT's GitHub</a>, but be sure to create a
+private repository. 请不要发布您的代码或将其提供给当前或未来的 6.824
+学生。 <code>github.com</code>
+仓库默认为公有，因此除非您将仓库设为私有，否则请不要将代码放在那里。您可能会发现使用
+<a target="_blank" rel="noopener" href="https://github.mit.edu/">MIT 的 GitHub</a>
+很方便，但请务必创建一个私有存储库。</p>
+<h3 id="software-软件">Software 软件</h3>
+<p>You'll implement this lab (and all the labs) in <a
+target="_blank" rel="noopener" href="http://www.golang.org/">Go</a>. The Go web site contains lots of
+tutorial information. We will grade your labs using Go version 1.13; you
+should use 1.13 too. You can check your Go version by running
+<code>go version</code>. 您将在 <a target="_blank" rel="noopener" href="http://www.golang.org/">Go</a>
+中实现此实验室（以及所有实验室）。Go Web
+站点包含许多教程信息。我们将使用 Go 1.13
+版对您的实验室进行评分;你也应该使用 1.13。您可以通过运行
+<code>go version</code> 来检查您的 Go 版本。</p>
+<p>We recommend that you work on the labs on your own machine, so you
+can use the tools, text editors, etc. that you are already familiar
+with. Alternatively, you can work on the labs on Athena.
+我们建议您在自己的计算机上进行实验，以便您可以使用您已经熟悉的工具、文本编辑器等。或者，您可以在
+Athena 上进行实验。</p>
+<h4 id="macos-macos操作系统">macOS macOS操作系统</h4>
+<p>You can use <a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a> to install Go.
+After installing Homebrew, run <code>brew install go</code>. 您可以使用
+<a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a> 安装 Go。安装 Homebrew 后，运行
+<code>brew install go</code> .</p>
+<h4 id="linux-linux的">Linux Linux的</h4>
+<p>Depending on your Linux distribution, you might be able to get an
+up-to-date version of Go from the package repository, e.g. by running
+<code>apt install golang</code>. Otherwise, you can manually install a
+binary from Go's website. First, make sure that you're running a 64-bit
+kernel (<code>uname -a</code> should mention "x86_64 GNU/Linux"), and
+then run: 根据您的 Linux 发行版，您或许能够从包存储库获取最新版本的
+Go，例如，通过运行 <code>apt install golang</code> .否则，您可以从 Go
+的网站手动安装二进制文件。首先，确保您运行的是 64 位内核（
+<code>uname -a</code> 应该提到 “x86_64 GNU/Linux”），然后运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -qO- https://dl.google.com/go/go1.13.6.linux-amd64.tar.gz | sudo tar xz -C /usr/local</span><br></pre></td></tr></table></figure>
+<p>You'll need to make sure <code>/usr/local/bin</code> is on your
+<code>PATH</code>. 您需要确保 <code>/usr/local/bin</code> 在您的
+<code>PATH</code> .</p>
+<h4 id="windows-窗户">Windows 窗户</h4>
+<p>The labs probably won't work directly on Windows. If you're feeling
+adventurous, you can try to get them running inside <a
+target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Windows
+Subsystem for Linux</a> and following the Linux instructions above.
+Otherwise, you can fall back to Athena. 实验室可能无法直接在 Windows
+上运行。如果您喜欢冒险，可以尝试让它们在<a
+target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">适用于
+Linux 的 Windows 子系统</a>中运行，并按照上面的 Linux
+说明进行操作。否则，您可以回退到 Athena。</p>
+<h4 id="athena-雅典娜">Athena 雅典娜</h4>
+<p>You can log into a public Athena host with
+<code>ssh &#123;your kerberos&#125;@athena.dialup.mit.edu</code>. Once you're
+logged in, to get Go 1.13, run: 您可以使用
+<code>ssh &#123;your kerberos&#125;@athena.dialup.mit.edu</code> .登录后，要获取
+Go 1.13，请运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ setup ggo</span><br></pre></td></tr></table></figure>
+<h3 id="getting-started-开始">Getting started 开始</h3>
+<p>You'll fetch the initial lab software with <a
+target="_blank" rel="noopener" href="https://git-scm.com/">git</a> (a version control system). To learn
+more about git, look at the <a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2">Pro
+Git book</a> or the <a
+target="_blank" rel="noopener" href="http://www.kernel.org/pub/software/scm/git/docs/user-manual.html">git
+user's manual</a>. To fetch the 6.824 lab software: 您将使用 <a
+target="_blank" rel="noopener" href="https://git-scm.com/">git</a>（一个版本控制系统）获取初始实验室软件。要了解有关
+git 的更多信息，请查看 <a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2">Pro Git
+书籍</a>或 <a
+target="_blank" rel="noopener" href="http://www.kernel.org/pub/software/scm/git/docs/user-manual.html">git
+用户手册</a>。要获取 6.824 lab 软件，请执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://g.csail.mit.edu/6.824-golabs-2020 6.824</span><br><span class="line">$ cd 6.824</span><br><span class="line">$ ls</span><br><span class="line">Makefile src</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>We supply you with a simple sequential mapreduce implementation in
+<code>src/main/mrsequential.go</code>. It runs the maps and reduces one
+at a time, in a single process. We also provide you with a couple of
+MapReduce applications: word-count in <code>mrapps/wc.go</code>, and a
+text indexer in <code>mrapps/indexer.go</code>. You can run word count
+sequentially as follows: 我们为您提供了一个简单的顺序 mapreduce 实现
+<code>src/main/mrsequential.go</code>
+。它在单个进程中运行映射并逐个缩减。我们还为您提供了几个 MapReduce
+应用程序：中的 <code>mrapps/wc.go</code> word-count 和 中的
+<code>mrapps/indexer.go</code>
+文本索引器。您可以按如下方式按顺序运行字数统计：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/6.824</span><br><span class="line">$ cd src/main</span><br><span class="line">$ go build -buildmode=plugin ../mrapps/wc.go</span><br><span class="line">$ rm mr-out*</span><br><span class="line">$ go run mrsequential.go wc.so pg*.txt</span><br><span class="line">$ more mr-out-0</span><br><span class="line">A 509</span><br><span class="line">ABOUT 2</span><br><span class="line">ACT 8</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><code>mrsequential.go</code> leaves its output in the file
+<code>mr-out-0</code>. The input is from the text files named
+<code>pg-xxx.txt</code>. <code>mrsequential.go</code> 将其输出保留在
+file <code>mr-out-0</code> .输入来自名为 <code>pg-xxx.txt</code>
+的文本文件。</p>
+<p>Feel free to borrow code from <code>mrsequential.go</code>. You
+should also have a look at <code>mrapps/wc.go</code> to see what
+MapReduce application code looks like. 随意从
+<code>mrsequential.go</code> 中借用代码。您还应该查看
+<code>mrapps/wc.go</code> MapReduce 应用程序代码的外观。</p>
+<h3 id="your-job-您的工作">Your Job 您的工作</h3>
+<p>Your job is to implement a distributed MapReduce, consisting of two
+programs, the master and the worker. There will be just one master
+process, and one or more worker processes executing in parallel. In a
+real system the workers would run on a bunch of different machines, but
+for this lab you'll run them all on a single machine. The workers will
+talk to the master via RPC. Each worker process will ask the master for
+a task, read the task's input from one or more files, execute the task,
+and write the task's output to one or more files. The master should
+notice if a worker hasn't completed its task in a reasonable amount of
+time (for this lab, use ten seconds), and give the same task to a
+different worker. 您的工作是实现一个分布式 MapReduce，它由
+两个程序，主程序和工作程序。将会有 只有一个主进程，以及一个或多个在
+平行。在实际系统中，worker 将在一堆
+不同的计算机，但对于本练习，您将在一台计算机上运行它们。 worker 将通过
+RPC 与 master 对话。每个 worker 进程都会询问
+任务的主节点，从一个或多个文件中读取任务的输入，
+执行任务，并将任务的输出写入一个 或更多文件。master 应该注意到 worker
+是否尚未完成 其任务在合理的时间内完成（对于本实验，请使用 10 个
+秒），并将相同的任务分配给不同的 worker。</p>
+<p>We have given you a little code to start you off. The "main" routines
+for the master and worker are in <code>main/mrmaster.go</code> and
+<code>main/mrworker.go</code>; don't change these files. You should put
+your implementation in <code>mr/master.go</code>,
+<code>mr/worker.go</code>, and <code>mr/rpc.go</code>.
+我们为您提供了一些代码，以便您开始。master 和 worker 的 “main” 例程位于
+<code>main/mrmaster.go</code> 和 <code>main/mrworker.go</code>
+;请勿更改这些文件。您应该将实现放在 <code>mr/master.go</code> 、
+<code>mr/worker.go</code> 和 <code>mr/rpc.go</code> 中。</p>
+<p>Here's how to run your code on the word-count MapReduce application.
+First, make sure the word-count plugin is freshly built:
+下面介绍如何在字数统计 MapReduce 应用程序上运行代码。首先，确保
+word-count 插件是新构建的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go build -buildmode=plugin ../mrapps/wc.go</span><br></pre></td></tr></table></figure>
+<p>In the <code>main</code> directory, run the master. 在该
+<code>main</code> 目录中，运行 master.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm mr-out*</span><br><span class="line">$ go run mrmaster.go pg-*.txt</span><br></pre></td></tr></table></figure>
+<p>The <code>pg-*.txt</code> arguments to <code>mrmaster.go</code> are
+the input files; each file corresponds to one "split", and is the input
+to one Map task. 的 <code>pg-*.txt</code> <code>mrmaster.go</code>
+参数是 输入文件;每个文件对应一个 “split”，并且是 input 添加到一个 Map
+任务中。</p>
+<p>In one or more other windows, run some workers:
+在一个或多个其他窗口中，运行一些 worker：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go run mrworker.go wc.so</span><br></pre></td></tr></table></figure>
+<p>When the workers and master have finished, look at the output in
+<code>mr-out-*</code>. When you've completed the lab, the sorted union
+of the output files should match the sequential output, like this: 当
+worker 和 master 完成后，查看输出 在 <code>mr-out-*</code> .完成实验后，
+输出文件的排序并集应与 Sequential 匹配 output 中，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat mr-out-* | sort | more</span><br><span class="line">A 509</span><br><span class="line">ABOUT 2</span><br><span class="line">ACT 8</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>We supply you with a test script in <code>main/test-mr.sh</code>. The
+tests check that the <code>wc</code> and <code>indexer</code> MapReduce
+applications produce the correct output when given the
+<code>pg-xxx.txt</code> files as input. The tests also check that your
+implementation runs the Map and Reduce tasks in parallel, and that your
+implementation recovers from workers that crash while running tasks.
+我们在 中 <code>main/test-mr.sh</code>
+为您提供了一个测试脚本。测试将检查 <code>wc</code> 和
+<code>indexer</code> MapReduce 应用程序在将 <code>pg-xxx.txt</code>
+文件作为输入时是否生成正确的输出。这些测试还会检查您的实施是否并行运行
+Map 和 Reduce
+任务，以及您的实施是否从运行任务时崩溃的工作程序中恢复。</p>
+<p>If you run the test script now, it will hang because the master never
+finishes: 如果您现在运行测试脚本，它将挂起，因为 master 从未完成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/6.824/src/main</span><br><span class="line">$ sh test-mr.sh</span><br><span class="line">*** Starting wc test.</span><br></pre></td></tr></table></figure>
+<p>You can change <code>ret := false</code> to true in the Done function
+in <code>mr/master.go</code> so that the master exits immediately. Then:
+您可以在 Done 函数中更改为 <code>ret := false</code> true，
+<code>mr/master.go</code> 以便主服务器立即退出。然后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sh ./test-mr.sh</span><br><span class="line">*** Starting wc test.</span><br><span class="line">sort: No such file or directory</span><br><span class="line">cmp: EOF on mr-wc-all</span><br><span class="line">--- wc output is not the same as mr-correct-wc.txt</span><br><span class="line">--- wc test: FAIL</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>The test script expects to see output in files named
+<code>mr-out-X</code>, one for each reduce task. The empty
+implementations of <code>mr/master.go</code> and
+<code>mr/worker.go</code> don't produce those files (or do much of
+anything else), so the test fails. 测试脚本希望在名为
+<code>mr-out-X</code> 的文件中看到输出，每个 reduce 任务一个。
+<code>mr/master.go</code> 和 的 <code>mr/worker.go</code>
+空实现不会生成这些文件（或执行其他大部分操作），因此测试失败。</p>
+<p>When you've finished, the test script output should look like this:
+完成后，测试脚本输出应如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ sh ./test-mr.sh</span><br><span class="line">*** Starting wc test.</span><br><span class="line">--- wc test: PASS</span><br><span class="line">*** Starting indexer test.</span><br><span class="line">--- indexer test: PASS</span><br><span class="line">*** Starting map parallelism test.</span><br><span class="line">--- map parallelism test: PASS</span><br><span class="line">*** Starting reduce parallelism test.</span><br><span class="line">--- reduce parallelism test: PASS</span><br><span class="line">*** Starting crash test.</span><br><span class="line">--- crash test: PASS</span><br><span class="line">*** PASSED ALL TESTS</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>You'll also see some errors from the Go RPC package that look like
+你还会看到 Go RPC 包中的一些错误，如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019/12/16 13:27:09 rpc.Register: method &quot;Done&quot; has 1 input parameters; needs exactly three</span><br></pre></td></tr></table></figure>
+<p>Ignore these messages. 忽略这些消息。</p>
+<p>A few rules: 一些规则：</p>
+<ul>
+<li>The map phase should divide the intermediate keys into buckets for
+<code>nReduce</code> reduce tasks, where <code>nReduce</code> is the
+argument that <code>main/mrmaster.go</code> passes to
+<code>MakeMaster()</code>. map 阶段应将中间键划分为 reduce 任务的
+<code>nReduce</code> 存储桶，其中 <code>nReduce</code> 是
+<code>main/mrmaster.go</code> 传递给 的 <code>MakeMaster()</code>
+参数。</li>
+<li>The worker implementation should put the output of the X'th reduce
+task in the file <code>mr-out-X</code>. worker 实现应将第 X 个 reduce
+任务的输出放在 file <code>mr-out-X</code> 中。</li>
+<li>A <code>mr-out-X</code> file should contain one line per Reduce
+function output. The line should be generated with the Go
+<code>"%v %v"</code> format, called with the key and value. Have a look
+in <code>main/mrsequential.go</code> for the line commented "this is the
+correct format". The test script will fail if your implementation
+deviates too much from this format. <code>mr-out-X</code> 文件的每个
+Reduce 函数输出应包含一行。该行应使用 Go <code>"%v %v"</code>
+格式生成，并使用 key 和 value 调用。看看
+<code>main/mrsequential.go</code> 评论“This is the correct
+format”的那一行。如果您的 implementation
+与此格式有太多偏差，则测试脚本将失败。</li>
+<li>You can modify <code>mr/worker.go</code>, <code>mr/master.go</code>,
+and <code>mr/rpc.go</code>. You can temporarily modify other files for
+testing, but make sure your code works with the original versions; we'll
+test with the original versions. 您可以修改 <code>mr/worker.go</code> 、
+<code>mr/master.go</code> 和 <code>mr/rpc.go</code>
+。您可以临时修改其他文件以进行测试，但请确保您的代码与原始版本兼容;我们将使用原始版本进行测试。</li>
+<li>The worker should put intermediate Map output in files in the
+current directory, where your worker can later read them as input to
+Reduce tasks. worker 应该将中间的 Map 输出放在当前目录的文件中，以便
+worker 稍后可以将它们作为 Reduce 任务的输入读取。</li>
+<li><code>main/mrmaster.go</code> expects <code>mr/master.go</code> to
+implement a <code>Done()</code> method that returns true when the
+MapReduce job is completely finished; at that point,
+<code>mrmaster.go</code> will exit. <code>main/mrmaster.go</code>
+<code>mr/master.go</code> 期望实现一个 <code>Done()</code> 在 MapReduce
+作业完全完成时返回 true 的方法;此时， <code>mrmaster.go</code>
+将退出。</li>
+<li>When the job is completely finished, the worker processes should
+exit. A simple way to implement this is to use the return value from
+<code>call()</code>: if the worker fails to contact the master, it can
+assume that the master has exited because the job is done, and so the
+worker can terminate too. Depending on your design, you might also find
+it helpful to have a "please exit" pseudo-task that the master can give
+to workers.
+当作业完全完成后，工作进程应退出。实现这一点的一种简单方法是使用 return
+value from <code>call()</code> ： 如果 worker 没有联系
+master，它可以假设 master 已经退出，因为 job 已经完成，因此 worker
+也可以终止。根据您的设计，您可能还会发现 master 可以将其分配给 worker 的
+“please exit” 伪任务会很有帮助。</li>
+</ul>
+<h3 id="hints-提示">Hints 提示</h3>
+<ul>
+<li><p>One way to get started is to modify <code>mr/worker.go</code>'s
+<code>Worker()</code> to send an RPC to the master asking for a task.
+Then modify the master to respond with the file name of an
+as-yet-unstarted map task. Then modify the worker to read that file and
+call the application Map function, as in <code>mrsequential.go</code>.
+一种开始的方法是修改 <code>mr/worker.go</code> ， <code>Worker()</code>
+将 RPC 发送到 master
+请求任务。然后修改主服务器以使用尚未启动的映射任务的文件名进行响应。然后修改
+worker 以读取该文件并调用应用程序 Map 函数，如
+<code>mrsequential.go</code> .</p></li>
+<li><p>The application Map and Reduce functions are loaded at run-time
+using the Go plugin package, from files whose names end in
+<code>.so</code>. 应用程序 Map 和 Reduce 函数在运行时使用 Go
+插件包从名称以 . <code>.so</code></p></li>
+<li><p>If you change anything in the <code>mr/</code> directory, you
+will probably have to re-build any MapReduce plugins you use, with
+something like <code>go build -buildmode=plugin ../mrapps/wc.go</code>
+如果你更改 <code>mr/</code>
+了目录中的任何内容，你可能必须重新构建你使用的任何 MapReduce
+插件，如下所示
+<code>go build -buildmode=plugin ../mrapps/wc.go</code></p></li>
+<li><p>This lab relies on the workers sharing a file system. That's
+straightforward when all workers run on the same machine, but would
+require a global filesystem like GFS if the workers ran on different
+machines. 此实验室依赖于共享文件系统的工作程序。当所有 worker
+都在同一台机器上运行时，这很简单，但如果 worker
+在不同机器上运行，则需要像 GFS 这样的全局文件系统。</p></li>
+<li><p>A reasonable naming convention for intermediate files is
+<code>mr-X-Y</code>, where X is the Map task number, and Y is the reduce
+task number. 中间文件的合理命名约定是 <code>mr-X-Y</code> ，其中 X 是
+Map 任务编号，Y 是 reduce 任务编号。</p></li>
+<li><p>The worker's map task code will need a way to store intermediate
+key/value pairs in files in a way that can be correctly read back during
+reduce tasks. One possibility is to use Go's</p></li>
+</ul>
+<pre><code>encoding/json
+
+ package. To write key/value pairs to a JSON file:
+
+
+worker 的 map 任务代码将需要一种方法来存储中间 键/值对，以便正确读回 在 减少 任务 期间。一种可能性是使用 Go 的包 `encoding/json` 。自 将键/值对写入 JSON 文件：
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">enc := json.NewEncoder(file)</span><br><span class="line"><span class="keyword">for</span> _, kv := ... &#123;</span><br><span class="line">  err := enc.Encode(&amp;kv)</span><br></pre></td></tr></table></figure>
+
+and to read such a file back:
+
+
+并要读回这样的文件：
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dec := json.NewDecoder(file)</span><br><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> kv KeyValue</span><br><span class="line">  <span class="keyword">if</span> err := dec.Decode(&amp;kv); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">  &#125;</span><br><span class="line">  kva = <span class="built_in">append</span>(kva, kv)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>
+<ul>
+<li><p>The map part of your worker can use the <code>ihash(key)</code>
+function (in <code>worker.go</code>) to pick the reduce task for a given
+key. worker 的 map 部分可以使用 <code>ihash(key)</code> 函数 （in
+<code>worker.go</code> ） 为给定的 key 选择 reduce 任务。</p></li>
+<li><p>You can steal some code from <code>mrsequential.go</code> for
+reading Map input files, for sorting intermedate key/value pairs between
+the Map and Reduce, and for storing Reduce output in files.
+您可以从中窃取一些代码 <code>mrsequential.go</code> ，用于读取 Map
+输入文件，在 Map 和 Reduce 之间对中间键/值对进行排序，以及将 Reduce
+输出存储在文件中。</p></li>
+<li><p>The master, as an RPC server, will be concurrent; don't forget to
+lock shared data. master 作为 RPC
+服务器，将是并发的;不要忘记锁定共享数据。</p></li>
+<li><p>Use Go's race detector, with <code>go build -race</code> and
+<code>go run -race</code>. <code>test-mr.sh</code> has a comment that
+shows you how to enable the race detector for the tests. 使用 Go 的 race
+检测器，其中有 <code>go build -race</code> 和 <code>go run -race</code>
+。 <code>test-mr.sh</code>
+有一个注释，向您展示如何为测试启用争用检测器。</p></li>
+<li><p>Workers will sometimes need to wait, e.g. reduces can't start
+until the last map has finished. One possibility is for workers to
+periodically ask the master for work, sleeping with
+<code>time.Sleep()</code> between each request. Another possibility is
+for the relevant RPC handler in the master to have a loop that waits,
+either with <code>time.Sleep()</code> or <code>sync.Cond</code>. Go runs
+the handler for each RPC in its own thread, so the fact that one handler
+is waiting won't prevent the master from processing other RPCs. Worker
+有时需要等待，例如，在最后一个 map 完成之前，减少无法启动。一种可能性是
+worker 定期向 master 请求工作，在每次请求之间休
+<code>time.Sleep()</code> 眠。另一种可能性是主服务器中的相关 RPC
+处理程序有一个等待的循环，要么是 或 <code>time.Sleep()</code>
+<code>sync.Cond</code> 。Go 在自己的线程中运行每个 RPC
+的处理程序，因此一个处理程序正在等待的事实不会阻止 master 处理其他
+RPC。</p></li>
+<li><p>The master can't reliably distinguish between crashed workers,
+workers that are alive but have stalled for some reason, and workers
+that are executing but too slowly to be useful. The best you can do is
+have the master wait for some amount of time, and then give up and
+re-issue the task to a different worker. For this lab, have the master
+wait for ten seconds; after that the master should assume the worker has
+died (of course, it might not have). 主节点无法可靠地区分崩溃的
+worker、存活但由于某种原因而停滞的 worker 以及正在执行但太慢而无法使用的
+worker。你能做的最好的事情是让 master
+等待一段时间，然后放弃并将任务重新分配给不同的
+worker。对于此实验室，让主服务器等待 10 秒;之后，master 应该假设 worker
+已经死亡（当然，它可能没有）。</p></li>
+<li><p>To test crash recovery, you can use the
+<code>mrapps/crash.go</code> application plugin. It randomly exits in
+the Map and Reduce functions. 要测试崩溃恢复，您可以使用
+<code>mrapps/crash.go</code> 应用程序插件。它会在 Map 和 Reduce
+函数中随机退出。</p></li>
+<li><p>To ensure that nobody observes partially written files in the
+presence of crashes, the MapReduce paper mentions the trick of using a
+temporary file and atomically renaming it once it is completely written.
+You can use <code>ioutil.TempFile</code> to create a temporary file and
+<code>os.Rename</code> to atomically rename it.
+为了确保在崩溃的情况下没有人观察到部分写入的文件，MapReduce
+论文提到了使用临时文件并在完全写入后对其进行原子重命名的技巧。您可以使用
+<code>ioutil.TempFile</code> 创建临时文件并 <code>os.Rename</code>
+对其进行原子重命名。</p></li>
+<li><p><code>test-mr.sh</code> runs all the processes in the
+sub-directory <code>mr-tmp</code>, so if something goes wrong and you
+want to look at intermediate or output files, look there.<br />
+<code>test-mr.sh</code> 运行 sub directory <code>mr-tmp</code>
+中的所有进程，因此如果出现问题并且您想查看中间文件或输出文件，请查看那里。</p></li>
+</ul>
+<h3 id="handin-procedure-handin-程序">Handin procedure Handin 程序</h3>
+<p>Before submitting, please run <code>test-mr.sh</code> one final time.
+在提交之前，请最后一次运行 <code>test-mr.sh</code> 。</p>
+<p>Use the <code>make lab1</code> command to package your lab assignment
+and upload it to the class's submission website, located at
+https://6824.scripts.mit.edu/2020/handin.py/. 使用该
+<code>make lab1</code> 命令打包您的实验室作业并将其上传到位于
+https://6824.scripts.mit.edu/2020/handin.py/ 的课程提交网站。</p>
+<p>You may use your MIT Certificate or request an API key via email to
+log in for the first time. Your API key (<code>XXX</code>) is displayed
+once you logged in, which can be used to upload lab1 from the console as
+follows. 首次登录时，您可以使用 MIT 证书或通过电子邮件请求 API
+密钥。登录后，将显示您的 API 密钥 （ <code>XXX</code>
+），该密钥可用于从控制台上传 lab1，如下所示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/6.824</span><br><span class="line">$ echo XXX &gt; api.key</span><br><span class="line">$ make lab1</span><br></pre></td></tr></table></figure>
+<p>Check the submission website to make sure it thinks you submitted
+this lab! 检查提交网站，确保它认为您提交了此实验！</p>
+<p>You may submit multiple times. We will use the timestamp of your
+<strong>last</strong> submission for the purpose of calculating late
+days.
+您可以多次提交。我们将使用您<strong>上次</strong>提交的时间戳来计算逾期天数。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MIT/" rel="tag"># MIT</a>
+              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" rel="tag"># 分布式系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2352633213.html" rel="prev" title="在TTY环境中使用GPG签名">
+      <i class="fa fa-chevron-left"></i> 在TTY环境中使用GPG签名
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2319536131.html" rel="next" title="Virtualbox设置共享文件夹（Ubuntu）">
+      Virtualbox设置共享文件夹（Ubuntu） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">Introduction 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collaboration-policy-%E5%90%88%E4%BD%9C%E6%94%BF%E7%AD%96"><span class="nav-number">2.</span> <span class="nav-text">Collaboration Policy
+合作政策</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#software-%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">Software 软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#macos-macos%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.1.</span> <span class="nav-text">macOS macOS操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-linux%E7%9A%84"><span class="nav-number">3.2.</span> <span class="nav-text">Linux Linux的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-%E7%AA%97%E6%88%B7"><span class="nav-number">3.3.</span> <span class="nav-text">Windows 窗户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#athena-%E9%9B%85%E5%85%B8%E5%A8%9C"><span class="nav-number">3.4.</span> <span class="nav-text">Athena 雅典娜</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getting-started-%E5%BC%80%E5%A7%8B"><span class="nav-number">4.</span> <span class="nav-text">Getting started 开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#your-job-%E6%82%A8%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">Your Job 您的工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hints-%E6%8F%90%E7%A4%BA"><span class="nav-number">6.</span> <span class="nav-text">Hints 提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#handin-procedure-handin-%E7%A8%8B%E5%BA%8F"><span class="nav-number">7.</span> <span class="nav-text">Handin procedure Handin 程序</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

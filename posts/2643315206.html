@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文介绍了堆的基本概念、性质、插入、删除操作，并给出了最大堆的构造过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构堆(Heap)详解">
+<meta property="og:url" content="https://tommygong.top/posts/2643315206.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="本文介绍了堆的基本概念、性质、插入、删除操作，并给出了最大堆的构造过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-12T08:00:17.000Z">
+<meta property="article:modified_time" content="2024-12-07T06:43:16.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="堆">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/2643315206.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据结构堆(Heap)详解 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/2643315206.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构堆(Heap)详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-12 16:00:17" itemprop="dateCreated datePublished" datetime="2024-09-12T16:00:17+08:00">2024-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 14:43:16" itemprop="dateModified" datetime="2024-12-07T14:43:16+08:00">2024-12-07</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+            <div class="post-description">本文介绍了堆的基本概念、性质、插入、删除操作，并给出了最大堆的构造过程。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>基本概念：</p>
+<p>1、完全二叉树：若二叉树的深度为h，则除第h层外，其他层的结点全部达到最大值，且第h层的所有结点都集中在左子树。</p>
+<p>2、满二叉树：满二叉树是一种特殊的的完全二叉树，所有层的结点都是最大值。</p>
+<h2 id="什么是堆">什么是堆？</h2>
+<p>堆（英语：heap)是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵树的数组对象。堆总是满足下列性质：</p>
+<ul>
+<li><p>堆中某个节点的值总是不大于或不小于其父节点的值；</p></li>
+<li><p>堆总是一棵完全二叉树。</p></li>
+</ul>
+<p>将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。常见的堆有二叉堆、斐波那契堆等。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/image-20241207144217704.png" /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/image-20241207144233647.png" /></p>
+<p>堆是非线性数据结构，相当于一维数组，有两个直接后继。</p>
+<p>堆的定义如下：n个元素的序列{k1,k2,ki,…,kn}当且仅当满足下关系时，称之为堆。</p>
+<p>(ki &lt;= k2i,ki &lt;= k2i+1)或者(ki &gt;= k2i,ki &gt;= k2i+1), (i =
+1,2,3,4...n/2)</p>
+<p>若将和此次序列对应的一维数组（即以一维数组作此序列的存储结构）看成是一个完全二叉树，则堆的含义表明，完全二叉树中所有非终端结点的值均不大于（或不小于）其左、右孩子结点的值。由此，若序列{k1,k2,…,kn}是堆，则堆顶元素（或完全二叉树的根）必为序列中n个元素的最小值（或最大值）。<br />
+<strong>注意： 在二叉树中，若当前节点的下标为 i， 则其父节点的下标为
+i/2，其左子节点的下标为 i*2，其右子节点的下标为i*2+1；</strong></p>
+<h2 id="堆的插入">堆的插入：</h2>
+<p>每次插入都是将先将新数据放在数组最后，由于从这个新数据的父结点到根结点必然为一个有序的序列，现在的任务是将这个新数据插入到这个有序序列中——这就类似于直接插入排序中将一个数据并入到有序区间中。</p>
+<p>我们通过一个插入例子来看看插入操作的细节。我们将数字 <code>16</code>
+插入到这个堆中：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/f5e2bd8c5cd23174ea4733b3de9bed13.png" /></p>
+<p>堆的数组是： <code>[ 10, 7, 2, 5, 1 ]</code>。</p>
+<p>第一步是将新的元素插入到数组的尾部，数组变成：[ 10, 7, 2, 5, 1, 16
+]；</p>
+<p>相应的树变成了：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/476b7bea162959303bc60f29887f7d88.png" /></p>
+<p><code>16</code> 被添加最后一行的第一个空位。</p>
+<p>不行的是，现在堆属性不满足，因为 <code>2</code> 在 <code>16</code>
+的上面，我们需要将大的数字在上面（这是一个最大堆）</p>
+<p>为了恢复堆属性，我们需要交换 <code>16</code> 和 <code>2</code>。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/b01e2fe15b0746e37648947e3dc52efe.png" /></p>
+<p>现在还没有完成，因为 <code>10</code> 也比 <code>16</code>
+小。我们继续交换我们的插入元素和它的父节点，直到它的父节点比它大或者我们到达树的顶部。这就是所谓的
+<strong>shift-up</strong>，每一次插入操作后都需要进行。它将一个太大或者太小的数字“浮起”到树的顶部。</p>
+<p>最后我们得到的堆：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/c4f062e9f353b77e73fa694bab67aac9.png" /></p>
+<p>现在每一个父节点都比它的子节点大。</p>
+<h2 id="堆的删除">堆的删除：</h2>
+<p>堆中每次都只能删除堆顶元素。为了便于重建堆，实际的操作是将最后一个数据的值赋给根结点，然后再从根结点开始进行一次从上向下的调整。调整时先在左右子结点中找最小的，如果父结点比这个最小的子结点还小说明不需要调整了，反之将父结点和它交换后再考虑后面的结点。相当于根结点数据的“下沉”过程。</p>
+<p>我们将这个树中的 <code>(10)</code> 删除：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/3b1843281df1093f2f51e695a6a22134.png" /></p>
+<p>现在顶部有一个空的节点，怎么处理？</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/a73d1b9388cf6190e3965df91c93e314.png" /></p>
+<p>当插入节点的时候，我们将新的值返给数组的尾部。现在我们来做相反的事情：我们取出数组中的最后一个元素，将它放到树的顶部，然后再修复堆属性。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/48773339bf25b99d8c17a14c3a9655fc.png" /></p>
+<p>现在来看怎么 <strong>shift-down</strong>
+<code>(1)</code>。为了保持最大堆的堆属性，我们需要树的顶部是最大的数据。现在有两个数字可用于交换
+<code>7</code> 和
+<code>2</code>。我们选择这两者中的较大者称为最大值放在树的顶部，所以交换
+<code>7</code> 和 <code>1</code>，现在树变成了：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/7de49e3f8841aa1d9d7f6c865e316f86.png" /></p>
+<p>继续堆化直到该节点没有任何子节点或者它比两个子节点都要大为止。对于我们的堆，我们只需要再有一次交换就恢复了堆属性：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/b8d775a60047391847a4be533697c7d0.png" /></p>
+<h2 id="最大堆">最大堆：</h2>
+<h4 id="构造最大堆">1，构造最大堆</h4>
+<p>原始数据为a[] = {4, 1, 3, 2, 16, 9, 10, 14, 8,
+7}，采用顺序存储方式，对应的完全二叉树如下图所示：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/bd6125df0507026075d897a710a5acd0.png" /></p>
+<p><strong>基本思想</strong>：<br />
+首先将每个叶子节点视为一个堆，再将每个叶子节点与其父节点一起构造成一个包含更多节点的对。所以，在构造堆的时候，首先需要找到最后一个节点的父节点，从这个节点开始构造最大堆；直到该节点前面所有分支节点都处理完毕，这样最大堆就构造完毕了。<br />
+<em>假设树的节点个数为n，以1为下标开始编号，直到n结束。对于节点i，其父节点为i/2；左孩子节点为i*2，右孩子节点为i*2+1。最后一个节点的下标为n，其父节点的下标为n/2。</em><br />
+我们边针对上边数组操作如下图所示，最后一个节点为7，其父节点为16，从16这个节点开始构造最大堆；构造完毕之后，转移到下一个父节点2，直到所有父节点都构造完毕。<br />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/038ba2c57f8352ffb48937a4a1cc010e.png" /></p>
+<p>代码实现如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">strcut MaxHeap</span><br><span class="line">&#123;</span><br><span class="line">	Etype *heap; <span class="comment">//数据元素存放的空间，下标从1开始存数数据，下标为0的作为工作空间，存储临时数据</span></span><br><span class="line">	<span class="type">int</span> HeapSize;<span class="comment">//数据元素的个数</span></span><br><span class="line">	<span class="type">int</span> MaxSize; <span class="comment">//存放数据元素空间的大小</span></span><br><span class="line">&#125;;</span><br><span class="line">MaxHeap H;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MaxHeapInit</span> <span class="params">(MaxHeap &amp;H)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = H.HeapSize/<span class="number">2</span>; i&gt;=<span class="number">1</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		H.heap[<span class="number">0</span>] = H.heap[i];</span><br><span class="line">		<span class="type">int</span> son = i*<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span>(son &lt;= H.HeapSize)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(son &lt; H.HeapSize &amp;&amp; H.heap[son] &lt; H.heap[son<span class="number">+1</span>])</span><br><span class="line">				son++;</span><br><span class="line">			<span class="keyword">if</span>(H.heap[<span class="number">0</span>] &gt;= H.heap[son])</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				H.heap[son/<span class="number">2</span>] = H.heap[son];</span><br><span class="line">				son *= <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		H.heap[son/<span class="number">2</span>] = H.heap[<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>再举一个详细的实例过程：</strong></p>
+<p>给定一个整形数组a[]={16,7,3,20,17,8}，对其进行堆排序。首先根据该数组元素构建一个完全二叉树，具体过程如下(从左到右，从上到下按顺序一步一步的详细过程)：<br />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/65201c4eddadcfe4bfaf975baa98c277.png" />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/b393505e2e7c7d61838f28dc08debc3d.png" /><br />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/4b2ff3c1db988e24cbf50772f527612d.png" />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/07f13665a80ec3bc3fde685898c9263b.png" />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/35cf22381f11333aba21f372eeebb965.png" /><br />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A0%86(Heap)%E8%AF%A6%E8%A7%A3/7fd9a21e0ebf0d767a8d39d59987369b.png" /></p>
+<h4 id="最大堆插入节点">2，最大堆插入节点</h4>
+<p>最大堆的插入节点的思想就是先在堆的最后添加一个节点，然后沿着堆树上升。跟最大堆的初始化过程大致相同。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MaxHeapInsert</span> <span class="params">(MaxHeap &amp;H, EType &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(H.HeapSize == H.MaxSize)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="type">int</span> i = ++H.HeapSize;</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">1</span> &amp;&amp; x&gt;H.heap[i/<span class="number">2</span>])</span><br><span class="line">	&#123;</span><br><span class="line">		H.heap[i] = H.heap[i/<span class="number">2</span>];</span><br><span class="line">		i = i/<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	H.heap[i] = x;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="最大堆堆顶节点删除">3，最大堆堆顶节点删除</h4>
+<p>最大堆堆顶节点删除思想如下：将堆树的最后的节点提到根结点，然后删除最大值，然后再把新的根节点放到合适的位置。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MaxHeapDelete</span> <span class="params">(MaxHeap &amp;H, EType &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(H.HeapSize == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	x = H.heap[<span class="number">1</span>];</span><br><span class="line">	H.heap[<span class="number">0</span>] = H.heap[H.HeapSize--];</span><br><span class="line">	<span class="type">int</span> i = <span class="number">1</span>, son = i*<span class="number">2</span>; </span><br><span class="line"> </span><br><span class="line">	<span class="keyword">while</span>(son &lt;= H.HeapSize)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(son &lt;= H.HeapSize &amp;&amp; H.heap[<span class="number">0</span>] &lt; H.heap[son<span class="number">+1</span>])</span><br><span class="line">			son++;</span><br><span class="line">		<span class="keyword">if</span>(H.heap[<span class="number">0</span>] &gt;= H.heap[son])</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		H.heap[i] = H.heap[son];</span><br><span class="line">		i = son;</span><br><span class="line">		son  = son*<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	H.heap[i] = H.heap[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="最小堆">最小堆</h2>
+<p>整体操作和最大堆类似，这里不做赘述。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E5%A0%86/" rel="tag"># 堆</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3461879022.html" rel="prev" title="Linux定时器（setitimer定时）">
+      <i class="fa fa-chevron-left"></i> Linux定时器（setitimer定时）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/1452544539.html" rel="next" title="Git回退版本">
+      Git回退版本 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A0%86"><span class="nav-number">1.</span> <span class="nav-text">什么是堆？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E6%8F%92%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">堆的插入：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E5%88%A0%E9%99%A4"><span class="nav-number">3.</span> <span class="nav-text">堆的删除：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%A0%86"><span class="nav-number">4.</span> <span class="nav-text">最大堆：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%9C%80%E5%A4%A7%E5%A0%86"><span class="nav-number">4.0.1.</span> <span class="nav-text">1，构造最大堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%A0%86%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9"><span class="nav-number">4.0.2.</span> <span class="nav-text">2，最大堆插入节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%A0%86%E5%A0%86%E9%A1%B6%E8%8A%82%E7%82%B9%E5%88%A0%E9%99%A4"><span class="nav-number">4.0.3.</span> <span class="nav-text">3，最大堆堆顶节点删除</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%A0%86"><span class="nav-number">5.</span> <span class="nav-text">最小堆</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

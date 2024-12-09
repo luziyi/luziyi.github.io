@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-yFe4SsNpzF">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="KMP算法详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP算法详解">
+<meta property="og:url" content="https://tommygong.top/posts/1170831533.html">
+<meta property="og:site_name" content="うずまきナルト">
+<meta property="og:description" content="KMP算法详解">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-30T02:02:17.000Z">
+<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:author" content="うずまきナルト">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tommygong.top/posts/1170831533.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>KMP算法详解 | うずまきナルト</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?567dc85496a63bc413e3da8f5adfa4a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">うずまきナルト</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">言出必行，相信过程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">41</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/1170831533.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+      <meta itemprop="name" content="うずまきナルト">
+      <meta itemprop="description" content="言出必行，相信过程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="うずまきナルト">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          KMP算法详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-30 10:02:17" itemprop="dateCreated datePublished" datetime="2023-04-30T10:02:17+08:00">2023-04-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+            <div class="post-description">KMP算法详解</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>KMP 解法</strong> KMP
+算法是一个快速查找匹配串的算法，它的作用其实就是本题问题：如何快速在「<strong>原字符串</strong>」中找到「<strong>匹配字符串</strong>」。
+在朴素解法中，不考虑剪枝的话复杂度是 O(m∗n) 的，而 KMP 算法的复杂度为
+O(m+n)。 KMP 之所以能够在O(m+n)
+复杂度内完成查找，是因为其能在「<strong>非完全匹配</strong>」的过程中提取到有效信息进行复用，以减少「<strong>重复匹配</strong>」的消耗。
+你可能不太理解，没关系，我们可以通过举个例子来理解 KMP。</p>
+<span id="more"></span>
+<h1 id="匹配过程">1. 匹配过程</h1>
+<p>在模拟 KMP 匹配过程之前，我们先建立两个概念：</p>
+<p>前缀：对于字符串 abcxxxxefg，我们称 abc 属于 abcxxxxefg 的某个前缀。
+后缀：对于字符串 abcxxxxefg，我们称 efg 属于 abcxxxxefg 的某个后缀。
+然后我们假设原串为 abeababeabf，匹配串为 abeabf： <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820185990.png" />
+我们可以先看看如果不使用 KMP，会如何进行匹配（不使用 substring
+函数的情况下）。
+首先在「原串」和「匹配串」分别各自有一个指针指向当前匹配的位置。
+首次匹配的「发起点」是第一个字符 a。显然，后面的 abeab
+都是匹配的，两个指针会同时往右移动（黑标）。 在都能匹配上 abeab
+的部分，「朴素匹配」和「KMP」并无不同。 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820206345.png" />
+直到出现第一个不同的位置（红标）：</p>
+<p><strong>接下来，正是「朴素匹配」和「KMP」出现不同的地方：</strong></p>
+<p>先看下「朴素匹配」逻辑：</p>
+<ul>
+<li>将原串的指针移动至本次「发起点」的下一个位置（b
+字符处）；匹配串的指针移动至起始位置。</li>
+<li>尝试匹配，发现对不上，原串的指针会一直往后移动，直到能够与匹配串对上位置。
+如图： <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820227329.png" />
+也就是说，对于「朴素匹配」而言，一旦匹配失败，将会将原串指针调整至下一个「发起点」，匹配串的指针调整至起始位置，然后重新尝试匹配。
+这也就不难理解为什么「朴素匹配」的复杂度是O(m∗n) 了。</li>
+</ul>
+<p>然后我们再看看「<strong>KMP 匹配</strong>」过程： <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820242235.png" />
+首先匹配串会检查之前已经匹配成功的部分中里是否存在相同的「前缀」和「后缀」。如果存在，则跳转到「前缀」的下一个位置继续往下匹配：
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820263085.png" />
+跳转到下一匹配位置后，尝试匹配，发现两个指针的字符对不上，并且此时匹配串指针前面不存在相同的「前缀」和「后缀」，这时候只能回到匹配串的起始位置重新开始。</p>
+<p>到这里，你应该清楚 KMP 为什么相比于朴素解法更快：</p>
+<ul>
+<li>因为 KMP
+利用已匹配部分中相同的「前缀」和「后缀」来加速下一次的匹配。</li>
+<li>因为 KMP
+的原串指针不会进行回溯（没有朴素匹配中回到下一个「发起点」的过程）。</li>
+</ul>
+<p>第一点很直观，也很好理解。
+我们可以把重点放在第二点上，原串不回溯至「发起点」意味着什么？
+其实是意味着：随着匹配过程的进行，原串指针的不断右移，我们本质上是在不断地在<strong>否决一些「不可能」的方案</strong>。当我们的原串指针从
+i 位置后移到 j 位置，不仅仅代表着「原串」下标范围为 [i,j)
+的字符与「匹配串」匹配或者不匹配，更是在否决那些以「原串」下标范围为
+[i,j)为「匹配发起点」的子集。</p>
+<h1 id="分析实现">2. 分析实现</h1>
+<p>我们分析一下复杂度。如果严格按照上述解法的话，最坏情况下我们需要扫描整个原串，复杂度为
+O(n)。同时在每一次匹配失败时，去检查已匹配部分的相同「前缀」和「后缀」，跳转到相应的位置，如果不匹配则再检查前面部分是否有相同「前缀」和「后缀」，再跳转到相应的位置
+… 这部分的复杂度是 O(m^2)，因此整体的复杂度是 O(n *
+m^2)，而我们的朴素解法是 O(m * n)O(m∗n) 的。</p>
+<p>说明还有一些性质我们没有利用到。</p>
+<p>显然，扫描完整原串操作这一操作是不可避免的，我们可以优化的只能是「检查已匹配部分的相同前缀和后缀」这一过程。
+再进一步，我们检查「前缀」和「后缀」的目的其实是「为了确定匹配串中的下一段开始匹配的位置」。
+同时我们发现，对于匹配串的任意一个位置而言，由该位置发起的下一个匹配点位置其实与原串无关。
+举个🌰例子，对于匹配串 abcabd 的字符 d
+而言，由它发起的下一个匹配点跳转必然是字符 c 的位置。因为字符 d
+位置的相同「前缀」和「后缀」字符 ab 的下一位置就是字符 c。</p>
+<p>可见从匹配串某个位置跳转下一个匹配位置这一过程是与原串无关的，我们将这一过程称为找
+next 点。</p>
+<p>显然我们可以预处理出 next
+数组，数组中每个位置的值就是该下标应该跳转的目标位置（ next 点）。</p>
+<p>当我们进行了这一步优化之后，复杂度是多少呢？</p>
+<p>预处理 next 数组的复杂度未知，匹配过程最多扫描完整个原串，复杂度为
+O(n)。</p>
+<p>因此如果我们希望整个 KMP 过程是 O(m + n)的话，那么我们需要在
+O(m)的复杂度内预处理出 next数组。</p>
+<p>所以我们的重点在于如何在 O(m)复杂度内处理处 next 数组。</p>
+<h1 id="next-数组的构建">3. next 数组的构建</h1>
+<p>接下来，我们看看 next 数组是如何在 O(m)的复杂度内被预处理出来的。</p>
+<p>假设有匹配串 aaabbab，我们来看看对应的 next 是如何被构建出来的。 <img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820293368.png" />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820303193.png" />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820313925.png" />
+<img
+src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/KMP算法详解/1682820328878.png" />
+这就是整个 next 数组的构建过程，时空复杂度均为 O(m)。</p>
+<p>至此整个 KMP 匹配过程复杂度是 O(m + n)的。</p>
+<h1 id="算法实现">4.算法实现</h1>
+<p>用KMP算法实现查找子串在原串中第一次出现的位置</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="type">int</span> <span class="title">strStr</span><span class="params">(String haystack, String needle)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// KMP</span></span><br><span class="line">        <span class="type">int</span> n = haystack.<span class="built_in">length</span>();</span><br><span class="line">        <span class="type">int</span> m = needle.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span>(m == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// next数组,pi[j - 1]为当i与j不匹配时j应该指向的位置</span></span><br><span class="line">        <span class="type">int</span>[] pi = <span class="keyword">new</span> <span class="type">int</span>[m];</span><br><span class="line">    </span><br><span class="line">		<span class="comment">// needle内部构建next数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">        	<span class="comment">// 这里当i与j对应的值不相等时，通过next数组将j回滚，与暴力（直接将j = 0）不同</span></span><br><span class="line">            <span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; needle.<span class="built_in">charAt</span>(i) != needle.<span class="built_in">charAt</span>(j))</span><br><span class="line">                j = pi[j - <span class="number">1</span>];</span><br><span class="line">            <span class="comment">// 这里注意：当i与j匹配时，j应该+1然后赋值给pi[i]</span></span><br><span class="line">            <span class="keyword">if</span>(needle.<span class="built_in">charAt</span>(i) == needle.<span class="built_in">charAt</span>(j))</span><br><span class="line">                j++;</span><br><span class="line">           	<span class="comment">// 当i与j不匹配时，直接将j赋值给pi[i]</span></span><br><span class="line">            pi[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// haystack与needle之间进行判断</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; haystack.<span class="built_in">charAt</span>(i) != needle.<span class="built_in">charAt</span>(j))&#123;</span><br><span class="line">                j = pi[j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(haystack.<span class="built_in">charAt</span>(i) == needle.<span class="built_in">charAt</span>(j))</span><br><span class="line">                j++;</span><br><span class="line">            <span class="keyword">if</span>(j == m)</span><br><span class="line">                <span class="keyword">return</span> i - m + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Leetcode 1668. 最大重复子字符串</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxRepeating</span><span class="params">(string sequence, string word)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = sequence.<span class="built_in">size</span>(), m = word.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt; m) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// next 数组，pi[j - 1]为当i与j不匹配时j应该指向的位置</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">pi</span><span class="params">(m, <span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; word[i] != word[j])</span><br><span class="line">                j = pi[j - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(word[i] == word[j])</span><br><span class="line">                j++;</span><br><span class="line">            pi[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">f</span><span class="params">(n)</span></span>; </span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; sequence[i] != word[j])&#123;</span><br><span class="line">                j = pi[j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(sequence[i] == word[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">                <span class="keyword">if</span>(j == m) &#123;</span><br><span class="line">                    f[i] = (i &gt;= m ? f[i - m] : <span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">// 这里将j指向pi[j - 1]，不影响i的遍历</span></span><br><span class="line">                    j = pi[j - <span class="number">1</span>];</span><br><span class="line">                    ans = <span class="built_in">max</span>(ans, f[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3771985588.html" rel="prev" title="c++运算符优先级归纳">
+      <i class="fa fa-chevron-left"></i> c++运算符优先级归纳
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2434167907.html" rel="next" title="克鲁斯卡尔算法（Kruskal）详解">
+      克鲁斯卡尔算法（Kruskal）详解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 匹配过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">2. 分析实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#next-%E6%95%B0%E7%BB%84%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">3. next 数组的构建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">4.算法实现</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="うずまきナルト"
+      src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
+  <p class="site-author-name" itemprop="name">うずまきナルト</p>
+  <div class="site-description" itemprop="description">言出必行，相信过程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luziyi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luziyi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa-solid fa-shield-halved"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">うずまきナルト</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:01</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
