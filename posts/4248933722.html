@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="new操作符可以在运行时为基本数据类型、数组和对象分配持久的内存空间。另外，新版c++标准中可以用变量名称作为数组大小。">
+  <meta name="description" content="基本概念，三个基本要素，线性回归，偏差方差分解，机器学习算法类型，数据特征表示，理论和定理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="指针及动态内存管理">
-<meta property="og:url" content="https://tommygong.top/posts/1679445169.html">
+<meta property="og:title" content="机器学习（一）概述">
+<meta property="og:url" content="https://tommygong.top/posts/4248933722.html">
 <meta property="og:site_name" content="うずまきナルト">
-<meta property="og:description" content="new操作符可以在运行时为基本数据类型、数组和对象分配持久的内存空间。另外，新版c++标准中可以用变量名称作为数组大小。">
+<meta property="og:description" content="基本概念，三个基本要素，线性回归，偏差方差分解，机器学习算法类型，数据特征表示，理论和定理">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-11T11:20:39.000Z">
-<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
+<meta property="article:published_time" content="2025-02-08T02:07:55.000Z">
+<meta property="article:modified_time" content="2025-02-08T02:47:28.000Z">
 <meta property="article:author" content="うずまきナルト">
-<meta property="article:tag" content="CPP">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://tommygong.top/posts/1679445169.html">
+<link rel="canonical" href="https://tommygong.top/posts/4248933722.html">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>指针及动态内存管理 | うずまきナルト</title>
+  <title>机器学习（一）概述 | うずまきナルト</title>
   
 
 
@@ -206,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/1679445169.html">
+    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/4248933722.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
@@ -219,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          指针及动态内存管理
+          机器学习（一）概述
         </h1>
 
         <div class="post-meta">
@@ -228,24 +228,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-09-11 19:20:39" itemprop="dateCreated datePublished" datetime="2023-09-11T19:20:39+08:00">2023-09-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
+              <time title="创建时间：2025-02-08 10:07:55 / 修改时间：10:47:28" itemprop="dateCreated datePublished" datetime="2025-02-08T10:07:55+08:00">2025-02-08</time>
             </span>
 
           <br>
@@ -254,16 +239,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>452</span>
+              <span>1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>4 分钟</span>
             </span>
-            <div class="post-description">new操作符可以在运行时为基本数据类型、数组和对象分配持久的内存空间。另外，新版c++标准中可以用变量名称作为数组大小。</div>
+            <div class="post-description">基本概念，三个基本要素，线性回归，偏差方差分解，机器学习算法类型，数据特征表示，理论和定理</div>
 
         </div>
       </header>
@@ -274,31 +259,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="动态持久内存分配">动态持久内存分配</h2>
-<p>KEY POINT</p>
-<p>new操作符可以在运行时为基本数据类型、数组和对象分配持久的内存空间。</p>
-<p>另外，新版c++标准中可以用变量名称作为数组大小。</p>
-<p>之前创建动态数组的方法</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;<span class="string">&quot;Enter the size of the array: &quot;</span>;</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line">cin&gt;&gt;size;</span><br><span class="line"><span class="type">int</span>* list = <span class="keyword">new</span> <span class="type">int</span>[size];</span><br></pre></td></tr></table></figure>
-<p>就可以被替换为：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;<span class="string">&quot;Enter the size of the array: &quot;</span>;</span><br><span class="line"><span class="type">int</span> size;</span><br><span class="line">cin&gt;&gt;size;</span><br><span class="line"><span class="type">int</span> list[size];</span><br></pre></td></tr></table></figure>
-<h2 id="创建及访问动态对象">创建及访问动态对象</h2>
-<p><strong>关键点</strong>：调用对象的构造函数可以动态的创建对象，语法是
-<code>new ClassNmae(arguments)</code>
-可以使用如下的语句在堆中动态创建对象：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClassName* pObject1 = <span class="keyword">new</span> <span class="built_in">ClassName</span>(); <span class="comment">//这里使用无参构造函数创建对象，并将对象赋予指针pObject1</span></span><br><span class="line">ClassName* pObject2 = <span class="keyword">new</span> <span class="built_in">ClassName</span>(arguments); <span class="comment">//这里使用有参构造函数创建对象，并将对象赋予指针pObject2</span></span><br></pre></td></tr></table></figure>
-<p>通过指针访问对象的数据成员以及成员函数需要先进行<strong>解引用</strong>操作，然后使用点操作符。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(*pObject1).member = value;</span><br><span class="line">(*pObject1).<span class="built_in">memberFunction</span>(arguments);</span><br></pre></td></tr></table></figure>
-<p>或者使用箭头操作符</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pObject1-&gt;member = value;</span><br><span class="line">pObject1-&gt;<span class="built_in">memberFunction</span>(arguments);</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：在使用new操作符创建对象时，必须使用delete操作符来释放内存，否则会造成内存泄漏。</p>
-<h2 id="this指针">this指针</h2>
-<p><strong>关键点</strong>：this指针是一个隐式的指针，指向当前对象，可以用来访问对象的数据成员和成员函数。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Circle</span>();</span><br><span class="line">        <span class="built_in">Circle</span>(<span class="type">double</span>);</span><br><span class="line">        <span class="function"><span class="type">double</span> <span class="title">getArea</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="type">double</span> <span class="title">getRadius</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">setRadius</span><span class="params">(<span class="type">double</span>)</span></span>;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="type">double</span> radius;</span><br><span class="line">&#125;</span><br><span class="line">Circle::<span class="built_in">Circle</span>() &#123;</span><br><span class="line">    radius = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">Circle::<span class="built_in">Circle</span>(<span class="type">double</span> radius) &#123;</span><br><span class="line">    <span class="keyword">this</span> -&gt; radius = radius;<span class="comment">//or (*this).radius = radius;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">Circle::getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3.14</span> * radius * radius;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">Circle::getRadius</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> radius;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Circle::setRadius</span><span class="params">(<span class="type">double</span> radius)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span> -&gt; radius = radius &gt;= <span class="number">0</span> ? radius : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="析构函数">析构函数</h2>
-<p><strong>关键点</strong>
-析构函数没有参数，没有返回值，名字是类名前加上~，一般是释放对象的资源。</p>
-
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="bb67be3e489c8a04372913690c14f85cb72aa70e10fcfe33e409109415e968e0">29e06521fec60bbbd8d8e44ffa9ac2d1a81490c76eb0b606c1d22a999691f723bf97807d2c95dffa9a086eb57030dd4e217cb102e391f1a9c967a8be235c0a50342a6f6f68bd71f4dbfb10f1eee456fd49190b25b81658bd8845d1d02baded2e27fa849ac32687b866da7992ec170e29519a739ee777485587fa66e0635db101d6ec21d199e0eba5fe34235c7e6955d7606c02ccba296403ddc50ae2bc626f8fe398cbb7d58bf06bc53d46addf1c85c4113bebbe127fb3334dc7b3cf8495a7bf4f55d9a40c7bf5a5afbc28af8de7a41d145b24f41e9618829303fc332af438841fa8e6672c17130eca84fb5b6f6137c34d70723334df20859ebe061049edc302fbdc354c5d0b016bd83399fef422012189f4064a1a7db2ca4d0a7806724834e70668b85f83e40bb28f930a63d1d370559e079c563edaeaa37721d83d811bd6580863d8b46e728c520de15399f9326bd66a8bfcac8ee34dcb7048b066fb156317df8f45c9a4bb2c556623cb97ef2265c6dbe82a6dc0c1a9a7a72259165eda2d66f5e0d3e2902b8146bc760ab0985d8eb4e149c586eed8bf33a9fa2fd26519d1490d2e9653e932131a0652a61ab7949ee833fa30aaf6f7f1e4061c479d61e2d69fce15b82221e3b0bb92a587ed9f07bb9d489758992e6f5e350bfdedcf8f7a5629474dfbab5266b5ac0978fe1cf50c7e0ee7092b4de81160f26ebe764f5a46ae9168df33975aa09114261f90a848a589dccc0ba7112ee41d88891b1bbc8fa61e6f4346e1d885e678a2ccce42c2d2e8e7efdbffe08f0a728e0533dd6ec03360d851a9b6ae247f103fdf7d8403fc67718941e2a836a60db732a51565e315f4479e063586886c687cd5be53f2ad8922bd900fd7742f7883aa1d1751cfd0d2e248c2a8bfd367066b1d6f1abfe9a46788ba730a339400e9074d0b6545bf70ca16b683f603705a822baa16424fbcbc74e1b4271b2638f236be5c35f2900b81be9776b60227ddbd6c586aa2b63d1c063acf8da5f82e1a9674a73d240400fd9a2a697af090403dc2e9b409695a0ba811806b6b0c30b3d9a9a58dc85a00bb5acd324b08541969e382e7fb33b927701e7582f2d7afdede20e2c78242b16e20e61d3fa60196b26923bf9b645b32db7300803d6e15e3b6c7b283ff59fb9c870118850a2aa9d79b234152e3134167f22ee6bcce68929324aadd39056f8dde7bc500c936a2a02c6af0a8bf32c8807b2e3e98be582618cae025bdef31aefa550a1ab8e8d6fe611e2ed9782e6210983ffa4446f86c808e168b0a22159b08e81b0ceb84ae58caaee8be7f40d7dc1a0e14240559c70855e14e8b17708ab3fc653b75ba617e2bb57d9b5c759c07721b1e2fa7b7a7cc8e4e2409ccedb06e08fe8786b40723c87be86ec9ebd4b49e7d8a322a44606b6e16991248503c4cd519e52e198f7f9adc1c137ee7a8d48ab5d424337bf913d3e593227cfc3754bcc955c2e1f899817fef8d0b7216351502bd1ca3fb80898d508b57cd4d5017fd8549f4f08625bdc673463cd8c9cc6bbe294123f142c18ea5b449fcc57f26991357e6e24b2d854ac2c150798dd4b8d39cb26268c22abda598eb26b79cb8820b69bc56d30bc441790ac5222c4e8f079602c552903464559b765116e2fe52aa46e53858bab0e08cb8c2d074adc09fdba0d1b9c6735cd46361139875564ba16c8edfec0946c29c38633a5ed15dbdcb6d7a31bf4a0a0f7b495b18defd1e147549372bae5f2d4b354a472c83070d7dd92b87e506ab63df2cca96ebe7ffd603f1e0ba291c3a4c3cbf7863d7d96dd38227ded86cc6e1b1b690a4ab9d828ffc8cfbbd44d0a01fe8c1b3d3191d837c2ac5572f746967c935d0f740f5762eeb88980927a133429f66c4095d66d70a00ebd46233d09773540a2a87f180797d2ee029769087fba3107b7350744d0435fcd6989b61f7d4e41a5fa99fa6e64646e43e1fc8daebdd5994e07c178bc9e2d64c89ffd9d66607055a469fdb4df302d91ab648afdfeb3413521b70eef7f4b639b476bbe1fa2510fe18be9050dd637e8dc7a01c933e1e93eb7c790c861ec64e224031b58a04495250c999d7d27885ddf7cdf02dcc7d51fbf0288e5d1724a865c24a84027b5d7c4b00d640fa0cf75986f67557581b96c97b9c048b031319e5b784813142af3985aaf10b4335d094215ab9b5baccd8ea0f4904356f02531d1e86f8783723df02fb9a348894a1fd77e41402c818fda746915681e5a326f512961e7c9c753d8acf26b707a578f3c4e8e679d9fedcb1143652135ae2981e90ca7f0c07477a3dddfdb0a8551fabb2b1ddb1ec8530cc3c6941f987402e36c60cc2dd5f119b9e28ee463d6deea725fc01593fe80b2f37abbd4a2689c5a1d7de9742aaec17808224cfdce36b4534527561be43e15c6bcea7d4eb0353a3334aa956e740ff7d798d51fb904c8969cba00f56efa105caff376696117f31bc7e3e07aa1890e1c0294c007c891192b769523ed27509e031065bdfb9104b34a61e8f95090ef8ffde9910dd9c750770376c149873788b8ef638c964daa6ef544c6adcc448365c8ae79020f3f50b89b6924a78bbe272c2122eca4e7046c9073abb2189b361247ad2420b00a63af1da8b7d11c7141e9888d01fe69367abb28cb585dc91bded2248448fb11cfb1377cbc55d9a7ded85cfaed41c1f9b64fe3e16b895e8e2152afd7bec807c85f2471e94a68934db0f6832ce6150e23c8b5f37912e74c852fe4a75174d71709b8f5baa01f4fe61e8b4726ac46b37e3415977d91eb3c02dca9b054cb0951baf6af230590a33aff735e0af1aa8b6bf8fa45cd24c12447fffa313cb6abe874a7d73881f311f14d8ed961d957345028f29228de894d6e896716bd397dd24b0dbbdac6af473f9c775663422a38c51448a950dce287982a51be1e6a63938d85b7d6362c2d5e47e06616842db7801828523f24723558d620c045919294322502e16a0a188a9dc8248796737169e4ee4a9dfdd7b622d95100a163151d1d6ccec88524b926ef6b62a87dcfc72a5ec916c1464c53da82e87c11008ec8c024f662f5f879a4d4efa29f9390fbc73b7b6458e9df046c4fd34c4da7bdeacc9eb12ea3b59f1f33b94686d10d802051b243ab43edfa7047b34e5faef740943b86ae115c50a3d04cfa486cdbb55c4394621743bad4c1b6fbe3485cdc40669b09891545db9fa861cba9184193337ad15708dd53db503936ed50a334ae4974f4fb49e16349ccb1464bc65346675e3bd7452584955fb288090e39e897c4b481b0c490ae9da758387e9f6da07c43b0f63c49734115646784445c601f297b76769087abb80b8b98ffb32dd38288cf5aaf4d735dde00e42d808752817d65150cc5ea59b0c265024131bee6e966ac726c4aad1ad9baa84f2d3188968888fcfea760a73b5edc8970faa658f7d512a108e5939a4013520e2fde722f8e037ccf7d4be9b93a07571adac3f840c9cf82c7e67f0546d94582375902b48c39a8e7303acb8a91b4a88749cd720f3e7e5533804366f93baaa95b7c95232cdbd71d0855759e0bf216f01f247b31b3aa867a496e3154dc95d662e34efb4e030a3e1426457bdd5d977ab9303017ad972ec44fc0b71d8fd0f4a46f485ed92839ce33120b0c164d2b9ab2c05e287b6492bd1b1497e16883ba338a4300def20089441017041859dcd0c0d16d0a558849c08119ca82378c5ab5da5d7926552f01c79c22b2d574468e03de7925dedf29fd46584fb1827a54cb587482529db797c6624fe0e2de0ed834f254771448e8dabef1bd2fab7f706462fec602559d39dea236772374724cb1215b2e79016acb183b9aec56ae94fb5794b35516fcd65652d266b203e134a95f884675b4f341c5c0a4f95349f69e6c8fdd1d3971f82be7d986b04311c3276bebd70b525e2209e69e7c3f5536e60f4a1f4c94e543c44ee7388ee3d1dc70252135c1b9a27e3f96089f8b2335460d64859a7ee1b3e330858f4f91386b8326ac8d720c5becf304127401c152ded3cc816aed6bb9928f9791f7f2a4d407cea83b3839de897940250d0cf9cc804452eaf8eccd1494965803dc6ba97fd096746c1f53cae852f9b3fb76352e30affb4a6865539a8a924cc798c9ccad523598653b1099acfd4c72a4e4f409dfba9a8f543382b7c66897b8333c1eb2bbe842a3b87deca161f12b6d391253622fe773cfdb74652820b8c829140759d25bff7f5216180c378399fac0821c8087767d231e787bd05a8aea238eb364726cb73622ce941c4dcebca2ddf7e245d57767b15bb22978a14b35abe5946cc645f93634cdd6f7824e4f8af1cb5ade373b04f90281d69ce06e0a3a657704d2022f3014a1e8139beaebe08b327400cad79b09efacddf8b7c70f8a3de8ac6871ca2b1c1aee2c3e313b26538b55e1343420556c39e00e1546e26263fe794882e6a216cb76196584f8f9cc04bfc95e55eb9584ea2c7f0f12660cc1f6dde54a53395f23bf8c1965772f9d644c713a7bc1662885ec759667c6b178b05ae7d49ed989dafd6b7e36e34fffead64dde6b2fa03d8d11ba40a7b207d4bb5e5fdb1da0813b6f9d33759e2b90225f8e23e41fb94038715da8843917416f44860ac1507e53fc2eb9102853df9b0f3d58cd56a8a16785c01a442ccdefeb84b19324e4be2df8e91fafccef8af24e28157d62ed9c9475051b31f80a912c4df8bcee1dd8fee13082faa325f078d96b822d9403b825ca41323c88be7e54ca5ea93f9b48178ea5291fa16bbb1e7e4dbb4f5b611cfa677292b7eded112618ec68b619d80511a8678cf0c0ad8ecd8b3cf004dd443e90516a10733c9705557571e5b5de922df96bcb0e46cb66e521eff76819ed994a14e93379cf26973d3ce158e6558262ae3239019da0c6177b687b4b4bf058ad1c8559cf4522faa0d17e3af7aea13f172ccd8a8acd5be8a3333fc7f6cebaa0e1ba378bbe279c40a8d84ad9b3c8e74981aa25562608615fd48bf0241400ed85abbf54499420547a17f24062f596ff8cae3dddb8669c487fce7834b987bb5df005de77c028a241ebf08c725697bea6034d3748a3c07c0e76da6f228512dcdad45a4401355835ed95eaacbf9277305858f5c3695d89c12770664b7b255d705c1ac8b07462bcdc90cea9d273f02468aacf54159180f756ef123af986745d630a548e0dba98d650e97f92892c42def7a36837e258f1e6afe14f188d96683039b4e9e69f19bb6b9c1ec6cc9ea77d97d2fa6838987d5148c97f0d52b6bda89b6c143d0606f2c658a6753b30ab3fa553267413a8241855bede34abf8b688a7db20bb5e4e47e4cfbd6afc8619e7f10361b11393c7505dee6d052111637687413f2c70706286eb2fc803166ba545752b7cdc483918caf40033f92390f0eb42902837e220854813ef47eeb461e5dcb2d8094b8cc952e6e76a594453e601a941e1cbaff3bf37b24e7a84b1278f5bd7a70f9a31c0def6fc049d5683e7e3bb1772e727df6f811c958444523abe9e5f224cc7616a74772e0e907437c6b315ae40e9b751fe292e862e5fe52b9e7906a94cab7d5efdec0446783569c4b7f97fd245a3dc7ca0fe24a74f3c3eb87e513efe49323817acb2dec599bf745d4d4d8c0de3264cc59c02a7c6f1c9175e3370b3a1342196645182f3764d6fc5130261a7e6ea3b75c4110eeeb5c6c8369c2fcb8677525249949f2508addd9b9e7daa93a5f6409bd07118d3c029afef37288460ec0a0f2b4263cda1471b0bca5970b11a2c1710af1f66126507ddd85acb2cb8520457c979c0d80e4c3f51f7f275cacae932b50df454742add629a8bde9471ebcc15e80c539a202bbe7f748d0c709ea1bdfd9378337eb6298bea2e2d08f4eb1a4960412ecee975a30e0931d7e657b12f153030b8499e27d0daa57c0168a0440c295e1ec5686718cb242bbfc569186ffa79bbe85417dfb9de6c3ea4927bbb18b7a155cbfaace10b5dfb0fed9c05380957e0fb2c04e11aa15e71eaacb5a633a0549a75b5a0f76a7e488f03d9f7f8ecf176b1127543636be0f2ecfa08a4612c7e1166e2f6b31c076db292862476358936856b8a5ad2f625f324914f13e9e4044a67980dc43b24552a902e9a95f3ff4173a09060a1daa5959a6297d731be2bee4e7fe4e1e3c08e0ce658d58706f56e70784bfe1ef8e13e5560caa05fa41f6757f965e80adfbd4bbd28b848ec9f5c6c8f97081f8ab436e617cec96fd25611a4beb02ae752b70cc82d943d10cde3edf2404d7d4af0c6c65be2e9bb050724ec50538f40eab0868c6ae4182196fe6392af125b73d82848a73c0fa1c548addca7a24346aa4e4d40c875a0552b4c2f5fb143b0f1e473a81c8b5461d7ecc13dec6a738645da46ae72afd54074310f7652698c6514f0b763eced8550a62c03639202586b7e4a2b5d3c8fbbaab562339e58bdd49cf831e476218107a5f09f47a6be1eed587a1f3a04fe4639c1a3f9a342b7a7fec66de795e496725265635df778be96a77094f9881d0a8ee39f9b296a826d92f43f344e13b4841f399149d23681187e9d0cba0277e60f7004c6cd83f7986a24d9602d5a0bf8c07d6c62cfe883c260be257ad9fdf2e14f56a87400912e0db7a0359248f5f6856dccc78070afef426a43116691daec534030aefb361b15a53c746e7885766e23c5b1669a6d1cd9da2938304025e3c9a6afa5eb68de80b24a91170847430c23c97160e62e84bba41400e55f80ff068e3c0eee6fb5821d8b4d02a2b82bb1ff9e3e355f0c06dbfcd7bcc66552df130814597561650545b5bf7e75f8c398ef421d0069ab0ad31ab0bcad7d7d15fb3c8ccb7bd5e5cb1c29e4c0cd7f9389be88e14d6c333b36e1172707382aa84e88ca4623cd20edc76d36365400da436533f5b1628ee8d83b1d94ef6e8586375c219c1dc612e215877cf66e7c0666cf351f02c0fa8a1542097cc50d4db33c19a2e7975809267764fd6dc70abaffd563a27ce8e0adad75cc0644c97e67d1e003a99324d4b144e0cee227bc2bcbb6d174f58458aebd452c92c381e60b3eb6a939b328c495d49b4f9d2d38e051692b5c6f1115de1a727fc1f7aee23ca6c6f2db9910bf9b450e4b1fe6aa2ffb92e8e8ea3b69fbe1c4f57e19dca59cbc5680f1ee2efb06911de1f2a28d5551b459d9b077fa27be2830176bb0ba3330f03f67a88756a5d43501fed7d49c8590065a66a126a8208e95a5bc6c3affc54d7ea41fd0edc64b56b8168c86408144c3782a0cdff037d4849a66d93c311408e3f83551a2949244bb47e91664806e258f9abb4852c24c98509ea78df4ab4e94d4bc780349950e6b20904f4b8ebceced43b44634749272773d475e83482a9b9966edf52dda8a3431877d8137295a79682c1b98798ad1654611af02ded0581119fe8f95ea0b8dabe3e708385c667a3e505fe3770170fcf668a8a97d0bbef01bea323e963a495a2caa196d2ccb9a191996291236e88403f9df6201f1c0b94f13cc56c8dbc0b23b251a1c5936889bd21dd7fb458a2a2c2d96a2025fc1f7e6789b542e59debaa5f733c2a846f96b0db1993ae2acb47dafb74b3138505bc6732d741cb0d8564ead2c290d63cac7e35477536ad05eae0a7483cb204dcc54f770d3651777a635a4f0125a8d03dfbdbdfdf9a2b31e4cfc860a9ce1d050d3983c045805dcceb05213312975cf16fa51f8abdca59187ab9ffed2bebc177c4e745db69ad4644cbfeb8e1bdf8972eef87b9181a2c115f28690ff91ebcd11587b73cb3547312cc54e541d3c19f4e892a5ce37a9ff1a863ee3093e914926bcba6dfc4ebc16f2dba792e588a77f3b152cc635fca4a82823d87dcdb757655d09743319dd15f1b748bcead36f470ba9f6712588714fa9b0c49a873d17e9b8c2a6730823bc3a36aeb28c250df73f8343d24e46029cc2c6f5b345e611db5ac7f1403ec9e336fc1b5f6abedc871095006cafefc80b1c6866dde32a958389bfb3d77e174f10ef1a0c7df75ebd898e79a6ab5673c3538529990115a99e7753a7b4835f753ff414f06e7f2585f88b60188e676a5e61cce301153b784e28e5ba86ea62fc78e74a863558ad40ff1376b9c8488046bb7dcf460867eb2380475093e573430a0cb922d46e15ee1c8b731f8a56b69869e6a22d7ce84ce35e096ecad3629f7dc8352235df487517039091b763b13ec3b1f51a5565e356d799b0cff9d023f5d14a3a6e8d8645f3404d162ce227e2e6267d5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -307,7 +279,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/CPP/" rel="tag"># CPP</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
           </div>
 
         
@@ -316,13 +288,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/540896091.html" rel="prev" title="algorithm头文件函数全集——史上最全，最贴心">
-      <i class="fa fa-chevron-left"></i> algorithm头文件函数全集——史上最全，最贴心
+    <a href="/posts/1297384559.html" rel="prev" title="MIT 6.828 实验记录 (二)">
+      <i class="fa fa-chevron-left"></i> MIT 6.828 实验记录 (二)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/737419435.html" rel="next" title="运算符重载">
-      运算符重载 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -381,7 +350,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%8C%81%E4%B9%85%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">动态持久内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%8F%8A%E8%AE%BF%E9%97%AE%E5%8A%A8%E6%80%81%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">创建及访问动态对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this%E6%8C%87%E9%92%88"><span class="nav-number">3.</span> <span class="nav-text">this指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">析构函数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
