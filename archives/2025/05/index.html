@@ -22,20 +22,17 @@
     var CONFIG = {"hostname":"tommygong.top","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Rational是用来描述有理数的工具。由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1&#x2F;3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="运算符重载">
-<meta property="og:url" content="https://tommygong.top/posts/737419435.html">
+  <meta name="description" content="言出必行，相信过程">
+<meta property="og:type" content="website">
+<meta property="og:title" content="うずまきナルト">
+<meta property="og:url" content="https://tommygong.top/archives/2025/05/index.html">
 <meta property="og:site_name" content="うずまきナルト">
-<meta property="og:description" content="Rational是用来描述有理数的工具。由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1&#x2F;3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。">
+<meta property="og:description" content="言出必行，相信过程">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-11T11:46:43.000Z">
-<meta property="article:modified_time" content="2024-12-07T04:58:20.000Z">
 <meta property="article:author" content="うずまきナルト">
-<meta property="article:tag" content="CPP">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://tommygong.top/posts/737419435.html">
+<link rel="canonical" href="https://tommygong.top/archives/2025/05/">
 
 
 <script id="page-configurations">
@@ -43,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>运算符重载 | うずまきナルト</title>
+  <title>归档 | うずまきナルト</title>
   
 
 
@@ -199,122 +196,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content archive">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tommygong.top/posts/737419435.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/avatar.png">
-      <meta itemprop="name" content="うずまきナルト">
-      <meta itemprop="description" content="言出必行，相信过程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="うずまきナルト">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          运算符重载
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-11 19:46:43" itemprop="dateCreated datePublished" datetime="2023-09-11T19:46:43+08:00">2023-09-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-12-07 12:58:20" itemprop="dateModified" datetime="2024-12-07T12:58:20+08:00">2024-12-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>139</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-            <div class="post-description">Rational是用来描述有理数的工具。由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1/3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        
+        <span class="collection-header">还行! 目前共计 39 篇日志。 继续努力。</span>
+      </div>
 
       
-        <h1 id="rational类">Rational类</h1>
-<p><strong>关键点</strong>：Rational是用来描述有理数的工具。
-由于计算机对于浮点数存储机制的底层硬件局限，c++中的double无法准确的存储1/3，因此需要自定义Rational类来存储有理数，进行更加精确的运算。
-另外，double类型可以表示的数据范围大于int类型，但是在精度上，double在表示大数时不如int类型。
-<img
-src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/运算符重载/2023-09-11_19-53-50.png" /></p>
-<h1 id="运算符函数">运算符函数</h1>
-<p><strong>关键点</strong>：运算符函数是类的成员函数，用于重载运算符。
-<img
-src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/运算符重载/2023-09-11_19-48-35.png" /></p>
-
+    <div class="collection-year">
+      <span class="collection-header">2025</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/CPP/" rel="tag"># CPP</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2025-05-18T11:05:21+08:00"
+              content="2025-05-18">
+          05-18
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/posts/3756147499.html" itemprop="url">
+            <span itemprop="name">WSL磁盘空间压缩</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/1679445169.html" rel="prev" title="指针及动态内存管理">
-      <i class="fa fa-chevron-left"></i> 指针及动态内存管理
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/4203464694.html" rel="next" title="通过UMAF禁/启用XHCI">
-      通过UMAF禁/启用XHCI <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
@@ -367,7 +293,6 @@ src="https://cdn.jsdelivr.net/gh/luziyi/jsdelivr@main/image/运算符重载/2023
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rational%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">Rational类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">运算符函数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
